@@ -1,0 +1,12 @@
+﻿<Page x:Class="LeavinsSoftware.Collection.Program.ExportPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:res="clr-namespace:LeavinsSoftware.Collection.Program.Resources"
+      Title="{x:Static res:InterfaceResources.PageTitles_Export}">
+    <Grid Style="{StaticResource mainPageGrid}">
+        <Button Content="{x:Static res:InterfaceResources.Common_ExportData}"
+                Command="{Binding Export}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center" />
+    </Grid>
+</Page>

@@ -1,0 +1,57 @@
+﻿<Window x:Class="LeavinsSoftware.Collection.Program.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:LeavinsSoftware.Collection.Program.Resources"
+        Title="{x:Static res:InterfaceResources.ProgramName}"
+        Height="350"
+        Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+                   VerticalAlignment="Center">
+                <Hyperlink Name="backLink"
+                           Command="NavigationCommands.BrowseBack"
+                           CommandTarget="{Binding ElementName=mainFrame}"
+                           TextDecorations="None">
+                    <Rectangle Height="32"
+                               Width="32"
+                               Name="backLinkRectangle">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush ImageSource="Resources\Images\back32.png" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Hyperlink>
+            </Label>
+
+            <Label Grid.Column="1"
+                   Style="{StaticResource headerLabelStyle}"
+                   Name="headerLabel" />
+        </Grid>
+
+        <ScrollViewer Grid.Row="1"
+                      VerticalAlignment="Stretch"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Auto">
+            <Frame Name="mainFrame"
+                   Source="HomePage.xaml"
+                   Navigated="mainFrame_Navigated"
+                   NavigationUIVisibility="Hidden">
+                <Frame.CommandBindings>
+                    <CommandBinding Command="NavigationCommands.BrowseBack"
+                                    Executed="BrowseBack_Executed"
+                                    CanExecute="BrowseBack_CanExecute"/>
+                </Frame.CommandBindings>
+            </Frame>
+        </ScrollViewer>
+    </Grid>
+</Window>

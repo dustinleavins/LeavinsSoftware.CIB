@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <!-- Product -->
+    <system:String x:Key="dc_P01">Collectables</system:String>
+    
+    <!-- Comic Books -->
+    <system:String x:Key="dc_DC">DC</system:String>
+    <system:String x:Key="dc_Marvel">Marvel</system:String>
+    <system:String x:Key="dc_Vertigo">Vertigo</system:String>
+    
+    <!-- Video Games -->
+    <system:String x:Key="dc_Xbox360">Xbox 360</system:String>
+    <system:String x:Key="dc_PS3">Playstation 3</system:String>
+    <system:String x:Key="dc_Vita">PS Vita</system:String>
+    <system:String x:Key="dc_Wii">Wii</system:String>
+    <system:String x:Key="dc_WiiU">Wii U</system:String>
+    <system:String x:Key="dc_DS">DS</system:String>
+    <system:String x:Key="dc_3DS">3DS</system:String>
+    <system:String x:Key="dc_PC">PC</system:String>
+</ResourceDictionary>

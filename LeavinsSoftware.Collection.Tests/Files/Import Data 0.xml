@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<ExportData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ComicBooks>
+    <ComicBook>
+      <Id>1</Id>
+      <Name>Test Book #1938005744</Name>
+      <Notes />
+      <Publisher>
+        <Id>1</Id>
+        <Name>ComicPublisher0</Name>
+        <Code />
+        <CategoryType>ComicBook</CategoryType>
+      </Publisher>
+      <Issues>
+        <ComicBookIssue>
+          <Id>1</Id>
+          <ComicBookId>1</ComicBookId>
+          <IssueNumber>2080427802</IssueNumber>
+          <Cover />
+          <Name />
+          <DistributionType>Physical</DistributionType>
+          <Condition />
+          <IssueType>Issue</IssueType>
+          <Notes />
+          <ListType>Have</ListType>
+        </ComicBookIssue>
+        <ComicBookIssue>
+          <Id>2</Id>
+          <ComicBookId>1</ComicBookId>
+          <IssueNumber>341851734</IssueNumber>
+          <Cover />
+          <Name />
+          <DistributionType>Physical</DistributionType>
+          <Condition />
+          <IssueType>Issue</IssueType>
+          <Notes />
+          <ListType>Have</ListType>
+        </ComicBookIssue>
+        <ComicBookIssue>
+          <Id>3</Id>
+          <ComicBookId>1</ComicBookId>
+          <IssueNumber>1431988776</IssueNumber>
+          <Cover />
+          <Name />
+          <DistributionType>Physical</DistributionType>
+          <Condition />
+          <IssueType>Issue</IssueType>
+          <Notes />
+          <ListType>Want</ListType>
+        </ComicBookIssue>
+      </Issues>
+    </ComicBook>
+    <ComicBook>
+      <Id>2</Id>
+      <Name>Test Book #1311292502</Name>
+      <Notes />
+      <Publisher>
+        <Id>2</Id>
+        <Name>ComicPublisher1</Name>
+        <Code />
+        <CategoryType>ComicBook</CategoryType>
+      </Publisher>
+      <Issues>
+        <ComicBookIssue>
+          <Id>4</Id>
+          <ComicBookId>2</ComicBookId>
+          <IssueNumber>761513014</IssueNumber>
+          <Cover />
+          <Name />
+          <DistributionType>Physical</DistributionType>
+          <Condition />
+          <IssueType>Issue</IssueType>
+          <Notes />
+          <ListType>Have</ListType>
+        </ComicBookIssue>
+        <ComicBookIssue>
+          <Id>5</Id>
+          <ComicBookId>2</ComicBookId>
+          <IssueNumber>2037243568</IssueNumber>
+          <Cover />
+          <Name />
+          <DistributionType>Physical</DistributionType>
+          <Condition />
+          <IssueType>Issue</IssueType>
+          <Notes />
+          <ListType>Have</ListType>
+        </ComicBookIssue>
+        <ComicBookIssue>
+          <Id>6</Id>
+          <ComicBookId>2</ComicBookId>
+          <IssueNumber>1528357293</IssueNumber>
+          <Cover />
+          <Name />
+          <DistributionType>Physical</DistributionType>
+          <Condition />
+          <IssueType>Issue</IssueType>
+          <Notes />
+          <ListType>Want</ListType>
+        </ComicBookIssue>
+      </Issues>
+    </ComicBook>
+  </ComicBooks>
+  <Products>
+    <Product>
+      <Id>1</Id>
+      <Name>Item #749943798</Name>
+      <Notes />
+      <Category>
+        <Id>3</Id>
+        <Name>ProductCategory0</Name>
+        <Code />
+        <CategoryType>Product</CategoryType>
+      </Category>
+      <Quantity>0</Quantity>
+      <ListType>Have</ListType>
+    </Product>
+    <Product>
+      <Id>2</Id>
+      <Name>Item #319576108</Name>
+      <Notes />
+      <Category>
+        <Id>3</Id>
+        <Name>ProductCategory0</Name>
+        <Code />
+        <CategoryType>Product</CategoryType>
+      </Category>
+      <Quantity>0</Quantity>
+      <ListType>Want</ListType>
+    </Product>
+    <Product>
+      <Id>3</Id>
+      <Name>Item #2072233842</Name>
+      <Notes />
+      <Category>
+        <Id>4</Id>
+        <Name>ProductCategory1</Name>
+        <Code />
+        <CategoryType>Product</CategoryType>
+      </Category>
+      <Quantity>0</Quantity>
+      <ListType>Have</ListType>
+    </Product>
+    <Product>
+      <Id>4</Id>
+      <Name>Item #1156976611</Name>
+      <Notes />
+      <Category>
+        <Id>4</Id>
+        <Name>ProductCategory1</Name>
+        <Code />
+        <CategoryType>Product</CategoryType>
+      </Category>
+      <Quantity>0</Quantity>
+      <ListType>Want</ListType>
+    </Product>
+  </Products>
+  <VideoGames>
+    <VideoGame>
+      <Id>1</Id>
+      <Name>Game #811244070</Name>
+      <Notes />
+      <System>
+        <Id>5</Id>
+        <Name>System0</Name>
+        <Code />
+        <CategoryType>VideoGame</CategoryType>
+      </System>
+      <DistributionType>Physical</DistributionType>
+      <Condition />
+      <ContentProvider />
+      <ListType>Have</ListType>
+    </VideoGame>
+    <VideoGame>
+      <Id>2</Id>
+      <Name>Game #1063087737</Name>
+      <Notes />
+      <System>
+        <Id>5</Id>
+        <Name>System0</Name>
+        <Code />
+        <CategoryType>VideoGame</CategoryType>
+      </System>
+      <DistributionType>Physical</DistributionType>
+      <Condition />
+      <ContentProvider />
+      <ListType>Want</ListType>
+    </VideoGame>
+    <VideoGame>
+      <Id>3</Id>
+      <Name>Game #2103111965</Name>
+      <Notes />
+      <System>
+        <Id>6</Id>
+        <Name>System1</Name>
+        <Code />
+        <CategoryType>VideoGame</CategoryType>
+      </System>
+      <DistributionType>Physical</DistributionType>
+      <Condition />
+      <ContentProvider />
+      <ListType>Have</ListType>
+    </VideoGame>
+    <VideoGame>
+      <Id>4</Id>
+      <Name>Game #1036067702</Name>
+      <Notes />
+      <System>
+        <Id>6</Id>
+        <Name>System1</Name>
+        <Code />
+        <CategoryType>VideoGame</CategoryType>
+      </System>
+      <DistributionType>Physical</DistributionType>
+      <Condition />
+      <ContentProvider />
+      <ListType>Want</ListType>
+    </VideoGame>
+  </VideoGames>
+</ExportData>

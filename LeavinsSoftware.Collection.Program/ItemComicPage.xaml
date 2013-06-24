@@ -1,0 +1,125 @@
+﻿<Page x:Class="LeavinsSoftware.Collection.Program.ItemComicPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:res="clr-namespace:LeavinsSoftware.Collection.Program.Resources"
+      xmlns:core="clr-namespace:System;assembly=mscorlib"
+      xmlns:model="clr-namespace:LeavinsSoftware.Collection.Models;assembly=LeavinsSoftware.Collection"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300">
+    <Page.Resources>
+        <ObjectDataProvider x:Key="distType"
+                            MethodName="GetValues"
+                            ObjectType="{x:Type core:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="model:DistributionType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        
+        <ObjectDataProvider x:Key="issueType"
+                            MethodName="GetValues"
+                            ObjectType="{x:Type core:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="model:VolumeType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="listType"
+                            MethodName="GetValues"
+                            ObjectType="{x:Type core:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="model:ItemListType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Page.Resources>
+
+    <Grid Style="{StaticResource mainPageGrid}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Margin="0,0,0,20"
+               VerticalAlignment="Top"
+               Content="{x:Static res:InterfaceResources.Fields_Title}" />
+        <TextBox Grid.Row="0"
+                 Grid.Column="1"
+                 Margin="0,0,0,20"
+                 VerticalAlignment="Top"
+                 Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Margin="0,0,0,20"
+               VerticalAlignment="Top"
+               Content="{x:Static res:InterfaceResources.Fields_Publisher}" />
+        <ComboBox Grid.Row="1"
+                  Grid.Column="1"
+                  Margin="0,0,0,20"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  ItemsSource="{Binding Publishers}"
+                  SelectedValuePath="Value"
+                  DisplayMemberPath="Name"
+                  SelectedValue="{Binding Item.Publisher, ValidatesOnDataErrors=True}" />
+
+        <Label Grid.Row="2"
+               Grid.Column="0"
+               Margin="0,0,0,20"
+               VerticalAlignment="Top"
+               Content="{x:Static res:InterfaceResources.Fields_Notes}" />
+        <TextBox Grid.Row="2"
+                 Grid.Column="1"
+                 Margin="0,0,0,20"
+                 VerticalAlignment="Top"
+                 AcceptsReturn="True"
+                 Text="{Binding Item.Notes, UpdateSourceTrigger=PropertyChanged}" />
+
+        <DataGrid Grid.Row="3"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Margin="0,0,0,20"
+                  VerticalAlignment="Top"
+                  ItemsSource="{Binding Item.Issues}"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridComboBoxColumn Header="{x:Static res:InterfaceResources.Fields_ListType}"
+                                        SelectedItemBinding="{Binding ListType}"
+                                        ItemsSource="{Binding Source={StaticResource listType}}" />
+                <DataGridComboBoxColumn Header="{x:Static res:InterfaceResources.Fields_IssueType}"
+                                        SelectedItemBinding="{Binding IssueType}"
+                                        ItemsSource="{Binding Source={StaticResource issueType}}" />
+                <DataGridTextColumn Binding="{Binding IssueNumber, UpdateSourceTrigger=PropertyChanged}"
+                                    Header="{x:Static res:InterfaceResources.Fields_IssueNumber}" />
+                <DataGridTextColumn Binding="{Binding Cover, UpdateSourceTrigger=PropertyChanged}"
+                                    Header="{x:Static res:InterfaceResources.Fields_Cover}" />
+                <DataGridTextColumn Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                    Header="{x:Static res:InterfaceResources.Fields_IssueTitle}" />
+                <DataGridComboBoxColumn Header="{x:Static res:InterfaceResources.Fields_DistributionType}"
+                                        SelectedItemBinding="{Binding DistributionType}"
+                                        ItemsSource="{Binding Source={StaticResource distType}}" />
+                <DataGridTextColumn Binding="{Binding Condition, UpdateSourceTrigger=PropertyChanged}"
+                                    Header="{x:Static res:InterfaceResources.Fields_Condition}" />
+                <DataGridTextColumn Binding="{Binding Notes, UpdateSourceTrigger=PropertyChanged}"
+                                    Header="{x:Static res:InterfaceResources.Fields_Notes}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="4"
+              Grid.ColumnSpan="2">
+            <Button HorizontalAlignment="Center"
+                    Content="{x:Static res:InterfaceResources.Add_ComicBooks}"
+                    Command="{Binding AddItem}" />
+        </Grid>
+    </Grid>
+</Page>
