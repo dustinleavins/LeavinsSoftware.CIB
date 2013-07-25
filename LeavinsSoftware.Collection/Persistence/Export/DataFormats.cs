@@ -9,7 +9,7 @@ using System.Text;
 
 namespace LeavinsSoftware.Collection.Persistence.Export
 {
-    public sealed class DataFormats
+    public sealed class DataFormats : IDisposable
     {
         public DataFormats(string pluginsDirectoryName)
         {
@@ -115,6 +115,15 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             }
 
             return Activator.CreateInstance(type) as IDataExportFormat;
+        }
+
+        public void Dispose()
+        {
+            if (container != null)
+            {
+                container.Dispose();
+                container = null;
+            }
         }
 
 #pragma warning disable 649

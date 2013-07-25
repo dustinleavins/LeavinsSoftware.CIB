@@ -11,7 +11,7 @@ namespace LeavinsSoftware.Collection.Program
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public sealed partial class App : Application, IDisposable
     {
         private Mutex appMutex;
 
@@ -26,17 +26,18 @@ namespace LeavinsSoftware.Collection.Program
             }
             else
             {
-                Application.Current.Exit += OnAppExit;
                 Persistence.Setup();
                 AsyncProgramSetup();
             }
         }
 
-        private void OnAppExit(object sender, ExitEventArgs e)
+        public void Dispose()
         {
+            //throw new NotImplementedException();
             if (appMutex != null)
             {
                 appMutex.Dispose();
+                appMutex = null;
             }
         }
 

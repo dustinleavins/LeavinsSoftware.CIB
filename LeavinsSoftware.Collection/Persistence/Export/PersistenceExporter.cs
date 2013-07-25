@@ -35,9 +35,12 @@ namespace LeavinsSoftware.Collection.Persistence.Export
                 VideoGames = VideoGames()
             };
 
-            DataFormats formats = new DataFormats("."); // Current directory
-            IDataExportFormat dataFormat = formats
-                .GetExportInstanceForExtension((new FileInfo(destinationFilename)).Extension);
+            IDataExportFormat dataFormat = null;
+            using (DataFormats formats = new DataFormats(".")) // Current directory
+            {
+                dataFormat = formats
+                    .GetExportInstanceForExtension((new FileInfo(destinationFilename)).Extension);
+            }
 
             dataFormat.Export(destinationFilename, exportData);
         }

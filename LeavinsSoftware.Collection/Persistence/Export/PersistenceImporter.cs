@@ -32,9 +32,12 @@ namespace LeavinsSoftware.Collection.Persistence.Export
 
         public void Import(string filename, ImportOptions importOptions)
         {
-            DataFormats formats = new DataFormats("."); // Current directory
-            IDataImportFormat dataFormat = formats
-                .GetImportInstanceForExtension((new FileInfo(filename)).Extension);
+            IDataImportFormat dataFormat = null;
+            using (DataFormats formats = new DataFormats(".")) // Current directory
+            {
+                dataFormat = formats
+                    .GetImportInstanceForExtension((new FileInfo(filename)).Extension);
+            }
 
             ExportData importData = dataFormat.Import(filename);
 
