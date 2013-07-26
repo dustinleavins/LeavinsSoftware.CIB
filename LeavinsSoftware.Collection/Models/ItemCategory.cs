@@ -69,7 +69,7 @@ namespace LeavinsSoftware.Collection.Models
                 return false;
             }
 
-            return id == other.Id &&
+            return Id == other.Id &&
                 string.Equals(name, other.name, StringComparison.Ordinal) &&
                 string.Equals(code, other.code, StringComparison.Ordinal) &&
                 categoryType == other.categoryType;
@@ -77,7 +77,7 @@ namespace LeavinsSoftware.Collection.Models
 
         public override int GetHashCode()
         {
-            return id.GetHashCode();
+            return Id.GetHashCode();
         }
 
         public static bool operator ==(ItemCategory lhs, ItemCategory rhs)

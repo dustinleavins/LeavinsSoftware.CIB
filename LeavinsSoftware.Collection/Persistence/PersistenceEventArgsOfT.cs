@@ -12,14 +12,14 @@ namespace LeavinsSoftware.Collection.Persistence
     {
         private PersistenceEventArgs(PersistenceEventType type)
         {
-            Type = type;
+            EventType = type;
         }
 
         public T OldData { get; private set; }
 
         public T NewData { get; private set; }
 
-        public PersistenceEventType Type { get; private set; }
+        public PersistenceEventType EventType { get; private set; }
 
         public static PersistenceEventArgs<T> CreateEventArgs(T newData)
         {

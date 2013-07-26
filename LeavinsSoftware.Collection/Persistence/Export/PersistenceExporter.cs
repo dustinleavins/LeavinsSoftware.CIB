@@ -26,7 +26,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
 
         public IVideoGamePersistence VideoGamePersistence { get; private set; }
 
-        public void Export(string destinationFilename)
+        public void Export(string destinationFileName)
         {
             ExportData exportData = new ExportData
             {
@@ -39,10 +39,10 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             using (DataFormats formats = new DataFormats(".")) // Current directory
             {
                 dataFormat = formats
-                    .GetExportInstanceForExtension((new FileInfo(destinationFilename)).Extension);
+                    .GetExportInstanceForExtension((new FileInfo(destinationFileName)).Extension);
             }
 
-            dataFormat.Export(destinationFilename, exportData);
+            dataFormat.Export(destinationFileName, exportData);
         }
 
         public static ExporterBuilder New()

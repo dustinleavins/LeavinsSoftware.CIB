@@ -28,8 +28,6 @@ namespace LeavinsSoftware.Collection.Persistence.Migrations
             private set;
         }
 
-        private static Lazy<IList<Migration>> lazyMigrations { get; set; }
-
         static MigrationRunner()
         {
             Migrations = new List<Migration>

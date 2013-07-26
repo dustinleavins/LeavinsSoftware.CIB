@@ -18,11 +18,11 @@ namespace LeavinsSoftware.Collection.Persistence.Export.Formats
         {
         }
 
-        public void Export(string filename, ExportData dataToExport)
+        public void Export(string fileName, ExportData dataToExport)
         {
             var serializer = new XmlSerializer(typeof(ExportData));
 
-            using (var stream = File.Create(filename))
+            using (var stream = File.Create(fileName))
             {
                 serializer.Serialize(stream, dataToExport);
             }

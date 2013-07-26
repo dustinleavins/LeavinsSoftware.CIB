@@ -30,16 +30,16 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             return new ImporterBuilder();
         }
 
-        public void Import(string filename, ImportOptions importOptions)
+        public void Import(string fileName, ImportOptions importOptions)
         {
             IDataImportFormat dataFormat = null;
             using (DataFormats formats = new DataFormats(".")) // Current directory
             {
                 dataFormat = formats
-                    .GetImportInstanceForExtension((new FileInfo(filename)).Extension);
+                    .GetImportInstanceForExtension((new FileInfo(fileName)).Extension);
             }
 
-            ExportData importData = dataFormat.Import(filename);
+            ExportData importData = dataFormat.Import(fileName);
 
             ImportData(importData.ComicBooks, importOptions);
             ImportData(importData.Products, importOptions);
@@ -301,7 +301,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             return match;
         }
 
-        private ComicBook Merge(ComicBook existingBook, ComicBook bookFromImportFile)
+        private static ComicBook Merge(ComicBook existingBook, ComicBook bookFromImportFile)
         {
             ComicBook mergedBook = new ComicBook();
             mergedBook.Name = existingBook.Name;
@@ -390,7 +390,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             return match;
         }
 
-        private Product Merge(Product existingProduct, Product productFromImportFile)
+        private static Product Merge(Product existingProduct, Product productFromImportFile)
         {
             Product mergedProduct = new Product();
             mergedProduct.Category = existingProduct.Category;
@@ -446,7 +446,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             return match;
         }
 
-        private VideoGame Merge(VideoGame existing, VideoGame gameFromImportFile)
+        private static VideoGame Merge(VideoGame existing, VideoGame gameFromImportFile)
         {
             VideoGame merged = new VideoGame();
 

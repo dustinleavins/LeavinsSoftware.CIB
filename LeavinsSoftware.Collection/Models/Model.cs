@@ -43,6 +43,6 @@ namespace LeavinsSoftware.Collection.Models
             }
         }
 
-        protected long id;
+        private long id;
     }
 }

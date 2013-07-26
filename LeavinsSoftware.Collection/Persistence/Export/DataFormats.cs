@@ -34,7 +34,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
 
             string ext = string.Empty;
 
-            if (extension.StartsWith("."))
+            if (extension.StartsWith(".", StringComparison.Ordinal))
             {
                 ext = extension.Remove(0, 1);
             }
@@ -68,7 +68,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
 
             string ext = string.Empty;
 
-            if (extension.StartsWith("."))
+            if (extension.StartsWith(".", StringComparison.Ordinal))
             {
                 ext = extension.Remove(0, 1);
             }

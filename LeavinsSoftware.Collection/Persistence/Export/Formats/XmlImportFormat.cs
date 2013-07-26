@@ -18,12 +18,12 @@ namespace LeavinsSoftware.Collection.Persistence.Export.Formats
         {
         }
 
-        public ExportData Import(string filename)
+        public ExportData Import(string fileName)
         {
             ExportData importData;
             var serializer = new XmlSerializer(typeof(ExportData));
 
-            using (var stream = File.OpenRead(filename))
+            using (var stream = File.OpenRead(fileName))
             {
                 importData = serializer.Deserialize(stream) as ExportData;
             }

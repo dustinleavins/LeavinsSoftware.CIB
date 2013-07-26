@@ -9,6 +9,6 @@ namespace LeavinsSoftware.Collection.Persistence.Export
 {
     public interface IDataImportFormat
     {
-        ExportData Import(string filename);
+        ExportData Import(string fileName);
     }
 }

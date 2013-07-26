@@ -40,7 +40,7 @@ namespace LeavinsSoftware.Collection.Models
             }
         }
 
-        protected string name;
-        protected string notes;
+        private string name;
+        private string notes;
     }
 }

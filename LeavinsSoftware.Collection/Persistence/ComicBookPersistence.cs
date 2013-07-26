@@ -348,7 +348,7 @@ namespace LeavinsSoftware.Collection.Persistence
             return total;
         }
 
-        private ItemCategory GetCategory(long id, SQLiteConnection openConnection)
+        private static ItemCategory GetCategory(long id, SQLiteConnection openConnection)
         {
             ItemCategory targetCategory = null;
 
