@@ -19,7 +19,8 @@ namespace LeavinsSoftware.Collection.Persistence
         public VideoGamePersistence(string dataPath, string initialProfileName)
         {
             string fullPath = Path.Combine(dataPath, initialProfileName, "collection.db");
-            ConnectionString = string.Format("Data Source=|DataDirectory|{0}",
+            ConnectionString = string.Format(CultureInfo.InvariantCulture,
+                "Data Source=|DataDirectory|{0}",
                 fullPath);
         }
 
@@ -73,7 +74,7 @@ namespace LeavinsSoftware.Collection.Persistence
                         {
                             targetGame = ReaderToGame(reader);
 
-                            categoryId = long.Parse(reader["categoryid"].ToString());
+                            categoryId = long.Parse(reader["categoryid"].ToString(), CultureInfo.InvariantCulture);
                         }
                     }
                 }
@@ -183,7 +184,7 @@ namespace LeavinsSoftware.Collection.Persistence
                             VideoGame game = ReaderToGame(reader);
 
                             categoryIdDict[game.Id] =
-                                long.Parse(reader["categoryid"].ToString());
+                                long.Parse(reader["categoryid"].ToString(), CultureInfo.InvariantCulture);
 
                             page.Add(game);
                         }
@@ -291,10 +292,11 @@ namespace LeavinsSoftware.Collection.Persistence
                     if (reader.Read())
                     {
                         targetCategory = new ItemCategory();
-                        targetCategory.Id = long.Parse(reader["categoryid"].ToString());
+                        targetCategory.Id = long.Parse(reader["categoryid"].ToString(), CultureInfo.InvariantCulture);
                         targetCategory.Name = reader["name"].ToString();
                         targetCategory.Code = reader["code"].ToString();
-                        targetCategory.CategoryType = (ItemCategoryType)int.Parse(reader["type"].ToString());
+                        targetCategory.CategoryType = (ItemCategoryType)int.Parse(reader["type"].ToString(),
+                            CultureInfo.InvariantCulture);
                     }
                 }
             }
@@ -306,13 +308,15 @@ namespace LeavinsSoftware.Collection.Persistence
         {
             VideoGame targetGame = new VideoGame();
 
-            targetGame.Id = long.Parse(reader["gameid"].ToString());
+            targetGame.Id = long.Parse(reader["gameid"].ToString(), CultureInfo.InvariantCulture);
             targetGame.Name = reader["name"].ToString();
             targetGame.Notes = reader["notes"].ToString();
-            targetGame.DistributionType = (DistributionType)int.Parse(reader["distribution"].ToString());
+            targetGame.DistributionType = (DistributionType)int.Parse(reader["distribution"].ToString(),
+                CultureInfo.InvariantCulture);
             targetGame.Condition = reader["condition"].ToString();
             targetGame.ContentProvider = reader["contentprovider"].ToString();
-            targetGame.ListType = (ItemListType)int.Parse(reader["listtype"].ToString());
+            targetGame.ListType = (ItemListType)int.Parse(reader["listtype"].ToString(),
+                CultureInfo.InvariantCulture);
 
             return targetGame;
         }

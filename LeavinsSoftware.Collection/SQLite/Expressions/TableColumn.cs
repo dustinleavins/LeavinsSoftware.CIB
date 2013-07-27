@@ -1,4 +1,5 @@
-﻿// Copyright (c) 2013 Dustin Leavins
+﻿using System.Globalization;
+// Copyright (c) 2013 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 namespace LeavinsSoftware.Collection.SQLite.Expressions
 {
@@ -10,7 +11,7 @@ namespace LeavinsSoftware.Collection.SQLite.Expressions
 
         public string ToCommandText()
         {
-            return string.Format("{0} {1} {2}", Name, Type, Constraint).Trim();
+            return string.Format(CultureInfo.InvariantCulture, "{0} {1} {2}", Name, Type, Constraint).Trim();
         }
     }
 }

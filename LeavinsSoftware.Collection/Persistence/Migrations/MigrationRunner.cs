@@ -46,7 +46,8 @@ namespace LeavinsSoftware.Collection.Persistence.Migrations
         {
             string fullPath = Path.Combine(dataPath, profileName, "collection.db");
             string connectionString = string.Format("Data Source=|DataDirectory|{0}",
-                fullPath);
+                fullPath,
+                CultureInfo.InvariantCulture);
 
             bool outdatedProgramSchema = false;
 
@@ -140,7 +141,7 @@ namespace LeavinsSoftware.Collection.Persistence.Migrations
                         if (reader.Read())
                         {
                             string valueAsString = reader["value"] as string;
-                            version = long.Parse(valueAsString);
+                            version = long.Parse(valueAsString, CultureInfo.InvariantCulture);
                         }
                     }
                 }

@@ -7,6 +7,7 @@ using System.Data.SQLite;
 using System.IO;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
@@ -15,7 +16,8 @@ namespace LeavinsSoftware.Collection.Persistence
         public ItemCategoryPersistence(string dataPath, string initialProfileName)
         {
             string fullPath = Path.Combine(dataPath, initialProfileName, "collection.db");
-            ConnectionString = string.Format("Data Source=|DataDirectory|{0}",
+            ConnectionString = string.Format(CultureInfo.InvariantCulture,
+                "Data Source=|DataDirectory|{0}",
                 fullPath);
         }
 
@@ -128,7 +130,7 @@ namespace LeavinsSoftware.Collection.Persistence
 
                     int typeCode = (int)type;
 
-                    cmd.Parameters.Add(new SQLiteParameter("type", typeCode.ToString()));
+                    cmd.Parameters.Add(new SQLiteParameter("type", typeCode.ToString(CultureInfo.InvariantCulture)));
 
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -162,7 +164,7 @@ namespace LeavinsSoftware.Collection.Persistence
 
                     int typeCode = (int)type;
 
-                    cmd.Parameters.Add(new SQLiteParameter("type", typeCode.ToString()));
+                    cmd.Parameters.Add(new SQLiteParameter("type", typeCode.ToString(CultureInfo.InvariantCulture)));
 
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -189,10 +191,10 @@ namespace LeavinsSoftware.Collection.Persistence
         private static ItemCategory ReaderToCategory(SQLiteDataReader reader)
         {
             var targetCategory = new ItemCategory();
-            targetCategory.Id = long.Parse(reader["categoryid"].ToString());
+            targetCategory.Id = long.Parse(reader["categoryid"].ToString(), CultureInfo.InvariantCulture);
             targetCategory.Name = reader["name"].ToString();
             targetCategory.Code = reader["code"].ToString();
-            targetCategory.CategoryType = (ItemCategoryType)int.Parse(reader["type"].ToString());
+            targetCategory.CategoryType = (ItemCategoryType)int.Parse(reader["type"].ToString(), CultureInfo.InvariantCulture);
             return targetCategory;
         }
     }

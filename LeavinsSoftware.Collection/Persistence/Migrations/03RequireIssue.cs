@@ -8,6 +8,7 @@ using LeavinsSoftware.Collection.SQLite;
 using System.Data.SQLite;
 using System.Data;
 using LeavinsSoftware.Collection.Models;
+using System.Globalization;
 
 namespace LeavinsSoftware.Collection.Persistence.Migrations
 {
@@ -30,7 +31,7 @@ namespace LeavinsSoftware.Collection.Persistence.Migrations
                     {
                         if (string.IsNullOrEmpty(reader["issueid"].ToString()))
                         {
-                            comicIds.Add(long.Parse(reader["comicid"].ToString()));
+                            comicIds.Add(long.Parse(reader["comicid"].ToString(), CultureInfo.InvariantCulture));
                         }
                     }
                 }

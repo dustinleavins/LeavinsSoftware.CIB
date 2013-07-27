@@ -19,7 +19,8 @@ namespace LeavinsSoftware.Collection.Persistence
         public ProductPersistence(string dataPath, string initialProfileName)
         {
             string fullPath = Path.Combine(dataPath, initialProfileName, "collection.db");
-            ConnectionString = string.Format("Data Source=|DataDirectory|{0}",
+            ConnectionString = string.Format(CultureInfo.InvariantCulture,
+                "Data Source=|DataDirectory|{0}",
                 fullPath);
         }
 
@@ -71,7 +72,7 @@ namespace LeavinsSoftware.Collection.Persistence
                         {
                             targetProduct = ReaderToProduct(reader);
 
-                            categoryId = long.Parse(reader["categoryid"].ToString());
+                            categoryId = long.Parse(reader["categoryid"].ToString(), CultureInfo.InvariantCulture);
                         }
                     }
                 }
@@ -179,7 +180,7 @@ namespace LeavinsSoftware.Collection.Persistence
                             Product product = ReaderToProduct(reader);
 
                             categoryIdDict[product.Id] =
-                                long.Parse(reader["categoryid"].ToString());
+                                long.Parse(reader["categoryid"].ToString(), CultureInfo.InvariantCulture);
                             
                             page.Add(product);
                         }
@@ -289,10 +290,10 @@ namespace LeavinsSoftware.Collection.Persistence
                     if (reader.Read())
                     {
                         targetCategory = new ItemCategory();
-                        targetCategory.Id = long.Parse(reader["categoryid"].ToString());
+                        targetCategory.Id = long.Parse(reader["categoryid"].ToString(), CultureInfo.InvariantCulture);
                         targetCategory.Name = reader["name"].ToString();
                         targetCategory.Code = reader["code"].ToString();
-                        targetCategory.CategoryType = (ItemCategoryType)int.Parse(reader["type"].ToString());
+                        targetCategory.CategoryType = (ItemCategoryType)int.Parse(reader["type"].ToString(), CultureInfo.InvariantCulture);
                     }
                 }
             }
@@ -304,11 +305,11 @@ namespace LeavinsSoftware.Collection.Persistence
         {
             Product targetProduct = new Product();
 
-            targetProduct.Id = long.Parse(reader["productid"].ToString());
+            targetProduct.Id = long.Parse(reader["productid"].ToString(), CultureInfo.InvariantCulture);
             targetProduct.Name = reader["name"].ToString();
             targetProduct.Notes = reader["notes"].ToString();
-            targetProduct.Quantity = long.Parse(reader["quantity"].ToString());
-            targetProduct.ListType = (ItemListType)int.Parse(reader["listtype"].ToString());
+            targetProduct.Quantity = long.Parse(reader["quantity"].ToString(), CultureInfo.InvariantCulture);
+            targetProduct.ListType = (ItemListType)int.Parse(reader["listtype"].ToString(), CultureInfo.InvariantCulture);
 
             return targetProduct;
         }

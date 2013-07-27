@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.Globalization;
 using System.Text;
 
 namespace LeavinsSoftware.Collection.SQLite.Expressions
@@ -40,7 +41,7 @@ namespace LeavinsSoftware.Collection.SQLite.Expressions
                     builder.Append(",");
                 }
 
-                builder.Append(string.Format("{0} = @{0}", v));
+                builder.Append(string.Format(CultureInfo.InvariantCulture, "{0} = @{0}", v));
                 firstRow = false;
             }
 
@@ -93,7 +94,8 @@ namespace LeavinsSoftware.Collection.SQLite.Expressions
 
         public UpdateExpression WhereEquals(string parameterName, object parameterValue)
         {
-            WhereClause = String.Format("{0} = {1}",
+            WhereClause = String.Format(CultureInfo.InvariantCulture,
+                                        "{0} = {1}",
                                         parameterName,
                                         "@" + parameterName);
             ParameterMapping.Add("@" + parameterName, parameterValue);

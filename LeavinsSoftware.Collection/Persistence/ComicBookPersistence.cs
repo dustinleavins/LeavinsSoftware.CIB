@@ -17,7 +17,8 @@ namespace LeavinsSoftware.Collection.Persistence
         public ComicBookPersistence(string dataPath, string initialProfileName)
         {
             string fullPath = Path.Combine(dataPath, initialProfileName, "collection.db");
-            ConnectionString = string.Format("Data Source=|DataDirectory|{0}",
+            ConnectionString = string.Format(CultureInfo.InvariantCulture,
+                "Data Source=|DataDirectory|{0}",
                 fullPath);
         }
 
@@ -74,7 +75,8 @@ namespace LeavinsSoftware.Collection.Persistence
                         {
                             targetBook = ReaderToComicBook(reader);
 
-                            categoryId = long.Parse(reader["categoryid"].ToString());
+                            categoryId = long.Parse(reader["categoryid"].ToString(),
+                                CultureInfo.InvariantCulture);
                         }
                     }
                 }
@@ -234,7 +236,8 @@ namespace LeavinsSoftware.Collection.Persistence
                             ComicBookSummary book = ReaderToComicBookSummary(reader);
 
                             categoryIdDict[book.Id] =
-                                long.Parse(reader["categoryid"].ToString());
+                                long.Parse(reader["categoryid"].ToString(),
+                                CultureInfo.InvariantCulture);
 
                             page.Add(book);
                         }
@@ -259,7 +262,8 @@ namespace LeavinsSoftware.Collection.Persistence
                         {
                             while (reader.Read())
                             {
-                                summary.IssueCount = long.Parse(reader[0].ToString());
+                                summary.IssueCount = long.Parse(reader[0].ToString(),
+                                CultureInfo.InvariantCulture);
                             }
                         }
                     }
@@ -366,10 +370,12 @@ namespace LeavinsSoftware.Collection.Persistence
                     if (reader.Read())
                     {
                         targetCategory = new ItemCategory();
-                        targetCategory.Id = long.Parse(reader["categoryid"].ToString());
+                        targetCategory.Id = long.Parse(reader["categoryid"].ToString(),
+                            CultureInfo.InvariantCulture);
                         targetCategory.Name = reader["name"].ToString();
                         targetCategory.Code = reader["code"].ToString();
-                        targetCategory.CategoryType = (ItemCategoryType)int.Parse(reader["type"].ToString());
+                        targetCategory.CategoryType = (ItemCategoryType)int.Parse(reader["type"].ToString(),
+                            CultureInfo.InvariantCulture);
                     }
                 }
             }
@@ -381,7 +387,8 @@ namespace LeavinsSoftware.Collection.Persistence
         {
             ComicBook targetBook = new ComicBook();
 
-            targetBook.Id = long.Parse(reader["comicid"].ToString());
+            targetBook.Id = long.Parse(reader["comicid"].ToString(),
+                CultureInfo.InvariantCulture);
             targetBook.Name = reader["name"].ToString();
             targetBook.Notes = reader["notes"].ToString();
 
@@ -392,7 +399,8 @@ namespace LeavinsSoftware.Collection.Persistence
         {
             ComicBookSummary targetBook = new ComicBookSummary();
 
-            targetBook.Id = long.Parse(reader["comicid"].ToString());
+            targetBook.Id = long.Parse(reader["comicid"].ToString(),
+                CultureInfo.InvariantCulture);
             targetBook.Name = reader["name"].ToString();
             targetBook.Notes = reader["notes"].ToString();
 
@@ -403,16 +411,16 @@ namespace LeavinsSoftware.Collection.Persistence
         {
             ComicBookIssue targetBook = new ComicBookIssue();
 
-            targetBook.Id = long.Parse(reader["issueid"].ToString());
+            targetBook.Id = long.Parse(reader["issueid"].ToString(), CultureInfo.InvariantCulture);
             targetBook.Name = reader["name"].ToString();
             targetBook.Notes = reader["notes"].ToString();
             targetBook.IssueNumber = reader["issue"].ToString();
             targetBook.Cover = reader["cover"].ToString();
-            targetBook.DistributionType = (DistributionType)int.Parse(reader["distribution"].ToString());
+            targetBook.DistributionType = (DistributionType)int.Parse(reader["distribution"].ToString(), CultureInfo.InvariantCulture);
             targetBook.Condition = reader["condition"].ToString();
-            targetBook.IssueType = (VolumeType)int.Parse(reader["issuetype"].ToString());
-            targetBook.ComicBookId = int.Parse(reader["comicid"].ToString());
-            targetBook.ListType = (ItemListType)int.Parse(reader["listtype"].ToString());
+            targetBook.IssueType = (VolumeType)int.Parse(reader["issuetype"].ToString(), CultureInfo.InvariantCulture);
+            targetBook.ComicBookId = int.Parse(reader["comicid"].ToString(), CultureInfo.InvariantCulture);
+            targetBook.ListType = (ItemListType)int.Parse(reader["listtype"].ToString(), CultureInfo.InvariantCulture);
 
             return targetBook;
         }
