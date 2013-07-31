@@ -8,11 +8,12 @@ using System.Text;
 
 namespace LeavinsSoftware.Collection.Program.Attributes
 {
+    [AttributeUsage(AttributeTargets.Class)]
     public sealed class CollectionPageAttribute : Attribute
     {
-        public CollectionPageAttribute(ItemCategoryType type)
+        public CollectionPageAttribute(ItemCategoryType categoryType)
         {
-            CategoryType = type;
+            CategoryType = categoryType;
         }
 
         public ItemCategoryType CategoryType

@@ -41,7 +41,7 @@ namespace LeavinsSoftware.Collection.Program
             }
         }
 
-        private void AsyncProgramSetup()
+        private static void AsyncProgramSetup()
         {
             Task.Factory.StartNew(
                 () =>

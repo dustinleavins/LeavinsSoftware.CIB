@@ -37,7 +37,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 });
         }
 
-        private bool DoExport()
+        private static bool DoExport()
         {
             string destinationFileName = string.Empty;
 

@@ -42,9 +42,9 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         /// </summary>
         /// <param name="nav"></param>
         /// <param name="GameId"></param>
-        public ItemGameViewModel(IAppNavigationService nav, long GameId)
+        public ItemGameViewModel(IAppNavigationService nav, long gameId)
         {
-            Item = Persistence.GamePersistence.Retrieve(GameId);
+            Item = Persistence.GamePersistence.Retrieve(gameId);
 
             Setup(nav);
         }
