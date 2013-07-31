@@ -41,14 +41,6 @@ namespace LeavinsSoftware.Collection.Models
             {
                 return issues;
             }
-            set
-            {
-                if (issues != value)
-                {
-                    issues = value;
-                    OnPropertyChanged("Issues");
-                }
-            }
         }
 
         public static ValidationResult ValidateItems(ObservableCollection<ComicBookIssue> items,

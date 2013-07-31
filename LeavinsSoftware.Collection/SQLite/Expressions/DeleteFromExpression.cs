@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.Globalization;
 using System.Text;
 
 namespace LeavinsSoftware.Collection.SQLite.Expressions
@@ -18,9 +19,11 @@ namespace LeavinsSoftware.Collection.SQLite.Expressions
 
         public DeleteFromExpression WhereEquals(string parameterName, object parameterValue)
         {
-            WhereClause = String.Format("{0} = {1}",
-                                        parameterName,
-                                        "@" + parameterName);
+            WhereClause = String.Format(
+                CultureInfo.InvariantCulture,
+                "{0} = {1}",
+                parameterName,
+                "@" + parameterName);
 
             ParameterMapping.Add("@" + parameterName, parameterValue);
 

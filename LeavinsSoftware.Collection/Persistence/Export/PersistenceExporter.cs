@@ -28,12 +28,10 @@ namespace LeavinsSoftware.Collection.Persistence.Export
 
         public void Export(string destinationFileName)
         {
-            ExportData exportData = new ExportData
-            {
-                ComicBooks = ComicBooks(),
-                Products = Products(),
-                VideoGames = VideoGames()
-            };
+            ExportData exportData = new ExportData();
+            exportData.ComicBooks.AddRange(ComicBooks());
+            exportData.Products.AddRange(Products());
+            exportData.VideoGames.AddRange(VideoGames());
 
             IDataExportFormat dataFormat = null;
             using (DataFormats formats = new DataFormats(".")) // Current directory

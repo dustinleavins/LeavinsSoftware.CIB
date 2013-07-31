@@ -45,9 +45,10 @@ namespace LeavinsSoftware.Collection.Persistence.Migrations
         public static void Run(string dataPath, string profileName)
         {
             string fullPath = Path.Combine(dataPath, profileName, "collection.db");
-            string connectionString = string.Format("Data Source=|DataDirectory|{0}",
-                fullPath,
-                CultureInfo.InvariantCulture);
+            string connectionString = string.Format(
+                CultureInfo.InvariantCulture,
+                "Data Source=|DataDirectory|{0}",
+                fullPath);
 
             bool outdatedProgramSchema = false;
 

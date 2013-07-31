@@ -16,10 +16,10 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             Products = new List<Product>();
             VideoGames = new List<VideoGame>();
         }
-        public List<ComicBook> ComicBooks { get; set; }
+        public List<ComicBook> ComicBooks { get; private set; }
 
-        public List<Product> Products { get; set; }
+        public List<Product> Products { get; private set; }
 
-        public List<VideoGame> VideoGames { get; set; }
+        public List<VideoGame> VideoGames { get; private set; }
     }
 }

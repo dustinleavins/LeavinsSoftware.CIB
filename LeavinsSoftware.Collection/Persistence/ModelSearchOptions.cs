@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
-    public struct ModelSearchOptions
+    public struct ModelSearchOptions : IEquatable<ModelSearchOptions>
     {
         public ModelSearchOptions(long itemsPerPage,
             ItemCategory itemCategory,
@@ -33,5 +33,55 @@ namespace LeavinsSoftware.Collection.Persistence
         public readonly bool AllListTypes;
 
         public readonly string SearchText;
+        
+        public override bool Equals(object obj)
+        {
+            return (obj is ModelSearchOptions) && Equals((ModelSearchOptions)obj);
+        }
+        
+        public bool Equals(ModelSearchOptions other)
+        {
+            return this.ItemsPerPage == other.ItemsPerPage &&
+                this.ItemCategory == other.ItemCategory &&
+                this.ListType == other.ListType &&
+                this.AllListTypes == other.AllListTypes &&
+                this.SearchText == other.SearchText;
+        }
+        
+        public override int GetHashCode()
+        {
+            int hashCode = 19;
+            
+            unchecked
+            {
+                hashCode += 23 * ItemsPerPage.GetHashCode();
+                
+                if (ItemCategory != null)
+                {
+                    hashCode += 23 * ItemCategory.GetHashCode();
+                }
+                
+                hashCode += 23 * ListType.GetHashCode();
+                
+                hashCode += 23 * AllListTypes.GetHashCode();
+                
+                if (SearchText != null)
+                {
+                    hashCode += 23 * SearchText.GetHashCode();
+                }
+            }
+            return hashCode;
+        }
+        
+        public static bool operator ==(ModelSearchOptions lhs, ModelSearchOptions rhs)
+        {
+            return lhs.Equals(rhs);
+        }
+        
+        public static bool operator !=(ModelSearchOptions lhs, ModelSearchOptions rhs)
+        {
+            return !(lhs == rhs);
+        }
+
     }
 }

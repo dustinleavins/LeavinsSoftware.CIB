@@ -1,0 +1,21 @@
+﻿<?xml version="1.0"?>
+<Dictionary>
+  <Words>
+    <Recognized>
+      <Word>Leavins</Word>
+      <Word>lite</Word>
+      <Word>plugins</Word>
+      <Word>lhs</Word>
+      <Word>rhs</Word>
+    </Recognized>
+    <Compound>
+      <Term CompoundAlternate="VideoGame">videogame</Term>
+      <Term CompoundAlternate="VideoGames">videogames</Term>
+    </Compound>
+  </Words>
+  <Acronyms>
+    <CasingExceptions>
+      <Acronym>TPB</Acronym>
+     </CasingExceptions>
+  </Acronyms>
+</Dictionary>
