@@ -27,6 +27,12 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
             Options = Persistence.ProgramOptionsPersistence.Retrieve();
 
+            CategoryEdit = new BasicCommand(
+                () =>
+                {
+                    Nav.Navigate(() => new OptionsCategoryNamesPage());
+                });
+
             Finish = new BasicCommand(
                 // Execute
                 () =>
@@ -48,6 +54,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         public IAppNavigationService Nav { get; private set; }
 
         public ProgramOptions Options { get; private set; }
+
+        public ICommand CategoryEdit { get; private set; }
 
         public ICommand Finish { get; private set; }
 

@@ -171,6 +171,9 @@
   <data name="Fields_Category" xml:space="preserve">
     <value>Category</value>
   </data>
+  <data name="Fields_CategoryType" xml:space="preserve">
+    <value>Category</value>
+  </data>
   <data name="Fields_CheckForProgramUpdates" xml:space="preserve">
     <value>Check for program updates</value>
   </data>
@@ -238,6 +241,9 @@
   <data name="Import_SuccessMessage" xml:space="preserve">
     <value>Import was successful.</value>
   </data>
+  <data name="OptionsCategoryNames_Save" xml:space="preserve">
+    <value>Update Names</value>
+  </data>
   <data name="Options_Finish" xml:space="preserve">
     <value>Finish</value>
   </data>
@@ -289,6 +295,9 @@
   </data>
   <data name="PageTitles_Options" xml:space="preserve">
     <value>Options</value>
+  </data>
+  <data name="PageTitles_OptionsCategoryNames" xml:space="preserve">
+    <value>Change Category Names</value>
   </data>
   <data name="ProgramName" xml:space="preserve">
     <value>CIB Collection Manager</value>

@@ -133,6 +133,9 @@
     <Compile Include="ItemProductPage.xaml.cs">
       <DependentUpon>ItemProductPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OptionsCategoryNamesPage.xaml.cs">
+      <DependentUpon>OptionsCategoryNamesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="OptionsPage.xaml.cs">
       <DependentUpon>OptionsPage.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,7 @@
     <Compile Include="ViewModels\ItemComicViewModel.cs" />
     <Compile Include="ViewModels\ItemGameViewModel.cs" />
     <Compile Include="ViewModels\ItemProductViewModel.cs" />
+    <Compile Include="ViewModels\OptionsCategoryNamesViewModel.cs" />
     <Compile Include="ViewModels\OptionsViewModel.cs" />
     <Page Include="AddMainCategoryPage.xaml">
       <SubType>Designer</SubType>
@@ -223,6 +227,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OptionsCategoryNamesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="OptionsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

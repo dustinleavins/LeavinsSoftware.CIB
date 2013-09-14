@@ -14,6 +14,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <CheckBox Grid.Row="0"
@@ -72,8 +73,15 @@
                 </Grid>
             </GroupBox>
         </Expander>
+        
+        <Label Grid.Row="2"
+               Margin="0,0,0,20">
+            <Hyperlink Command="{Binding CategoryEdit}">
+                <TextBlock Text="{x:Static res:InterfaceResources.PageTitles_OptionsCategoryNames}" />
+            </Hyperlink>
+        </Label>
 
-        <Button Grid.Row="2"
+        <Button Grid.Row="3"
                 Command="{Binding Finish}"
                 Content="{x:Static res:InterfaceResources.Options_Finish}" />
     </Grid>
