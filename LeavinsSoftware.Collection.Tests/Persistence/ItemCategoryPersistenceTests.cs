@@ -22,6 +22,11 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             {
                 File.Delete(Path.Combine("default", "collection.db"));
             }
+            
+            if (File.Exists("collection.db.bak"))
+            {
+                File.Delete("collection.db.bak");
+            }
 
             MigrationRunner.Run(".", "default");
             File.Copy(Path.Combine("default", "collection.db"), "collection.db.bak");
