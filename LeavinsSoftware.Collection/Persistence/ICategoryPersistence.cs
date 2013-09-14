@@ -13,6 +13,8 @@ namespace LeavinsSoftware.Collection.Persistence
     {
         ICollection<ItemCategory> RetrieveAll(ItemCategoryType type);
 
+        ICollection<ItemCategory> RetrieveAll();
+
         long Count(ItemCategoryType type);
 
         bool Any(ItemCategoryType type);

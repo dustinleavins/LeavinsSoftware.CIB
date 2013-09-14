@@ -24,8 +24,17 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             }
 
             MigrationRunner.Run(".", "default");
+            File.Copy(Path.Combine("default", "collection.db"), "collection.db.bak");
 
             categoryPersistence = new ItemCategoryPersistence(".", "default");
+        }
+        
+        [SetUp]
+        public void SetUp()
+        {
+            File.Copy("collection.db.bak",
+                Path.Combine("default", "collection.db"),
+                true);
         }
 
         [Test]
@@ -142,6 +151,16 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Assert.IsFalse(gameCategories.Any(c => c.CategoryType != ItemCategoryType.VideoGame));
 
             Assert.AreEqual(1, gameCategories.Count(c => c.Id == newGameCategory.Id));
+
+            // All Tests
+            ICollection<ItemCategory> allRetrievedCategories =
+                categoryPersistence.RetrieveAll();
+
+            Assert.IsNotNull(allRetrievedCategories);
+            Assert.AreEqual(3, allRetrievedCategories.Count);
+            Assert.AreEqual(1, allRetrievedCategories.Count(c => c.Id == newComicCategory.Id));
+            Assert.AreEqual(1, allRetrievedCategories.Count(c => c.Id == newProductCategory.Id));
+            Assert.AreEqual(1, allRetrievedCategories.Count(c => c.Id == newGameCategory.Id));
         }
 
         private static void AssertEquality(ItemCategory expected, ItemCategory actual)

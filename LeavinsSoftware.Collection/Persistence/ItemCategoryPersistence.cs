@@ -147,6 +147,35 @@ namespace LeavinsSoftware.Collection.Persistence
             return categories;
         }
 
+        public ICollection<ItemCategory> RetrieveAll()
+        {
+            List<ItemCategory> categories = new List<ItemCategory>();
+
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT categoryid, name, code, type " +
+                        "FROM Categories;";
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            categories.Add(ReaderToCategory(reader));
+                        }
+                    }
+                }
+
+                connection.Close();
+            }
+
+            return categories;
+        }
+
         public long Count(ItemCategoryType type)
         {
             long count = 0;
