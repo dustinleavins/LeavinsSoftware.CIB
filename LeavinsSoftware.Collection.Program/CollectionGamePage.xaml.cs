@@ -14,7 +14,7 @@ namespace LeavinsSoftware.Collection.Program
     /// Interaction logic for CollectionGamePage.xaml
     /// </summary>
     [CollectionPage(ItemCategoryType.VideoGame)]
-    public partial class CollectionGamePage : Page
+    public partial class CollectionGamePage : CollectionPage
     {
         public CollectionGamePage() : this(null)
         {

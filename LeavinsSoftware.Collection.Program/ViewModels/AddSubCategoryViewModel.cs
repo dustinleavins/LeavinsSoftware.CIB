@@ -41,20 +41,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     };
 
                     Persistence.CategoryPersistence.Create(newCategory);
-
-                    // TODO: Go back to Home page, then Subcategory page, then collection page
-                    switch (mainCategory)
-                    {
-                        case ItemCategoryType.ComicBook:
-                            Nav.Navigate(() => new CollectionComicPage(newCategory));
-                            break;
-                        case ItemCategoryType.VideoGame:
-                            Nav.Navigate(() => new CollectionGamePage(newCategory));
-                            break;
-                        default:
-                            Nav.Navigate(() => new CollectionProductPage(newCategory));
-                            break;
-                    }
+                    Nav.Navigate(() => CollectionPage.PageFor(newCategory));
                 },
 
                 // CanExecute
@@ -72,21 +59,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     ItemCategory newCategory = categoryObject as ItemCategory;
 
                     Persistence.CategoryPersistence.Create(newCategory);
-
-                    // TODO: Go back to Home page, then Subcategory page, then collection page
-                    switch (mainCategory)
-                    {
-                        case ItemCategoryType.ComicBook:
-                            Nav.Navigate(() => new CollectionComicPage(newCategory));
-                            break;
-                        case ItemCategoryType.VideoGame:
-                            Nav.Navigate(() => new CollectionGamePage(newCategory));
-                            break;
-                        default:
-                            Nav.Navigate(() => new CollectionProductPage(newCategory));
-                            break;
-                    }
-
+                    Nav.Navigate(() => CollectionPage.PageFor(newCategory));
                 });
 
             PropertyChanged += PropertyChangedHandler;

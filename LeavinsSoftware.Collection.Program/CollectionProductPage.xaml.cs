@@ -11,7 +11,7 @@ using LeavinsSoftware.Collection.Program.ViewModels;
 namespace LeavinsSoftware.Collection.Program
 {
     [CollectionPage(ItemCategoryType.Product)]
-    public partial class CollectionProductPage : Page
+    public partial class CollectionProductPage : CollectionPage
     {
         public CollectionProductPage()
             : this(null)

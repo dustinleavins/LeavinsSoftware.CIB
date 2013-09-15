@@ -56,23 +56,7 @@ namespace LeavinsSoftware.Collection.Program
                 mainFrame.RemoveBackEntry(); // Remove category
                 mainFrame.RemoveBackEntry(); // Remove 'add sub'
 
-                Page categoryPage = null;
-
-                switch (collectAttribute.CategoryType)
-                {
-                    case ItemCategoryType.ComicBook:
-                        categoryPage = new CategoryComicPage();
-                        break;
-                    case ItemCategoryType.Product:
-                        categoryPage = new CategoryProductPage();
-                        break;
-                    case ItemCategoryType.VideoGame:
-                        categoryPage = new CategoryGamePage();
-                        break;
-                    default:
-                        throw new NotSupportedException();
-                }
-
+                Page categoryPage = CategoryPage.PageFor(collectAttribute.CategoryType);
                 mainFrame.Navigate(categoryPage);
 
                 // Setup nav workaround

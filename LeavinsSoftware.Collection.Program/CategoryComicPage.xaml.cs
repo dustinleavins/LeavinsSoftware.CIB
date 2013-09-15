@@ -12,7 +12,7 @@ namespace LeavinsSoftware.Collection.Program
     /// <summary>
     /// Interaction logic for CategoryComicPage.xaml
     /// </summary>
-    public partial class CategoryComicPage : Page
+    public partial class CategoryComicPage : CategoryPage
     {
         private CategoryComicViewModel model;
         public CategoryComicPage()
