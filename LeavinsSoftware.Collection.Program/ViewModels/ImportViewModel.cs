@@ -1,21 +1,22 @@
 ﻿// Copyright (c) 2013 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF;
-using KSMVVM.WPF.Testing;
+using KSMVVM.WPF.Messaging;
 using KSMVVM.WPF.ViewModel;
 using LeavinsSoftware.Collection.Persistence.Export;
-using LeavinsSoftware.Collection.Program.Resources;
-using Microsoft.Win32;
 using System;
-using System.Windows;
 using System.Windows.Input;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
     public sealed class ImportViewModel : ViewModelBase
     {
+        public const string ImportFileNameMessage = "ImportFileName";
+        public const string FinishedImportMessage = "FinishedImport";
+
         public ImportViewModel(IAppNavigationService nav)
         {
+            Messenger = new BasicMessenger();
             mergeImportData = true;
 
             Nav = nav;
@@ -23,11 +24,26 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             Import = new CustomCommand(
                 (x) =>
                 {
-                    if (DoImport())
+                    Messenger.Send(ImportFileNameMessage);
+
+                    if (string.IsNullOrEmpty(ImportFileName))
                     {
-                        MessageBox.Show(InterfaceResources.Import_SuccessMessage);
-                        Nav.GoBack();
+                        return;
                     }
+
+                    // Create exporter instance & export
+                    PersistenceImporter.New()
+                        .ComicBookPersistence(Persistence.ComicPersistence)
+                        .ProductPersistence(Persistence.ProductPersistence)
+                        .VideoGamePersistence(Persistence.GamePersistence)
+                        .CategoryPersistence(Persistence.CategoryPersistence)
+                        .Build()
+                        .Import(ImportFileName, new ImportOptions(merge: MergeImportData));
+
+                    // TODO: Catch possible exceptions
+
+                    Messenger.Send(FinishedImportMessage);
+                    Nav.GoBack();
                 });
         }
 
@@ -51,36 +67,25 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             }
         }
 
-        private bool DoImport()
+        public BasicMessenger Messenger { get; private set; }
+
+        public string ImportFileName
         {
-            string sourceFileName = string.Empty;
-
-            var dialog = new OpenFileDialog();
-            dialog.Filter = "xml files (*.xml)|*.xml|All Files (*.*)|*.*";
-            if (dialog.ShowDialog().GetValueOrDefault())
+            get
             {
-                sourceFileName = dialog.FileName;
+                return importFileName;
             }
-
-            if (string.IsNullOrEmpty(sourceFileName))
+            set
             {
-                return false;
+                if (!string.Equals(importFileName, value, StringComparison.Ordinal))
+                {
+                    importFileName = value;
+                    OnPropertyChanged("ImportFileName");
+                }
             }
-
-            // Create exporter instance & export
-            PersistenceImporter.New()
-                .ComicBookPersistence(Persistence.ComicPersistence)
-                .ProductPersistence(Persistence.ProductPersistence)
-                .VideoGamePersistence(Persistence.GamePersistence)
-                .CategoryPersistence(Persistence.CategoryPersistence)
-                .Build()
-                .Import(sourceFileName, new ImportOptions(merge: MergeImportData));
-
-            // TODO: Catch possible exceptions
-
-            return true;
         }
 
         private bool mergeImportData;
+        private string importFileName;
     }
 }
