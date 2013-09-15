@@ -14,29 +14,18 @@ namespace LeavinsSoftware.Collection.Program
     /// </summary>
     public partial class CategoryProductPage : CategoryPage
     {
-        private CategoryProductViewModel model;
+        private CategoryViewModel model;
 
         public CategoryProductPage()
         {
             InitializeComponent();
-            model = new CategoryProductViewModel(new PageNavigationService(this));
+            model = CategoryViewModel.Product(new PageNavigationService(this));
             DataContext = model;
-
-            foreach (ItemCategory category in model.Categories)
-            {
-                Hyperlink categoryLink = new Hyperlink(new Run(category.Name));
-                categoryLink.Command = model.GoTo;
-                categoryLink.CommandParameter = category;
-                Label categoryLabel = new Label();
-                categoryLabel.Style = (Style)Application.Current.FindResource("categoryLabelStyle");
-
-                linksPanel.Children.Add(categoryLabel);
-            }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            model.LoadedHandler();
+            model.OnLoaded();
             linksPanel.Children.Clear();
 
             foreach (ItemCategory category in model.Categories)

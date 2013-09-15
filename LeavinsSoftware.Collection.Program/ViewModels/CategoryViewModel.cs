@@ -1,22 +1,36 @@
 ﻿// Copyright (c) 2013 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF;
-using KSMVVM.WPF.ViewModel;
 using LeavinsSoftware.Collection.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
-    public sealed class CategoryProductViewModel : ViewModelBase
+    public sealed class CategoryViewModel
     {
-        public CategoryProductViewModel(IAppNavigationService nav)
+        public static CategoryViewModel Product(IAppNavigationService nav)
         {
+            return new CategoryViewModel(nav, ItemCategoryType.Product);
+        }
+
+        public static CategoryViewModel ComicBook(IAppNavigationService nav)
+        {
+            return new CategoryViewModel(nav, ItemCategoryType.ComicBook);
+        }
+
+        public static CategoryViewModel VideoGame(IAppNavigationService nav)
+        {
+            return new CategoryViewModel(nav, ItemCategoryType.VideoGame);
+        }
+
+        private CategoryViewModel(IAppNavigationService nav, ItemCategoryType category)
+        {
+            primaryCategory = category;
             Nav = nav;
 
             Categories = new ObservableCollection<ItemCategory>();
@@ -24,17 +38,17 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             GoTo = new CustomCommand((paramObject) =>
                 {
                     ItemCategory paramAsCategory = paramObject as ItemCategory;
-                    Nav.Navigate(() => new CollectionProductPage(paramAsCategory));
+                    Nav.Navigate(() => CollectionPage.PageFor(paramAsCategory));
                 });
 
             GoToAll = new CustomCommand((x) =>
             {
-                Nav.Navigate(() => new CollectionProductPage());
+                Nav.Navigate(() => CollectionPage.PageFor(primaryCategory));
             });
 
             AddCategory = new CustomCommand((unused) =>
             {
-                Nav.Navigate(() => new AddSubCategoryPage(ItemCategoryType.Product));
+                Nav.Navigate(() => new AddSubCategoryPage(primaryCategory));
             });
         }
 
@@ -48,18 +62,20 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
         public ObservableCollection<ItemCategory> Categories { get; private set; }
 
-        public void LoadedHandler()
+        public void OnLoaded()
         {
             Categories.Clear();
 
             ICollection<ItemCategory> categoriesToAdd = Persistence
                 .CategoryPersistence
-                .RetrieveAll(ItemCategoryType.Product);
+                .RetrieveAll(primaryCategory);
 
             foreach (ItemCategory category in categoriesToAdd)
             {
                 Categories.Add(category);
             }
         }
+
+        private ItemCategoryType primaryCategory;
     }
 }

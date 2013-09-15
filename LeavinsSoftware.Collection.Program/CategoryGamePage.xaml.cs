@@ -14,18 +14,18 @@ namespace LeavinsSoftware.Collection.Program
     /// </summary>
     public partial class CategoryGamePage : CategoryPage
     {
-        private CategoryGameViewModel model;
+        private CategoryViewModel model;
 
         public CategoryGamePage()
         {
             InitializeComponent();
-            model = new CategoryGameViewModel(new PageNavigationService(this));
+            model = CategoryViewModel.VideoGame(new PageNavigationService(this));
             DataContext = model;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            model.LoadedHandler();
+            model.OnLoaded();
             linksPanel.Children.Clear();
 
             foreach (ItemCategory category in model.Categories)

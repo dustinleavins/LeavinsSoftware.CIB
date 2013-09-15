@@ -14,17 +14,17 @@ namespace LeavinsSoftware.Collection.Program
     /// </summary>
     public partial class CategoryComicPage : CategoryPage
     {
-        private CategoryComicViewModel model;
+        private CategoryViewModel model;
         public CategoryComicPage()
         {
             InitializeComponent();
-            model = new CategoryComicViewModel(new PageNavigationService(this));
+            model = CategoryViewModel.ComicBook(new PageNavigationService(this));
             DataContext = model;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            model.LoadedHandler();
+            model.OnLoaded();
             linksPanel.Children.Clear();
 
             foreach (ItemCategory category in model.Categories)

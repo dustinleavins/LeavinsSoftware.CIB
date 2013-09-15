@@ -153,9 +153,7 @@
     <Compile Include="Update\UpdateNotifier.cs" />
     <Compile Include="ViewModels\AddMainCategoryViewModel.cs" />
     <Compile Include="ViewModels\AddSubCategoryViewModel.cs" />
-    <Compile Include="ViewModels\CategoryComicViewModel.cs" />
-    <Compile Include="ViewModels\CategoryGameViewModel.cs" />
-    <Compile Include="ViewModels\CategoryProductViewModel.cs" />
+    <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\CollectionComicViewModel.cs" />
     <Compile Include="ViewModels\CollectionGameViewModel.cs" />
     <Compile Include="ViewModels\CollectionProductViewModel.cs" />
