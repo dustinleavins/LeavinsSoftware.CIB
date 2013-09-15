@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright (c) 2013 Dustin Leavins
+// See the file 'LICENSE.txt' for copying permission.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +12,11 @@ namespace KSMVVM.WPF.ViewModel
     /// </summary>
     public abstract class ViewModelBase<T> : ViewModelBase
     {
-        public ViewModelBase()
+        protected ViewModelBase()
         {
         }
 
-        public ViewModelBase(T model)
+        protected ViewModelBase(T model)
         {
             Model = model;
         }
@@ -26,13 +28,13 @@ namespace KSMVVM.WPF.ViewModel
         {
             get
             {
-                return model;
+                return modelData;
             }
             set
             {
-                if (!model.Equals(value))
+                if (!modelData.Equals(value))
                 {
-                    model = value;
+                    modelData = value;
                     OnPropertyChanged("Model");
                 }
             }
@@ -41,6 +43,6 @@ namespace KSMVVM.WPF.ViewModel
         /// <summary>
         /// Underlying backing field for ViewModelBase&lt;T&gt;.Model.
         /// </summary>
-        protected T model;
+        private T modelData;
     }
 }

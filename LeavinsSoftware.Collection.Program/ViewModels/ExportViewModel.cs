@@ -26,12 +26,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 {
                     if (DoExport())
                     {
-                        Skippable.Do(
-                            () =>
-                            {
-                                MessageBox.Show(InterfaceResources.Export_SuccessMessage);
-                            });
-
+                        MessageBox.Show(InterfaceResources.Export_SuccessMessage);
                         Nav.GoBack();
                     }
                 });
@@ -41,16 +36,12 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         {
             string destinationFileName = string.Empty;
 
-            Skippable.Do(
-                () =>
-                {
-                    var dialog = new SaveFileDialog();
-                    dialog.Filter = "xml files (*.xml)|*.xml|All Files (*.*)|*.*";
-                    if (dialog.ShowDialog().GetValueOrDefault())
-                    {
-                        destinationFileName = dialog.FileName;
-                    }
-                });
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "xml files (*.xml)|*.xml|All Files (*.*)|*.*";
+            if (dialog.ShowDialog().GetValueOrDefault())
+            {
+                destinationFileName = dialog.FileName;
+            }
 
             if (string.IsNullOrEmpty(destinationFileName))
             {

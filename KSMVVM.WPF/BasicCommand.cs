@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright (c) 2013 Dustin Leavins
+// See the file 'LICENSE.txt' for copying permission.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,18 +44,10 @@ namespace KSMVVM.WPF
             CanExecuteHandler = canExecuteFunc;
         }
 
-        public bool CanExecute(object unused)
+        public bool CanExecute(object parameter)
         {
             var canExecute = CanExecuteHandler;
-
-            if (canExecute != null)
-            {
-                return canExecute.Invoke();
-            }
-            else
-            {
-                return true;
-            }
+            return canExecute.Invoke();
         }
 
         public event EventHandler CanExecuteChanged
@@ -68,14 +62,10 @@ namespace KSMVVM.WPF
             }
         }
 
-        public void Execute(object unused)
+        public void Execute(object parameter)
         {
             var execute = ExecuteHandler;
-
-            if (execute != null)
-            {
-                execute.Invoke();
-            }
+            execute.Invoke();
         }
 
         /// <summary>
