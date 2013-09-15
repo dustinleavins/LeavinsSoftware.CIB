@@ -2,9 +2,9 @@
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF;
 using LeavinsSoftware.Collection.Models;
+using LeavinsSoftware.Collection.Program.Categories;
 using LeavinsSoftware.Collection.Program.Resources;
 using LeavinsSoftware.Collection.Program.ViewModels;
-
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -42,24 +42,24 @@ namespace LeavinsSoftware.Collection.Program
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             // Get unused categories
-            IEnumerable<ItemCategory> categories = model.UnusedDefaultCategories;
+            IEnumerable<CategoryBase> categories = model.UnusedDefaultCategories;
 
             bool atLeastOneCategory = false;
 
-            foreach (ItemCategory category in categories)
+            foreach (CategoryBase categoryBase in categories)
             {
                 atLeastOneCategory = true;
-                // Create link that adds the category to persistence
 
-                // Add link to stack panel
-                Hyperlink categoryLink = new Hyperlink(new Run(category.Name));
-                categoryLink.Command = model.CreateDefaultCategory;
-                categoryLink.CommandParameter = category;
-                Label categoryLabel = new Label();
-                categoryLabel.Content = categoryLink;
-                categoryLabel.Style = (Style)Application.Current.FindResource("categoryLabelStyle");
-
-                defaultCategoriesPanel.Children.Add(categoryLabel);
+                if (categoryBase.IsComposite)
+                {
+                    Expander categoryExpander = CreateCategoryGroup(categoryBase);
+                    defaultCategoriesPanel.Children.Add(categoryExpander);
+                }
+                else
+                {
+                    Label categoryLabel = CreateCategoryLabel(categoryBase.ToItemCategory());
+                    defaultCategoriesPanel.Children.Add(categoryLabel);
+                }
             }
 
             switch (model.MainCategory)
@@ -81,6 +81,33 @@ namespace LeavinsSoftware.Collection.Program
             {
                 defaultCategoriesPanel.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private Expander CreateCategoryGroup(CategoryBase categoryBase)
+        {
+            StackPanel categoriesWithHeaderPanel = new StackPanel();
+
+            foreach (DefaultCategory innerCategory in categoryBase.Categories)
+            {
+                Label categoryLabel = CreateCategoryLabel(innerCategory.ToItemCategory());
+                categoriesWithHeaderPanel.Children.Add(categoryLabel);
+            }
+
+            Expander categoryExpander = new Expander();
+            categoryExpander.Header = categoryBase.Name;
+            categoryExpander.Content = new GroupBox() { Content = categoriesWithHeaderPanel };
+            return categoryExpander;
+        }
+
+        private Label CreateCategoryLabel(ItemCategory category)
+        {
+            Hyperlink categoryLink = new Hyperlink(new Run(category.Name));
+            categoryLink.Command = model.CreateDefaultCategory;
+            categoryLink.CommandParameter = category;
+            Label categoryLabel = new Label();
+            categoryLabel.Content = categoryLink;
+            categoryLabel.Style = (Style)Application.Current.FindResource("categoryLabelStyle");
+            return categoryLabel;
         }
     }
 }

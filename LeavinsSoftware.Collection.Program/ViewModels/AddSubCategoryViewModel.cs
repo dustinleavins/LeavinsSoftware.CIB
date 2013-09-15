@@ -3,6 +3,7 @@
 using KSMVVM.WPF;
 using KSMVVM.WPF.ViewModel;
 using LeavinsSoftware.Collection.Models;
+using LeavinsSoftware.Collection.Program.Categories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,43 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 .RetrieveAll(mainCategory)
                 .Select(c => c.Code);
 
-            UnusedDefaultCategories = DefaultCategories.CategoriesFor(mainCategory)
-                .Where(defaultCategory => !persistedCodes.Contains(defaultCategory.Code));
+            //UnusedDefaultCategories = DefaultCategories.CategoriesFor(mainCategory)
+            //    .Where(defaultCategory => !persistedCodes.Contains(defaultCategory.Code));
+
+            // Initialize UnusedDefaultCategories
+            List<CategoryBase> unusedCategories = new List<CategoryBase>();
+            foreach (CategoryBase category in DefaultCategories.CategoriesFor(mainCategory))
+            {
+                if (category.IsComposite)
+                {
+                    List<DefaultCategory> unusedInnerCategories = new List<DefaultCategory>();
+
+                    foreach (DefaultCategory innerCategory in category.Categories)
+                    {
+                        if (!persistedCodes.Contains(innerCategory.ToItemCategory().Code))
+                        {
+                            unusedInnerCategories.Add(innerCategory);
+                        }
+                    }
+
+                    if (unusedInnerCategories.Count > 0)
+                    {
+                        CompositeCategory copiedCategory = new CompositeCategory(unusedInnerCategories)
+                        {
+                            Name = category.Name,
+                            CategoryType = category.CategoryType
+                        };
+
+                        unusedCategories.Add(copiedCategory);
+                    }
+                }
+                else if (!persistedCodes.Contains(category.ToItemCategory().Code))
+                {
+                    unusedCategories.Add(category);
+                }
+            }
+
+            UnusedDefaultCategories = unusedCategories;
 
             AddSubCategory = new CustomCommand(
                 // Execute
@@ -78,7 +114,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
         public ICommand CreateDefaultCategory { get; private set; }
 
-        public IEnumerable<ItemCategory> UnusedDefaultCategories { get; private set; }
+        public IEnumerable<CategoryBase> UnusedDefaultCategories { get; private set; }
 
         public string SubCategoryName
         {
