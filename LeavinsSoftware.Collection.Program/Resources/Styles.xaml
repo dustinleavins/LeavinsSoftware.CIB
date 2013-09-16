@@ -15,6 +15,16 @@
                 Value="Center" />
     </Style>
 
+    <Style x:Key="categoryExpanderStyle"
+           TargetType="Expander">
+        <Setter Property="LayoutTransform">
+            <Setter.Value>
+                <ScaleTransform ScaleX="1.5"
+                                ScaleY="1.5" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="headerLabelStyle"
            TargetType="Label">
         <Setter Property="LayoutTransform">

@@ -95,7 +95,14 @@ namespace LeavinsSoftware.Collection.Program
 
             Expander categoryExpander = new Expander();
             categoryExpander.Header = categoryBase.Name;
-            categoryExpander.Content = new GroupBox() { Content = categoriesWithHeaderPanel };
+            categoryExpander.Content = new GroupBox()
+            {
+                Content = categoriesWithHeaderPanel,
+                Header = categoryBase.Name
+            };
+
+            categoryExpander.Style = (Style)Application.Current.FindResource("categoryExpanderStyle");
+
             return categoryExpander;
         }
 
