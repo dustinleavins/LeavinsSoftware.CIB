@@ -39,24 +39,40 @@ namespace LeavinsSoftware.Collection.Program.Categories
             {
                 return new List<CategoryBase>()
                 {
-                    // Microsoft
                     GenerateCompositeCategory(ItemCategoryType.VideoGame, "Microsoft",
                     new List<DefaultCategory>
                     {
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "Xbox"),
                         GenerateDefaultCategory(ItemCategoryType.VideoGame, "Xbox360"),
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "XboxOne")
                     }),
 
-                    // Sony
-                    GenerateDefaultCategory(ItemCategoryType.VideoGame, "PS3"),
-                    GenerateDefaultCategory(ItemCategoryType.VideoGame, "Vita"),
+                    GenerateCompositeCategory(ItemCategoryType.VideoGame, "Sony",
+                    new List<DefaultCategory>
+                    {
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "PS1"),
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "PS2"),
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "PS3"),
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "PS4"),
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "PSP"),
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "Vita")
+                    }),
 
-                    // Nintendo
-                    GenerateDefaultCategory(ItemCategoryType.VideoGame, "WiiU"),
-                    GenerateDefaultCategory(ItemCategoryType.VideoGame, "3DS"),
-                    GenerateDefaultCategory(ItemCategoryType.VideoGame, "Wii"),
-                    GenerateDefaultCategory(ItemCategoryType.VideoGame, "DS"),
+                    GenerateCompositeCategory(ItemCategoryType.VideoGame, "Nintendo",
+                    new List<DefaultCategory>
+                    {
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "WiiU"),
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "3DS"),
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "Wii"),
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "DS"),
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "GB"),
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "GBA"),
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "NES"),
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "SNES"),
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "N64"),
+                        GenerateDefaultCategory(ItemCategoryType.VideoGame, "GCN")
+                    }),
 
-                    // Other
                     GenerateDefaultCategory(ItemCategoryType.VideoGame, "PC")
                 };
             }

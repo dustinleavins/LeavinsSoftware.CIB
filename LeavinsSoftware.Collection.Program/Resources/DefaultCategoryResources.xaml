@@ -11,12 +11,29 @@
     
     <!-- Video Games -->
     <system:String x:Key="group_Microsoft">Microsoft</system:String>
+    <system:String x:Key="dc_Xbox">Xbox (Original)</system:String>
     <system:String x:Key="dc_Xbox360">Xbox 360</system:String>
-    <system:String x:Key="dc_PS3">Playstation 3</system:String>
+    <system:String x:Key="dc_XboxOne">Xbox One</system:String>
+    
+    <system:String x:Key="group_Sony">Sony</system:String>
+    <system:String x:Key="dc_PS1">PSone</system:String>
+    <system:String x:Key="dc_PS2">PlayStation 2</system:String>
+    <system:String x:Key="dc_PS3">PlayStation 3</system:String>
+    <system:String x:Key="dc_PS4">PlayStation 4</system:String>
+    <system:String x:Key="dc_PSP">PlayStation Portable</system:String>
     <system:String x:Key="dc_Vita">PS Vita</system:String>
+    
+    <system:String x:Key="group_Nintendo">Nintendo</system:String>
     <system:String x:Key="dc_Wii">Wii</system:String>
     <system:String x:Key="dc_WiiU">Wii U</system:String>
     <system:String x:Key="dc_DS">DS</system:String>
     <system:String x:Key="dc_3DS">3DS</system:String>
+    <system:String x:Key="dc_GB">Game Boy / Game Boy Color</system:String>
+    <system:String x:Key="dc_GBA">Game Boy Advance</system:String>
+    <system:String x:Key="dc_NES">Nintendo Entertainment System</system:String>
+    <system:String x:Key="dc_SNES">Super Nintendo</system:String>
+    <system:String x:Key="dc_N64">Nintendo 64</system:String>
+    <system:String x:Key="dc_GCN">GameCube</system:String>
+    
     <system:String x:Key="dc_PC">PC</system:String>
 </ResourceDictionary>
