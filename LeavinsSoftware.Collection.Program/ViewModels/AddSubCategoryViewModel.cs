@@ -97,8 +97,6 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     Persistence.CategoryPersistence.Create(newCategory);
                     Nav.Navigate(() => CollectionPage.PageFor(newCategory));
                 });
-
-            PropertyChanged += PropertyChangedHandler;
         }
 
         void PropertyChangedHandler(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -130,6 +128,16 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     OnPropertyChanged("SubCategoryName");
                 }
             }
+        }
+
+        public void OnLoaded()
+        {
+            PropertyChanged += PropertyChangedHandler;
+        }
+
+        public void OnUnloaded()
+        {
+            PropertyChanged -= PropertyChangedHandler;
         }
 
         private string subCategoryName;

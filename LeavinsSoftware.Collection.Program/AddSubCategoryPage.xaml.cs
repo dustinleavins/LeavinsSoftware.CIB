@@ -41,6 +41,7 @@ namespace LeavinsSoftware.Collection.Program
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            model.OnLoaded();
             // Get unused categories
             IEnumerable<ICategory> categories = model.UnusedDefaultCategories;
 
@@ -81,6 +82,11 @@ namespace LeavinsSoftware.Collection.Program
             {
                 defaultCategoriesPanel.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            model.OnUnloaded();
         }
 
         private Expander CreateCategoryGroup(ICategory categoryBase)

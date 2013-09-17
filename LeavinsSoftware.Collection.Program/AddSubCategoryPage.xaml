@@ -8,7 +8,8 @@
       d:DesignHeight="300" d:DesignWidth="300"
       JournalEntry.Name="addSubCategoryPage"
       Title="AddSubCategoryPage"
-      Loaded="Page_Loaded">
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded">
 
     <Grid Style="{StaticResource mainPageGrid}">
         <Grid.RowDefinitions>
