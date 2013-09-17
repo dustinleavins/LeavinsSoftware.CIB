@@ -13,6 +13,9 @@ using System.Windows.Input;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
+    /// <summary>
+    /// ViewModel for <see cref="AddSubCategoryPage"/>.
+    /// </summary>
     public sealed class AddSubCategoryViewModel : ViewModelBase
     {
         public AddSubCategoryViewModel(IAppNavigationService nav, ItemCategoryType mainCategory)
@@ -25,9 +28,6 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 .CategoryPersistence
                 .RetrieveAll(mainCategory)
                 .Select(c => c.Code);
-
-            //UnusedDefaultCategories = DefaultCategories.CategoriesFor(mainCategory)
-            //    .Where(defaultCategory => !persistedCodes.Contains(defaultCategory.Code));
 
             // Initialize UnusedDefaultCategories
             List<ICategory> unusedCategories = new List<ICategory>();

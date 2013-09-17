@@ -9,9 +9,19 @@ using System.Windows.Input;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
+    /// <summary>
+    /// ViewModel for <see cref="ImportPage"/>.
+    /// </summary>
     public sealed class ImportViewModel : ViewModelBase
     {
+        /// <summary>
+        /// ID associated with the 'ImportFileName' message.
+        /// </summary>
         public const string ImportFileNameMessage = "ImportFileName";
+
+        /// <summary>
+        /// ID associated with the 'ImportFileName' message.
+        /// </summary>
         public const string FinishedImportMessage = "FinishedImport";
 
         public ImportViewModel(IAppNavigationService nav)

@@ -6,6 +6,9 @@ using System.Windows.Input;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
+    /// <summary>
+    /// ViewModel for <see cref="HomePage"/>.
+    /// </summary>
     public sealed class HomeViewModel : ViewModelBase
     {
         public HomeViewModel(IAppNavigationService nav)

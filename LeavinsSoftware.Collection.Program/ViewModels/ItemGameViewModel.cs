@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
+    /// <summary>
+    /// ViewModel for <see cref="ItemGamePage"/>.
+    /// </summary>
     public sealed class ItemGameViewModel : ViewModelBase
     {
         /// <summary>
@@ -57,6 +60,9 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
         public CustomCommand AddItem { get; private set; }
 
+        /// <summary>
+        /// Method that is invoked to determine if page contents are valid.
+        /// </summary>
         public Func<bool> PageValidator { get; set; }
 
         private void Setup(IAppNavigationService nav)

@@ -9,9 +9,19 @@ using System.Windows.Input;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
+    /// <summary>
+    /// ViewModel for <see cref="ExportPage"/>.
+    /// </summary>
     public sealed class ExportViewModel : ViewModelBase
     {
+        /// <summary>
+        /// ID associated with the 'ExportFileName' message.
+        /// </summary>
         public const string ExportFileNameMessage = "ExportFileName";
+
+        /// <summary>
+        /// ID associated with the 'FinishedExport' message.
+        /// </summary>
         public const string FinishedExportMessage = "FinishedExport";
 
         public ExportViewModel(IAppNavigationService nav)

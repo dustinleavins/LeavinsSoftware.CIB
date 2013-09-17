@@ -10,6 +10,9 @@ using System.Reflection;
 
 namespace LeavinsSoftware.Collection.Program
 {
+    /// <summary>
+    /// Contains instances of every class responsible for persistence.
+    /// </summary>
     public static class Persistence
     {
         public static IComicBookPersistence ComicPersistence { get; private set; }

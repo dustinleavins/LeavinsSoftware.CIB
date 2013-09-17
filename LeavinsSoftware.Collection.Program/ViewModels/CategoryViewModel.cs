@@ -11,6 +11,9 @@ using System.Windows.Input;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
+    /// <summary>
+    /// ViewModel for Category pages.
+    /// </summary>
     public sealed class CategoryViewModel
     {
         public static CategoryViewModel Product(IAppNavigationService nav)

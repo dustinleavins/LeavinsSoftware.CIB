@@ -1,4 +1,6 @@
-﻿using KSMVVM.WPF;
+﻿// Copyright (c) 2013 Dustin Leavins
+// See the file 'LICENSE.txt' for copying permission.
+using KSMVVM.WPF;
 using KSMVVM.WPF.ViewModel;
 using LeavinsSoftware.Collection.Models;
 using System;
@@ -8,6 +10,9 @@ using System.Linq;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
+    /// <summary>
+    /// ViewModel for <see cref="OptionsCategoryNamesPage"/>.
+    /// </summary>
     public sealed class OptionsCategoryNamesViewModel : ViewModelBase
     {
         public OptionsCategoryNamesViewModel(IAppNavigationService nav)

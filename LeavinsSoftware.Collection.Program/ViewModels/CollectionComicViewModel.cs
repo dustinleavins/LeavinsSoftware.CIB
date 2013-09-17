@@ -14,6 +14,9 @@ using System.Collections.ObjectModel;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
+    /// <summary>
+    /// ViewModel for <see cref="CollectionComicPage"/>.
+    /// </summary>
     public sealed class CollectionComicViewModel : ViewModelBase
     {
         public CollectionComicViewModel(IAppNavigationService nav, ItemCategory subCategory)

@@ -10,6 +10,9 @@ using System.Linq;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
+    /// <summary>
+    /// ViewModel for <see cref="ItemProductPage"/>.
+    /// </summary>
     public sealed class ItemProductViewModel : ViewModelBase
     {
         /// <summary>
@@ -54,6 +57,9 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
         public Product Item { get; private set; }
 
+        /// <summary>
+        /// Method that is invoked to determine if page contents are valid.
+        /// </summary>
         public Func<bool> PageValidator { get; set; }
 
         public CustomCommand AddItem { get; private set; }

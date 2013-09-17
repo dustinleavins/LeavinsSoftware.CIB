@@ -12,6 +12,9 @@ using System.Xml;
 
 namespace LeavinsSoftware.Collection.Program.Update
 {
+    /// <summary>
+    /// Manages update notification back-end work.
+    /// </summary>
     public sealed class UpdateNotifier
     {
         public UpdateNotifier(ProgramOptions options,

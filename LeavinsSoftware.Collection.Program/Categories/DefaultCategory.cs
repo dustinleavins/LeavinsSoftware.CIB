@@ -1,4 +1,6 @@
-﻿using LeavinsSoftware.Collection.Models;
+﻿// Copyright (c) 2013 Dustin Leavins
+// See the file 'LICENSE.txt' for copying permission.
+using LeavinsSoftware.Collection.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

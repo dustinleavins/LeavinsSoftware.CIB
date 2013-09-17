@@ -12,6 +12,9 @@ using System.Windows.Input;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
+    /// <summary>
+    /// ViewModel for <see cref="OptionsPage"/>.
+    /// </summary>
     public sealed class OptionsViewModel : ViewModelBase
     {
         /// <summary>
@@ -59,6 +62,9 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
         public ICommand Finish { get; private set; }
 
+        /// <summary>
+        /// Method that is invoked to determine if page contents are valid.
+        /// </summary>
         public Func<bool> FormValidator { get; private set; }
     }
 }

@@ -10,6 +10,9 @@ using System.Linq;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
+    /// <summary>
+    /// ViewModel for <see cref="ItemComicPage"/>.
+    /// </summary>
     public sealed class ItemComicViewModel : ViewModelBase
     {
         /// <summary>
@@ -58,6 +61,9 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
         public IEnumerable Publishers { get; private set; }
 
+        /// <summary>
+        /// Method that is invoked to determine if page contents are valid.
+        /// </summary>
         public Func<bool> PageValidator { get; set; }
 
         private void Setup(IAppNavigationService nav)

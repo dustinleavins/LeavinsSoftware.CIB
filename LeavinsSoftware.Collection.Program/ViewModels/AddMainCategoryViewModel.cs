@@ -12,6 +12,9 @@ using LeavinsSoftware.Collection.Models;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
+    /// <summary>
+    /// ViewModel for <see cref="AddMainCategoryPage"/>.
+    /// </summary>
     public sealed class AddMainCategoryViewModel : ViewModelBase
     {
         public AddMainCategoryViewModel(IAppNavigationService nav)
