@@ -8,6 +8,9 @@ using System.Text;
 
 namespace LeavinsSoftware.Collection.Persistence.Export
 {
+    /// <summary>
+    /// Container that holds all data to be exported.
+    /// </summary>
     public sealed class ExportData
     {
         public ExportData()

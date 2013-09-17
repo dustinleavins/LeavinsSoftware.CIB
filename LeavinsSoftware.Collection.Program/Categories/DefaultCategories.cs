@@ -9,22 +9,22 @@ namespace LeavinsSoftware.Collection.Program.Categories
 {
     public sealed class DefaultCategories
     {
-        public static IEnumerable<CategoryBase> ProductCategories
+        public static IEnumerable<ICategory> ProductCategories
         {
             get
             {
-                return new List<CategoryBase>()
+                return new List<ICategory>()
                 {
                     GenerateDefaultCategory(ItemCategoryType.Product, "P01")
                 };
             }
         }
 
-        public static IEnumerable<CategoryBase> ComicBookCategories
+        public static IEnumerable<ICategory> ComicBookCategories
         {
             get
             {
-                return new List<CategoryBase>()
+                return new List<ICategory>()
                 {
                     GenerateDefaultCategory(ItemCategoryType.ComicBook, "DC"),
                     GenerateDefaultCategory(ItemCategoryType.ComicBook, "Marvel"),
@@ -33,11 +33,11 @@ namespace LeavinsSoftware.Collection.Program.Categories
             }
         }
 
-        public static IEnumerable<CategoryBase> VideoGameCategories
+        public static IEnumerable<ICategory> VideoGameCategories
         {
             get
             {
-                return new List<CategoryBase>()
+                return new List<ICategory>()
                 {
                     GenerateCompositeCategory(ItemCategoryType.VideoGame, "Microsoft",
                     new List<DefaultCategory>
@@ -78,7 +78,7 @@ namespace LeavinsSoftware.Collection.Program.Categories
             }
         }
 
-        public static IEnumerable<CategoryBase> CategoriesFor(ItemCategoryType type)
+        public static IEnumerable<ICategory> CategoriesFor(ItemCategoryType type)
         {
             switch (type)
             {

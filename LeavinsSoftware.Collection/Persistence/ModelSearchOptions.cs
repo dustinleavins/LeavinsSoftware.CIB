@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
+    /// <summary>
+    /// Search options.
+    /// </summary>
     public struct ModelSearchOptions : IEquatable<ModelSearchOptions>
     {
         public ModelSearchOptions(long itemsPerPage,

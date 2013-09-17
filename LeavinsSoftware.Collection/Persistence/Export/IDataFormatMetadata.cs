@@ -7,6 +7,10 @@ using System.Text;
 
 namespace LeavinsSoftware.Collection.Persistence.Export
 {
+    /// <summary>
+    /// Metadata for <see cref="IDataImportFormat"/> and
+    /// <see cref="IDataExportFormat"/> implementations
+    /// </summary>
     public interface IDataFormatMetadata
     {
         /// <summary>

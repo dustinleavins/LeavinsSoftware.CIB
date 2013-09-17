@@ -9,6 +9,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LeavinsSoftware.Collection.Models
 {
+    /// <summary>
+    /// Represents a single issue in a series of comic books.
+    /// </summary>
     public sealed class ComicBookIssue : Model
     {
         [Range(0, long.MaxValue)]

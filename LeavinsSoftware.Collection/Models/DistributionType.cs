@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Models
 {
+    /// <summary>
+    /// Method of distribution.
+    /// </summary>
     public enum DistributionType
     {
         Physical = 0,

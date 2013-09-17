@@ -14,6 +14,9 @@ using System.Xml.Serialization;
 
 namespace LeavinsSoftware.Collection.Persistence.Export
 {
+    /// <summary>
+    /// Encapsulates the process of exporting program data to a file.
+    /// </summary>
     public sealed class PersistenceExporter
     {
         private PersistenceExporter()
@@ -106,6 +109,9 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             return games;
         }
 
+        /// <summary>
+        /// Builds an object to perform data export.
+        /// </summary>
         public class ExporterBuilder
         {
             public ExporterBuilder()

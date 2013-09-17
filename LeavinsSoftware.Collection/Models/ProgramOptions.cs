@@ -9,10 +9,16 @@ using System.Text;
 
 namespace LeavinsSoftware.Collection.Models
 {
-    public sealed class ProgramOptions : ModelBase, IEquatable<ProgramOptions>
+    /// <summary>
+    /// Program options.
+    /// </summary>
+    public sealed class ProgramOptions :
+        ValidatableBase, INotifyPropertyChanged, IEquatable<ProgramOptions>
     {
         public const string DefaultProxyServerAddress = "127.0.0.1";
         public const int DefaultProxyServerPort = 80;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Default constructor with default options.
@@ -26,6 +32,9 @@ namespace LeavinsSoftware.Collection.Models
             ProxyServerPort = DefaultProxyServerPort;
         }
 
+        /// <summary>
+        /// Is this the first time that the user has launched the program?
+        /// </summary>
         public bool IsFirstRun
         {
             get
@@ -42,6 +51,9 @@ namespace LeavinsSoftware.Collection.Models
             }
         }
 
+        /// <summary>
+        /// Should CIB check online for program updates?
+        /// </summary>
         public bool CheckForProgramUpdates
         {
             get
@@ -167,6 +179,19 @@ namespace LeavinsSoftware.Collection.Models
         public static bool operator !=(ProgramOptions lhs, ProgramOptions rhs)
         {
             return !(lhs == rhs);
+        }
+
+        /// <summary>
+        /// Triggers PropertyChanged event for the specified property.
+        /// </summary>
+        /// <param name="name"></param>
+        private void OnPropertyChanged(string name)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
         }
 
         private bool isFirstRun;

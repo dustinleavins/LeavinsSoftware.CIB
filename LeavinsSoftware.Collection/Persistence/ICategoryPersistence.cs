@@ -9,14 +9,36 @@ using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
+    /// <summary>
+    /// Interface for <see cref="ItemCategory"/> persistence.
+    /// </summary>
     public interface ICategoryPersistence : IPersistence<ItemCategory>
     {
+        /// <summary>
+        /// Retrieves all categories with the specified type.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         ICollection<ItemCategory> RetrieveAll(ItemCategoryType type);
 
+        /// <summary>
+        /// Retrieves every category in persistence.
+        /// </summary>
+        /// <returns></returns>
         ICollection<ItemCategory> RetrieveAll();
 
+        /// <summary>
+        /// Retrieves the number of categories with the specified type.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         long Count(ItemCategoryType type);
 
+        /// <summary>
+        /// Are there any categories with the specified type?
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         bool Any(ItemCategoryType type);
     }
 }

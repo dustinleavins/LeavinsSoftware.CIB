@@ -9,8 +9,13 @@ using System.Reflection;
 
 namespace LeavinsSoftware.Collection.Models
 {
-    public abstract class Model : ModelBase
+    /// <summary>
+    /// Represents a data model.
+    /// </summary>
+    public abstract class Model : ValidatableBase, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         [Range(0, long.MaxValue)]
         public long Id
         {
@@ -40,6 +45,19 @@ namespace LeavinsSoftware.Collection.Models
             get
             {
                 return id != 0;
+            }
+        }
+
+        /// <summary>
+        /// Triggers PropertyChanged event for the specified property.
+        /// </summary>
+        /// <param name="name"></param>
+        protected void OnPropertyChanged(string name)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
             }
         }
 

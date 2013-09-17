@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
+    /// <summary>
+    /// Interface for <see cref="VideoGame"/> persistence.
+    /// </summary>
     public interface IVideoGamePersistence : IPersistence<VideoGame>, ISearchablePersistence<VideoGame>
     {
     }

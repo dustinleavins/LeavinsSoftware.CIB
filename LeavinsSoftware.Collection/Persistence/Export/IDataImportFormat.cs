@@ -7,6 +7,9 @@ using System.Text;
 
 namespace LeavinsSoftware.Collection.Persistence.Export
 {
+    /// <summary>
+    /// Interface for classes that perform data export.
+    /// </summary>
     public interface IDataImportFormat
     {
         ExportData Import(string fileName);

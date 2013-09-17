@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
+    /// <summary>
+    /// Interface for <see cref="Product"/> persistence.
+    /// </summary>
     public interface IProductPersistence : IPersistence<Product>, ISearchablePersistence<Product>
     {
     }

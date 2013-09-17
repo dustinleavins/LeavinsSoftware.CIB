@@ -5,6 +5,9 @@ using System;
 
 namespace LeavinsSoftware.Collection.Models
 {
+    /// <summary>
+    /// Represents an item in a user's collection.
+    /// </summary>
     public abstract class Item :  Model
     {
         [Required]

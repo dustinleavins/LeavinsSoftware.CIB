@@ -8,6 +8,9 @@ using System.Text;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
+    /// <summary>
+    /// Builder for <see cref="ModelSearchOptions"/>.
+    /// </summary>
     public sealed class ModelSearchOptionsBuilder
     {
         public long ItemsPerPage { get; set; }

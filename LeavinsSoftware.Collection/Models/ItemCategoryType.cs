@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Models
 {
+    /// <summary>
+    /// Used in determining the major category of an <see cref="ItemCategory"/>.
+    /// </summary>
     public enum ItemCategoryType
     {
         Product = 0,

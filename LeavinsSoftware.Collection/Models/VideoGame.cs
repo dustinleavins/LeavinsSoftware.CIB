@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Models
 {
+
+    /// <summary>
+    /// Represents a video game in a user's collection.
+    /// </summary>
     public sealed class VideoGame : Item
     {
         [Required]

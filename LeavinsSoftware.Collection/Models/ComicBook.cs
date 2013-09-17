@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Models
 {
+    /// <summary>
+    /// Represents a series of comic books
+    /// </summary>
     public sealed class ComicBook : Item
     {
         public ComicBook()

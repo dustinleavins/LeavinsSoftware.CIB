@@ -7,6 +7,9 @@ using System.Text;
 
 namespace LeavinsSoftware.Collection.Persistence.Export
 {
+    /// <summary>
+    /// Import options
+    /// </summary>
     public struct ImportOptions : IEquatable<ImportOptions>
     {
         public ImportOptions(bool merge)

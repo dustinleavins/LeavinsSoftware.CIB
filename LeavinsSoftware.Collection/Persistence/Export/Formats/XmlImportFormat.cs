@@ -10,6 +10,9 @@ using System.Xml.Serialization;
 
 namespace LeavinsSoftware.Collection.Persistence.Export.Formats
 {
+    /// <summary>
+    /// XML import format.
+    /// </summary>
     [System.ComponentModel.Composition.Export(typeof(IDataImportFormat))]
     [ExportMetadata("Extensions", "xml")]
     public sealed class XmlImportFormat : IDataImportFormat

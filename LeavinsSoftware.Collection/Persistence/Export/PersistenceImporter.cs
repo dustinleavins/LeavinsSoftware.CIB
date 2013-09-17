@@ -11,6 +11,9 @@ using System;
 
 namespace LeavinsSoftware.Collection.Persistence.Export
 {
+    /// <summary>
+    /// Encapsulates the process of importing program data from a file.
+    /// </summary>
     public sealed class PersistenceImporter
     {
         private PersistenceImporter()
@@ -462,6 +465,9 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             return merged;
         }
 
+        /// <summary>
+        /// Builds an object to perform data import.
+        /// </summary>
         public class ImporterBuilder
         {
             public ImporterBuilder()

@@ -30,8 +30,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             //    .Where(defaultCategory => !persistedCodes.Contains(defaultCategory.Code));
 
             // Initialize UnusedDefaultCategories
-            List<CategoryBase> unusedCategories = new List<CategoryBase>();
-            foreach (CategoryBase category in DefaultCategories.CategoriesFor(mainCategory))
+            List<ICategory> unusedCategories = new List<ICategory>();
+            foreach (ICategory category in DefaultCategories.CategoriesFor(mainCategory))
             {
                 if (category.IsComposite)
                 {
@@ -114,7 +114,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
         public ICommand CreateDefaultCategory { get; private set; }
 
-        public IEnumerable<CategoryBase> UnusedDefaultCategories { get; private set; }
+        public IEnumerable<ICategory> UnusedDefaultCategories { get; private set; }
 
         public string SubCategoryName
         {

@@ -7,6 +7,9 @@ using System.Text;
 
 namespace LeavinsSoftware.Collection.Models
 {
+    /// <summary>
+    /// The list that an item belongs to.
+    /// </summary>
     public enum ItemListType
     {
         Have = 0,

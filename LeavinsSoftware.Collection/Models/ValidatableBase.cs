@@ -9,26 +9,49 @@ using System.Reflection;
 
 namespace LeavinsSoftware.Collection.Models
 {
-    public abstract class ModelBase : INotifyPropertyChanged, IDataErrorInfo
+    /// <summary>
+    /// Provides subclasses access to validation methods.
+    /// </summary>
+    public abstract class ValidatableBase : IDataErrorInfo
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        /// <summary>
+        /// Is this instance valid?
+        /// </summary>
+        /// <returns></returns>
         public bool IsValid()
         {
             return ValidationResults().Count == 0;
         }
 
+        /// <summary>
+        /// Is the specified member of this instance valid?
+        /// </summary>
+        /// <param name="memberName">Name of member to validate</param>
+        /// <returns></returns>
         public bool IsValid(string memberName)
         {
             return ValidationResultsFor(memberName).Count == 0;
         }
 
+        /// <summary>
+        /// Performs validation.
+        /// </summary>
+        /// <exception cref="System.ComponentModel.DataAnnotations.ValidationException">
+        /// Thrown when a member of this instance is invalid.
+        /// </exception>
         public void Validate()
         {
             var context = new ValidationContext(this, null, null);
             Validator.ValidateObject(this, context, true);
         }
 
+        /// <summary>
+        /// Returns a collection of validation results.
+        /// </summary>
+        /// <returns>
+        /// An empty collection if this instance is valid; otherwise,
+        /// returns a collection containing validation errors.
+        /// </returns>
         public ICollection<ValidationResult> ValidationResults()
         {
             var context = new ValidationContext(this, null, null);
@@ -38,6 +61,14 @@ namespace LeavinsSoftware.Collection.Models
             return results;
         }
 
+        /// <summary>
+        /// Returns a collection of validation results.
+        /// </summary>
+        /// <param name="memberName">Name of member to validate</param>
+        /// <returns>
+        /// An empty collection if the specified member of this instance is valid; otherwise,
+        /// returns a collection containing validation errors.
+        /// </returns>
         public ICollection<ValidationResult> ValidationResultsFor(string memberName)
         {
             PropertyInfo property = GetType().GetProperty(memberName);
@@ -66,11 +97,19 @@ namespace LeavinsSoftware.Collection.Models
             return results;
         }
 
-        public string this[string columnName]
+        /// <summary>
+        /// Gets an error string for the specified member.
+        /// </summary>
+        /// <param name="memberName">Name of member to validate</param>
+        /// <returns>
+        /// An empty string if the specified member is valid;
+        /// otherwise, returns an error string for the member.
+        /// </returns>
+        public string this[string memberName]
         {
             get
             {
-                var results = this.ValidationResultsFor(columnName);
+                var results = this.ValidationResultsFor(memberName);
 
                 if (results.Count == 0)
                 {
@@ -83,25 +122,15 @@ namespace LeavinsSoftware.Collection.Models
             }
         }
 
+        /// <summary>
+        /// Gets the error message for this instance.
+        /// </summary>
         public string Error
         {
             get
             {
                 return string.Join("\n",
                     ValidationResults().Select(r => r.ErrorMessage));
-            }
-        }
-
-        /// <summary>
-        /// Triggers PropertyChanged event for the specified property.
-        /// </summary>
-        /// <param name="name"></param>
-        protected void OnPropertyChanged(string name)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
             }
         }
     }

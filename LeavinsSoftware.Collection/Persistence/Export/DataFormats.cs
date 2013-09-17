@@ -9,6 +9,10 @@ using System.Text;
 
 namespace LeavinsSoftware.Collection.Persistence.Export
 {
+    /// <summary>
+    /// Manages <see cref="IDataImportFormat"/> and <see cref="IDataExportFormat"/>
+    /// implementations that might be bundled with the system as plugins.
+    /// </summary>
     public sealed class DataFormats : IDisposable
     {
         public DataFormats(string pluginsDirectoryName)

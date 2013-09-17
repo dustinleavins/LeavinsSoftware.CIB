@@ -9,6 +9,13 @@ using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Models
 {
+    /// <summary>
+    /// Represents a miscellaneous physical product that is part of a user's
+    /// collection.
+    /// </summary>
+    /// <remarks>
+    /// This usually represents a collectible of some kind.
+    /// </remarks>
     public sealed class Product : Item
     {
         [Required]

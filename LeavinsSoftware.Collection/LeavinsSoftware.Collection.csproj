@@ -76,13 +76,13 @@
     <Compile Include="Models\ComicBook.cs" />
     <Compile Include="Models\ComicBookIssue.cs" />
     <Compile Include="Models\ComicBookSummary.cs" />
-    <Compile Include="Models\ComicType.cs" />
+    <Compile Include="Models\VolumeType.cs" />
     <Compile Include="Models\DistributionType.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ItemCategoryType.cs" />
     <Compile Include="Models\ItemListType.cs" />
     <Compile Include="Models\Model.cs" />
-    <Compile Include="Models\ModelBase.cs" />
+    <Compile Include="Models\ValidatableBase.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ItemCategory.cs" />
     <Compile Include="Models\ProgramOptions.cs" />

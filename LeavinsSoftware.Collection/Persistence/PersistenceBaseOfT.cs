@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 namespace LeavinsSoftware.Collection.Persistence
 {
     // TODO: Add change event notification
+    /// <summary>
+    /// Base class for <see cref="IPersistence&lt;T&gt;"/> instances.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class PersistenceBase<T> : IPersistence<T> where T : Model
     {
         public T Create(T item)

@@ -94,10 +94,10 @@
       <DependentUpon>AddSubCategoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Attributes\CollectionPageAttribute.cs" />
-    <Compile Include="Categories\CategoryBase.cs" />
     <Compile Include="Categories\CompositeCategory.cs" />
     <Compile Include="Categories\DefaultCategory.cs" />
     <Compile Include="Categories\DefaultCategories.cs" />
+    <Compile Include="Categories\ICategory.cs" />
     <Compile Include="CategoryComicPage.xaml.cs">
       <DependentUpon>CategoryComicPage.xaml</DependentUpon>
     </Compile>

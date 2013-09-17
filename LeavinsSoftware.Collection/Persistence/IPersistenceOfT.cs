@@ -4,14 +4,43 @@ using LeavinsSoftware.Collection.Models;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
-    public interface IPersistence<T> where T : Model
+    /// <summary>
+    /// Interface for <see cref="Model"/> persistence.
+    /// </summary>
+    /// <typeparam name="TModel"></typeparam>
+    public interface IPersistence<TModel> where TModel : Model
     {
-        T Create(T item);
+        /// <summary>
+        /// Creates a persisted record of a model instance.
+        /// </summary>
+        /// <remarks>
+        /// Implementors need to validate the item before persisting it.
+        /// </remarks>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        TModel Create(TModel item);
 
-        T Retrieve(long id);
+        /// <summary>
+        /// Retrieves a persisted record of a model by its id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        TModel Retrieve(long id);
 
-        T Update(T item);
+        /// <summary>
+        /// Updates the record of an already persisted model.
+        /// </summary>
+        /// <remarks>
+        /// Implementors need to validate the item before persisting it.
+        /// </remarks>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        TModel Update(TModel item);
 
-        void Delete(T item);
+        /// <summary>
+        /// Deletes the record associated with the model instance.
+        /// </summary>
+        /// <param name="item"></param>
+        void Delete(TModel item);
     }
 }

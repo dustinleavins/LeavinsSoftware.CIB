@@ -6,21 +6,37 @@ using System.Text;
 
 namespace LeavinsSoftware.Collection.Program.Categories
 {
-    public sealed class DefaultCategory : CategoryBase
+    public sealed class DefaultCategory : ICategory
     {
-        public string Code { get; set; }
+        public string Name
+        {
+            get;
+            set;
+        }
 
-        public override bool IsComposite
+        public ItemCategoryType CategoryType
+        {
+            get;
+            set;
+        }
+
+        public string Code
+        {
+            get;
+            set;
+        }
+
+        public bool IsComposite
         {
             get { return false; }
         }
 
-        public override IEnumerable<DefaultCategory> Categories
+        public IEnumerable<DefaultCategory> Categories
         {
             get { throw new NotSupportedException(); }
         }
 
-        public override ItemCategory ToItemCategory()
+        public ItemCategory ToItemCategory()
         {
             return new ItemCategory()
             {

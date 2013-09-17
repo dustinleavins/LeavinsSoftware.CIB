@@ -6,6 +6,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LeavinsSoftware.Collection.Models
 {
+    /// <summary>
+    /// Represents a category of items.
+    /// </summary>
     public sealed class ItemCategory : Model, IEquatable<ItemCategory>
     {
         [Required]

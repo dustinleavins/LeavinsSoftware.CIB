@@ -42,11 +42,11 @@ namespace LeavinsSoftware.Collection.Program
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             // Get unused categories
-            IEnumerable<CategoryBase> categories = model.UnusedDefaultCategories;
+            IEnumerable<ICategory> categories = model.UnusedDefaultCategories;
 
             bool atLeastOneCategory = false;
 
-            foreach (CategoryBase categoryBase in categories)
+            foreach (ICategory categoryBase in categories)
             {
                 atLeastOneCategory = true;
 
@@ -83,7 +83,7 @@ namespace LeavinsSoftware.Collection.Program
             }
         }
 
-        private Expander CreateCategoryGroup(CategoryBase categoryBase)
+        private Expander CreateCategoryGroup(ICategory categoryBase)
         {
             StackPanel categoriesWithHeaderPanel = new StackPanel();
 

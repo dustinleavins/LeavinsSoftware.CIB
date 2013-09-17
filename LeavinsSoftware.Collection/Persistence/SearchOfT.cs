@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
+    /// <summary>
+    /// Represents an ongoing search.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public sealed class Search<T>
     {
         public Search(ISearchablePersistence<T> persistence, ModelSearchOptions options)
