@@ -2,6 +2,7 @@
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF;
 using LeavinsSoftware.Collection.Models;
+using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Program.ViewModels;
 using System.Windows.Controls;
 
@@ -23,7 +24,7 @@ namespace LeavinsSoftware.Collection.Program
             int presentCategories = 0;
 
             // Product
-            if (Persistence.CategoryPersistence.Any(ItemCategoryType.Product))
+            if (Persistence.GetInstance<ICategoryPersistence>().Any(ItemCategoryType.Product))
             {
                 productLabel.Visibility = System.Windows.Visibility.Visible;
                 presentCategories += 1;
@@ -34,7 +35,7 @@ namespace LeavinsSoftware.Collection.Program
             }
 
             // Comic Book
-            if (Persistence.CategoryPersistence.Any(ItemCategoryType.ComicBook))
+            if (Persistence.GetInstance<ICategoryPersistence>().Any(ItemCategoryType.ComicBook))
             {
                 comicLabel.Visibility = System.Windows.Visibility.Visible;
                 presentCategories += 1;
@@ -45,7 +46,7 @@ namespace LeavinsSoftware.Collection.Program
             }
 
             // Video Game
-            if (Persistence.CategoryPersistence.Any(ItemCategoryType.VideoGame))
+            if (Persistence.GetInstance<ICategoryPersistence>().Any(ItemCategoryType.VideoGame))
             {
                 gameLabel.Visibility = System.Windows.Visibility.Visible;
                 presentCategories += 1;

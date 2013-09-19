@@ -1,4 +1,5 @@
-﻿// Copyright (c) 2013 Dustin Leavins
+﻿using LeavinsSoftware.Collection.Persistence;
+// Copyright (c) 2013 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using LeavinsSoftware.Collection.Program.Resources;
 using System;
@@ -46,7 +47,7 @@ namespace LeavinsSoftware.Collection.Program
             Task.Factory.StartNew(
                 () =>
                 {
-                    var options = Persistence.ProgramOptionsPersistence
+                    var options = Persistence.GetInstance<IProgramOptionsPersistence>()
                         .Retrieve();
 
                     if (options.IsFirstRun)
@@ -62,7 +63,7 @@ namespace LeavinsSoftware.Collection.Program
                         }
 
                         options.IsFirstRun = false;
-                        Persistence.ProgramOptionsPersistence.Update(options);
+                        Persistence.GetInstance<IProgramOptionsPersistence>().Update(options);
                     }
                     else if (options.CheckForProgramUpdates)
                     {

@@ -3,6 +3,7 @@
 using KSMVVM.WPF;
 using KSMVVM.WPF.Messaging;
 using KSMVVM.WPF.ViewModel;
+using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Persistence.Export;
 using System;
 using System.Windows.Input;
@@ -40,9 +41,9 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
                     // Create exporter instance & export
                     PersistenceExporter.New()
-                        .ComicBookPersistence(Persistence.ComicPersistence)
-                        .ProductPersistence(Persistence.ProductPersistence)
-                        .VideoGamePersistence(Persistence.GamePersistence)
+                        .ComicBookPersistence(Persistence.GetInstance<IComicBookPersistence>())
+                        .ProductPersistence(Persistence.GetInstance<IProductPersistence>())
+                        .VideoGamePersistence(Persistence.GetInstance<IVideoGamePersistence>())
                         .Build()
                         .Export(ExportFileName);
 

@@ -3,6 +3,7 @@
 using KSMVVM.WPF;
 using KSMVVM.WPF.ViewModel;
 using LeavinsSoftware.Collection.Models;
+using LeavinsSoftware.Collection.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,7 +37,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
                     foreach (ItemCategory updatedCategory in updatedCategories)
                     {
-                        Persistence.CategoryPersistence.Update(updatedCategory);
+                        Persistence.GetInstance<ICategoryPersistence>().Update(updatedCategory);
                     }
 
                     Nav.GoBack();
@@ -47,7 +48,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     return !(Categories.Any(c => !c.IsValid()));
                 });
 
-            Categories = Persistence.CategoryPersistence.RetrieveAll();
+            Categories = Persistence.GetInstance<ICategoryPersistence>().RetrieveAll();
 
             originalCategoryNames = Categories.ToDictionary(
                 (cat) => cat.Id,

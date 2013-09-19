@@ -3,6 +3,7 @@
 using KSMVVM.WPF;
 using KSMVVM.WPF.ViewModel;
 using LeavinsSoftware.Collection.Models;
+using LeavinsSoftware.Collection.Persistence;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,7 +29,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
             Nav = nav;
 
-            Options = Persistence.ProgramOptionsPersistence.Retrieve();
+            Options = Persistence.GetInstance<IProgramOptionsPersistence>().Retrieve();
 
             CategoryEdit = new BasicCommand(
                 () =>
@@ -42,7 +43,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 {
                     if (Options.IsValid() && formValidator.Invoke())
                     {
-                        Persistence.ProgramOptionsPersistence.Update(Options);
+                        Persistence.GetInstance<IProgramOptionsPersistence>().Update(Options);
                         Nav.GoBack();
                     }
                 },

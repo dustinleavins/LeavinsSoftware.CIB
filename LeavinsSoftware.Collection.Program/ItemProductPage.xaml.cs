@@ -2,6 +2,7 @@
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF;
 using LeavinsSoftware.Collection.Models;
+using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Program.Resources;
 using LeavinsSoftware.Collection.Program.ViewModels;
 using System;
@@ -34,7 +35,7 @@ namespace LeavinsSoftware.Collection.Program
 
         public static ItemProductPage NewProductPage(long categoryId)
         {
-            ItemCategory category = Persistence.CategoryPersistence.Retrieve(categoryId);
+            ItemCategory category = Persistence.GetInstance<ICategoryPersistence>().Retrieve(categoryId);
             var page = new ItemProductPage();
 
             page.Setup(new ItemProductViewModel(new PageNavigationService(page),

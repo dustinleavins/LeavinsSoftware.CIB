@@ -3,6 +3,7 @@
 using KSMVVM.WPF;
 using KSMVVM.WPF.ViewModel;
 using LeavinsSoftware.Collection.Models;
+using LeavinsSoftware.Collection.Persistence;
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -48,7 +49,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         /// <param name="comicId"></param>
         public ItemComicViewModel(IAppNavigationService nav, long comicId)
         {
-            Item = Persistence.ComicPersistence.Retrieve(comicId);
+            Item = Persistence.GetInstance<IComicBookPersistence>().Retrieve(comicId);
 
             Setup(nav);
         }
@@ -81,11 +82,11 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
                     if (Item.Id == 0)
                     {
-                        Persistence.ComicPersistence.Create(Item);
+                        Persistence.GetInstance<IComicBookPersistence>().Create(Item);
                     }
                     else
                     {
-                        Persistence.ComicPersistence.Update(Item);
+                        Persistence.GetInstance<IComicBookPersistence>().Update(Item);
                     }
 
                     Nav.GoBack();
@@ -101,7 +102,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             Item.PropertyChanged += Item_PropertyChanged;
             Item.Issues.CollectionChanged += Issues_CollectionChanged;
 
-            Publishers = Persistence.CategoryPersistence
+            Publishers = Persistence.GetInstance<ICategoryPersistence>()
                 .RetrieveAll(ItemCategoryType.ComicBook)
                 .Select((p) => new { Name = p.Name, Value = p });
         }

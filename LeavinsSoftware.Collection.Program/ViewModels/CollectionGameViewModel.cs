@@ -81,7 +81,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 (x) =>
                 {
                     // TODO: Refactor
-                    currentSearch = new Search<VideoGame>(Persistence.GamePersistence, new ModelSearchOptionsBuilder()
+                    currentSearch = new Search<VideoGame>(Persistence.GetInstance<IVideoGamePersistence>(),
+                        new ModelSearchOptionsBuilder()
                     {
                         ItemCategory = SubCategory,
                         ItemsPerPage = 20,
@@ -144,7 +145,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     OnPropertyChanged("ListType");
 
                     // TODO: Refactor
-                    currentSearch = new Search<VideoGame>(Persistence.GamePersistence, new ModelSearchOptionsBuilder()
+                    currentSearch = new Search<VideoGame>(Persistence.GetInstance<IVideoGamePersistence>(),
+                        new ModelSearchOptionsBuilder()
                     {
                         ItemCategory = SubCategory,
                         ItemsPerPage = 20,
@@ -175,7 +177,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
         public void OnLoaded()
         {
-            currentSearch = new Search<VideoGame>(Persistence.GamePersistence, new ModelSearchOptionsBuilder()
+            currentSearch = new Search<VideoGame>(Persistence.GetInstance<IVideoGamePersistence>(),
+                new ModelSearchOptionsBuilder()
             {
                 ItemCategory = SubCategory,
                 ItemsPerPage = 20,

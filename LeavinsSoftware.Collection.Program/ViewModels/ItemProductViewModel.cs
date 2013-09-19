@@ -3,6 +3,7 @@
 using KSMVVM.WPF;
 using KSMVVM.WPF.ViewModel;
 using LeavinsSoftware.Collection.Models;
+using LeavinsSoftware.Collection.Persistence;
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -48,7 +49,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         /// <param name="productId"></param>
         public ItemProductViewModel(IAppNavigationService nav, long productId)
         {
-            Item = Persistence.ProductPersistence.Retrieve(productId);
+            Item = Persistence.GetInstance<IProductPersistence>().Retrieve(productId);
 
             Setup(nav);
         }
@@ -80,11 +81,11 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
                     if (Item.Id == 0)
                     {
-                        Persistence.ProductPersistence.Create(Item);
+                        Persistence.GetInstance<IProductPersistence>().Create(Item);
                     }
                     else
                     {
-                        Persistence.ProductPersistence.Update(Item);
+                        Persistence.GetInstance<IProductPersistence>().Update(Item);
                     }
 
                     Nav.GoBack();
@@ -99,7 +100,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
             Item.PropertyChanged += Item_PropertyChanged;
 
-            Categories = Persistence.CategoryPersistence
+            Categories = Persistence.GetInstance<ICategoryPersistence>()
                 .RetrieveAll(ItemCategoryType.Product)
                 .Select((p) => new { Name = p.Name, Value = p });
         }

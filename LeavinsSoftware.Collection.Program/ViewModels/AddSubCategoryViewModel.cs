@@ -3,6 +3,7 @@
 using KSMVVM.WPF;
 using KSMVVM.WPF.ViewModel;
 using LeavinsSoftware.Collection.Models;
+using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Program.Categories;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             MainCategory = mainCategory;
 
             IEnumerable<string> persistedCodes = Persistence
-                .CategoryPersistence
+                .GetInstance<ICategoryPersistence>()
                 .RetrieveAll(mainCategory)
                 .Select(c => c.Code);
 
@@ -76,7 +77,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                         CategoryType = MainCategory
                     };
 
-                    Persistence.CategoryPersistence.Create(newCategory);
+                    Persistence.GetInstance<ICategoryPersistence>().Create(newCategory);
                     Nav.Navigate(() => CollectionPage.PageFor(newCategory));
                 },
 
@@ -94,7 +95,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
                     ItemCategory newCategory = categoryObject as ItemCategory;
 
-                    Persistence.CategoryPersistence.Create(newCategory);
+                    Persistence.GetInstance<ICategoryPersistence>().Create(newCategory);
                     Nav.Navigate(() => CollectionPage.PageFor(newCategory));
                 });
         }

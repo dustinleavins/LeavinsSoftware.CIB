@@ -3,6 +3,7 @@
 using KSMVVM.WPF;
 using KSMVVM.WPF.ViewModel;
 using LeavinsSoftware.Collection.Models;
+using LeavinsSoftware.Collection.Persistence;
 using System;
 using System.Collections;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         /// <param name="GameId"></param>
         public ItemGameViewModel(IAppNavigationService nav, long gameId)
         {
-            Item = Persistence.GamePersistence.Retrieve(gameId);
+            Item = Persistence.GetInstance<IVideoGamePersistence>().Retrieve(gameId);
 
             Setup(nav);
         }
@@ -79,11 +80,11 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
                     if (Item.Id == 0)
                     {
-                        Persistence.GamePersistence.Create(Item);
+                        Persistence.GetInstance<IVideoGamePersistence>().Create(Item);
                     }
                     else
                     {
-                        Persistence.GamePersistence.Update(Item);
+                        Persistence.GetInstance<IVideoGamePersistence>().Update(Item);
                     }
 
                     Nav.GoBack();
@@ -98,7 +99,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
             Item.PropertyChanged += Item_PropertyChanged;
 
-            Systems = Persistence.CategoryPersistence
+            Systems = Persistence.GetInstance<ICategoryPersistence>()
                 .RetrieveAll(ItemCategoryType.VideoGame)
                 .Select((p) => new { Name = p.Name, Value = p });
         }

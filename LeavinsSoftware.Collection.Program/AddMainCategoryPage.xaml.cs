@@ -2,6 +2,7 @@
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF;
 using LeavinsSoftware.Collection.Models;
+using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Program.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,7 +23,7 @@ namespace LeavinsSoftware.Collection.Program
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             // Product
-            if (Persistence.CategoryPersistence.Any(ItemCategoryType.Product))
+            if (Persistence.GetInstance<ICategoryPersistence>().Any(ItemCategoryType.Product))
             {
                 productCategory.Visibility = Visibility.Collapsed;
             }
@@ -32,7 +33,7 @@ namespace LeavinsSoftware.Collection.Program
             }
 
             // Comic Book
-            if (Persistence.CategoryPersistence.Any(ItemCategoryType.ComicBook))
+            if (Persistence.GetInstance<ICategoryPersistence>().Any(ItemCategoryType.ComicBook))
             {
                 comicCategory.Visibility = Visibility.Collapsed;
             }
@@ -42,7 +43,7 @@ namespace LeavinsSoftware.Collection.Program
             }
 
             // Video Game
-            if (Persistence.CategoryPersistence.Any(ItemCategoryType.VideoGame))
+            if (Persistence.GetInstance<ICategoryPersistence>().Any(ItemCategoryType.VideoGame))
             {
                 gameCategory.Visibility = Visibility.Collapsed;
             }

@@ -2,6 +2,7 @@
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF;
 using LeavinsSoftware.Collection.Models;
+using LeavinsSoftware.Collection.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -70,7 +71,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             Categories.Clear();
 
             ICollection<ItemCategory> categoriesToAdd = Persistence
-                .CategoryPersistence
+                .GetInstance<ICategoryPersistence>()
                 .RetrieveAll(primaryCategory);
 
             foreach (ItemCategory category in categoriesToAdd)
