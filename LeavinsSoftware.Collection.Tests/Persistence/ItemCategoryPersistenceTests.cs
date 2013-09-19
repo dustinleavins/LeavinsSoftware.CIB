@@ -28,10 +28,13 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 File.Delete("collection.db.bak");
             }
 
-            MigrationRunner.Run(".", "default");
+            DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            Profile defaultProfile = new Profile("default");
+            MigrationRunner.Run(currentDir, defaultProfile);
             File.Copy(Path.Combine("default", "collection.db"), "collection.db.bak");
 
-            categoryPersistence = new ItemCategoryPersistence(".", "default");
+            
+            categoryPersistence = new ItemCategoryPersistence(currentDir, defaultProfile);
         }
         
         [SetUp]

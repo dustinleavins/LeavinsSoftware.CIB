@@ -13,9 +13,9 @@ namespace LeavinsSoftware.Collection.Persistence
 {
     public sealed class ItemCategoryPersistence : ICategoryPersistence
     {
-        public ItemCategoryPersistence(string dataPath, string initialProfileName)
+        public ItemCategoryPersistence(DirectoryInfo dataDir, Profile initialProfile)
         {
-            string fullPath = Path.Combine(dataPath, initialProfileName, "collection.db");
+            string fullPath = Path.Combine(dataDir.FullName, initialProfile.Name, "collection.db");
             ConnectionString = string.Format(CultureInfo.InvariantCulture,
                 "Data Source=|DataDirectory|{0}",
                 fullPath);

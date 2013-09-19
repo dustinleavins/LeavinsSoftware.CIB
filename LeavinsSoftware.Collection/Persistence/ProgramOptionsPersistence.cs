@@ -9,9 +9,9 @@ namespace LeavinsSoftware.Collection.Persistence
 {
     public sealed class ProgramOptionsPersistence : IProgramOptionsPersistence
     {
-        public ProgramOptionsPersistence(string fileName)
+        public ProgramOptionsPersistence(FileInfo file)
         {
-            FileName = fileName;
+            FileName = file.Name;
         }
 
         public string FileName { get; private set; }

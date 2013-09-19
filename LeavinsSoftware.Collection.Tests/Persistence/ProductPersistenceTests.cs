@@ -23,12 +23,15 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             {
                 File.Delete(Path.Combine("default", "collection.db"));
             }
-            
-            MigrationRunner.Run(".", "default");
-            productPersistence = new ProductPersistence(".", "default");
+
+            DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            Profile defaultProfile = new Profile("default");
+            MigrationRunner.Run(currentDir, defaultProfile);
+
+            productPersistence = new ProductPersistence(currentDir, defaultProfile);
 
             IPersistence<ItemCategory> categoryPersistence =
-                new ItemCategoryPersistence(".", "default");
+                new ItemCategoryPersistence(currentDir, defaultProfile);
 
             primaryCategory = new ItemCategory()
             {
@@ -116,13 +119,15 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 File.Delete(Path.Combine("pagination", "collection.db"));
             }
 
-            MigrationRunner.Run(".", "pagination");
-
+            DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            Profile paginationProfile = new Profile("pagination");
+            MigrationRunner.Run(currentDir, paginationProfile);
+            
             IProductPersistence target =
-                new ProductPersistence(".", "pagination");
+                new ProductPersistence(currentDir, paginationProfile);
 
             IPersistence<ItemCategory> categoryPersistence =
-                new ItemCategoryPersistence(".", "pagination");
+                new ItemCategoryPersistence(currentDir, paginationProfile);
 
             List<ItemCategory> categories = new List<ItemCategory>()
             {

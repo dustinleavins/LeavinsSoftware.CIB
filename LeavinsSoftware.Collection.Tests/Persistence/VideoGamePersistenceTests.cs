@@ -23,12 +23,15 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             {
                 File.Delete(Path.Combine("default", "collection.db"));
             }
-            
-            MigrationRunner.Run(".", "default");
-            gamePersistence = new VideoGamePersistence(".", "default");
+
+            DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            Profile defaultProfile = new Profile("default");
+
+            MigrationRunner.Run(currentDir, defaultProfile);
+            gamePersistence = new VideoGamePersistence(currentDir, defaultProfile);
 
             IPersistence<ItemCategory> categoryPersistence =
-                new ItemCategoryPersistence(".", "default");
+                new ItemCategoryPersistence(currentDir, defaultProfile);
 
             categoryPersistence.Create(new ItemCategory()
             {
@@ -132,13 +135,16 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 File.Delete(Path.Combine("pagination", "collection.db"));
             }
 
-            MigrationRunner.Run(".", "pagination");
+            DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            Profile paginationProfile = new Profile("pagination");
+            MigrationRunner.Run(currentDir, paginationProfile);
+            
 
             IVideoGamePersistence target =
-                new VideoGamePersistence(".", "pagination");
+                new VideoGamePersistence(currentDir, paginationProfile);
 
             IPersistence<ItemCategory> categoryPersistence =
-                new ItemCategoryPersistence(".", "pagination");
+                new ItemCategoryPersistence(currentDir, paginationProfile);
 
             List<ItemCategory> categories = new List<ItemCategory>()
             {

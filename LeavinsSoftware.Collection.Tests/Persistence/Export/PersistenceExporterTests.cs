@@ -31,11 +31,14 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
                 File.Delete(Path.Combine("default", "collection.db"));
             }
 
-            MigrationRunner.Run(".", "default");
-            comicBookPersistence = new ComicBookPersistence(".", "default");
-            productPersistence = new ProductPersistence(".", "default");
-            categoryPersistence = new ItemCategoryPersistence(".", "default");
-            videoGamePersistence = new VideoGamePersistence(".", "default");
+            DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            Profile defaultProfile = new Profile("default");
+            MigrationRunner.Run(currentDir, defaultProfile);
+            
+            comicBookPersistence = new ComicBookPersistence(currentDir, defaultProfile);
+            productPersistence = new ProductPersistence(currentDir, defaultProfile);
+            categoryPersistence = new ItemCategoryPersistence(currentDir, defaultProfile);
+            videoGamePersistence = new VideoGamePersistence(currentDir, defaultProfile);
 
             target = PersistenceExporter
                 .New()

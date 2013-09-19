@@ -118,6 +118,7 @@
     <Compile Include="Persistence\PersistenceEventArgsOfT.cs" />
     <Compile Include="Persistence\PersistenceEventType.cs" />
     <Compile Include="Persistence\ProductPersistence.cs" />
+    <Compile Include="Persistence\Profile.cs" />
     <Compile Include="Persistence\ProgramOptionsPersistence.cs" />
     <Compile Include="Persistence\SearchOfT.cs" />
     <Compile Include="Persistence\ModelSearchOptions.cs" />

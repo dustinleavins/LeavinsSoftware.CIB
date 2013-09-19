@@ -25,7 +25,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 File.Delete("options.xml");
             }
             
-            target = new ProgramOptionsPersistence("options.xml");
+            target = new ProgramOptionsPersistence(new FileInfo("options.xml"));
         }
 
         [Test]

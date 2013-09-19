@@ -16,9 +16,9 @@ namespace LeavinsSoftware.Collection.Persistence
 {
     public sealed class ProductPersistence :  PersistenceBase<Product>, IProductPersistence
     {
-        public ProductPersistence(string dataPath, string initialProfileName)
+        public ProductPersistence(DirectoryInfo dataDir, Profile initialProfile)
         {
-            string fullPath = Path.Combine(dataPath, initialProfileName, "collection.db");
+            string fullPath = Path.Combine(dataDir.FullName, initialProfile.Name, "collection.db");
             ConnectionString = string.Format(CultureInfo.InvariantCulture,
                 "Data Source=|DataDirectory|{0}",
                 fullPath);

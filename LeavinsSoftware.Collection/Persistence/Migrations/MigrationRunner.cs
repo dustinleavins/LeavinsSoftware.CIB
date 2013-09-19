@@ -42,19 +42,22 @@ namespace LeavinsSoftware.Collection.Persistence.Migrations
         /// Runs all migrations, in order.
         /// </summary>
         /// <param name="databaseFileName"></param>
-        public static void Run(string dataPath, string profileName)
+        public static void Run(DirectoryInfo dataDir, Profile profile)
         {
-            string fullPath = Path.Combine(dataPath, profileName, "collection.db");
+            string collectionDatabasePath = Path.Combine(dataDir.FullName,
+                profile.Name,
+                "collection.db");
+            
             string connectionString = string.Format(
                 CultureInfo.InvariantCulture,
                 "Data Source=|DataDirectory|{0}",
-                fullPath);
+                collectionDatabasePath);
 
             bool outdatedProgramSchema = false;
 
-            if (!Directory.Exists(Path.Combine(dataPath, profileName)))
+            if (!Directory.Exists(Path.Combine(dataDir.FullName, profile.Name)))
             {
-                Directory.CreateDirectory(Path.Combine(dataPath, profileName));
+                Directory.CreateDirectory(Path.Combine(dataDir.FullName, profile.Name));
             }
 
             using (var connection = new SQLiteConnection(connectionString))

@@ -24,11 +24,14 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 File.Delete(Path.Combine("default", "collection.db"));
             }
 
-            MigrationRunner.Run(".", "default");
-            comicPersistence = new ComicBookPersistence(".", "default");
+            DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            Profile defaultProfile = new Profile("default");
+            MigrationRunner.Run(currentDir, defaultProfile);
+            comicPersistence = new ComicBookPersistence(new DirectoryInfo("."),
+                new Profile("default"));
 
             IPersistence<ItemCategory> categoryPersistence =
-                new ItemCategoryPersistence(".", "default");
+                new ItemCategoryPersistence(currentDir, new Profile("default"));
 
             primaryCategory = new ItemCategory()
             {
@@ -313,13 +316,15 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 File.Delete(Path.Combine("pagination", "collection.db"));
             }
 
-            MigrationRunner.Run(".", "pagination");
+            DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            Profile paginationProfile = new Profile("pagination");
+            MigrationRunner.Run(currentDir, paginationProfile);
 
             IComicBookPersistence target =
-                new ComicBookPersistence(".", "pagination");
+                new ComicBookPersistence(currentDir, paginationProfile);
 
             IPersistence<ItemCategory> categoryPersistence =
-                new ItemCategoryPersistence(".", "pagination");
+                new ItemCategoryPersistence(currentDir, paginationProfile);
 
             List<ItemCategory> categories = new List<ItemCategory>()
             {
