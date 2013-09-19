@@ -21,12 +21,30 @@ namespace LeavinsSoftware.Collection.Persistence
             GoToPage(0);
         }
 
+        /// <summary>
+        /// Current page of results.
+        /// </summary>
+        /// <remarks>
+        /// This should be the page of results currently being shown to an end-user.
+        /// </remarks>
         public List<T> CurrentPage { get; private set; }
 
+        /// <summary>
+        /// Number of the current page.
+        /// </summary>
         public long CurrentPageNumber { get; private set; }
 
+        /// <summary>
+        /// Total number of pages.
+        /// </summary>
         public long TotalNumberOfPages { get; private set; }
 
+        /// <summary>
+        /// Goes to the next page (if it is available)
+        /// </summary>
+        /// <remarks>
+        /// Currently, this just fails silently if there is no next page available.
+        /// </remarks>
         public void NextPage()
         {
             if (HasNextPage)
@@ -35,6 +53,13 @@ namespace LeavinsSoftware.Collection.Persistence
             }
         }
 
+        /// <summary>
+        /// Goes to the previous page (unless the current page is the
+        /// first one)
+        /// </summary>
+        /// <remarks>
+        /// Currently, this just fails silently if there is no next page available.
+        /// </remarks>
         public void PreviousPage()
         {
             if (HasPreviousPage)
@@ -43,12 +68,19 @@ namespace LeavinsSoftware.Collection.Persistence
             }
         }
 
+        /// <summary>
+        /// Goes to the specified page number (if it's available)
+        /// </summary>
+        /// <param name="newPageNumber"></param>
         public void GoToPage(long newPageNumber)
         {
             CurrentPageNumber = newPageNumber;
             CurrentPage = Persistence.Page(Options, newPageNumber);
         }
 
+        /// <summary>
+        /// Is there a next page of results?
+        /// </summary>
         public bool HasNextPage
         {
             get
@@ -62,13 +94,22 @@ namespace LeavinsSoftware.Collection.Persistence
             }
         }
 
+        /// <summary>
+        /// Is there a previous page of results?
+        /// </summary>
         public bool HasPreviousPage
         {
             get { return CurrentPageNumber != 0; }
         }
 
+        /// <summary>
+        /// Backing persistence class to use for actually performing searches
+        /// </summary>
         public ISearchablePersistence<T> Persistence { get; private set; }
 
+        /// <summary>
+        /// Search options
+        /// </summary>
         public ModelSearchOptions Options { get; private set; }
     }
 }

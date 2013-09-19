@@ -10,8 +10,11 @@ using System.Reflection;
 namespace LeavinsSoftware.Collection.Models
 {
     /// <summary>
-    /// Provides subclasses access to validation methods.
+    /// Provides validation methods.
     /// </summary>
+    /// <remarks>
+    /// Uses <see cref="System.ComponentModel.DataAnnotations"/> for validation.
+    /// </remarks>
     public abstract class ValidatableBase : IDataErrorInfo
     {
         /// <summary>

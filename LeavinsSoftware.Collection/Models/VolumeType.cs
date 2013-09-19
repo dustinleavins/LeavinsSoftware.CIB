@@ -8,8 +8,14 @@ using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Models
 {
+    /// <summary>
+    /// Comic book volume type.
+    /// </summary>
     public enum VolumeType
     {
+        /// <summary>
+        /// Issue
+        /// </summary>
         Issue = 0,
 
         /// <summary>

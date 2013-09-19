@@ -27,14 +27,33 @@ namespace LeavinsSoftware.Collection.Persistence
             SearchText = searchText;
         }
 
+        /// <summary>
+        /// Maximum number of items to include in a page of results.
+        /// </summary>
         public readonly long ItemsPerPage;
 
+        /// <summary>
+        /// Limits category of search results; can be null.
+        /// </summary>
         public readonly ItemCategory ItemCategory;
 
+        /// <summary>
+        /// Unless AllListTypes is true, limits the search to items with the
+        /// specified ItemListType.
+        /// </summary>
         public readonly ItemListType ListType;
 
+        /// <summary>
+        /// Should this search contain results with all list types?
+        /// </summary>
+        /// <remarks>
+        /// Should override ListType.
+        /// </remarks>
         public readonly bool AllListTypes;
 
+        /// <summary>
+        /// Search text.
+        /// </summary>
         public readonly string SearchText;
         
         public override bool Equals(object obj)

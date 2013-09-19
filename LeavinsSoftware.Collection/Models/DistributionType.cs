@@ -13,7 +13,15 @@ namespace LeavinsSoftware.Collection.Models
     /// </summary>
     public enum DistributionType
     {
+        /// <summary>
+        /// Physical good - this is a physical comic book issue,
+        /// a game cartridge, a disc, or anything that was not downloaded.
+        /// </summary>
         Physical = 0,
+
+        /// <summary>
+        /// Digital download good.
+        /// </summary>
         Digital = 1
     }
 }
