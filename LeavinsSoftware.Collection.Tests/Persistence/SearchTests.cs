@@ -64,7 +64,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 .Returns(GeneratePage(defaultOptions, 1));
             
             persistenceMock.Setup(p => p.TotalResults(defaultOptions))
-                .Returns(40);
+                .Returns(41);
 
             Search<Product> target = new Search<Product>(persistenceMock.Object, defaultOptions);
             
@@ -86,12 +86,13 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             
             // ...and back
             target.NextPage();
+            Assert.AreEqual(1, target.CurrentPageNumber);
             Assert.IsTrue(target.HasNextPage);
 
             // Page 3
             target.NextPage();
             Assert.AreEqual(2, target.CurrentPageNumber);
-            Assert.AreEqual(5, target.CurrentPage.Count);
+            Assert.AreEqual(1, target.CurrentPage.Count);
             Assert.IsFalse(target.HasNextPage);
             
             Assert.IsTrue(target.HasPreviousPage);

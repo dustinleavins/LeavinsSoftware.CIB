@@ -18,7 +18,24 @@ namespace LeavinsSoftware.Collection.Persistence
         {
             Persistence = persistence;
             Options = options;
-            GoToPage(0);
+            
+            long totalResults = Persistence.TotalResults(options);
+            
+            if (totalResults == 0)
+            {
+                CurrentPage = new List<T>();
+            }
+            else
+            {
+                TotalNumberOfPages = totalResults / options.ItemsPerPage;
+
+                if ((totalResults % options.ItemsPerPage) != 0)
+                {
+                    TotalNumberOfPages += 1;
+                }
+                
+                GoToPage(0);
+            }
         }
 
         /// <summary>
