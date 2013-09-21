@@ -28,6 +28,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <ComboBox Grid.Row="0"
@@ -59,8 +60,7 @@
                   IsReadOnly="True"
                   SelectedItem="{Binding SelectedItem}"
                   AutoGenerateColumns="False"
-                  CanUserSortColumns="False"
-                  Margin="0,0,0,20">
+                  CanUserSortColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name}"
                                     Header="{x:Static res:InterfaceResources.Fields_Title}" />
@@ -75,7 +75,28 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="3"
+              Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+                   HorizontalAlignment="Left">
+                <Hyperlink Command="{Binding PreviousPage}">
+                    <TextBlock Text="{x:Static res:InterfaceResources.Common_PreviousPage}" />
+                </Hyperlink>
+            </Label>
+            <Label Grid.Column="1"
+                   HorizontalAlignment="Right">
+                <Hyperlink Command="{Binding NextPage}">
+                    <TextBlock Text="{x:Static res:InterfaceResources.Common_NextPage}" />
+                </Hyperlink>
+            </Label>
+        </Grid>
+        
+        <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />

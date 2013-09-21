@@ -160,6 +160,24 @@ namespace LeavinsSoftware.Collection.Program.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        public static string Common_NextPage {
+            get {
+                return ResourceManager.GetString("Common_NextPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous.
+        /// </summary>
+        public static string Common_PreviousPage {
+            get {
+                return ResourceManager.GetString("Common_PreviousPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Products.
         /// </summary>
         public static string Common_Products {

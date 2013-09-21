@@ -150,6 +150,12 @@
   <data name="Common_ImportData" xml:space="preserve">
     <value>Import Data</value>
   </data>
+  <data name="Common_NextPage" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Common_PreviousPage" xml:space="preserve">
+    <value>Previous</value>
+  </data>
   <data name="Common_Products" xml:space="preserve">
     <value>Products</value>
   </data>

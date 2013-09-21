@@ -63,7 +63,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
             PreviousPage.CanExecuteHandler = (x) =>
             {
-                return currentSearch.HasPreviousPage;
+                return currentSearch != null &&
+                    currentSearch.HasPreviousPage;
             };
 
             NextPage.ExecuteHandler = (x) =>
@@ -74,7 +75,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
             NextPage.CanExecuteHandler = (x) =>
             {
-                return currentSearch.HasNextPage;
+                return currentSearch != null &&
+                    currentSearch.HasNextPage;
             };
 
             Search = new CustomCommand(
