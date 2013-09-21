@@ -49,6 +49,24 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Assert.AreEqual(20, target.CurrentPage.Count);
             Assert.AreEqual(0, target.CurrentPageNumber);
             Assert.AreEqual(1, target.TotalNumberOfPages);
+            Assert.IsFalse(target.HasPreviousPage);
+            Assert.IsFalse(target.HasNextPage);
+        }
+        
+        [Test]
+        public void ConstructorNoResultsTest()
+        {
+            persistenceMock.Setup(p => p.TotalResults(defaultOptions))
+                .Returns(0);
+
+            Search<Product> target = new Search<Product>(persistenceMock.Object, defaultOptions);
+            Assert.IsNotNull(target.Persistence);
+            Assert.IsNotNull(target.CurrentPage);
+            Assert.AreEqual(0, target.CurrentPage.Count);
+            Assert.AreEqual(0, target.CurrentPageNumber);
+            Assert.AreEqual(0, target.TotalNumberOfPages);
+            Assert.IsFalse(target.HasPreviousPage);
+            Assert.IsFalse(target.HasNextPage);
         }
         
         [Test]
@@ -70,7 +88,6 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             
             // Page 1
             Assert.IsFalse(target.HasPreviousPage);
-            target.PreviousPage();
             Assert.AreEqual(0, target.CurrentPageNumber);
             Assert.IsTrue(target.HasNextPage);
             
@@ -100,6 +117,53 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             // Going back to page 2
             target.PreviousPage();
             Assert.AreEqual(1, target.CurrentPageNumber);
+        }
+        
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void NextPageExceptionTest()
+        {
+            persistenceMock.Setup(p => p.Page(defaultOptions, 0))
+                .Returns(GeneratePage(defaultOptions, 20));
+            
+            persistenceMock.Setup(p => p.TotalResults(defaultOptions))
+                .Returns(20);
+
+            Search<Product> target = new Search<Product>(persistenceMock.Object, defaultOptions);
+            
+            target.NextPage();
+        }
+        
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void PreviousPageExceptionTest()
+        {
+            persistenceMock.Setup(p => p.Page(defaultOptions, 0))
+                .Returns(GeneratePage(defaultOptions, 20));
+            
+            persistenceMock.Setup(p => p.TotalResults(defaultOptions))
+                .Returns(20);
+
+            Search<Product> target = new Search<Product>(persistenceMock.Object, defaultOptions);
+            
+            target.PreviousPage();
+        }
+        
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(-1)]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GoToPageExceptionTest(long pageNumber)
+        {
+            persistenceMock.Setup(p => p.Page(defaultOptions, 0))
+                .Returns(GeneratePage(defaultOptions, 20));
+            
+            persistenceMock.Setup(p => p.TotalResults(defaultOptions))
+                .Returns(20);
+
+            Search<Product> target = new Search<Product>(persistenceMock.Object, defaultOptions);
+            
+            target.GoToPage(pageNumber);
         }
 
         private static List<Product> GeneratePage(ModelSearchOptions options, long length)

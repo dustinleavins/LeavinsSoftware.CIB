@@ -57,40 +57,51 @@ namespace LeavinsSoftware.Collection.Persistence
         public long TotalNumberOfPages { get; private set; }
 
         /// <summary>
-        /// Goes to the next page (if it is available)
+        /// Goes to the next page
         /// </summary>
-        /// <remarks>
-        /// Currently, this just fails silently if there is no next page available.
-        /// </remarks>
+        /// <exception cref="InvalidOperationException">
+        /// This instance is currently at its last page.
+        /// </exception>
         public void NextPage()
         {
-            if (HasNextPage)
+            if (!HasNextPage)
             {
-                GoToPage(CurrentPageNumber + 1);
+                throw new InvalidOperationException("Currently at last page");
             }
+
+            GoToPage(CurrentPageNumber + 1);
         }
 
         /// <summary>
-        /// Goes to the previous page (unless the current page is the
-        /// first one)
+        /// Goes to the previous page
         /// </summary>
-        /// <remarks>
-        /// Currently, this just fails silently if there is no next page available.
-        /// </remarks>
+        /// <exception cref="InvalidOperationException">
+        /// This instance is currently at its first page.
+        /// </exception>
         public void PreviousPage()
         {
-            if (HasPreviousPage)
+            if (!HasPreviousPage)
             {
-                GoToPage(CurrentPageNumber - 1);
+                throw new InvalidOperationException("Currently at first page");
             }
+            
+            GoToPage(CurrentPageNumber - 1);
         }
 
         /// <summary>
-        /// Goes to the specified page number (if it's available)
+        /// Goes to the specified page number
         /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// Specified page does not exist.
+        /// </exception>
         /// <param name="newPageNumber"></param>
         public void GoToPage(long newPageNumber)
         {
+            if (newPageNumber < 0 || newPageNumber >= TotalNumberOfPages)
+            {
+                throw new InvalidOperationException("Page does not exist");
+            }
+            
             CurrentPageNumber = newPageNumber;
             CurrentPage = Persistence.Page(Options, newPageNumber);
         }
