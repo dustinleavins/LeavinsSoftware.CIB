@@ -4,6 +4,7 @@ using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Persistence.Migrations;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -280,6 +281,78 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             tempResults = target.Page(nameSearch, 0);
             Assert.AreEqual(1, tempResults.Count);
             Assert.IsTrue(tempResults.Any(i => i.Id == games[0].Id));
+        }
+
+        [Test]
+        public void ItemListTypePaginationTest()
+        {
+            #region Test Setup
+
+            if (File.Exists(Path.Combine("listtype", "collection.db")))
+            {
+                File.Delete(Path.Combine("listtype", "collection.db"));
+            }
+
+            DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            Profile listProfile = new Profile("listtype");
+            MigrationRunner.Run(currentDir, listProfile);
+
+            IVideoGamePersistence target =
+                new VideoGamePersistence(currentDir, listProfile);
+
+            IPersistence<ItemCategory> categoryPersistence =
+                new ItemCategoryPersistence(currentDir, listProfile);
+
+            ItemCategory category = categoryPersistence.Create(new ItemCategory()
+            {
+                Name = "Category 1",
+                CategoryType = ItemCategoryType.VideoGame,
+                Code = "001"
+            });
+
+
+            foreach (ItemListType listType in Enum.GetValues(typeof(ItemListType)).Cast<ItemListType>())
+            {
+                target.Create(new VideoGame()
+                {
+                    Name = string.Format("Test Product {0}", listType),
+                    ListType = listType,
+                    System = category
+                });
+            }
+
+            // Create an additional 'Have' product
+            target.Create(new VideoGame()
+            {
+                Name = string.Format("Test Product {0} 2", ItemListType.Have),
+                System = category,
+                ListType = ItemListType.Have
+            });
+
+            #endregion
+
+            foreach (ItemListType listType in Enum.GetValues(typeof(ItemListType)).Cast<ItemListType>())
+            {
+                ModelSearchOptions searchOptions = new ModelSearchOptionsBuilder()
+                {
+                    AllListTypes = false,
+                    ListType = listType,
+                    ItemsPerPage = 20
+                }.Build();
+
+                string errorMsg = string.Format("Type: {0}", listType);
+
+                if (listType == ItemListType.Have)
+                {
+                    Assert.AreEqual(2, target.TotalResults(searchOptions), errorMsg);
+                    Assert.AreEqual(2, target.Page(searchOptions, 0).Count, errorMsg);
+                }
+                else
+                {
+                    Assert.AreEqual(1, target.TotalResults(searchOptions), errorMsg);
+                    Assert.AreEqual(1, target.Page(searchOptions, 0).Count, errorMsg);
+                }
+            }
         }
 
         private static void AssertEquality(VideoGame expected, VideoGame actual)

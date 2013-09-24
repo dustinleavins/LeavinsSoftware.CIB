@@ -4,6 +4,7 @@ using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Persistence.Migrations;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -145,7 +146,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
 
             ComicBook retrievedComic = comicPersistence.Retrieve(comicId);
             Assert.IsNotNull(retrievedComic);
-            
+
             Assert.AreEqual(comicId, retrievedComic.Id);
             Assert.AreEqual(updatedComic.Id, retrievedComic.Id);
             Assert.AreEqual(updatedComic.Name, retrievedComic.Name);
@@ -298,7 +299,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Notes = "Test Notes",
                 Publisher = primaryCategory
             };
-            
+
             newComic.Issues.Add(new ComicBookIssue());
 
             comicPersistence.Create(newComic);
@@ -385,19 +386,19 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                     IssueNumber = "1",
                     ListType = ItemListType.Have
                 });
-                
+
                 book.Issues.Add(new ComicBookIssue()
                 {
                     IssueNumber = "2",
                     ListType = ItemListType.Have
                 });
-                
+
                 book.Issues.Add(new ComicBookIssue()
                 {
                     IssueNumber = "3",
                     ListType = ItemListType.Want
                 });
-                
+
                 target.Create(book);
             }
 
@@ -451,13 +452,13 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Assert.IsTrue(tempResults.Any(i => i.Id == books[1].Id));
             Assert.IsTrue(tempResults.Any(i => i.Id == books[2].Id));
             Assert.IsFalse(tempResults.Any(i => i.Id == books[3].Id)); // has 'category 2'
-            
+
             // Proper pagination checks
             ModelSearchOptions multiItemsOptions = new ModelSearchOptionsBuilder()
             {
                 ItemsPerPage = 2
             }.Build();
-            
+
             Assert.AreEqual(4, target.TotalResults(multiItemsOptions));
             Assert.AreEqual(2, target.Page(multiItemsOptions, 0).Count);
             Assert.AreEqual(2, target.Page(multiItemsOptions, 1).Count);
@@ -473,6 +474,86 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             tempResults = target.Page(nameSearch, 0);
             Assert.AreEqual(1, tempResults.Count);
             Assert.IsTrue(tempResults.Any(i => i.Id == books[0].Id));
+        }
+
+        [Test]
+        public void ItemListTypePaginationTest()
+        {
+            #region Test Setup
+
+            if (File.Exists(Path.Combine("listtype", "collection.db")))
+            {
+                File.Delete(Path.Combine("listtype", "collection.db"));
+            }
+
+            DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            Profile listProfile = new Profile("listtype");
+            MigrationRunner.Run(currentDir, listProfile);
+
+            IComicBookPersistence target =
+                new ComicBookPersistence(currentDir, listProfile);
+
+            IPersistence<ItemCategory> categoryPersistence =
+                new ItemCategoryPersistence(currentDir, listProfile);
+
+            ItemCategory category = categoryPersistence.Create(new ItemCategory()
+            {
+                Name = "Category 1",
+                CategoryType = ItemCategoryType.ComicBook,
+                Code = "001"
+            });
+
+            ComicBook addedBook = new ComicBook()
+            {
+                Name = "Test Book",
+                Publisher = category
+            };
+
+            foreach (ItemListType listType in Enum.GetValues(typeof(ItemListType)).Cast<ItemListType>())
+            {
+                addedBook.Issues.Add(new ComicBookIssue()
+                {
+                    IssueNumber = listType.ToString(),
+                    ListType = listType
+                });
+            }
+
+            // Add an additional 'Have' issue
+            addedBook.Issues.Add(new ComicBookIssue()
+            {
+                IssueNumber = "Have - 2nd",
+                ListType = ItemListType.Have
+            });
+
+            target.Create(addedBook);
+
+            #endregion
+
+            foreach (ItemListType listType in Enum.GetValues(typeof(ItemListType)).Cast<ItemListType>())
+            {
+                ModelSearchOptions searchOptions = new ModelSearchOptionsBuilder()
+                {
+                    AllListTypes = false,
+                    ListType = listType,
+                    ItemsPerPage = 20
+                }.Build();
+
+                string errorMsg = string.Format("Type: {0}", listType);
+
+                Assert.AreEqual(1, target.TotalResults(searchOptions), errorMsg);
+                Assert.AreEqual(1, target.Page(searchOptions, 0).Count, errorMsg);
+
+                ComicBookSummary retrievedSummary = target.Page(searchOptions, 0).First();
+
+                if (listType == ItemListType.Have)
+                {
+                    Assert.AreEqual(2, retrievedSummary.IssueCount, errorMsg);
+                }
+                else
+                {
+                    Assert.AreEqual(1, retrievedSummary.IssueCount, errorMsg);
+                }
+            }
         }
 
         private static void AssertEquality(ComicBookIssue expected, ComicBookIssue actual)

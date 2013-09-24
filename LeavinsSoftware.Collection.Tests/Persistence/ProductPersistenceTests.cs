@@ -4,6 +4,7 @@ using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Persistence.Migrations;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -59,7 +60,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
 
             AssertEquality(newProduct, retrievedProduct);
         }
-        
+
         [Test]
         public void UpdateTest()
         {
@@ -72,27 +73,27 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             };
 
             productPersistence.Create(newProduct);
-            
+
             Product updatedProduct = new Product
             {
                 Id = newProduct.Id,
                 Name = "Test2",
                 Notes = "Test Notes 2",
                 Quantity = 5,
-                
+
                 // TODO: Test category change
                 Category = primaryCategory
             };
-            
+
             productPersistence.Update(updatedProduct);
-            
+
             Product retrievedProduct = productPersistence
                 .Retrieve(updatedProduct.Id);
-            
+
             Assert.IsNotNull(retrievedProduct);
             AssertEquality(updatedProduct, retrievedProduct);
         }
-        
+
         [Test]
         public void DeleteTest()
         {
@@ -103,10 +104,10 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Quantity = 1,
                 Category = primaryCategory
             };
-            
+
             productPersistence.Create(newProduct);
             productPersistence.Delete(newProduct);
-            
+
             Assert.IsNull(productPersistence.Retrieve(newProduct.Id));
         }
 
@@ -122,7 +123,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
             Profile paginationProfile = new Profile("pagination");
             MigrationRunner.Run(currentDir, paginationProfile);
-            
+
             IProductPersistence target =
                 new ProductPersistence(currentDir, paginationProfile);
 
@@ -255,6 +256,80 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             tempResults = target.Page(nameSearch, 0);
             Assert.AreEqual(1, tempResults.Count);
             Assert.IsTrue(tempResults.Any(i => i.Id == products[0].Id));
+        }
+
+        [Test]
+        public void ItemListTypePaginationTest()
+        {
+            #region Test Setup
+
+            if (File.Exists(Path.Combine("listtype", "collection.db")))
+            {
+                File.Delete(Path.Combine("listtype", "collection.db"));
+            }
+
+            DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            Profile listProfile = new Profile("listtype");
+            MigrationRunner.Run(currentDir, listProfile);
+
+            IProductPersistence target =
+                new ProductPersistence(currentDir, listProfile);
+
+            IPersistence<ItemCategory> categoryPersistence =
+                new ItemCategoryPersistence(currentDir, listProfile);
+
+            ItemCategory category = categoryPersistence.Create(new ItemCategory()
+            {
+                Name = "Category 1",
+                CategoryType = ItemCategoryType.Product,
+                Code = "001"
+            });
+
+
+            foreach (ItemListType listType in Enum.GetValues(typeof(ItemListType)).Cast<ItemListType>())
+            {
+                target.Create(new Product()
+                {
+                    Name = string.Format("Test Product {0}", listType),
+                    Quantity = 1,
+                    ListType = listType,
+                    Category = category
+                });
+            }
+
+            // Create an additional 'Have' product
+            target.Create(new Product()
+            {
+                Name = string.Format("Test Product {0} 2", ItemListType.Have),
+                Quantity = 1,
+                ListType = ItemListType.Have,
+                Category = category
+            });
+
+            #endregion
+
+            foreach (ItemListType listType in Enum.GetValues(typeof(ItemListType)).Cast<ItemListType>())
+            {
+                ModelSearchOptions searchOptions = new ModelSearchOptionsBuilder()
+                {
+                    AllListTypes = false,
+                    ListType = listType,
+                    ItemsPerPage = 20
+                }.Build();
+
+                string errorMsg = string.Format("Type: {0}", listType);
+
+                if (listType == ItemListType.Have)
+                {
+                    Assert.AreEqual(2, target.TotalResults(searchOptions), errorMsg);
+                    Assert.AreEqual(2, target.Page(searchOptions, 0).Count, errorMsg);
+                }
+                else
+                {
+                    Assert.AreEqual(1, target.TotalResults(searchOptions), errorMsg);
+                    Assert.AreEqual(1, target.Page(searchOptions, 0).Count, errorMsg);
+                }
+            }
         }
 
         private static void AssertEquality(Product expected, Product actual)
