@@ -252,11 +252,19 @@ namespace LeavinsSoftware.Collection.Persistence
                         cmd.CommandType = CommandType.Text;
                         cmd.CommandText = "SELECT COUNT(*) " +
                             "FROM ComicBookIssues " +
-                            "WHERE comicid = @comicid " +
-                            "AND listtype = @listtype;";
+                            "WHERE comicid = @comicid ";
 
                         cmd.Parameters.Add(new SQLiteParameter("comicid", summary.Id));
-                        cmd.Parameters.Add(new SQLiteParameter("listtype", options.ListType));
+                        
+                        if (!options.AllListTypes)
+                        {
+                            cmd.CommandText += "AND listtype = @listtype;";
+                            cmd.Parameters.Add(new SQLiteParameter("listtype", options.ListType));
+                        }
+                        else
+                        {
+                            cmd.CommandText += ";";
+                        }
 
                         using (var reader = cmd.ExecuteReader())
                         {
