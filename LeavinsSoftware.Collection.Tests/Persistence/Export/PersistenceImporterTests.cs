@@ -65,8 +65,8 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             List<ComicBookSummary> comicResults = comicBookPersistence.Page(searchOptions, 0);
             Assert.IsNotNull(comicResults);
             Assert.AreEqual(2, comicResults.Count);
-            Assert.AreEqual(2, comicResults.First().IssueCount);
-            Assert.AreEqual(2, comicResults.Skip(1).First().IssueCount);
+            Assert.AreEqual(3, comicResults.First().IssueCount);
+            Assert.AreEqual(3, comicResults.Skip(1).First().IssueCount);
 
             foreach (ComicBookSummary summary in comicResults)
             {
