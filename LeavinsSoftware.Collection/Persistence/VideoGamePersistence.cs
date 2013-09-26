@@ -161,13 +161,13 @@ namespace LeavinsSoftware.Collection.Persistence
                         cmd.Parameters.Add(new SQLiteParameter("@categoryid",
                             options.ItemCategory.Id));
 
-                        if (!options.AllListTypes)
+                        if (options.ListType.HasValue)
                         {
                             cmd.CommandText += "AND listtype = @listtype ";
                             cmd.Parameters.Add(new SQLiteParameter("listtype", options.ListType));
                         }
                     }
-                    else if (!options.AllListTypes)
+                    else if (options.ListType.HasValue)
                     {
                         cmd.CommandText += "AND listtype = @listtype ";
                         cmd.Parameters.Add(new SQLiteParameter("listtype", options.ListType));
@@ -244,13 +244,13 @@ namespace LeavinsSoftware.Collection.Persistence
                         cmd.Parameters.Add(new SQLiteParameter("@categoryid",
                             options.ItemCategory.Id));
 
-                        if (!options.AllListTypes)
+                        if (options.ListType.HasValue)
                         {
                             cmd.CommandText += "AND listtype = @listtype";
                             cmd.Parameters.Add(new SQLiteParameter("listtype", options.ListType));
                         }
                     }
-                    else if (!options.AllListTypes)
+                    else if (options.ListType.HasValue)
                     {
                         cmd.CommandText += "AND listtype = @listtype";
                         cmd.Parameters.Add(new SQLiteParameter("listtype", options.ListType));

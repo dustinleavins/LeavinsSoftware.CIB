@@ -249,8 +249,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             ModelSearchOptions nameSearch = new ModelSearchOptionsBuilder()
             {
                 ItemsPerPage = 1,
-                SearchText = products[0].Name,
-                AllListTypes = true
+                SearchText = products[0].Name
             }.Build();
 
             tempResults = target.Page(nameSearch, 0);
@@ -312,7 +311,6 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             {
                 ModelSearchOptions searchOptions = new ModelSearchOptionsBuilder()
                 {
-                    AllListTypes = false,
                     ListType = listType,
                     ItemsPerPage = 20
                 }.Build();
@@ -334,7 +332,6 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             // All-inclusive search
             ModelSearchOptions allInclusiveOptions = new ModelSearchOptionsBuilder()
             {
-                AllListTypes = true,
                 ItemsPerPage = 20
             }.Build();
             

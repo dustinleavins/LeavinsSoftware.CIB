@@ -25,8 +25,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export.Extensions
         {
             ModelSearchOptions options = new ModelSearchOptionsBuilder()
             {
-                ItemsPerPage = 100,
-                AllListTypes = true
+                ItemsPerPage = 100
             }.Build();
 
             return AllPages(persistence, options);

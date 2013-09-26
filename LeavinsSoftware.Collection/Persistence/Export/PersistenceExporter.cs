@@ -55,8 +55,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
         {
             ModelSearchOptions options = new ModelSearchOptionsBuilder()
             {
-                ItemsPerPage = 100,
-                AllListTypes = true
+                ItemsPerPage = 100
             }.Build();
 
             List<ComicBook> books = new List<ComicBook>();
@@ -77,8 +76,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
         {
             ModelSearchOptions options = new ModelSearchOptionsBuilder()
             {
-                ItemsPerPage = 100,
-                AllListTypes = true
+                ItemsPerPage = 100
             }.Build();
 
             List<Product> products = new List<Product>();
@@ -95,8 +93,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
         {
             ModelSearchOptions options = new ModelSearchOptionsBuilder()
             {
-                ItemsPerPage = 100,
-                AllListTypes = true
+                ItemsPerPage = 100
             }.Build();
 
             List<VideoGame> games = new List<VideoGame>();

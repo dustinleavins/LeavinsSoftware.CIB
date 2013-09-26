@@ -212,7 +212,7 @@ namespace LeavinsSoftware.Collection.Persistence
 
                     cmd.Parameters.Add(new SQLiteParameter("name", searchParamValue));
 
-                    if (!options.AllListTypes)
+                    if (options.ListType.HasValue)
                     {
                         cmd.CommandText += "AND i.listtype = @listtype ";
                         cmd.Parameters.Add(new SQLiteParameter("listtype", options.ListType));
@@ -255,8 +255,8 @@ namespace LeavinsSoftware.Collection.Persistence
                             "WHERE comicid = @comicid ";
 
                         cmd.Parameters.Add(new SQLiteParameter("comicid", summary.Id));
-                        
-                        if (!options.AllListTypes)
+
+                        if (options.ListType.HasValue)
                         {
                             cmd.CommandText += "AND listtype = @listtype;";
                             cmd.Parameters.Add(new SQLiteParameter("listtype", options.ListType));
@@ -327,7 +327,7 @@ namespace LeavinsSoftware.Collection.Persistence
 
                     cmd.Parameters.Add(new SQLiteParameter("name", searchParamValue));
 
-                    if (!options.AllListTypes)
+                    if (options.ListType.HasValue)
                     {
                         cmd.CommandText += "AND i.listtype = @listtype ";
                         cmd.Parameters.Add(new SQLiteParameter("listtype", options.ListType));

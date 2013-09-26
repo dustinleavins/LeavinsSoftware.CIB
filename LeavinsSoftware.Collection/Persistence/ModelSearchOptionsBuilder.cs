@@ -17,9 +17,7 @@ namespace LeavinsSoftware.Collection.Persistence
 
         public ItemCategory ItemCategory { get; set; }
 
-        public ItemListType ListType { get; set; }
-
-        public bool AllListTypes { get; set; }
+        public ItemListType? ListType { get; set; }
 
         public string SearchText { get; set; }
 
@@ -29,7 +27,6 @@ namespace LeavinsSoftware.Collection.Persistence
                 itemsPerPage: ItemsPerPage,
                 itemCategory: ItemCategory,
                 listType: ListType,
-                allListTypes: AllListTypes,
                 searchText: SearchText);
         }
     }

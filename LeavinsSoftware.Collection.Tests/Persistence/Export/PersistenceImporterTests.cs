@@ -57,8 +57,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
 
             ModelSearchOptions searchOptions = new ModelSearchOptionsBuilder()
             {
-                ItemsPerPage = 20,
-                AllListTypes = true
+                ItemsPerPage = 20
             }.Build();
 
             // ComicBook checks

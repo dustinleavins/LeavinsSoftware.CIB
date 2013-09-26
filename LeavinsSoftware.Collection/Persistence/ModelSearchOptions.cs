@@ -16,14 +16,12 @@ namespace LeavinsSoftware.Collection.Persistence
     {
         public ModelSearchOptions(long itemsPerPage,
             ItemCategory itemCategory,
-            ItemListType listType,
-            bool allListTypes,
+            ItemListType? listType,
             string searchText)
         {
             ItemsPerPage = itemsPerPage;
             ItemCategory = itemCategory;
             ListType = listType;
-            AllListTypes = allListTypes;
             SearchText = searchText;
         }
 
@@ -38,18 +36,11 @@ namespace LeavinsSoftware.Collection.Persistence
         public readonly ItemCategory ItemCategory;
 
         /// <summary>
-        /// Unless AllListTypes is true, limits the search to items with the
+        /// Limits the search to items with the
         /// specified ItemListType.
         /// </summary>
-        public readonly ItemListType ListType;
+        public readonly ItemListType? ListType;
 
-        /// <summary>
-        /// Should this search contain results with all list types?
-        /// </summary>
-        /// <remarks>
-        /// Should override ListType.
-        /// </remarks>
-        public readonly bool AllListTypes;
 
         /// <summary>
         /// Search text.
@@ -66,7 +57,6 @@ namespace LeavinsSoftware.Collection.Persistence
             return this.ItemsPerPage == other.ItemsPerPage &&
                 this.ItemCategory == other.ItemCategory &&
                 this.ListType == other.ListType &&
-                this.AllListTypes == other.AllListTypes &&
                 this.SearchText == other.SearchText;
         }
         
@@ -82,11 +72,12 @@ namespace LeavinsSoftware.Collection.Persistence
                 {
                     hashCode += 23 * ItemCategory.GetHashCode();
                 }
-                
-                hashCode += 23 * ListType.GetHashCode();
-                
-                hashCode += 23 * AllListTypes.GetHashCode();
-                
+
+                if (ListType != null)
+                {
+                    hashCode += 23 * ListType.GetHashCode();
+                }
+
                 if (SearchText != null)
                 {
                     hashCode += 23 * SearchText.GetHashCode();

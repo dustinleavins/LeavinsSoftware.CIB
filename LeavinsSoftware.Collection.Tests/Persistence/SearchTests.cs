@@ -20,10 +20,9 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         {
             defaultOptions = new ModelSearchOptionsBuilder()
             {
-                AllListTypes = true,
                 ItemCategory = null,
                 ItemsPerPage = 20,
-                ListType = ItemListType.Have, // unused
+                ListType = ItemListType.Have,
                 SearchText = string.Empty
             }.Build();
         }
@@ -204,14 +203,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
 
         private static ItemListType GenerateListType(ModelSearchOptions options)
         {
-            if (options.AllListTypes)
-            {
-                return ItemListType.Have;
-            }
-            else
-            {
-                return options.ListType;
-            }
+            return options.ListType.GetValueOrDefault(ItemListType.Have);
         }
     }
 }
