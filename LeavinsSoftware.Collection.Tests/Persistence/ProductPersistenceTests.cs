@@ -330,6 +330,16 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                     Assert.AreEqual(1, target.Page(searchOptions, 0).Count, errorMsg);
                 }
             }
+            
+            // All-inclusive search
+            ModelSearchOptions allInclusiveOptions = new ModelSearchOptionsBuilder()
+            {
+                AllListTypes = true,
+                ItemsPerPage = 20
+            }.Build();
+            
+            Assert.AreEqual(6, target.TotalResults(allInclusiveOptions));
+            Assert.AreEqual(6, target.Page(allInclusiveOptions, 0).Count);
         }
 
         private static void AssertEquality(Product expected, Product actual)

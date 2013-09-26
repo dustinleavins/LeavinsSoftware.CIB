@@ -554,6 +554,19 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                     Assert.AreEqual(1, retrievedSummary.IssueCount, errorMsg);
                 }
             }
+            
+            // All-inclusive search
+            ModelSearchOptions allInclusiveOptions = new ModelSearchOptionsBuilder()
+            {
+                AllListTypes = true,
+                ItemsPerPage = 20
+            }.Build();
+            
+            Assert.AreEqual(1, target.TotalResults(allInclusiveOptions));
+            Assert.AreEqual(1, target.Page(allInclusiveOptions, 0).Count);
+            
+            ComicBookSummary issueSummary = target.Page(allInclusiveOptions, 0).First();
+            Assert.AreEqual(6, issueSummary.IssueCount);
         }
 
         private static void AssertEquality(ComicBookIssue expected, ComicBookIssue actual)
