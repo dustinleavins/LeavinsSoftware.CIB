@@ -198,8 +198,9 @@ namespace LeavinsSoftware.Collection.Persistence
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = "SELECT DISTINCT cb.comicid, cb.name, cb.notes, cb.categoryid " +
-                        "FROM ComicBooks cb, ComicBookIssues i " +
+                        "FROM ComicBooks cb, ComicBookIssues i, Categories cat " +
                         "WHERE cb.comicid = i.comicid " +
+                        "AND cb.categoryid = cat.rowid " +
                         "AND cb.name LIKE @name ";
 
                     string searchParamValue = "%";
@@ -225,7 +226,8 @@ namespace LeavinsSoftware.Collection.Persistence
                             options.ItemCategory.Id));
                     }
 
-                    cmd.CommandText += "ORDER BY cb.name LIMIT @limit OFFSET @offset;";
+                    cmd.CommandText += "ORDER BY cat.name, cb.name LIMIT @limit OFFSET @offset;";;
+
                     cmd.Parameters.Add(new SQLiteParameter("@limit", options.ItemsPerPage));
                     cmd.Parameters.Add(new SQLiteParameter("@offset", options.ItemsPerPage * pageNumber));
 

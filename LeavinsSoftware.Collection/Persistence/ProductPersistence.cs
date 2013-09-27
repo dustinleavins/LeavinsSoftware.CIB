@@ -137,9 +137,11 @@ namespace LeavinsSoftware.Collection.Persistence
                 using (var cmd = connection.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "SELECT * " +
-                        "FROM Products " +
-                        "WHERE name LIKE @name ";
+                    cmd.CommandText = "SELECT DISTINCT p.name, p.notes, " +
+                        "p.categoryid, p.quantity, p.listtype, p.productid " +
+                        "FROM Products p, Categories cat " +
+                        "WHERE p.name LIKE @name " +
+                        "AND p.categoryid = cat.rowid ";
 
                     string searchParamValue = "%";
 
@@ -153,23 +155,23 @@ namespace LeavinsSoftware.Collection.Persistence
 
                     if (options.ItemCategory != null)
                     {
-                        cmd.CommandText += "AND categoryid = @categoryid ";
+                        cmd.CommandText += "AND p.categoryid = @categoryid ";
                         cmd.Parameters.Add(new SQLiteParameter("@categoryid",
                             options.ItemCategory.Id));
 
                         if (options.ListType.HasValue)
                         {
-                            cmd.CommandText += "AND listtype = @listtype ";
+                            cmd.CommandText += "AND p.listtype = @listtype ";
                             cmd.Parameters.Add(new SQLiteParameter("listtype", options.ListType));
                         }
                     }
                     else if (options.ListType.HasValue)
                     {
-                        cmd.CommandText += "AND listtype = @listtype ";
+                        cmd.CommandText += "AND p.listtype = @listtype ";
                         cmd.Parameters.Add(new SQLiteParameter("listtype", options.ListType));
                     }
 
-                    cmd.CommandText += "ORDER BY name LIMIT @limit OFFSET @offset;";
+                    cmd.CommandText += "ORDER BY cat.name, p.name LIMIT @limit OFFSET @offset;";
                     cmd.Parameters.Add(new SQLiteParameter("@limit", options.ItemsPerPage));
                     cmd.Parameters.Add(new SQLiteParameter("@offset", options.ItemsPerPage * pageNumber));
 
