@@ -46,5 +46,11 @@ namespace LeavinsSoftware.Collection.Tests.Models
                 .CheckHashCodes()
                 .Do();
         }
+        
+        [Test]
+        public void EqualsNullTest()
+        {
+            Assert.IsFalse(target.Equals((ProgramOptions)null));
+        }
     }
 }

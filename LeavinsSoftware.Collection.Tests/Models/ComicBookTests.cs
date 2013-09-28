@@ -134,5 +134,42 @@ namespace LeavinsSoftware.Collection.Tests.Models
 
             Assert.IsTrue(PropertyChangedChecker.HasPropertyChanged("Publisher"));
         }
+        
+        [Test]
+        public void IssuesEmptyTest()
+        {
+            ComicBook comicBookWithoutIssues = new ComicBook()
+            {
+                Name = "Test Item",
+
+                Publisher = new ItemCategory()
+                {
+                    Name = "Category",
+                    CategoryType = ItemCategoryType.ComicBook
+                }
+            };
+            
+            Assert.IsFalse(comicBookWithoutIssues.IsValid());
+            Assert.IsFalse(comicBookWithoutIssues.IsValid("Issues"));
+        }
+        
+        [Test]
+        public void IssuesInvalidTest()
+        {
+            ComicBook comicBookWithInvalidIssue = new ComicBook()
+            {
+                Name = "Test Item",
+
+                Publisher = new ItemCategory()
+                {
+                    Name = "Category",
+                    CategoryType = ItemCategoryType.ComicBook
+                }
+            };
+            comicBookWithInvalidIssue.Issues.Add(new ComicBookIssue() { Id = -1 });
+            
+            Assert.IsFalse(comicBookWithInvalidIssue.IsValid());
+            Assert.IsFalse(comicBookWithInvalidIssue.IsValid("Issues"));
+        }
     }
 }

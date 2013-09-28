@@ -140,5 +140,11 @@ namespace LeavinsSoftware.Collection.Tests.Models
                 .Expect(expected)
                 .Do();
         }
+        
+        [Test]
+        public void EqualsNullTest()
+        {
+            Assert.IsFalse(target.Equals((ItemCategory)null));
+        }
     }
 }
