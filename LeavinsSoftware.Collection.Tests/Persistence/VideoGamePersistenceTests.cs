@@ -360,6 +360,26 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             
             Assert.AreEqual(6, target.TotalResults(allInclusiveOptions));
             Assert.AreEqual(6, target.Page(allInclusiveOptions, 0).Count);
+            
+            // Name search
+            ModelSearchOptions nameOptions = new ModelSearchOptionsBuilder()
+            {
+                ItemsPerPage = 20,
+                SearchText = "Test"
+            }.Build();
+            
+            Assert.AreEqual(6, target.TotalResults(nameOptions));
+            Assert.AreEqual(6, target.Page(nameOptions, 0).Count);
+            
+            // Name not found search
+            ModelSearchOptions nameNotFoundOptions = new ModelSearchOptionsBuilder()
+            {
+                ItemsPerPage = 20,
+                SearchText = "Not Found"
+            }.Build();
+            
+            Assert.AreEqual(0, target.TotalResults(nameNotFoundOptions));
+            Assert.AreEqual(0, target.Page(nameNotFoundOptions, 0).Count);
         }
 
         private static void AssertEquality(VideoGame expected, VideoGame actual)

@@ -89,6 +89,7 @@
     <Compile Include="Persistence\Export\PersistenceExporterTests.cs" />
     <Compile Include="Persistence\Export\PersistenceImporterTests.cs" />
     <Compile Include="Persistence\ItemCategoryPersistenceTests.cs" />
+    <Compile Include="Persistence\ModelSearchOptionsTests.cs" />
     <Compile Include="Persistence\ProductPersistenceTests.cs" />
     <Compile Include="Persistence\ProgramOptionsPersistenceTests.cs" />
     <Compile Include="Persistence\SearchTests.cs" />

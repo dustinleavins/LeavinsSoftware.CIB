@@ -562,6 +562,28 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             
             ComicBookSummary issueSummary = target.Page(allInclusiveOptions, 0).First();
             Assert.AreEqual(6, issueSummary.IssueCount);
+            
+            // Name search search
+            ModelSearchOptions nameOptions = new ModelSearchOptionsBuilder()
+            {
+                ItemsPerPage = 20,
+                SearchText = "Test"
+            }.Build();
+            
+            Assert.AreEqual(1, target.TotalResults(nameOptions));
+            Assert.AreEqual(1, target.Page(nameOptions, 0).Count);
+            
+            Assert.AreEqual(6, target.Page(nameOptions, 0).First().IssueCount);
+            
+            // Name not found search
+            ModelSearchOptions nameNotFoundOptions = new ModelSearchOptionsBuilder()
+            {
+                ItemsPerPage = 20,
+                SearchText = "Name not found"
+            }.Build();
+            
+            Assert.AreEqual(0, target.TotalResults(nameNotFoundOptions));
+            Assert.AreEqual(0, target.Page(nameNotFoundOptions, 0).Count);
         }
 
         private static void AssertEquality(ComicBookIssue expected, ComicBookIssue actual)
