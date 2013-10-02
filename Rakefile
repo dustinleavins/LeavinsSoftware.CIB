@@ -27,7 +27,7 @@ end
 def nsis(*args)
     nsis_path = ''
 
-    Win32::Registry::HKEY_LOCAL_MACHINE.open('SOFTWARE\NSIS') do |reg|
+    Win32::Registry::HKEY_LOCAL_MACHINE.open('SOFTWARE\Wow6432Node\NSIS') do |reg|
         nsis_path = reg['']
     end
 
