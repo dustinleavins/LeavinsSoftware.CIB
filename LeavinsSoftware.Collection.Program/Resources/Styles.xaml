@@ -52,8 +52,6 @@
                 Value="Left" />
         <Setter Property="VerticalAlignment"
                 Value="Center" />
-        <Setter Property="FontFamily"
-                Value="Verdana" />
     </Style>
 
     <Style x:Key="mainPageGrid"
