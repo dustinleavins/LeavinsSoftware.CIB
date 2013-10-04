@@ -101,6 +101,7 @@ namespace LeavinsSoftware.Collection.Tests.Models
         public void NotesTest(string expectedValue)
         {
             PropertyChangedChecker.CheckOnly("Notes");
+            PropertyChangedChecker.CheckOnly("NotesSummary");
 
             target.Notes = expectedValue;
             Assert.AreEqual(expectedValue, target.Notes);
