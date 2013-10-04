@@ -68,7 +68,7 @@
                                     Header="{x:Static res:InterfaceResources.Fields_Publisher}" />
                 <DataGridTextColumn Binding="{Binding IssueCount}"
                                     Header="{x:Static res:InterfaceResources.Fields_IssueCount}" />
-                <DataGridTextColumn Binding="{Binding Notes}"
+                <DataGridTextColumn Binding="{Binding NotesSummary}"
                                     Header="{x:Static res:InterfaceResources.Fields_Notes}" />
             </DataGrid.Columns>
         </DataGrid>

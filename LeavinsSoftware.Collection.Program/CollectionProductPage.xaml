@@ -68,7 +68,7 @@
                                     Header="{x:Static res:InterfaceResources.Fields_Category}" />
                 <DataGridTextColumn Binding="{Binding Quantity}"
                                     Header="{x:Static res:InterfaceResources.Fields_Quantity}" />
-                <DataGridTextColumn Binding="{Binding Notes}"
+                <DataGridTextColumn Binding="{Binding NotesSummary}"
                                     Header="{x:Static res:InterfaceResources.Fields_Notes}" />
             </DataGrid.Columns>
         </DataGrid>

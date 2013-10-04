@@ -70,7 +70,7 @@
                                     Header="{x:Static res:InterfaceResources.Fields_DistributionType}" />
                 <DataGridTextColumn Binding="{Binding ContentProvider}"
                                     Header="{x:Static res:InterfaceResources.Fields_ContentProvider}" />
-                <DataGridTextColumn Binding="{Binding Notes}"
+                <DataGridTextColumn Binding="{Binding NotesSummary}"
                                     Header="{x:Static res:InterfaceResources.Fields_Notes}" />
             </DataGrid.Columns>
         </DataGrid>

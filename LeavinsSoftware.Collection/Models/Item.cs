@@ -39,6 +39,28 @@ namespace LeavinsSoftware.Collection.Models
                 {
                     notes = value;
                     OnPropertyChanged("Notes");
+                    OnPropertyChanged("NotesSummary");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Single-line summary for notes
+        /// </summary>
+        // TODO: Localize
+        // Possible TODO: Remove in favor of a WPF value converter?
+        public string NotesSummary
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(notes) || !notes.Contains("\n"))
+                {
+                    return notes;
+                }
+                else
+                {
+                    return notes.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)[0].TrimEnd() +
+                        "...";
                 }
             }
         }
