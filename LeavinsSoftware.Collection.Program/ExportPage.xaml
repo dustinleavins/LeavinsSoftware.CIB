@@ -9,6 +9,10 @@
         <Button Content="{x:Static res:InterfaceResources.Common_ExportData}"
                 Command="{Binding Export}"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center" />
+                VerticalAlignment="Top">
+            <Button.LayoutTransform>
+                <ScaleTransform ScaleX="2" ScaleY="2" />
+            </Button.LayoutTransform>
+        </Button>
     </Grid>
 </Page>

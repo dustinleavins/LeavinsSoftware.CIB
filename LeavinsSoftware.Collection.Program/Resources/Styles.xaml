@@ -25,6 +25,19 @@
         </Setter>
     </Style>
 
+    <Style x:Key="categoryBorderStyle"
+           TargetType="Border">
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="Red" />
+            </Setter.Value>
+        </Setter>
+        
+        <Setter Property="BorderThickness" Value="1" />
+        
+        <Setter Property="CornerRadius" Value="3" />
+    </Style>
+
     <Style x:Key="headerLabelStyle"
            TargetType="Label">
         <Setter Property="LayoutTransform">
@@ -47,6 +60,13 @@
            TargetType="Grid">
         <Setter Property="Margin"
                 Value="20" />
+    </Style>
+    
+    <Style x:Key="itemFieldLabel"
+           TargetType="Label">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Padding" Value="0,0,20,0" />
+        <Setter Property="Margin" Value="0" />
     </Style>
     
     <Style x:Key="listTypeCollectionBox"

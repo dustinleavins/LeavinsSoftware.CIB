@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace LeavinsSoftware.Collection.Program
 {
@@ -101,11 +102,13 @@ namespace LeavinsSoftware.Collection.Program
 
             Expander categoryExpander = new Expander();
             categoryExpander.Header = categoryBase.Name;
-            categoryExpander.Content = new GroupBox()
+            Border categoryBorder = new Border()
             {
-                Content = categoriesWithHeaderPanel,
-                Header = categoryBase.Name
+                Child = categoriesWithHeaderPanel,
+                Style = (Style)Application.Current.FindResource("categoryBorderStyle")
             };
+
+            categoryExpander.Content = categoryBorder;
 
             categoryExpander.Style = (Style)Application.Current.FindResource("categoryExpanderStyle");
 

@@ -38,24 +38,22 @@
         <Label Grid.Row="0"
                Grid.Column="0"
                Margin="0,0,0,20"
-               VerticalAlignment="Top"
+               Style="{StaticResource itemFieldLabel}"
                Content="{x:Static res:InterfaceResources.Fields_Name}" />
         <TextBox Grid.Row="0"
                  Grid.Column="1"
                  Margin="0,0,0,20"
-                 VerticalAlignment="Top"
                  Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
         <Label Grid.Row="1"
                Grid.Column="0"
                Margin="0,0,0,20"
-               VerticalAlignment="Top"
+               Style="{StaticResource itemFieldLabel}"
                Content="{x:Static res:InterfaceResources.Fields_Category}" />
         <ComboBox Grid.Row="1"
                   Grid.Column="1"
                   Margin="0,0,0,20"
                   HorizontalAlignment="Left"
-                  VerticalAlignment="Top"
                   ItemsSource="{Binding Categories}"
                   SelectedValuePath="Value"
                   DisplayMemberPath="Name"
@@ -64,37 +62,34 @@
         <Label Grid.Row="2"
                Grid.Column="0"
                Margin="0,0,0,20"
-               VerticalAlignment="Top"
+               Style="{StaticResource itemFieldLabel}"
                Content="{x:Static res:InterfaceResources.Fields_Quantity}" />
         <TextBox Grid.Row="2"
                  Grid.Column="1"
                  Margin="0,0,0,20"
-                 VerticalAlignment="Top"
                  Name="quantityBox"
                  Text="{Binding Item.Quantity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" />
 
         <Label Grid.Row="3"
                Grid.Column="0"
                Margin="0,0,0,20"
-               VerticalAlignment="Top"
+               Style="{StaticResource itemFieldLabel}"
                Content="{x:Static res:InterfaceResources.Fields_Notes}" />
         <TextBox Grid.Row="3"
                  Grid.Column="1"
                  Margin="0,0,0,20"
-                 VerticalAlignment="Top"
                  AcceptsReturn="True"
                  Text="{Binding Item.Notes, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label Grid.Row="4"
                Grid.Column="0"
                Margin="0,0,0,20"
-               VerticalAlignment="Top"
+               Style="{StaticResource itemFieldLabel}"
                Content="{x:Static res:InterfaceResources.Fields_ListType}" />
         <ComboBox Grid.Row="4"
                   Grid.Column="1"
                   Margin="0,0,0,20"
                   HorizontalAlignment="Left"
-                  VerticalAlignment="Top"
                   ItemsSource="{Binding Source={StaticResource listType}}"
                   SelectedValue="{Binding Item.ListType}" />
 

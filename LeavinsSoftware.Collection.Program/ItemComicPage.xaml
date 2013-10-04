@@ -7,7 +7,9 @@
       xmlns:core="clr-namespace:System;assembly=mscorlib"
       xmlns:model="clr-namespace:LeavinsSoftware.Collection.Models;assembly=LeavinsSoftware.Collection"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300">
+      d:DesignHeight="300" d:DesignWidth="300"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded">
     <Page.Resources>
         <ObjectDataProvider x:Key="distType"
                             MethodName="GetValues"
@@ -41,6 +43,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -50,24 +53,22 @@
         <Label Grid.Row="0"
                Grid.Column="0"
                Margin="0,0,0,20"
-               VerticalAlignment="Top"
+               Style="{StaticResource itemFieldLabel}"
                Content="{x:Static res:InterfaceResources.Fields_Title}" />
         <TextBox Grid.Row="0"
                  Grid.Column="1"
                  Margin="0,0,0,20"
-                 VerticalAlignment="Top"
                  Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
         <Label Grid.Row="1"
                Grid.Column="0"
                Margin="0,0,0,20"
-               VerticalAlignment="Top"
+               Style="{StaticResource itemFieldLabel}"
                Content="{x:Static res:InterfaceResources.Fields_Publisher}" />
         <ComboBox Grid.Row="1"
                   Grid.Column="1"
                   Margin="0,0,0,20"
                   HorizontalAlignment="Left"
-                  VerticalAlignment="Top"
                   ItemsSource="{Binding Publishers}"
                   SelectedValuePath="Value"
                   DisplayMemberPath="Name"
@@ -76,20 +77,25 @@
         <Label Grid.Row="2"
                Grid.Column="0"
                Margin="0,0,0,20"
-               VerticalAlignment="Top"
+               Style="{StaticResource itemFieldLabel}"
                Content="{x:Static res:InterfaceResources.Fields_Notes}" />
         <TextBox Grid.Row="2"
                  Grid.Column="1"
                  Margin="0,0,0,20"
-                 VerticalAlignment="Top"
                  AcceptsReturn="True"
                  Text="{Binding Item.Notes, UpdateSourceTrigger=PropertyChanged}" />
+        
+        <Label Grid.Row="3"
+               Grid.Column="0"
+               Grid.ColumnSpan="2"
+               x:Name="issuesRequiredLabel"
+               Visibility="Collapsed"
+               Content="{x:Static res:InterfaceResources.ItemComicPage_NoIssuesError}" />
 
-        <DataGrid Grid.Row="3"
+        <DataGrid Grid.Row="4"
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
                   Margin="0,0,0,20"
-                  VerticalAlignment="Top"
                   ItemsSource="{Binding Item.Issues}"
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
@@ -115,7 +121,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Grid Grid.Row="4"
+        <Grid Grid.Row="5"
               Grid.ColumnSpan="2">
             <Button HorizontalAlignment="Center"
                     Content="{x:Static res:InterfaceResources.Add_ComicBooks}"

@@ -5,6 +5,8 @@ using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Program.Resources;
 using LeavinsSoftware.Collection.Program.ViewModels;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace LeavinsSoftware.Collection.Program
@@ -63,6 +65,34 @@ namespace LeavinsSoftware.Collection.Program
             else
             {
                 Title = InterfaceResources.PageTitles_ItemNewComic;
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            model.Item.Issues.CollectionChanged += Issues_CollectionChanged;
+            RefreshErrorLabels();
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            model.Item.Issues.CollectionChanged -= Issues_CollectionChanged;
+        }
+
+        private void Issues_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            RefreshErrorLabels();
+        }
+
+        private void RefreshErrorLabels()
+        {
+            if (model.Item.Issues.Any())
+            {
+                issuesRequiredLabel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                issuesRequiredLabel.Visibility = Visibility.Visible;
             }
         }
     }

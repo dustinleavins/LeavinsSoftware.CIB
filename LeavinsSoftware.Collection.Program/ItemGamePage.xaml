@@ -25,7 +25,7 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </Page.Resources>
-    
+
     <Grid Style="{StaticResource mainPageGrid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -45,24 +45,23 @@
         <Label Grid.Row="0"
                Grid.Column="0"
                Margin="0,0,0,20"
-               VerticalAlignment="Top"
+               Style="{StaticResource itemFieldLabel}"
                Content="{x:Static res:InterfaceResources.Fields_Title}" />
         <TextBox Grid.Row="0"
                  Grid.Column="1"
                  Margin="0,0,0,20"
-                 VerticalAlignment="Top"
                  Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
         <Label Grid.Row="1"
                Grid.Column="0"
                Margin="0,0,0,20"
-               VerticalAlignment="Top"
+               Style="{StaticResource itemFieldLabel}"
+               
                Content="{x:Static res:InterfaceResources.Fields_System}" />
         <ComboBox Grid.Row="1"
                   Grid.Column="1"
                   Margin="0,0,0,20"
                   HorizontalAlignment="Left"
-                  VerticalAlignment="Top"
                   ItemsSource="{Binding Systems}"
                   SelectedValuePath="Value"
                   DisplayMemberPath="Name"
@@ -71,64 +70,59 @@
         <Label Grid.Row="2"
                Grid.Column="0"
                Margin="0,0,0,20"
-               VerticalAlignment="Top"
+               Style="{StaticResource itemFieldLabel}"
                Content="{x:Static res:InterfaceResources.Fields_DistributionType}" />
         <ComboBox Grid.Row="2"
                   Grid.Column="1"
                   Margin="0,0,0,20"
                   HorizontalAlignment="Left"
-                  VerticalAlignment="Top"
                   ItemsSource="{Binding Source={StaticResource distType}}"
                   SelectedValue="{Binding Item.DistributionType}" />
 
         <Label Grid.Row="3"
                Grid.Column="0"
                Margin="0,0,0,20"
-               VerticalAlignment="Top"
+               Style="{StaticResource itemFieldLabel}"
                Name="conditionLabel"
                Content="{x:Static res:InterfaceResources.Fields_Condition}" />
         <TextBox Grid.Row="3"
                  Grid.Column="1"
                  Margin="0,0,0,20"
-                 VerticalAlignment="Top"
                  Name="conditionBox"
                  Text="{Binding Item.Condition, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label Grid.Row="4"
                Grid.Column="0"
                Margin="0,0,0,20"
-               VerticalAlignment="Top"
+               Style="{StaticResource itemFieldLabel}"
                Name="providerLabel"
                Content="{x:Static res:InterfaceResources.Fields_ContentProvider}" />
         <TextBox Grid.Row="4"
                  Grid.Column="1"
                  Margin="0,0,0,20"
-                 VerticalAlignment="Top"
                  Name="ProviderBox"
                  Text="{Binding Item.ContentProvider, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label Grid.Row="5"
                Grid.Column="0"
                Margin="0,0,0,20"
-               VerticalAlignment="Top"
+               Style="{StaticResource itemFieldLabel}"
                Content="{x:Static res:InterfaceResources.Fields_Notes}" />
         <TextBox Grid.Row="5"
                  Grid.Column="1"
                  Margin="0,0,0,20"
-                 VerticalAlignment="Top"
                  AcceptsReturn="True"
                  Text="{Binding Item.Notes, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label Grid.Row="6"
                Grid.Column="0"
                Margin="0,0,0,20"
-               VerticalAlignment="Top"
+               Style="{StaticResource itemFieldLabel}"
                Content="{x:Static res:InterfaceResources.Fields_ListType}" />
         <ComboBox Grid.Row="6"
                   Grid.Column="1"
                   Margin="0,0,0,20"
                   HorizontalAlignment="Left"
-                  VerticalAlignment="Top"
                   ItemsSource="{Binding Source={StaticResource listType}}"
                   SelectedValue="{Binding Item.ListType}" />
 

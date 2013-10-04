@@ -127,7 +127,7 @@
     <value>Add System</value>
   </data>
   <data name="Add_ComicBooks" xml:space="preserve">
-    <value>Add Comics</value>
+    <value>Add Comic Series</value>
   </data>
   <data name="Add_Product" xml:space="preserve">
     <value>Add Product</value>
@@ -247,6 +247,9 @@
   <data name="Import_SuccessMessage" xml:space="preserve">
     <value>Import was successful.</value>
   </data>
+  <data name="ItemComicPage_NoIssuesError" xml:space="preserve">
+    <value>You need to add at least one issue (or volume).</value>
+  </data>
   <data name="OptionsCategoryNames_Save" xml:space="preserve">
     <value>Update Names</value>
   </data>
@@ -291,7 +294,7 @@
     <value>Edit Game</value>
   </data>
   <data name="PageTitles_ItemNewComic" xml:space="preserve">
-    <value>Add Comic</value>
+    <value>Add Comic Series</value>
   </data>
   <data name="PageTitles_ItemNewProduct" xml:space="preserve">
     <value>Add Item</value>
