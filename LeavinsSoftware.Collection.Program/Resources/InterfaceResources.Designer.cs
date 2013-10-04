@@ -61,7 +61,7 @@ namespace LeavinsSoftware.Collection.Program.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add Comics.
+        ///   Looks up a localized string similar to Add Comic Series.
         /// </summary>
         public static string Add_ComicBooks {
             get {
@@ -295,11 +295,11 @@ namespace LeavinsSoftware.Collection.Program.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to # of Issues.
+        ///   Looks up a localized string similar to # of Entries.
         /// </summary>
-        public static string Fields_IssueCount {
+        public static string Fields_EntriesCount {
             get {
-                return ResourceManager.GetString("Fields_IssueCount", resourceCulture);
+                return ResourceManager.GetString("Fields_EntriesCount", resourceCulture);
             }
         }
         
@@ -448,7 +448,7 @@ namespace LeavinsSoftware.Collection.Program.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to You need to add at least one issue (or volume)..
         /// </summary>
         public static string ItemComicPage_NoIssuesError {
             get {
@@ -583,7 +583,7 @@ namespace LeavinsSoftware.Collection.Program.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add Comic.
+        ///   Looks up a localized string similar to Add Comic Series.
         /// </summary>
         public static string PageTitles_ItemNewComic {
             get {

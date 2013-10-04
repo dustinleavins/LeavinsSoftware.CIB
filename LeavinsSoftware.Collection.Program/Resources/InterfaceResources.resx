@@ -195,8 +195,8 @@
   <data name="Fields_DistributionType" xml:space="preserve">
     <value>Distribution</value>
   </data>
-  <data name="Fields_IssueCount" xml:space="preserve">
-    <value># of Issues</value>
+  <data name="Fields_EntriesCount" xml:space="preserve">
+    <value># of Entries</value>
   </data>
   <data name="Fields_IssueNumber" xml:space="preserve">
     <value>Issue #</value>

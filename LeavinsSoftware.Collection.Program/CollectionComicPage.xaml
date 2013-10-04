@@ -79,7 +79,7 @@
                 <DataGridTextColumn Binding="{Binding Publisher.Name}"
                                     Header="{x:Static res:InterfaceResources.Fields_Publisher}" />
                 <DataGridTextColumn Binding="{Binding EntriesCount}"
-                                    Header="{x:Static res:InterfaceResources.Fields_IssueCount}" />
+                                    Header="{x:Static res:InterfaceResources.Fields_EntriesCount}" />
                 <DataGridTextColumn Binding="{Binding NotesSummary}"
                                     Header="{x:Static res:InterfaceResources.Fields_Notes}" />
             </DataGrid.Columns>
