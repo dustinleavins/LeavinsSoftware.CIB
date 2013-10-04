@@ -45,14 +45,16 @@
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0"
                      Margin="0,0,40,0"
-                     Text="{Binding SearchText}"
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Top" />
+
             <Button Grid.Column="1"
                     Content="{x:Static res:InterfaceResources.Common_Search}"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    Command="{Binding Search}" />
+                    Command="{Binding Search}"
+                    IsDefault="True" />
         </Grid>
 
         <DataGrid Grid.Row="2"
