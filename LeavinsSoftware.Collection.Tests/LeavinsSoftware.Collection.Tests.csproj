@@ -78,9 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EqualsTester.cs" />
-    <Compile Include="Models\ComicBookIssueTests.cs" />
+    <Compile Include="Models\ComicBookSeriesEntryTests.cs" />
     <Compile Include="Models\ComicBookSummaryTests.cs" />
-    <Compile Include="Models\ComicBookTests.cs" />
+    <Compile Include="Models\ComicBookSeriesTests.cs" />
     <Compile Include="Models\ItemCategoryTests.cs" />
     <Compile Include="Models\ProductTests.cs" />
     <Compile Include="Models\ProgramOptionsTests.cs" />

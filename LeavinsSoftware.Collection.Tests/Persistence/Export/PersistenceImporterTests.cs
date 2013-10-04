@@ -64,14 +64,14 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             List<ComicBookSummary> comicResults = comicBookPersistence.Page(searchOptions, 0);
             Assert.IsNotNull(comicResults);
             Assert.AreEqual(2, comicResults.Count);
-            Assert.AreEqual(3, comicResults.First().IssueCount);
-            Assert.AreEqual(3, comicResults.Skip(1).First().IssueCount);
+            Assert.AreEqual(3, comicResults.First().EntriesCount);
+            Assert.AreEqual(3, comicResults.Skip(1).First().EntriesCount);
 
             foreach (ComicBookSummary summary in comicResults)
             {
-                ComicBook actualBook = comicBookPersistence.Retrieve(summary.Id);
+                ComicBookSeries actualBook = comicBookPersistence.Retrieve(summary.Id);
                 Assert.IsNotNull(actualBook);
-                Assert.AreEqual(3, actualBook.Issues.Count);
+                Assert.AreEqual(3, actualBook.Entries.Count);
             }
 
             // Product checks
@@ -97,7 +97,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             preImportCategories.AddRange(categoryPersistence.RetrieveAll(ItemCategoryType.Product));
             preImportCategories.AddRange(categoryPersistence.RetrieveAll(ItemCategoryType.VideoGame));
 
-            List<ComicBook> preImportComics = new List<ComicBook>();
+            List<ComicBookSeries> preImportComics = new List<ComicBookSeries>();
 
             foreach (var page in comicBookPersistence.AllPages())
             {
@@ -159,8 +159,8 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             {
                 foreach (ComicBookSummary summary in page)
                 {
-                    ComicBook book = comicBookPersistence.Retrieve(summary.Id);
-                    ComicBook preImportMatch = preImportComics
+                    ComicBookSeries book = comicBookPersistence.Retrieve(summary.Id);
+                    ComicBookSeries preImportMatch = preImportComics
                         .SingleOrDefault(c => c.Id == book.Id);
 
                     Assert.IsNotNull(preImportMatch, "ID: {0}", book.Id);

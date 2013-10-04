@@ -164,27 +164,27 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             Assert.IsTrue(File.Exists("export_data.xml"));
         }
 
-        private static ComicBook GenerateComic(Random rnd,
-            ItemCategory publisher, params ComicBookIssue[] issues)
+        private static ComicBookSeries GenerateComic(Random rnd,
+            ItemCategory publisher, params ComicBookSeriesEntry[] issues)
         {
-            ComicBook book = new ComicBook()
+            ComicBookSeries book = new ComicBookSeries()
             {
                 Name = string.Format("Test Book #{0}", rnd.Next()),
                 Publisher = publisher
             };
 
-            foreach (ComicBookIssue issue in issues)
+            foreach (ComicBookSeriesEntry issue in issues)
             {
-                book.Issues.Add(issue);
+                book.Entries.Add(issue);
             }
 
             return book;
         }
 
-        private static ComicBookIssue GenerateIssue(Random rnd,
+        private static ComicBookSeriesEntry GenerateIssue(Random rnd,
             ItemListType listType)
         {
-            return new ComicBookIssue()
+            return new ComicBookSeriesEntry()
             {
                 IssueNumber = rnd.Next(1, int.MaxValue).ToString(CultureInfo.InvariantCulture),
                 ListType = listType

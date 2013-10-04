@@ -12,7 +12,7 @@ using System.Globalization;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
-    public sealed class ComicBookPersistence : PersistenceBase<ComicBook>, IComicBookPersistence
+    public sealed class ComicBookPersistence : PersistenceBase<ComicBookSeries>, IComicBookPersistence
     {
         public ComicBookPersistence(DirectoryInfo dataDir, Profile initialProfile)
         {
@@ -24,7 +24,7 @@ namespace LeavinsSoftware.Collection.Persistence
 
         public string ConnectionString { get; private set; }
 
-        protected override ComicBook CreateBase(ComicBook item)
+        protected override ComicBookSeries CreateBase(ComicBookSeries item)
         {
             using (var connection = new SQLiteConnection(ConnectionString))
             {
@@ -38,7 +38,7 @@ namespace LeavinsSoftware.Collection.Persistence
 
                 item.Id = connection.LastInsertRowId;
 
-                foreach (ComicBookIssue issue in item.Issues)
+                foreach (ComicBookSeriesEntry issue in item.Entries)
                 {
                     CreateIssue(issue, item.Id, connection);
                 }
@@ -49,9 +49,9 @@ namespace LeavinsSoftware.Collection.Persistence
             return item;
         }
 
-        protected override ComicBook RetrieveBase(long id)
+        protected override ComicBookSeries RetrieveBase(long id)
         {
-            ComicBook targetBook = null;
+            ComicBookSeries targetBook = null;
 
             using (var connection = new SQLiteConnection(ConnectionString))
             {
@@ -98,7 +98,7 @@ namespace LeavinsSoftware.Collection.Persistence
                         {
                             while (reader.Read())
                             {
-                                targetBook.Issues.Add(ReaderToIssue(reader));
+                                targetBook.Entries.Add(ReaderToIssue(reader));
                             }
                         }
                     }
@@ -113,9 +113,9 @@ namespace LeavinsSoftware.Collection.Persistence
             return targetBook;
         }
 
-        protected override ComicBook UpdateBase(ComicBook item)
+        protected override ComicBookSeries UpdateBase(ComicBookSeries item)
         {
-            ComicBook originalBook = Retrieve(item.Id);
+            ComicBookSeries originalBook = Retrieve(item.Id);
 
             using (var connection = new SQLiteConnection(ConnectionString))
             {
@@ -128,7 +128,7 @@ namespace LeavinsSoftware.Collection.Persistence
                     .WhereEquals("comicid", item.Id)
                     .ExecuteWith(connection);
 
-                foreach (ComicBookIssue issue in item.Issues)
+                foreach (ComicBookSeriesEntry issue in item.Entries)
                 {
                     if (issue.HasId)
                     {
@@ -141,9 +141,9 @@ namespace LeavinsSoftware.Collection.Persistence
                 }
 
                 IEnumerable<long> removedIssueIds = originalBook
-                    .Issues
+                    .Entries
                     .Select(i => i.Id)
-                    .Except(item.Issues.Select(i => i.Id));
+                    .Except(item.Entries.Select(i => i.Id));
 
                 foreach (long issueId in removedIssueIds)
                 {
@@ -156,7 +156,7 @@ namespace LeavinsSoftware.Collection.Persistence
             return item;
         }
 
-        protected override void DeleteBase(ComicBook item)
+        protected override void DeleteBase(ComicBookSeries item)
         {
             using (var connection = new SQLiteConnection(ConnectionString))
             {
@@ -272,7 +272,7 @@ namespace LeavinsSoftware.Collection.Persistence
                         {
                             while (reader.Read())
                             {
-                                summary.IssueCount = long.Parse(reader[0].ToString(),
+                                summary.EntriesCount = long.Parse(reader[0].ToString(),
                                 CultureInfo.InvariantCulture);
                             }
                         }
@@ -393,9 +393,9 @@ namespace LeavinsSoftware.Collection.Persistence
             return targetCategory;
         }
 
-        private static ComicBook ReaderToComicBook(SQLiteDataReader reader)
+        private static ComicBookSeries ReaderToComicBook(SQLiteDataReader reader)
         {
-            ComicBook targetBook = new ComicBook();
+            ComicBookSeries targetBook = new ComicBookSeries();
 
             targetBook.Id = long.Parse(reader["comicid"].ToString(),
                 CultureInfo.InvariantCulture);
@@ -417,9 +417,9 @@ namespace LeavinsSoftware.Collection.Persistence
             return targetBook;
         }
 
-        private static ComicBookIssue ReaderToIssue(SQLiteDataReader reader)
+        private static ComicBookSeriesEntry ReaderToIssue(SQLiteDataReader reader)
         {
-            ComicBookIssue targetBook = new ComicBookIssue();
+            ComicBookSeriesEntry targetBook = new ComicBookSeriesEntry();
 
             targetBook.Id = long.Parse(reader["issueid"].ToString(), CultureInfo.InvariantCulture);
             targetBook.Name = reader["name"].ToString();
@@ -435,7 +435,7 @@ namespace LeavinsSoftware.Collection.Persistence
             return targetBook;
         }
 
-        private static void CreateIssue(ComicBookIssue issue, long comicId, SQLiteConnection openConnection)
+        private static void CreateIssue(ComicBookSeriesEntry issue, long comicId, SQLiteConnection openConnection)
         {
             issue.ComicBookId = comicId;
 
@@ -454,7 +454,7 @@ namespace LeavinsSoftware.Collection.Persistence
             issue.Id = openConnection.LastInsertRowId;
         }
 
-        private static void UpdateIssue(ComicBookIssue issue, SQLiteConnection openConnection)
+        private static void UpdateIssue(ComicBookSeriesEntry issue, SQLiteConnection openConnection)
         {
             SQL.Update("ComicBookIssues")
                 .Set("issue", issue.IssueNumber)

@@ -49,12 +49,12 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             ImportData(importData.VideoGames, importOptions);
         }
 
-        private void ImportData(IEnumerable<ComicBook> list, ImportOptions importOptions)
+        private void ImportData(IEnumerable<ComicBookSeries> list, ImportOptions importOptions)
         {
             // Get all categories & add them
             HashSet<ItemCategory> categories = new HashSet<ItemCategory>();
 
-            foreach (ComicBook book in list)
+            foreach (ComicBookSeries book in list)
             {
                 categories.Add(book.Publisher);
             }
@@ -63,7 +63,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
 
             // TODO: Throw exception if issue is not present in a book
 
-            foreach (ComicBook book in list)
+            foreach (ComicBookSeries book in list)
             {
                 // Pair each comic book with its persisted publisher
                 ItemCategory matchingCategory = categories
@@ -73,7 +73,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
 
                 if (importOptions.Merge)
                 {
-                    ComicBook match = FindMatch(book);
+                    ComicBookSeries match = FindMatch(book);
 
                     if (match != null)
                     {
@@ -84,7 +84,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
                         // Book is new
                         book.Id = 0;
 
-                        foreach (ComicBookIssue issue in book.Issues)
+                        foreach (ComicBookSeriesEntry issue in book.Entries)
                         {
                             issue.Id = 0;
                             issue.ComicBookId = 0;
@@ -98,7 +98,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
                     // Book is new
                     book.Id = 0;
 
-                    foreach (ComicBookIssue issue in book.Issues)
+                    foreach (ComicBookSeriesEntry issue in book.Entries)
                     {
                         issue.Id = 0;
                         issue.ComicBookId = 0;
@@ -272,10 +272,10 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             }
         }
 
-        private ComicBook FindMatch(ComicBook bookFromImportFile)
+        private ComicBookSeries FindMatch(ComicBookSeries bookFromImportFile)
         {
             ComicBookSummary matchingSummary = null;
-            ComicBook match = null;
+            ComicBookSeries match = null;
 
             foreach (var page in ComicBookPersistence.AllPages())
             {
@@ -304,19 +304,19 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             return match;
         }
 
-        private static ComicBook Merge(ComicBook existingBook, ComicBook bookFromImportFile)
+        private static ComicBookSeries Merge(ComicBookSeries existingBook, ComicBookSeries bookFromImportFile)
         {
-            ComicBook mergedBook = new ComicBook();
+            ComicBookSeries mergedBook = new ComicBookSeries();
             mergedBook.Name = existingBook.Name;
             mergedBook.Id = existingBook.Id;
             mergedBook.Publisher = existingBook.Publisher;
             mergedBook.Notes = existingBook.Notes + bookFromImportFile.Notes;
 
             // Merge issues
-            foreach (ComicBookIssue issueFromImportFile in bookFromImportFile.Issues)
+            foreach (ComicBookSeriesEntry issueFromImportFile in bookFromImportFile.Entries)
             {
                 // Find matching, existing one
-                ComicBookIssue existingMatch = existingBook.Issues.FirstOrDefault((i) =>
+                ComicBookSeriesEntry existingMatch = existingBook.Entries.FirstOrDefault((i) =>
                     {
                         // Does not compare ListType and Notes
                         bool issueNumberMatch = string.Equals(i.IssueNumber,
@@ -350,14 +350,14 @@ namespace LeavinsSoftware.Collection.Persistence.Export
                     // Add issue to existing book
                     issueFromImportFile.Id = 0;
                     issueFromImportFile.ComicBookId = 0;
-                    mergedBook.Issues.Add(issueFromImportFile);
+                    mergedBook.Entries.Add(issueFromImportFile);
                 }
                 else
                 {
                     // Update existing issue
                     existingMatch.ListType = issueFromImportFile.ListType;
                     existingMatch.Notes = existingMatch.Notes + issueFromImportFile.Notes;
-                    mergedBook.Issues.Add(existingMatch);
+                    mergedBook.Entries.Add(existingMatch);
                 }
             }
 

@@ -51,20 +51,20 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             return new ExporterBuilder();
         }
 
-        private List<ComicBook> ComicBooks()
+        private List<ComicBookSeries> ComicBooks()
         {
             ModelSearchOptions options = new ModelSearchOptionsBuilder()
             {
                 ItemsPerPage = 100
             }.Build();
 
-            List<ComicBook> books = new List<ComicBook>();
+            List<ComicBookSeries> books = new List<ComicBookSeries>();
 
             foreach (var pageOfSummaries in ComicBookPersistence.AllPages(options))
             {
                 foreach (ComicBookSummary summary in pageOfSummaries)
                 {
-                    ComicBook book = ComicBookPersistence.Retrieve(summary.Id);
+                    ComicBookSeries book = ComicBookPersistence.Retrieve(summary.Id);
                     books.Add(book);
                 }
             }

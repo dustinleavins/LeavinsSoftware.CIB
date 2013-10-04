@@ -96,7 +96,7 @@
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
                   Margin="0,0,0,20"
-                  ItemsSource="{Binding Item.Issues}"
+                  ItemsSource="{Binding Item.Entries}"
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridComboBoxColumn Header="{x:Static res:InterfaceResources.Fields_ListType}"

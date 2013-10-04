@@ -10,14 +10,14 @@ using LeavinsSoftware.Collection.Models;
 namespace LeavinsSoftware.Collection.Tests.Models
 {
     [TestFixture]
-    public sealed class ComicBookIssueTests
+    public sealed class ComicBookSeriesEntryTests
     {
-        private ComicBookIssue target;
+        private ComicBookSeriesEntry target;
 
         [SetUp]
         public void SetUp()
         {
-            target = new ComicBookIssue()
+            target = new ComicBookSeriesEntry()
             {
                 IssueNumber = "1",
                 ListType = ItemListType.Have

@@ -23,7 +23,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         /// <param name="defaultCategory"></param>
         public ItemComicViewModel(IAppNavigationService nav, ItemCategory defaultCategory)
         {
-            Item = new ComicBook()
+            Item = new ComicBookSeries()
             {
                 Publisher = defaultCategory
             };
@@ -37,7 +37,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         /// <param name="nav"></param>
         public ItemComicViewModel(IAppNavigationService nav)
         {
-            Item = new ComicBook();
+            Item = new ComicBookSeries();
 
             Setup(nav);
         }
@@ -56,7 +56,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
         public IAppNavigationService Nav { get; private set; }
 
-        public ComicBook Item { get; private set; }
+        public ComicBookSeries Item { get; private set; }
 
         public CustomCommand AddItem { get; private set; }
 
@@ -78,7 +78,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 (x) =>
                 {
                     Item.PropertyChanged -= Item_PropertyChanged;
-                    Item.Issues.CollectionChanged -= Issues_CollectionChanged;
+                    Item.Entries.CollectionChanged -= Issues_CollectionChanged;
 
                     if (Item.Id == 0)
                     {
@@ -100,7 +100,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             );
 
             Item.PropertyChanged += Item_PropertyChanged;
-            Item.Issues.CollectionChanged += Issues_CollectionChanged;
+            Item.Entries.CollectionChanged += Issues_CollectionChanged;
 
             Publishers = Persistence.GetInstance<ICategoryPersistence>()
                 .RetrieveAll(ItemCategoryType.ComicBook)

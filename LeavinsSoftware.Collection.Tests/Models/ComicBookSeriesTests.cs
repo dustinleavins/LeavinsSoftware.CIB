@@ -10,14 +10,14 @@ using LeavinsSoftware.Collection.Models;
 namespace LeavinsSoftware.Collection.Tests.Models
 {
     [TestFixture]
-    public sealed class ComicBookTests
+    public sealed class ComicBookSeriesTests
     {
-        private ComicBook target;
+        private ComicBookSeries target;
 
         [SetUp]
         public void SetUp()
         {
-            target = new ComicBook()
+            target = new ComicBookSeries()
             {
                 Name = "Test Item",
 
@@ -28,7 +28,7 @@ namespace LeavinsSoftware.Collection.Tests.Models
                 }
             };
             
-            target.Issues.Add(new ComicBookIssue()
+            target.Entries.Add(new ComicBookSeriesEntry()
             {
                 IssueNumber = "1",
                 ListType = ItemListType.Have
@@ -139,7 +139,7 @@ namespace LeavinsSoftware.Collection.Tests.Models
         [Test]
         public void IssuesEmptyTest()
         {
-            ComicBook comicBookWithoutIssues = new ComicBook()
+            ComicBookSeries comicBookWithoutIssues = new ComicBookSeries()
             {
                 Name = "Test Item",
 
@@ -151,13 +151,13 @@ namespace LeavinsSoftware.Collection.Tests.Models
             };
             
             Assert.IsFalse(comicBookWithoutIssues.IsValid());
-            Assert.IsFalse(comicBookWithoutIssues.IsValid("Issues"));
+            Assert.IsFalse(comicBookWithoutIssues.IsValid("Entries"));
         }
         
         [Test]
         public void IssuesInvalidTest()
         {
-            ComicBook comicBookWithInvalidIssue = new ComicBook()
+            ComicBookSeries comicBookWithInvalidIssue = new ComicBookSeries()
             {
                 Name = "Test Item",
 
@@ -167,10 +167,10 @@ namespace LeavinsSoftware.Collection.Tests.Models
                     CategoryType = ItemCategoryType.ComicBook
                 }
             };
-            comicBookWithInvalidIssue.Issues.Add(new ComicBookIssue() { Id = -1 });
+            comicBookWithInvalidIssue.Entries.Add(new ComicBookSeriesEntry() { Id = -1 });
             
             Assert.IsFalse(comicBookWithInvalidIssue.IsValid());
-            Assert.IsFalse(comicBookWithInvalidIssue.IsValid("Issues"));
+            Assert.IsFalse(comicBookWithInvalidIssue.IsValid("Entries"));
         }
     }
 }

@@ -15,11 +15,11 @@ namespace LeavinsSoftware.Collection.Persistence.Export
     {
         public ExportData()
         {
-            ComicBooks = new List<ComicBook>();
+            ComicBooks = new List<ComicBookSeries>();
             Products = new List<Product>();
             VideoGames = new List<VideoGame>();
         }
-        public List<ComicBook> ComicBooks { get; private set; }
+        public List<ComicBookSeries> ComicBooks { get; private set; }
 
         public List<Product> Products { get; private set; }
 

@@ -70,13 +70,13 @@ namespace LeavinsSoftware.Collection.Program
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            model.Item.Issues.CollectionChanged += Issues_CollectionChanged;
+            model.Item.Entries.CollectionChanged += Issues_CollectionChanged;
             RefreshErrorLabels();
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            model.Item.Issues.CollectionChanged -= Issues_CollectionChanged;
+            model.Item.Entries.CollectionChanged -= Issues_CollectionChanged;
         }
 
         private void Issues_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -86,7 +86,7 @@ namespace LeavinsSoftware.Collection.Program
 
         private void RefreshErrorLabels()
         {
-            if (model.Item.Issues.Any())
+            if (model.Item.Entries.Any())
             {
                 issuesRequiredLabel.Visibility = Visibility.Collapsed;
             }

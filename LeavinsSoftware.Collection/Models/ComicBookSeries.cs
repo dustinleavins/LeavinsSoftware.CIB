@@ -13,11 +13,11 @@ namespace LeavinsSoftware.Collection.Models
     /// <summary>
     /// Represents a series of comic books
     /// </summary>
-    public sealed class ComicBook : Item
+    public sealed class ComicBookSeries : Item
     {
-        public ComicBook()
+        public ComicBookSeries()
         {
-            issues = new ObservableCollection<ComicBookIssue>();
+            entries = new ObservableCollection<ComicBookSeriesEntry>();
         }
 
         [Required]
@@ -37,16 +37,16 @@ namespace LeavinsSoftware.Collection.Models
             }
         }
 
-        [CustomValidation(typeof(ComicBook), "ValidateItems")]
-        public ObservableCollection<ComicBookIssue> Issues
+        [CustomValidation(typeof(ComicBookSeries), "ValidateItems")]
+        public ObservableCollection<ComicBookSeriesEntry> Entries
         {
             get
             {
-                return issues;
+                return entries;
             }
         }
 
-        public static ValidationResult ValidateItems(ObservableCollection<ComicBookIssue> items,
+        public static ValidationResult ValidateItems(ObservableCollection<ComicBookSeriesEntry> items,
             ValidationContext context)
         {
             if (items.Count == 0)
@@ -64,6 +64,6 @@ namespace LeavinsSoftware.Collection.Models
         }
 
         private ItemCategory publisher;
-        private ObservableCollection<ComicBookIssue> issues;
+        private ObservableCollection<ComicBookSeriesEntry> entries;
     }
 }

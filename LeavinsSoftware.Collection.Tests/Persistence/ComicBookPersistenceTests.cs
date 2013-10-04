@@ -45,14 +45,14 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         [Test]
         public void CreateTest()
         {
-            ComicBook newComic = new ComicBook()
+            ComicBookSeries newComic = new ComicBookSeries()
             {
                 Name = "Test Book",
                 Notes = "Test Notes",
                 Publisher = primaryCategory
             };
 
-            newComic.Issues.Add(new ComicBookIssue()
+            newComic.Entries.Add(new ComicBookSeriesEntry()
             {
                 Condition = "Test Condition",
                 Cover = "Test Cover",
@@ -66,10 +66,10 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             comicPersistence.Create(newComic);
             // Create should set Ids
             Assert.IsTrue(newComic.Id > 0);
-            Assert.IsTrue(newComic.Issues[0].Id > 0);
-            Assert.AreEqual(newComic.Id, newComic.Issues[0].ComicBookId);
+            Assert.IsTrue(newComic.Entries[0].Id > 0);
+            Assert.AreEqual(newComic.Id, newComic.Entries[0].ComicBookId);
 
-            ComicBook retrievedComic = comicPersistence.Retrieve(newComic.Id);
+            ComicBookSeries retrievedComic = comicPersistence.Retrieve(newComic.Id);
             Assert.IsNotNull(retrievedComic);
             Assert.AreEqual(newComic.Id, retrievedComic.Id);
             Assert.AreEqual(newComic.Name, retrievedComic.Name);
@@ -80,25 +80,25 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             // newComic.Publisher.Code is null; retrievedComic.Publisher.Code is empty
             Assert.AreEqual(newComic.Publisher.Id, retrievedComic.Publisher.Id);
 
-            Assert.IsNotNull(retrievedComic.Issues);
-            Assert.AreEqual(1, retrievedComic.Issues.Count);
+            Assert.IsNotNull(retrievedComic.Entries);
+            Assert.AreEqual(1, retrievedComic.Entries.Count);
 
-            ComicBookIssue retrievedIssue = retrievedComic.Issues[0];
+            ComicBookSeriesEntry retrievedIssue = retrievedComic.Entries[0];
             Assert.AreEqual(retrievedComic.Id, retrievedIssue.ComicBookId);
-            AssertEquality(newComic.Issues[0], retrievedIssue);
+            AssertEquality(newComic.Entries[0], retrievedIssue);
         }
 
         [Test]
         public void UpdateTest()
         {
-            ComicBook newComic = new ComicBook()
+            ComicBookSeries newComic = new ComicBookSeries()
             {
                 Name = "Test Book",
                 Notes = "Test Notes",
                 Publisher = primaryCategory
             };
 
-            newComic.Issues.Add(new ComicBookIssue()
+            newComic.Entries.Add(new ComicBookSeriesEntry()
             {
                 Condition = "Test Condition",
                 Cover = "Test Cover",
@@ -113,9 +113,9 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
 
             // 'Set ID' checks are in CreateTest
             long comicId = newComic.Id;
-            long comicIssueId = newComic.Issues[0].Id;
+            long comicIssueId = newComic.Entries[0].Id;
 
-            ComicBook updatedComic = new ComicBook()
+            ComicBookSeries updatedComic = new ComicBookSeries()
             {
                 Id = comicId,
                 Name = "Test Book 2",
@@ -124,7 +124,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Publisher = primaryCategory
             };
 
-            updatedComic.Issues.Add(new ComicBookIssue()
+            updatedComic.Entries.Add(new ComicBookSeriesEntry()
             {
                 Id = comicIssueId,
                 ComicBookId = comicId,
@@ -141,10 +141,10 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
 
             // IDs should not change
             Assert.AreEqual(comicId, updatedComic.Id);
-            Assert.AreEqual(comicIssueId, updatedComic.Issues[0].Id);
-            Assert.AreEqual(comicId, updatedComic.Issues[0].ComicBookId);
+            Assert.AreEqual(comicIssueId, updatedComic.Entries[0].Id);
+            Assert.AreEqual(comicId, updatedComic.Entries[0].ComicBookId);
 
-            ComicBook retrievedComic = comicPersistence.Retrieve(comicId);
+            ComicBookSeries retrievedComic = comicPersistence.Retrieve(comicId);
             Assert.IsNotNull(retrievedComic);
 
             Assert.AreEqual(comicId, retrievedComic.Id);
@@ -155,30 +155,30 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Assert.IsNotNull(retrievedComic.Publisher);
             Assert.AreEqual(updatedComic.Publisher.Name, retrievedComic.Publisher.Name);
 
-            Assert.IsNotNull(retrievedComic.Issues);
-            Assert.AreEqual(1, retrievedComic.Issues.Count);
+            Assert.IsNotNull(retrievedComic.Entries);
+            Assert.AreEqual(1, retrievedComic.Entries.Count);
 
-            ComicBookIssue retrievedIssue = retrievedComic.Issues[0];
+            ComicBookSeriesEntry retrievedIssue = retrievedComic.Entries[0];
             Assert.AreEqual(retrievedComic.Id, retrievedIssue.ComicBookId);
-            AssertEquality(updatedComic.Issues[0], retrievedIssue);
+            AssertEquality(updatedComic.Entries[0], retrievedIssue);
 
             // IDs should not change
             Assert.AreEqual(comicId, retrievedComic.Id);
-            Assert.AreEqual(comicIssueId, retrievedComic.Issues[0].Id);
-            Assert.AreEqual(comicId, retrievedComic.Issues[0].ComicBookId);
+            Assert.AreEqual(comicIssueId, retrievedComic.Entries[0].Id);
+            Assert.AreEqual(comicId, retrievedComic.Entries[0].ComicBookId);
         }
 
         [Test]
         public void UpdateCreatesIssueTest()
         {
-            ComicBook comic = new ComicBook()
+            ComicBookSeries comic = new ComicBookSeries()
             {
                 Name = "Test Book",
                 Notes = "Test Notes",
                 Publisher = primaryCategory
             };
 
-            comic.Issues.Add(new ComicBookIssue()
+            comic.Entries.Add(new ComicBookSeriesEntry()
             {
                 Condition = "Test Condition",
                 Cover = "Test Cover",
@@ -191,9 +191,9 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
 
             comicPersistence.Create(comic);
             long comicId = comic.Id;
-            long initialIssueId = comic.Issues[0].Id;
+            long initialIssueId = comic.Entries[0].Id;
 
-            ComicBookIssue updatedIssue = new ComicBookIssue()
+            ComicBookSeriesEntry updatedIssue = new ComicBookSeriesEntry()
             {
                 Id = initialIssueId,
                 ComicBookId = comicId,
@@ -206,7 +206,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Notes = "Test Notes 2"
             };
 
-            ComicBookIssue issueNewToUpdate = new ComicBookIssue()
+            ComicBookSeriesEntry issueNewToUpdate = new ComicBookSeriesEntry()
             {
                 Condition = "Test Condition 3",
                 Cover = "Test Cover 3",
@@ -217,24 +217,24 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Notes = "Test Notes 3"
             };
 
-            comic.Issues.Clear();
-            comic.Issues.Add(updatedIssue);
-            comic.Issues.Add(issueNewToUpdate);
+            comic.Entries.Clear();
+            comic.Entries.Add(updatedIssue);
+            comic.Entries.Add(issueNewToUpdate);
             comicPersistence.Update(comic);
 
-            ComicBook retrievedBook = comicPersistence.Retrieve(comicId);
+            ComicBookSeries retrievedBook = comicPersistence.Retrieve(comicId);
             Assert.IsNotNull(retrievedBook);
             Assert.AreEqual(comicId, retrievedBook.Id);
-            Assert.IsNotNull(retrievedBook.Issues);
-            Assert.AreEqual(2, retrievedBook.Issues.Count);
+            Assert.IsNotNull(retrievedBook.Entries);
+            Assert.AreEqual(2, retrievedBook.Entries.Count);
 
-            ComicBookIssue initialRetrievedIssue = retrievedBook.Issues
+            ComicBookSeriesEntry initialRetrievedIssue = retrievedBook.Entries
                 .Single(i => i.Id == updatedIssue.Id);
 
             Assert.AreEqual(retrievedBook.Id, initialRetrievedIssue.ComicBookId);
             AssertEquality(updatedIssue, initialRetrievedIssue);
 
-            ComicBookIssue secondRetrievedIssue = retrievedBook.Issues
+            ComicBookSeriesEntry secondRetrievedIssue = retrievedBook.Entries
                 .Single(i => i.Id == issueNewToUpdate.Id);
 
             Assert.AreEqual(retrievedBook.Id, secondRetrievedIssue.ComicBookId);
@@ -244,14 +244,14 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         [Test]
         public void UpdateDeletesIssueTest()
         {
-            ComicBook comic = new ComicBook()
+            ComicBookSeries comic = new ComicBookSeries()
             {
                 Name = "Test Book",
                 Notes = "Test Notes",
                 Publisher = primaryCategory
             };
 
-            ComicBookIssue firstIssue = new ComicBookIssue()
+            ComicBookSeriesEntry firstIssue = new ComicBookSeriesEntry()
             {
                 Condition = "Test Condition",
                 Cover = "Test Cover",
@@ -262,7 +262,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Notes = "Test Notes"
             };
 
-            ComicBookIssue issueToDelete = new ComicBookIssue()
+            ComicBookSeriesEntry issueToDelete = new ComicBookSeriesEntry()
             {
                 Condition = "Test Condition",
                 Cover = "Test Cover",
@@ -273,34 +273,34 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Notes = "Test Notes"
             };
 
-            comic.Issues.Add(firstIssue);
-            comic.Issues.Add(issueToDelete);
+            comic.Entries.Add(firstIssue);
+            comic.Entries.Add(issueToDelete);
 
             comicPersistence.Create(comic);
 
-            comic.Issues.Remove(firstIssue);
+            comic.Entries.Remove(firstIssue);
 
             comicPersistence.Update(comic);
 
-            ComicBook retrievedBook = comicPersistence.Retrieve(comic.Id);
+            ComicBookSeries retrievedBook = comicPersistence.Retrieve(comic.Id);
             Assert.IsNotNull(retrievedBook);
-            Assert.IsNotNull(retrievedBook.Issues);
-            Assert.AreEqual(1, retrievedBook.Issues.Count);
-            Assert.IsFalse(retrievedBook.Issues.Any(i => i.Id == firstIssue.Id));
-            Assert.IsTrue(retrievedBook.Issues.Any(i => i.Id == issueToDelete.Id));
+            Assert.IsNotNull(retrievedBook.Entries);
+            Assert.AreEqual(1, retrievedBook.Entries.Count);
+            Assert.IsFalse(retrievedBook.Entries.Any(i => i.Id == firstIssue.Id));
+            Assert.IsTrue(retrievedBook.Entries.Any(i => i.Id == issueToDelete.Id));
         }
 
         [Test]
         public void DeleteTest()
         {
-            ComicBook newComic = new ComicBook()
+            ComicBookSeries newComic = new ComicBookSeries()
             {
                 Name = "Test Book",
                 Notes = "Test Notes",
                 Publisher = primaryCategory
             };
 
-            newComic.Issues.Add(new ComicBookIssue());
+            newComic.Entries.Add(new ComicBookSeriesEntry());
 
             comicPersistence.Create(newComic);
             comicPersistence.Delete(newComic);
@@ -349,51 +349,51 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 categoryPersistence.Create(category);
             }
 
-            List<ComicBook> books = new List<ComicBook>();
-            books.Add(new ComicBook()
+            List<ComicBookSeries> books = new List<ComicBookSeries>();
+            books.Add(new ComicBookSeries()
             {
                 Name = "Test Book 1",
                 Notes = "Test Notes",
                 Publisher = categories[0]
             });
 
-            books.Add(new ComicBook()
+            books.Add(new ComicBookSeries()
             {
                 Name = "Test Book 2",
                 Notes = "Test Notes",
                 Publisher = categories[0]
             });
 
-            books.Add(new ComicBook()
+            books.Add(new ComicBookSeries()
             {
                 Name = "Test Book 3",
                 Notes = "Test Notes",
                 Publisher = categories[0]
             });
 
-            books.Add(new ComicBook()
+            books.Add(new ComicBookSeries()
             {
                 Name = "Test Book 4",
                 Notes = "Test Notes",
                 Publisher = categories[1]
             });
 
-            foreach (ComicBook book in books)
+            foreach (ComicBookSeries book in books)
             {
                 // Add issues to each book before adding the book
-                book.Issues.Add(new ComicBookIssue()
+                book.Entries.Add(new ComicBookSeriesEntry()
                 {
                     IssueNumber = "1",
                     ListType = ItemListType.Have
                 });
 
-                book.Issues.Add(new ComicBookIssue()
+                book.Entries.Add(new ComicBookSeriesEntry()
                 {
                     IssueNumber = "2",
                     ListType = ItemListType.Have
                 });
 
-                book.Issues.Add(new ComicBookIssue()
+                book.Entries.Add(new ComicBookSeriesEntry()
                 {
                     IssueNumber = "3",
                     ListType = ItemListType.Want
@@ -500,7 +500,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Code = "001"
             });
 
-            ComicBook addedBook = new ComicBook()
+            ComicBookSeries addedBook = new ComicBookSeries()
             {
                 Name = "Test Book",
                 Publisher = category
@@ -508,7 +508,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
 
             foreach (ItemListType listType in Enum.GetValues(typeof(ItemListType)).Cast<ItemListType>())
             {
-                addedBook.Issues.Add(new ComicBookIssue()
+                addedBook.Entries.Add(new ComicBookSeriesEntry()
                 {
                     IssueNumber = listType.ToString(),
                     ListType = listType
@@ -516,7 +516,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             }
 
             // Add an additional 'Have' issue
-            addedBook.Issues.Add(new ComicBookIssue()
+            addedBook.Entries.Add(new ComicBookSeriesEntry()
             {
                 IssueNumber = "Have - 2nd",
                 ListType = ItemListType.Have
@@ -543,11 +543,11 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
 
                 if (listType == ItemListType.Have)
                 {
-                    Assert.AreEqual(2, retrievedSummary.IssueCount, errorMsg);
+                    Assert.AreEqual(2, retrievedSummary.EntriesCount, errorMsg);
                 }
                 else
                 {
-                    Assert.AreEqual(1, retrievedSummary.IssueCount, errorMsg);
+                    Assert.AreEqual(1, retrievedSummary.EntriesCount, errorMsg);
                 }
             }
             
@@ -561,7 +561,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Assert.AreEqual(1, target.Page(allInclusiveOptions, 0).Count);
             
             ComicBookSummary issueSummary = target.Page(allInclusiveOptions, 0).First();
-            Assert.AreEqual(6, issueSummary.IssueCount);
+            Assert.AreEqual(6, issueSummary.EntriesCount);
             
             // Name search search
             ModelSearchOptions nameOptions = new ModelSearchOptionsBuilder()
@@ -573,7 +573,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Assert.AreEqual(1, target.TotalResults(nameOptions));
             Assert.AreEqual(1, target.Page(nameOptions, 0).Count);
             
-            Assert.AreEqual(6, target.Page(nameOptions, 0).First().IssueCount);
+            Assert.AreEqual(6, target.Page(nameOptions, 0).First().EntriesCount);
             
             // Name not found search
             ModelSearchOptions nameNotFoundOptions = new ModelSearchOptionsBuilder()
@@ -586,7 +586,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Assert.AreEqual(0, target.Page(nameNotFoundOptions, 0).Count);
         }
 
-        private static void AssertEquality(ComicBookIssue expected, ComicBookIssue actual)
+        private static void AssertEquality(ComicBookSeriesEntry expected, ComicBookSeriesEntry actual)
         {
             Assert.AreEqual(expected.Condition, actual.Condition);
             Assert.AreEqual(expected.Cover, actual.Cover);

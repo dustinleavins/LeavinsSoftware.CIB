@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace LeavinsSoftware.Collection.Models
 {
     /// <summary>
-    /// Variant of <see cref="ComicBook"/> to be used during searches.
+    /// Variant of <see cref="ComicBookSeries"/> to be used during searches.
     /// </summary>
     public sealed class ComicBookSummary : Item
     {
@@ -29,7 +29,7 @@ namespace LeavinsSoftware.Collection.Models
             }
         }
 
-        public long IssueCount
+        public long EntriesCount
         {
             get
             {
@@ -40,7 +40,7 @@ namespace LeavinsSoftware.Collection.Models
                 if (issueCount != value)
                 {
                     issueCount = value;
-                    OnPropertyChanged("IssueCount");
+                    OnPropertyChanged("EntriesCount");
                 }
             }
         }

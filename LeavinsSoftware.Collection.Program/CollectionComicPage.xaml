@@ -78,7 +78,7 @@
                                     Header="{x:Static res:InterfaceResources.Fields_Title}" />
                 <DataGridTextColumn Binding="{Binding Publisher.Name}"
                                     Header="{x:Static res:InterfaceResources.Fields_Publisher}" />
-                <DataGridTextColumn Binding="{Binding IssueCount}"
+                <DataGridTextColumn Binding="{Binding EntriesCount}"
                                     Header="{x:Static res:InterfaceResources.Fields_IssueCount}" />
                 <DataGridTextColumn Binding="{Binding NotesSummary}"
                                     Header="{x:Static res:InterfaceResources.Fields_Notes}" />
