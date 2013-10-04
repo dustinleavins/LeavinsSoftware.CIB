@@ -84,4 +84,18 @@
         <Setter Property="HorizontalContentAlignment"
                 Value="Center" />
     </Style>
+    
+    <Style x:Key="listTypeCollectionLabel"
+           TargetType="Label">
+        <Setter Property="LayoutTransform">
+            <Setter.Value>
+                <ScaleTransform ScaleX="1.25"
+                                ScaleY="1.25" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontWeight"
+                Value="Bold" />
+        <Setter Property="Padding" Value="0, 0, 20,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
 </ResourceDictionary>

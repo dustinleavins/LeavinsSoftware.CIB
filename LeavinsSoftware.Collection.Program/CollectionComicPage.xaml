@@ -31,11 +31,21 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ComboBox Grid.Row="0"
-                  Margin="0,0,0,20"
+        <Grid Grid.Row="0"
+              Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+                   Style="{StaticResource listTypeCollectionLabel}"
+                   Content="{x:Static res:InterfaceResources.Fields_ListType}" />
+            <ComboBox Grid.Column="1"
                   Style="{StaticResource listTypeCollectionBox}"
                   ItemsSource="{Binding Source={StaticResource listType}}"
                   SelectedValue="{Binding ListType}" />
+        </Grid>
 
         <Grid Grid.Row="1"
               Margin="0,0,0,20">
