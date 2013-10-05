@@ -90,7 +90,7 @@
                Grid.ColumnSpan="2"
                x:Name="issuesRequiredLabel"
                Visibility="Collapsed"
-               Content="{x:Static res:InterfaceResources.ItemComicPage_NoIssuesError}" />
+               Content="{x:Static res:InterfaceResources.ItemComicPage_NoEntriesError}" />
 
         <DataGrid Grid.Row="4"
                   Grid.Column="0"
@@ -102,15 +102,15 @@
                 <DataGridComboBoxColumn Header="{x:Static res:InterfaceResources.Fields_ListType}"
                                         SelectedItemBinding="{Binding ListType}"
                                         ItemsSource="{Binding Source={StaticResource listType}}" />
-                <DataGridComboBoxColumn Header="{x:Static res:InterfaceResources.Fields_IssueType}"
+                <DataGridComboBoxColumn Header="{x:Static res:InterfaceResources.Fields_ComicEntryType}"
                                         SelectedItemBinding="{Binding EntryType}"
                                         ItemsSource="{Binding Source={StaticResource entryType}}" />
                 <DataGridTextColumn Binding="{Binding Number, UpdateSourceTrigger=PropertyChanged}"
-                                    Header="{x:Static res:InterfaceResources.Fields_IssueNumber}" />
+                                    Header="{x:Static res:InterfaceResources.Fields_ComicEntryNumber}" />
                 <DataGridTextColumn Binding="{Binding Cover, UpdateSourceTrigger=PropertyChanged}"
                                     Header="{x:Static res:InterfaceResources.Fields_Cover}" />
                 <DataGridTextColumn Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
-                                    Header="{x:Static res:InterfaceResources.Fields_IssueTitle}" />
+                                    Header="{x:Static res:InterfaceResources.Fields_ComicEntryTitle}" />
                 <DataGridComboBoxColumn Header="{x:Static res:InterfaceResources.Fields_DistributionType}"
                                         SelectedItemBinding="{Binding DistributionType}"
                                         ItemsSource="{Binding Source={StaticResource distType}}" />

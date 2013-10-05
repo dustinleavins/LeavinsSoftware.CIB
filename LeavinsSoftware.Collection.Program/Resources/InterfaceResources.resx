@@ -198,13 +198,13 @@
   <data name="Fields_EntriesCount" xml:space="preserve">
     <value># of Entries</value>
   </data>
-  <data name="Fields_IssueNumber" xml:space="preserve">
-    <value>Issue #</value>
+  <data name="Fields_ComicEntryNumber" xml:space="preserve">
+    <value>#</value>
   </data>
-  <data name="Fields_IssueTitle" xml:space="preserve">
+  <data name="Fields_ComicEntryTitle" xml:space="preserve">
     <value>Volume Title</value>
   </data>
-  <data name="Fields_IssueType" xml:space="preserve">
+  <data name="Fields_ComicEntryType" xml:space="preserve">
     <value>Type</value>
   </data>
   <data name="Fields_ListType" xml:space="preserve">
@@ -233,7 +233,6 @@
   </data>
   <data name="Fields_Title" xml:space="preserve">
     <value>Title</value>
-    <comment>Used on many item pages instead of Fields_Name</comment>
   </data>
   <data name="Fields_UseProxyServer" xml:space="preserve">
     <value>Use Proxy Server</value>
@@ -247,7 +246,7 @@
   <data name="Import_SuccessMessage" xml:space="preserve">
     <value>Import was successful.</value>
   </data>
-  <data name="ItemComicPage_NoIssuesError" xml:space="preserve">
+  <data name="ItemComicPage_NoEntriesError" xml:space="preserve">
     <value>You need to add at least one issue (or volume).</value>
   </data>
   <data name="OptionsCategoryNames_Save" xml:space="preserve">
@@ -267,7 +266,6 @@
   </data>
   <data name="PageTitles_CollectionFormat" xml:space="preserve">
     <value>{0} - {1}</value>
-    <comment>{Main Category} - {Sub Category}</comment>
   </data>
   <data name="PageTitles_CollectionProduct" xml:space="preserve">
     <value>Products - All</value>
