@@ -1,6 +1,6 @@
-﻿using LeavinsSoftware.Collection.Persistence;
-// Copyright (c) 2013 Dustin Leavins
+﻿// Copyright (c) 2013 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
+using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Program.Resources;
 using System;
 using System.Threading;

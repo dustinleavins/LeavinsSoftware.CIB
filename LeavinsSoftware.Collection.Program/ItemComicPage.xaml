@@ -1,4 +1,7 @@
-﻿<Page x:Class="LeavinsSoftware.Collection.Program.ItemComicPage"
+﻿<!-- Copyright (c) 2013 Dustin Leavins
+     See the file 'LICENSE.txt' for copying permission.
+-->
+<Page x:Class="LeavinsSoftware.Collection.Program.ItemComicPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
