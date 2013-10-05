@@ -29,13 +29,17 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0"
                    Content="{x:Static res:InterfaceResources.Fields_Name}"
-                   Margin="0, 0, 20, 0" />
+                   Margin="0, 0, 20, 0"
+                   VerticalAlignment="Center" />
             <TextBox Grid.Column="1"
-                     Text="{Binding SubCategoryName}" />
+                     Text="{Binding SubCategoryName, UpdateSourceTrigger=PropertyChanged}"
+                     VerticalAlignment="Center" />
             <Button Grid.Column="2"
                     Name="addSubCategoryButton"
                     Command="{Binding AddSubCategory}"
-                    Margin="20, 0, 0, 0"/>
+                    VerticalAlignment="Center"
+                    Margin="20, 0, 0, 0"
+                    IsDefault="True" />
         </Grid>
         
     </Grid>

@@ -9,7 +9,7 @@
       Title="{x:Static res:InterfaceResources.PageTitles_OptionsCategoryNames}"
       Loaded="Page_Loaded"
       Unloaded="Page_Unloaded">
-    <Grid>
+    <Grid Style="{StaticResource mainPageGrid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />

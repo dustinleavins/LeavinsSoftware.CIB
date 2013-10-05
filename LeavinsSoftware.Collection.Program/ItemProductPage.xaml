@@ -96,7 +96,7 @@
         <Grid Grid.Row="5"
               Grid.ColumnSpan="2">
             <Button HorizontalAlignment="Center"
-                    Content="{x:Static res:InterfaceResources.Add_Product}"
+                    Content="{x:Static res:InterfaceResources.Common_Save}"
                     Command="{Binding AddItem}" />
         </Grid>
     </Grid>

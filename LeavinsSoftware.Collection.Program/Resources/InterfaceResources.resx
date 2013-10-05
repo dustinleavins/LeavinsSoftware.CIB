@@ -315,4 +315,7 @@
   <data name="Startup_UpdateAvailable" xml:space="preserve">
     <value>An update to CIB Collection Manager is available.</value>
   </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>
