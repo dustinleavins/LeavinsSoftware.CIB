@@ -186,7 +186,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
         {
             return new ComicBookSeriesEntry()
             {
-                IssueNumber = rnd.Next(1, int.MaxValue).ToString(CultureInfo.InvariantCulture),
+                Number = rnd.Next(1, int.MaxValue).ToString(CultureInfo.InvariantCulture),
                 ListType = listType
             };
         }

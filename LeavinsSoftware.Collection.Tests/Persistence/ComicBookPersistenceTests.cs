@@ -57,8 +57,8 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Condition = "Test Condition",
                 Cover = "Test Cover",
                 DistributionType = DistributionType.Digital,
-                IssueNumber = "Test Issue",
-                IssueType = VolumeType.Issue,
+                Number = "Test Issue",
+                EntryType = VolumeType.Issue,
                 Name = "Title",
                 Notes = "Test Notes"
             });
@@ -67,7 +67,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             // Create should set Ids
             Assert.IsTrue(newComic.Id > 0);
             Assert.IsTrue(newComic.Entries[0].Id > 0);
-            Assert.AreEqual(newComic.Id, newComic.Entries[0].ComicBookId);
+            Assert.AreEqual(newComic.Id, newComic.Entries[0].SeriesId);
 
             ComicBookSeries retrievedComic = comicPersistence.Retrieve(newComic.Id);
             Assert.IsNotNull(retrievedComic);
@@ -84,7 +84,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Assert.AreEqual(1, retrievedComic.Entries.Count);
 
             ComicBookSeriesEntry retrievedIssue = retrievedComic.Entries[0];
-            Assert.AreEqual(retrievedComic.Id, retrievedIssue.ComicBookId);
+            Assert.AreEqual(retrievedComic.Id, retrievedIssue.SeriesId);
             AssertEquality(newComic.Entries[0], retrievedIssue);
         }
 
@@ -103,8 +103,8 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Condition = "Test Condition",
                 Cover = "Test Cover",
                 DistributionType = DistributionType.Digital,
-                IssueNumber = "Test Issue",
-                IssueType = VolumeType.Issue,
+                Number = "Test Issue",
+                EntryType = VolumeType.Issue,
                 Name = "Title",
                 Notes = "Test Notes"
             });
@@ -127,12 +127,12 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             updatedComic.Entries.Add(new ComicBookSeriesEntry()
             {
                 Id = comicIssueId,
-                ComicBookId = comicId,
+                SeriesId = comicId,
                 Condition = "Test Condition 2",
                 Cover = "Test Cover 2",
                 DistributionType = DistributionType.Physical,
-                IssueNumber = "Test Issue 2",
-                IssueType = VolumeType.TPB,
+                Number = "Test Issue 2",
+                EntryType = VolumeType.TPB,
                 Name = "Title 2",
                 Notes = "Test Notes 2"
             });
@@ -142,7 +142,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             // IDs should not change
             Assert.AreEqual(comicId, updatedComic.Id);
             Assert.AreEqual(comicIssueId, updatedComic.Entries[0].Id);
-            Assert.AreEqual(comicId, updatedComic.Entries[0].ComicBookId);
+            Assert.AreEqual(comicId, updatedComic.Entries[0].SeriesId);
 
             ComicBookSeries retrievedComic = comicPersistence.Retrieve(comicId);
             Assert.IsNotNull(retrievedComic);
@@ -159,13 +159,13 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Assert.AreEqual(1, retrievedComic.Entries.Count);
 
             ComicBookSeriesEntry retrievedIssue = retrievedComic.Entries[0];
-            Assert.AreEqual(retrievedComic.Id, retrievedIssue.ComicBookId);
+            Assert.AreEqual(retrievedComic.Id, retrievedIssue.SeriesId);
             AssertEquality(updatedComic.Entries[0], retrievedIssue);
 
             // IDs should not change
             Assert.AreEqual(comicId, retrievedComic.Id);
             Assert.AreEqual(comicIssueId, retrievedComic.Entries[0].Id);
-            Assert.AreEqual(comicId, retrievedComic.Entries[0].ComicBookId);
+            Assert.AreEqual(comicId, retrievedComic.Entries[0].SeriesId);
         }
 
         [Test]
@@ -183,8 +183,8 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Condition = "Test Condition",
                 Cover = "Test Cover",
                 DistributionType = DistributionType.Digital,
-                IssueNumber = "Test Issue",
-                IssueType = VolumeType.Issue,
+                Number = "Test Issue",
+                EntryType = VolumeType.Issue,
                 Name = "Title",
                 Notes = "Test Notes"
             });
@@ -196,12 +196,12 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             ComicBookSeriesEntry updatedIssue = new ComicBookSeriesEntry()
             {
                 Id = initialIssueId,
-                ComicBookId = comicId,
+                SeriesId = comicId,
                 Condition = "Test Condition 2",
                 Cover = "Test Cover 2",
                 DistributionType = DistributionType.Physical,
-                IssueNumber = "Test Issue 2",
-                IssueType = VolumeType.TPB,
+                Number = "Test Issue 2",
+                EntryType = VolumeType.TPB,
                 Name = "Title 2",
                 Notes = "Test Notes 2"
             };
@@ -211,8 +211,8 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Condition = "Test Condition 3",
                 Cover = "Test Cover 3",
                 DistributionType = DistributionType.Digital,
-                IssueNumber = "Test Issue 3",
-                IssueType = VolumeType.Issue,
+                Number = "Test Issue 3",
+                EntryType = VolumeType.Issue,
                 Name = "Title 3",
                 Notes = "Test Notes 3"
             };
@@ -231,13 +231,13 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             ComicBookSeriesEntry initialRetrievedIssue = retrievedBook.Entries
                 .Single(i => i.Id == updatedIssue.Id);
 
-            Assert.AreEqual(retrievedBook.Id, initialRetrievedIssue.ComicBookId);
+            Assert.AreEqual(retrievedBook.Id, initialRetrievedIssue.SeriesId);
             AssertEquality(updatedIssue, initialRetrievedIssue);
 
             ComicBookSeriesEntry secondRetrievedIssue = retrievedBook.Entries
                 .Single(i => i.Id == issueNewToUpdate.Id);
 
-            Assert.AreEqual(retrievedBook.Id, secondRetrievedIssue.ComicBookId);
+            Assert.AreEqual(retrievedBook.Id, secondRetrievedIssue.SeriesId);
             AssertEquality(issueNewToUpdate, secondRetrievedIssue);
         }
 
@@ -256,8 +256,8 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Condition = "Test Condition",
                 Cover = "Test Cover",
                 DistributionType = DistributionType.Digital,
-                IssueNumber = "Test Issue",
-                IssueType = VolumeType.Issue,
+                Number = "Test Issue",
+                EntryType = VolumeType.Issue,
                 Name = "Title",
                 Notes = "Test Notes"
             };
@@ -267,8 +267,8 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Condition = "Test Condition",
                 Cover = "Test Cover",
                 DistributionType = DistributionType.Digital,
-                IssueNumber = "Test Issue",
-                IssueType = VolumeType.Issue,
+                Number = "Test Issue",
+                EntryType = VolumeType.Issue,
                 Name = "Title",
                 Notes = "Test Notes"
             };
@@ -383,19 +383,19 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 // Add issues to each book before adding the book
                 book.Entries.Add(new ComicBookSeriesEntry()
                 {
-                    IssueNumber = "1",
+                    Number = "1",
                     ListType = ItemListType.Have
                 });
 
                 book.Entries.Add(new ComicBookSeriesEntry()
                 {
-                    IssueNumber = "2",
+                    Number = "2",
                     ListType = ItemListType.Have
                 });
 
                 book.Entries.Add(new ComicBookSeriesEntry()
                 {
-                    IssueNumber = "3",
+                    Number = "3",
                     ListType = ItemListType.Want
                 });
 
@@ -510,7 +510,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             {
                 addedBook.Entries.Add(new ComicBookSeriesEntry()
                 {
-                    IssueNumber = listType.ToString(),
+                    Number = listType.ToString(),
                     ListType = listType
                 });
             }
@@ -518,7 +518,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             // Add an additional 'Have' issue
             addedBook.Entries.Add(new ComicBookSeriesEntry()
             {
-                IssueNumber = "Have - 2nd",
+                Number = "Have - 2nd",
                 ListType = ItemListType.Have
             });
 
@@ -591,8 +591,8 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Assert.AreEqual(expected.Condition, actual.Condition);
             Assert.AreEqual(expected.Cover, actual.Cover);
             Assert.AreEqual(expected.DistributionType, actual.DistributionType);
-            Assert.AreEqual(expected.IssueNumber, actual.IssueNumber);
-            Assert.AreEqual(expected.IssueType, actual.IssueType);
+            Assert.AreEqual(expected.Number, actual.Number);
+            Assert.AreEqual(expected.EntryType, actual.EntryType);
             Assert.AreEqual(expected.Name, actual.Name);
             Assert.AreEqual(expected.Notes, actual.Notes);
             Assert.AreEqual(expected.ListType, actual.ListType);

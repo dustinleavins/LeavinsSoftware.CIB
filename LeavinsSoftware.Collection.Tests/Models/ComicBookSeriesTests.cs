@@ -30,7 +30,7 @@ namespace LeavinsSoftware.Collection.Tests.Models
             
             target.Entries.Add(new ComicBookSeriesEntry()
             {
-                IssueNumber = "1",
+                Number = "1",
                 ListType = ItemListType.Have
             });
             

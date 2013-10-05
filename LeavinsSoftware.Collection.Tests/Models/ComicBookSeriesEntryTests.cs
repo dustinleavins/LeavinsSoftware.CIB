@@ -19,7 +19,7 @@ namespace LeavinsSoftware.Collection.Tests.Models
         {
             target = new ComicBookSeriesEntry()
             {
-                IssueNumber = "1",
+                Number = "1",
                 ListType = ItemListType.Have
             };
             
@@ -99,32 +99,32 @@ namespace LeavinsSoftware.Collection.Tests.Models
         [TestCase(1)]
         [TestCase(int.MaxValue)]
         [TestCase(long.MaxValue)]
-        public void ComicBookIdIdTest(long expectedValue)
+        public void SeriesIdTest(long expectedValue)
         {
-            PropertyChangedChecker.CheckOnly("ComicBookId");
-            target.ComicBookId = expectedValue;
-            Assert.AreEqual(expectedValue, target.ComicBookId);
+            PropertyChangedChecker.CheckOnly("SeriesId");
+            target.SeriesId = expectedValue;
+            Assert.AreEqual(expectedValue, target.SeriesId);
             Assert.IsTrue(target.IsValid());
 
             Assert.AreEqual(expectedValue != default(long),
-                PropertyChangedChecker.HasPropertyChanged("ComicBookId"));
+                PropertyChangedChecker.HasPropertyChanged("SeriesId"));
         }
 
         [TestCase(-1)]
         [TestCase(-2)]
         [TestCase(int.MinValue)]
         [TestCase(long.MinValue)]
-        public void ComicBookIdIdInvalidTest(long expectedValue)
+        public void SeriesIdInvalidTest(long expectedValue)
         {
-            PropertyChangedChecker.CheckOnly("ComicBookId");
+            PropertyChangedChecker.CheckOnly("SeriesId");
 
-            target.ComicBookId = expectedValue;
-            Assert.AreEqual(expectedValue, target.ComicBookId);
+            target.SeriesId = expectedValue;
+            Assert.AreEqual(expectedValue, target.SeriesId);
 
             var results = target.ValidationResults();
             Assert.AreEqual(1, results.Count);
 
-            Assert.IsTrue(PropertyChangedChecker.HasPropertyChanged("ComicBookId"));
+            Assert.IsTrue(PropertyChangedChecker.HasPropertyChanged("SeriesId"));
         }
         
         [TestCase(ItemListType.Want)]
@@ -182,29 +182,29 @@ namespace LeavinsSoftware.Collection.Tests.Models
         [TestCase(null)]
         [TestCase("")]
         [TestCase("Issue")]
-        public void IssueNumberTest(string expectedValue)
+        public void NumberTest(string expectedValue)
         {
-            PropertyChangedChecker.CheckOnly("IssueNumber");
+            PropertyChangedChecker.CheckOnly("Number");
 
-            target.IssueNumber = expectedValue;
-            Assert.AreEqual(expectedValue, target.IssueNumber);
+            target.Number = expectedValue;
+            Assert.AreEqual(expectedValue, target.Number);
 
             Assert.IsTrue(target.IsValid());
 
             // IssueNumber is set in SetUp
-            Assert.IsTrue(PropertyChangedChecker.HasPropertyChanged("IssueNumber"));
+            Assert.IsTrue(PropertyChangedChecker.HasPropertyChanged("Number"));
         }
         
         [TestCase(VolumeType.Issue)]
         [TestCase(VolumeType.TPB)]
         public void IssueTypeTest(VolumeType expected)
         {
-            PropertyChangedChecker.CheckOnly("IssueType");
-            target.IssueType = expected;
-            Assert.AreEqual(expected, target.IssueType);
+            PropertyChangedChecker.CheckOnly("EntryType");
+            target.EntryType = expected;
+            Assert.AreEqual(expected, target.EntryType);
             Assert.IsTrue(target.IsValid());
             Assert.AreEqual(expected != default(VolumeType),
-                PropertyChangedChecker.HasPropertyChanged("IssueType"));
+                PropertyChangedChecker.HasPropertyChanged("EntryType"));
         }
         
         [TestCase(null)]

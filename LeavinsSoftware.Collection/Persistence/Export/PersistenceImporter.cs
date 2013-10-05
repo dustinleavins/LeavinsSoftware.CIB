@@ -87,7 +87,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
                         foreach (ComicBookSeriesEntry issue in book.Entries)
                         {
                             issue.Id = 0;
-                            issue.ComicBookId = 0;
+                            issue.SeriesId = 0;
                         }
 
                         ComicBookPersistence.Create(book);
@@ -101,7 +101,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
                     foreach (ComicBookSeriesEntry issue in book.Entries)
                     {
                         issue.Id = 0;
-                        issue.ComicBookId = 0;
+                        issue.SeriesId = 0;
                     }
 
                     ComicBookPersistence.Create(book);
@@ -319,11 +319,11 @@ namespace LeavinsSoftware.Collection.Persistence.Export
                 ComicBookSeriesEntry existingMatch = existingBook.Entries.FirstOrDefault((i) =>
                     {
                         // Does not compare ListType and Notes
-                        bool issueNumberMatch = string.Equals(i.IssueNumber,
-                            issueFromImportFile.IssueNumber,
+                        bool issueNumberMatch = string.Equals(i.Number,
+                            issueFromImportFile.Number,
                             StringComparison.OrdinalIgnoreCase);
 
-                        bool issueTypeMatch = i.IssueType == issueFromImportFile.IssueType;
+                        bool issueTypeMatch = i.EntryType == issueFromImportFile.EntryType;
 
                         bool nameMatch = string.Equals(i.Name, issueFromImportFile.Name,
                             StringComparison.OrdinalIgnoreCase);
@@ -349,7 +349,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
                 {
                     // Add issue to existing book
                     issueFromImportFile.Id = 0;
-                    issueFromImportFile.ComicBookId = 0;
+                    issueFromImportFile.SeriesId = 0;
                     mergedBook.Entries.Add(issueFromImportFile);
                 }
                 else

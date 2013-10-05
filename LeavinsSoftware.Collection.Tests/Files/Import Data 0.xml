@@ -15,36 +15,36 @@
         <ComicBookSeriesEntry>
           <Id>1</Id>
           <ComicBookId>1</ComicBookId>
-          <IssueNumber>2080427802</IssueNumber>
+          <Number>2080427802</Number>
           <Cover>Cover</Cover>
           <Name>Entry Name</Name>
           <DistributionType>Physical</DistributionType>
           <Condition>Good</Condition>
-          <IssueType>Issue</IssueType>
+          <EntryType>Issue</EntryType>
           <Notes>Entry Notes</Notes>
           <ListType>Have</ListType>
         </ComicBookSeriesEntry>
         <ComicBookSeriesEntry>
           <Id>2</Id>
           <ComicBookId>1</ComicBookId>
-          <IssueNumber>341851734</IssueNumber>
+          <Number>341851734</Number>
           <Cover />
           <Name />
           <DistributionType>Physical</DistributionType>
           <Condition />
-          <IssueType>Issue</IssueType>
+          <EntryType>Issue</EntryType>
           <Notes />
           <ListType>Have</ListType>
         </ComicBookSeriesEntry>
         <ComicBookSeriesEntry>
           <Id>3</Id>
           <ComicBookId>1</ComicBookId>
-          <IssueNumber>1431988776</IssueNumber>
+          <Number>1431988776</Number>
           <Cover />
           <Name />
           <DistributionType>Digital</DistributionType>
           <Condition />
-          <IssueType>TPB</IssueType>
+          <EntryType>TPB</EntryType>
           <Notes />
           <ListType>Want</ListType>
         </ComicBookSeriesEntry>

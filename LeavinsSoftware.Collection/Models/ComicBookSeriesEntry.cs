@@ -16,34 +16,34 @@ namespace LeavinsSoftware.Collection.Models
     public sealed class ComicBookSeriesEntry : Model
     {
         [Range(0, long.MaxValue)]
-        public long ComicBookId
+        public long SeriesId
         {
             get
             {
-                return comicBookId;
+                return seriesId;
             }
             set
             {
-                if (comicBookId != value)
+                if (seriesId != value)
                 {
-                    comicBookId = value;
-                    OnPropertyChanged("ComicBookId");
+                    seriesId = value;
+                    OnPropertyChanged("SeriesId");
                 }
             }
         }
 
-        public string IssueNumber
+        public string Number
         {
             get
             {
-                return issueNumber;
+                return number;
             }
             set
             {
-                if (!string.Equals(issueNumber, value, StringComparison.Ordinal))
+                if (!string.Equals(number, value, StringComparison.Ordinal))
                 {
-                    issueNumber = value;
-                    OnPropertyChanged("IssueNumber");
+                    number = value;
+                    OnPropertyChanged("Number");
                 }
             }
         }
@@ -112,18 +112,18 @@ namespace LeavinsSoftware.Collection.Models
             }
         }
 
-        public VolumeType IssueType
+        public VolumeType EntryType
         {
             get
             {
-                return issueType;
+                return entryType;
             }
             set
             {
-                if (issueType != value)
+                if (entryType != value)
                 {
-                    issueType = value;
-                    OnPropertyChanged("IssueType");
+                    entryType = value;
+                    OnPropertyChanged("EntryType");
                 }
             }
         }
@@ -160,13 +160,13 @@ namespace LeavinsSoftware.Collection.Models
             }
         }
 
-        private long comicBookId;
-        private string issueNumber;
+        private long seriesId;
+        private string number;
         private string cover;
         private string name;
         private DistributionType distType;
         private string condition;
-        private VolumeType issueType;
+        private VolumeType entryType;
         private string notes;
         private ItemListType list;
     }

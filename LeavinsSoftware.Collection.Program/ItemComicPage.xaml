@@ -19,7 +19,7 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
         
-        <ObjectDataProvider x:Key="issueType"
+        <ObjectDataProvider x:Key="entryType"
                             MethodName="GetValues"
                             ObjectType="{x:Type core:Enum}">
             <ObjectDataProvider.MethodParameters>
@@ -103,9 +103,9 @@
                                         SelectedItemBinding="{Binding ListType}"
                                         ItemsSource="{Binding Source={StaticResource listType}}" />
                 <DataGridComboBoxColumn Header="{x:Static res:InterfaceResources.Fields_IssueType}"
-                                        SelectedItemBinding="{Binding IssueType}"
-                                        ItemsSource="{Binding Source={StaticResource issueType}}" />
-                <DataGridTextColumn Binding="{Binding IssueNumber, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedItemBinding="{Binding EntryType}"
+                                        ItemsSource="{Binding Source={StaticResource entryType}}" />
+                <DataGridTextColumn Binding="{Binding Number, UpdateSourceTrigger=PropertyChanged}"
                                     Header="{x:Static res:InterfaceResources.Fields_IssueNumber}" />
                 <DataGridTextColumn Binding="{Binding Cover, UpdateSourceTrigger=PropertyChanged}"
                                     Header="{x:Static res:InterfaceResources.Fields_Cover}" />

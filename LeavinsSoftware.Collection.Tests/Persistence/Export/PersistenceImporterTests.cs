@@ -98,7 +98,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             Assert.AreEqual("ComicPublisher0", actualBooks[0].Publisher.Name);
             
             ComicBookSeriesEntry tempActualEntry = actualBooks[0].Entries
-            	.SingleOrDefault(c => c.IssueNumber == "2080427802");
+            	.SingleOrDefault(c => c.Number == "2080427802");
             
             Assert.IsNotNull(tempActualEntry, "Cannot find issue 2080427802");
             Assert.AreEqual("Cover", tempActualEntry.Cover);
@@ -107,18 +107,18 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             Assert.AreEqual("Entry Notes", tempActualEntry.Notes);
             Assert.AreEqual(DistributionType.Physical, tempActualEntry.DistributionType);
             Assert.AreEqual(ItemListType.Have, tempActualEntry.ListType);
-            Assert.AreEqual(VolumeType.Issue, tempActualEntry.IssueType);
+            Assert.AreEqual(VolumeType.Issue, tempActualEntry.EntryType);
             
             tempActualEntry = actualBooks[0].Entries
-            	.SingleOrDefault(c => c.IssueNumber == "1431988776");
+            	.SingleOrDefault(c => c.Number == "1431988776");
             
             Assert.IsNotNull(tempActualEntry, "Cannot find issue 1431988776");
             Assert.AreEqual(ItemListType.Want, tempActualEntry.ListType);
-            Assert.AreEqual(VolumeType.TPB, tempActualEntry.IssueType);
+            Assert.AreEqual(VolumeType.TPB, tempActualEntry.EntryType);
             Assert.AreEqual(DistributionType.Digital, tempActualEntry.DistributionType);
             
             tempActualEntry = actualBooks[0].Entries
-            	.SingleOrDefault(c => c.IssueNumber == "341851734");
+            	.SingleOrDefault(c => c.Number == "341851734");
             Assert.IsNotNull(tempActualEntry, "Cannot find issue 341851734");
             
             #endregion

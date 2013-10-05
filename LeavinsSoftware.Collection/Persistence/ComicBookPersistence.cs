@@ -424,12 +424,12 @@ namespace LeavinsSoftware.Collection.Persistence
             targetBook.Id = long.Parse(reader["issueid"].ToString(), CultureInfo.InvariantCulture);
             targetBook.Name = reader["name"].ToString();
             targetBook.Notes = reader["notes"].ToString();
-            targetBook.IssueNumber = reader["issue"].ToString();
+            targetBook.Number = reader["issue"].ToString();
             targetBook.Cover = reader["cover"].ToString();
             targetBook.DistributionType = (DistributionType)int.Parse(reader["distribution"].ToString(), CultureInfo.InvariantCulture);
             targetBook.Condition = reader["condition"].ToString();
-            targetBook.IssueType = (VolumeType)int.Parse(reader["issuetype"].ToString(), CultureInfo.InvariantCulture);
-            targetBook.ComicBookId = int.Parse(reader["comicid"].ToString(), CultureInfo.InvariantCulture);
+            targetBook.EntryType = (VolumeType)int.Parse(reader["issuetype"].ToString(), CultureInfo.InvariantCulture);
+            targetBook.SeriesId = int.Parse(reader["comicid"].ToString(), CultureInfo.InvariantCulture);
             targetBook.ListType = (ItemListType)int.Parse(reader["listtype"].ToString(), CultureInfo.InvariantCulture);
 
             return targetBook;
@@ -437,17 +437,17 @@ namespace LeavinsSoftware.Collection.Persistence
 
         private static void CreateIssue(ComicBookSeriesEntry issue, long comicId, SQLiteConnection openConnection)
         {
-            issue.ComicBookId = comicId;
+            issue.SeriesId = comicId;
 
             SQL.InsertInto("ComicBookIssues")
-                .Column("issue", issue.IssueNumber)
+                .Column("issue", issue.Number)
                 .Column("cover", issue.Cover)
                 .Column("name", issue.Name)
                 .Column("distribution", issue.DistributionType)
                 .Column("condition", issue.Condition)
-                .Column("issuetype", issue.IssueType)
+                .Column("issuetype", issue.EntryType)
                 .Column("notes", issue.Notes)
-                .Column("comicid", issue.ComicBookId)
+                .Column("comicid", issue.SeriesId)
                 .Column("listtype", issue.ListType)
                 .ExecuteWith(openConnection);
 
@@ -457,14 +457,14 @@ namespace LeavinsSoftware.Collection.Persistence
         private static void UpdateIssue(ComicBookSeriesEntry issue, SQLiteConnection openConnection)
         {
             SQL.Update("ComicBookIssues")
-                .Set("issue", issue.IssueNumber)
+                .Set("issue", issue.Number)
                 .Set("cover", issue.Cover)
                 .Set("name", issue.Name)
                 .Set("distribution", issue.DistributionType)
                 .Set("condition", issue.Condition)
-                .Set("issuetype", issue.IssueType)
+                .Set("issuetype", issue.EntryType)
                 .Set("notes", issue.Notes)
-                .Set("comicid", issue.ComicBookId)
+                .Set("comicid", issue.SeriesId)
                 .Set("listtype", issue.ListType)
                 .WhereEquals("issueid", issue.Id)
                 .ExecuteWith(openConnection);
