@@ -4,7 +4,7 @@
     <ComicBookSeries>
       <Id>1</Id>
       <Name>Test Book #1938005744</Name>
-      <Notes />
+      <Notes>Notes</Notes>
       <Publisher>
         <Id>1</Id>
         <Name>ComicPublisher0</Name>
@@ -16,12 +16,12 @@
           <Id>1</Id>
           <ComicBookId>1</ComicBookId>
           <IssueNumber>2080427802</IssueNumber>
-          <Cover />
-          <Name />
+          <Cover>Cover</Cover>
+          <Name>Entry Name</Name>
           <DistributionType>Physical</DistributionType>
-          <Condition />
+          <Condition>Good</Condition>
           <IssueType>Issue</IssueType>
-          <Notes />
+          <Notes>Entry Notes</Notes>
           <ListType>Have</ListType>
         </ComicBookSeriesEntry>
         <ComicBookSeriesEntry>
@@ -42,9 +42,9 @@
           <IssueNumber>1431988776</IssueNumber>
           <Cover />
           <Name />
-          <DistributionType>Physical</DistributionType>
+          <DistributionType>Digital</DistributionType>
           <Condition />
-          <IssueType>Issue</IssueType>
+          <IssueType>TPB</IssueType>
           <Notes />
           <ListType>Want</ListType>
         </ComicBookSeriesEntry>
@@ -104,14 +104,14 @@
     <Product>
       <Id>1</Id>
       <Name>Item #749943798</Name>
-      <Notes />
+      <Notes>Notes</Notes>
       <Category>
         <Id>3</Id>
         <Name>ProductCategory0</Name>
         <Code />
         <CategoryType>Product</CategoryType>
       </Category>
-      <Quantity>0</Quantity>
+      <Quantity>5</Quantity>
       <ListType>Have</ListType>
     </Product>
     <Product>
@@ -158,7 +158,7 @@
     <VideoGame>
       <Id>1</Id>
       <Name>Game #811244070</Name>
-      <Notes />
+      <Notes>Notes</Notes>
       <System>
         <Id>5</Id>
         <Name>System0</Name>
@@ -166,7 +166,7 @@
         <CategoryType>VideoGame</CategoryType>
       </System>
       <DistributionType>Physical</DistributionType>
-      <Condition />
+      <Condition>Good</Condition>
       <ContentProvider />
       <ListType>Have</ListType>
     </VideoGame>
@@ -180,9 +180,9 @@
         <Code />
         <CategoryType>VideoGame</CategoryType>
       </System>
-      <DistributionType>Physical</DistributionType>
+      <DistributionType>Digital</DistributionType>
       <Condition />
-      <ContentProvider />
+      <ContentProvider>Online Service</ContentProvider>
       <ListType>Want</ListType>
     </VideoGame>
     <VideoGame>

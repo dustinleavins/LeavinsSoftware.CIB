@@ -83,6 +83,90 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             List<VideoGame> gameResults = videoGamePersistence.Page(searchOptions, 0);
             Assert.IsNotNull(gameResults);
             Assert.AreEqual(4, gameResults.Count);
+            
+            #region Individual ComicBookSeries Checks
+            
+            ComicBookSeries[] actualBooks = new ComicBookSeries[]
+            {
+            	comicBookPersistence.Retrieve(1),
+            	comicBookPersistence.Retrieve(2)
+            };
+            
+            Assert.IsNotNull(actualBooks[0]);
+            Assert.AreEqual("Test Book #1938005744", actualBooks[0].Name);
+            Assert.AreEqual("Notes", actualBooks[0].Notes);
+            Assert.AreEqual("ComicPublisher0", actualBooks[0].Publisher.Name);
+            
+            ComicBookSeriesEntry tempActualEntry = actualBooks[0].Entries
+            	.SingleOrDefault(c => c.IssueNumber == "2080427802");
+            
+            Assert.IsNotNull(tempActualEntry, "Cannot find issue 2080427802");
+            Assert.AreEqual("Cover", tempActualEntry.Cover);
+            Assert.AreEqual("Entry Name", tempActualEntry.Name);
+            Assert.AreEqual("Good", tempActualEntry.Condition);
+            Assert.AreEqual("Entry Notes", tempActualEntry.Notes);
+            Assert.AreEqual(DistributionType.Physical, tempActualEntry.DistributionType);
+            Assert.AreEqual(ItemListType.Have, tempActualEntry.ListType);
+            Assert.AreEqual(VolumeType.Issue, tempActualEntry.IssueType);
+            
+            tempActualEntry = actualBooks[0].Entries
+            	.SingleOrDefault(c => c.IssueNumber == "1431988776");
+            
+            Assert.IsNotNull(tempActualEntry, "Cannot find issue 1431988776");
+            Assert.AreEqual(ItemListType.Want, tempActualEntry.ListType);
+            Assert.AreEqual(VolumeType.TPB, tempActualEntry.IssueType);
+            Assert.AreEqual(DistributionType.Digital, tempActualEntry.DistributionType);
+            
+            tempActualEntry = actualBooks[0].Entries
+            	.SingleOrDefault(c => c.IssueNumber == "341851734");
+            Assert.IsNotNull(tempActualEntry, "Cannot find issue 341851734");
+            
+            #endregion
+            
+            #region Individual Product Checks
+            
+            Product[] actualProducts = new Product[]
+            {
+            	productPersistence.Retrieve(1),
+            	productPersistence.Retrieve(2)
+            };
+            
+            Assert.IsNotNull(actualProducts[0]);
+            Assert.AreEqual("Item #749943798", actualProducts[0].Name);
+            Assert.AreEqual("Notes", actualProducts[0].Notes);
+            Assert.AreEqual("ProductCategory0", actualProducts[0].Category.Name);
+            Assert.AreEqual(5, actualProducts[0].Quantity);
+            Assert.AreEqual(ItemListType.Have, actualProducts[0].ListType);
+            
+            Assert.IsNotNull(actualProducts[1]);
+            Assert.AreEqual(ItemListType.Want, actualProducts[1].ListType);
+            
+            #endregion
+            
+            #region Individual VideoGame Checks
+            
+            VideoGame[] actualGames = new VideoGame[]
+            {
+            	videoGamePersistence.Retrieve(1),
+            	videoGamePersistence.Retrieve(2)
+            };
+            
+            Assert.IsNotNull(actualGames[0]);
+            Assert.AreEqual("Game #811244070", actualGames[0].Name);
+            Assert.AreEqual("Notes", actualGames[0].Notes);
+            Assert.AreEqual("System0", actualGames[0].System.Name);
+            Assert.AreEqual(DistributionType.Physical, actualGames[0].DistributionType);
+            Assert.AreEqual("Good", actualGames[0].Condition);
+            Assert.IsTrue(string.IsNullOrEmpty(actualGames[0].ContentProvider));
+            Assert.AreEqual(ItemListType.Have, actualGames[0].ListType);
+            
+            Assert.IsNotNull(actualGames[1]);
+            Assert.AreEqual("Game #1063087737", actualGames[1].Name);
+            Assert.AreEqual("Online Service", actualGames[1].ContentProvider);
+            Assert.IsTrue(string.IsNullOrEmpty(actualGames[1].Condition));
+            Assert.AreEqual(ItemListType.Want, actualGames[1].ListType);
+            
+            #endregion
         }
         
         [Test]
