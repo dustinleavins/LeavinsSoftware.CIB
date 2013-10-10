@@ -16,20 +16,26 @@ namespace LeavinsSoftware.Collection.Program
     /// </summary>
     public static class Persistence
     {
+        private static readonly DirectoryInfo ProgramDir = new DirectoryInfo(Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            InterfaceResources.CompanyName,
+            InterfaceResources.ProgramName));
+
+        private static readonly Container Container = new Container();
+
         public static UpdateNotifier UpdateNotifier { get; private set; }
 
         public static void Setup()
         {
             Profile defaultProfile = new Profile("default");
-            MigrationRunner.Run(DataDirectory, defaultProfile);
-            
-            Container = new Container();
-            Container.RegisterSingle<IComicBookPersistence>(new ComicBookPersistence(DataDirectory, defaultProfile));
-            Container.RegisterSingle<IVideoGamePersistence>(new VideoGamePersistence(DataDirectory, defaultProfile));
-            Container.RegisterSingle<IProductPersistence>(new ProductPersistence(DataDirectory, defaultProfile));
-            Container.RegisterSingle<ICategoryPersistence>(new ItemCategoryPersistence(DataDirectory, defaultProfile));
+            MigrationRunner.Run(ProgramDir, defaultProfile);
+
+            Container.RegisterSingle<IComicBookPersistence>(new ComicBookPersistence(ProgramDir, defaultProfile));
+            Container.RegisterSingle<IVideoGamePersistence>(new VideoGamePersistence(ProgramDir, defaultProfile));
+            Container.RegisterSingle<IProductPersistence>(new ProductPersistence(ProgramDir, defaultProfile));
+            Container.RegisterSingle<ICategoryPersistence>(new ItemCategoryPersistence(ProgramDir, defaultProfile));
             Container.RegisterSingle<IProgramOptionsPersistence>(new ProgramOptionsPersistence(
-                new FileInfo(Path.Combine(DataDirectory.FullName, "options.xml"))));
+                new FileInfo(Path.Combine(ProgramDir.FullName, "options.xml"))));
 
             UpdateNotifier = new UpdateNotifier(GetInstance<IProgramOptionsPersistence>().Retrieve(),
                 Assembly.GetExecutingAssembly().GetName().Version,
@@ -40,28 +46,5 @@ namespace LeavinsSoftware.Collection.Program
         {
             return Container.GetInstance<TService>();
         }
-
-        public static DirectoryInfo DataDirectory
-        {
-            get
-            {
-                return dataDirectory.Value;
-            }
-        }
-
-        public static Container Container
-        {
-            get;
-            private set;
-        }
-
-        private static Lazy<DirectoryInfo> dataDirectory = new Lazy<DirectoryInfo>(() =>
-            {
-                string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                    InterfaceResources.CompanyName,
-                    InterfaceResources.ProgramName);
-
-                return new DirectoryInfo(path);
-            });
     }
 }
