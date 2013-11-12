@@ -43,6 +43,20 @@ task :default => [:nothing]
 task :nothing do
 end
 
+namespace :util do
+    task :clean do
+	    dirs = Dir.glob('*/bin') + Dir.glob('*/obj')
+		
+		if dirs.count > 0
+		    puts "Removing the following dirs:\n#{dirs.join "\n"}"
+		    FileUtils.rm_r dirs
+		    puts "\nOK"
+		else
+		    puts 'Nothing to delete'
+		end
+	end
+end
+
 task :build_installer do
     version = version_number()
     fail if version.nil?
