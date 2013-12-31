@@ -61,10 +61,15 @@ namespace LeavinsSoftware.Collection.Persistence.Export
 
             PersistCategories(categories, ItemCategoryType.ComicBook, importOptions);
 
-            // TODO: Throw exception if issue is not present in a book
-
             foreach (ComicBookSeries book in list)
             {
+
+                if (!book.Entries.Any())
+                {
+                    throw new InvalidDataException(
+                        "Tried to import a comic book series without an entry.");
+                }
+
                 // Pair each comic book with its persisted publisher
                 ItemCategory matchingCategory = categories
                     .Single(c => IsCategoryMatch(c, book.Publisher));
