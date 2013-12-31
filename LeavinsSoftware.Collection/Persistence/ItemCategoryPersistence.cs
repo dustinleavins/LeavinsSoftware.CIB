@@ -25,7 +25,7 @@ namespace LeavinsSoftware.Collection.Persistence
 
         public ItemCategory Create(ItemCategory item)
         {
-            // TODO: Validate Item
+            item.Validate();
             using (var connection = new SQLiteConnection(ConnectionString))
             {
                 connection.Open();
@@ -78,7 +78,7 @@ namespace LeavinsSoftware.Collection.Persistence
 
         public ItemCategory Update(ItemCategory item)
         {
-            // TODO: Validate Item
+            item.Validate();
             using (var connection = new SQLiteConnection(ConnectionString))
             {
                 connection.Open();
