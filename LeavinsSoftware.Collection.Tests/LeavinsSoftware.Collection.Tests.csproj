@@ -83,6 +83,7 @@
     <Compile Include="Models\ComicBookSummaryTests.cs" />
     <Compile Include="Models\ComicBookSeriesTests.cs" />
     <Compile Include="Models\ItemCategoryTests.cs" />
+    <Compile Include="Models\ItemTests.cs" />
     <Compile Include="Models\ProductTests.cs" />
     <Compile Include="Models\ProgramOptionsTests.cs" />
     <Compile Include="Models\VideoGameTests.cs" />

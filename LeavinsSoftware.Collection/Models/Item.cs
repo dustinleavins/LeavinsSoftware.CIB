@@ -2,6 +2,7 @@
 // See the file 'LICENSE.txt' for copying permission.
 using System.ComponentModel.DataAnnotations;
 using System;
+using LeavinsSoftware.Collection.Resources;
 
 namespace LeavinsSoftware.Collection.Models
 {
@@ -10,6 +11,9 @@ namespace LeavinsSoftware.Collection.Models
     /// </summary>
     public abstract class Item :  Model
     {
+        private static char[] summarySeparator =
+            new char[] { '\n' };
+        
         [Required]
         public string Name
         {
@@ -47,8 +51,6 @@ namespace LeavinsSoftware.Collection.Models
         /// <summary>
         /// Single-line summary for notes
         /// </summary>
-        // TODO: Localize
-        // Possible TODO: Remove in favor of a WPF value converter?
         public string NotesSummary
         {
             get
@@ -59,8 +61,11 @@ namespace LeavinsSoftware.Collection.Models
                 }
                 else
                 {
-                    return notes.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)[0].TrimEnd() +
-                        "...";
+                    string firstLine = notes
+                        .Split(summarySeparator, StringSplitOptions.RemoveEmptyEntries)[0]
+                        .TrimEnd();
+
+                    return string.Format(ModelResources.Item_SummaryFormat, firstLine);
                 }
             }
         }
