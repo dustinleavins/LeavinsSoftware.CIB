@@ -81,18 +81,5 @@ namespace LeavinsSoftware.Collection.SQLite.Conversion
         {
             return input == null ? "" : (input.Value).ToString(CultureInfo.InvariantCulture);
         }
-
-        public object ListToDatabase(List<string> list)
-        {
-            // TODO: Account for semi-colons already in the string
-            if (list == null || list.Count == 0)
-            {
-                return "";
-            }
-            else
-            {
-                return string.Join(";", list);
-            }
-        }
     }
 }

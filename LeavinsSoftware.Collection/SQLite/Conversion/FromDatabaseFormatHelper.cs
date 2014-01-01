@@ -101,21 +101,5 @@ namespace LeavinsSoftware.Collection.SQLite.Conversion
                 return DatabaseToDecimal(objectFromReader);
             }
         }
-
-        public List<string> DatabaseToList(object objectFromReader)
-        {
-            // TODO: Account for semi-colons already in the string
-            if (string.IsNullOrEmpty(objectFromReader as string))
-            {
-                return new List<string>();
-            }
-            else
-            {
-                string objectAsString = objectFromReader as string;
-                List<string> returnList = new List<string>();
-                returnList.AddRange(objectAsString.Split(';'));
-                return returnList;
-            }
-        }
     }
 }
