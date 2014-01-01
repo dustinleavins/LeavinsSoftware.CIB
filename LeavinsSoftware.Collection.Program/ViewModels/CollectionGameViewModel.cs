@@ -82,17 +82,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             Search = new CustomCommand(
                 (x) =>
                 {
-                    // TODO: Refactor
-                    currentSearch = new Search<VideoGame>(Persistence.GetInstance<IVideoGamePersistence>(),
-                        new ModelSearchOptionsBuilder()
-                    {
-                        ItemCategory = SubCategory,
-                        ItemsPerPage = 20,
-                        ListType = ListType,
-                        SearchText = SearchText
-                    }.Build());
-
-                    RefreshSearch();
+                    NewSearch();
                 });
         }
 
@@ -146,17 +136,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     listType = value;
                     OnPropertyChanged("ListType");
 
-                    // TODO: Refactor
-                    currentSearch = new Search<VideoGame>(Persistence.GetInstance<IVideoGamePersistence>(),
-                        new ModelSearchOptionsBuilder()
-                    {
-                        ItemCategory = SubCategory,
-                        ItemsPerPage = 20,
-                        ListType = ListType,
-                        SearchText = SearchText
-                    }.Build());
-
-                    RefreshSearch();
+                    NewSearch();
                 }
             }
         }
@@ -177,18 +157,23 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             }
         }
 
-        public void OnLoaded()
+        private void NewSearch()
         {
             currentSearch = new Search<VideoGame>(Persistence.GetInstance<IVideoGamePersistence>(),
                 new ModelSearchOptionsBuilder()
-            {
-                ItemCategory = SubCategory,
-                ItemsPerPage = 20,
-                ListType = ListType,
-                SearchText = SearchText
-            }.Build());
+                {
+                    ItemCategory = SubCategory,
+                    ItemsPerPage = 20,
+                    ListType = ListType,
+                    SearchText = SearchText
+                }.Build());
 
             RefreshSearch();
+        }
+
+        public void OnLoaded()
+        {
+            NewSearch();
         }
 
         private void RefreshSearch()
