@@ -3,6 +3,7 @@
 using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Persistence.Migrations;
+using LeavinsSoftware.Collection.Tests.Helpers;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
     {
         private IProductPersistence productPersistence;
         private ItemCategory primaryCategory;
+        private ItemCategory secondaryCategory;
 
         [TestFixtureSetUp]
         public void FixtureSetUp()
@@ -37,9 +39,18 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             primaryCategory = new ItemCategory()
             {
                 Name = "Goods",
+                CategoryType = ItemCategoryType.Product
             };
 
             categoryPersistence.Create(primaryCategory);
+            
+            secondaryCategory = new ItemCategory()
+            {
+                Name = "Goods 2",
+                CategoryType = ItemCategoryType.Product
+            };
+            
+            categoryPersistence.Create(secondaryCategory);
         }
 
         [Test]
@@ -58,7 +69,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Product retrievedProduct = productPersistence.Retrieve(newProduct.Id);
             Assert.IsNotNull(retrievedProduct);
 
-            AssertEquality(newProduct, retrievedProduct);
+            AssertEquality.For(newProduct, retrievedProduct);
         }
 
         [Test]
@@ -80,9 +91,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Name = "Test2",
                 Notes = "Test Notes 2",
                 Quantity = 5,
-
-                // TODO: Test category change
-                Category = primaryCategory
+                Category = secondaryCategory
             };
 
             productPersistence.Update(updatedProduct);
@@ -91,7 +100,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 .Retrieve(updatedProduct.Id);
 
             Assert.IsNotNull(retrievedProduct);
-            AssertEquality(updatedProduct, retrievedProduct);
+            AssertEquality.For(updatedProduct, retrievedProduct);
         }
 
         [Test]
@@ -357,17 +366,6 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             
             Assert.AreEqual(0, target.TotalResults(nameNotFoundOptions));
             Assert.AreEqual(0, target.Page(nameNotFoundOptions, 0).Count);
-        }
-
-        private static void AssertEquality(Product expected, Product actual)
-        {
-            Assert.AreEqual(expected.Name, actual.Name);
-            Assert.AreEqual(expected.Notes, actual.Notes);
-            Assert.AreEqual(expected.Quantity, actual.Quantity);
-            Assert.AreEqual(expected.ListType, actual.ListType);
-
-            Assert.IsNotNull(actual.Category);
-            Assert.AreEqual(expected.Category.Name, actual.Category.Name);
         }
     }
 }

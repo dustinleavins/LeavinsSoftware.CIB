@@ -1,13 +1,15 @@
 ﻿// Copyright (c) 2013 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
-using LeavinsSoftware.Collection.Models;
-using LeavinsSoftware.Collection.Persistence;
-using LeavinsSoftware.Collection.Persistence.Migrations;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
+using LeavinsSoftware.Collection.Models;
+using LeavinsSoftware.Collection.Persistence;
+using LeavinsSoftware.Collection.Persistence.Migrations;
+using LeavinsSoftware.Collection.Tests.Helpers;
+using NUnit.Framework;
 
 namespace LeavinsSoftware.Collection.Tests.Persistence
 {
@@ -15,7 +17,8 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
     public sealed class VideoGamePersistenceTests
     {
         private IVideoGamePersistence gamePersistence;
-        private ItemCategory primaryCategory;
+        private ItemCategory primarySystem;
+        private ItemCategory secondarySystem;
 
         [TestFixtureSetUp]
         public void FixtureSetUp()
@@ -34,17 +37,21 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             IPersistence<ItemCategory> categoryPersistence =
                 new ItemCategoryPersistence(currentDir, defaultProfile);
 
-            categoryPersistence.Create(new ItemCategory()
+            primarySystem = new ItemCategory()
             {
-                Name = "Goods",
-            });
-
-            primaryCategory = new ItemCategory()
-            {
-                Name = "Goods",
+                Name = "System 1",
+                CategoryType = ItemCategoryType.VideoGame
             };
 
-            categoryPersistence.Create(primaryCategory);
+            categoryPersistence.Create(primarySystem);
+
+            secondarySystem = new ItemCategory()
+            {
+                Name = "System 2",
+                CategoryType = ItemCategoryType.VideoGame
+            };
+
+            categoryPersistence.Create(secondarySystem);
         }
 
         [Test]
@@ -58,7 +65,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Condition = "Condition",
                 DistributionType = DistributionType.Physical,
 
-                System = primaryCategory
+                System = primarySystem
             };
 
             gamePersistence.Create(newGame);
@@ -66,7 +73,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             VideoGame retrievedGame = gamePersistence.Retrieve(newGame.Id);
             Assert.IsNotNull(retrievedGame);
 
-            AssertEquality(newGame, retrievedGame);
+            AssertEquality.For(newGame, retrievedGame);
         }
 
         [Test]
@@ -80,7 +87,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Condition = "Condition",
                 DistributionType = DistributionType.Physical,
 
-                System = primaryCategory
+                System = primarySystem
             };
 
             gamePersistence.Create(newGame);
@@ -93,9 +100,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 ContentProvider = "Provider 2",
                 Condition = "Condition 2",
                 DistributionType = DistributionType.Digital,
-
-                // TODO: Change system
-                System = primaryCategory
+                System = secondarySystem
             };
             
             gamePersistence.Update(updatedGame);
@@ -104,7 +109,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 .Retrieve(updatedGame.Id);
             
             Assert.IsNotNull(retrievedGame);
-            AssertEquality(updatedGame, retrievedGame);
+            AssertEquality.For(updatedGame, retrievedGame);
         }
         
         [Test]
@@ -118,7 +123,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Condition = "Condition",
                 DistributionType = DistributionType.Physical,
 
-                System = primaryCategory
+                System = primarySystem
             };
             
             gamePersistence.Create(newGame);
@@ -380,19 +385,6 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             
             Assert.AreEqual(0, target.TotalResults(nameNotFoundOptions));
             Assert.AreEqual(0, target.Page(nameNotFoundOptions, 0).Count);
-        }
-
-        private static void AssertEquality(VideoGame expected, VideoGame actual)
-        {
-            Assert.AreEqual(expected.Name, actual.Name);
-            Assert.AreEqual(expected.Notes, actual.Notes);
-            Assert.AreEqual(expected.ContentProvider, actual.ContentProvider);
-            Assert.AreEqual(expected.Condition, actual.Condition);
-            Assert.AreEqual(expected.DistributionType, actual.DistributionType);
-            Assert.AreEqual(expected.ListType, actual.ListType);
-
-            Assert.IsNotNull(actual.System);
-            Assert.AreEqual(expected.System.Name, actual.System.Name);
         }
     }
 }

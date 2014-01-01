@@ -12,10 +12,23 @@ namespace LeavinsSoftware.Collection.Tests.Helpers
         public static void For(ItemCategory expected, ItemCategory actual)
         {
             string msg = string.Format("expected ID: {0}", expected.Id);
-            
+            For(expected, actual, msg);
+        }
+        
+        public static void For(ItemCategory expected, ItemCategory actual, string msg)
+        {
             Assert.AreEqual(expected.Id, actual.Id, msg);
             Assert.AreEqual(expected.Name, actual.Name, msg);
-            Assert.AreEqual(expected.Code, actual.Code, msg);
+            
+            if (string.IsNullOrEmpty(expected.Code))
+            {
+                Assert.IsTrue(string.IsNullOrEmpty(actual.Code));
+            }
+            else
+            {
+                Assert.AreEqual(expected.Code, actual.Code, msg);
+            }
+            
             Assert.AreEqual(expected.CategoryType, actual.CategoryType, msg);
         }
         
@@ -26,7 +39,7 @@ namespace LeavinsSoftware.Collection.Tests.Helpers
             Assert.AreEqual(expected.Id, actual.Id, msg);
             Assert.AreEqual(expected.Name, actual.Name, msg);
             Assert.AreEqual(expected.Notes, actual.Notes, msg);
-            Assert.AreEqual(expected.Publisher, actual.Publisher, msg);
+            For(expected.Publisher, actual.Publisher, msg);
 
             foreach (ComicBookSeriesEntry expectedEntry in expected.Entries)
             {
@@ -73,7 +86,7 @@ namespace LeavinsSoftware.Collection.Tests.Helpers
             Assert.AreEqual(expected.Quantity, actual.Quantity, msg);
             Assert.AreEqual(expected.ListType, actual.ListType, msg);
             
-            For(expected.Category, actual.Category);
+            For(expected.Category, actual.Category, msg);
         }
         
         public static void For(VideoGame expected, VideoGame actual)
@@ -87,7 +100,7 @@ namespace LeavinsSoftware.Collection.Tests.Helpers
             Assert.AreEqual(expected.ContentProvider, actual.ContentProvider, msg);
             Assert.AreEqual(expected.DistributionType, actual.DistributionType, msg);
             
-            For(expected.System, actual.System);
+            For(expected.System, actual.System, msg);
         }
     }
 }
