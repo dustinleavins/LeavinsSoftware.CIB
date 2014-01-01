@@ -315,7 +315,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             mergedBook.Name = existingBook.Name;
             mergedBook.Id = existingBook.Id;
             mergedBook.Publisher = existingBook.Publisher;
-            mergedBook.Notes = existingBook.Notes + bookFromImportFile.Notes;
+            mergedBook.Notes = MergeNotes(existingBook.Notes, bookFromImportFile.Notes);
 
             // Merge issues
             foreach (ComicBookSeriesEntry issueFromImportFile in bookFromImportFile.Entries)
@@ -361,7 +361,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
                 {
                     // Update existing issue
                     existingMatch.ListType = issueFromImportFile.ListType;
-                    existingMatch.Notes = existingMatch.Notes + issueFromImportFile.Notes;
+                    existingMatch.Notes = MergeNotes(existingMatch.Notes, issueFromImportFile.Notes);
                     mergedBook.Entries.Add(existingMatch);
                 }
             }
@@ -406,7 +406,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             mergedProduct.ListType = productFromImportFile.ListType;
             mergedProduct.Name = existingProduct.Name;
             mergedProduct.Quantity = productFromImportFile.Quantity;
-            mergedProduct.Notes = existingProduct.Notes + productFromImportFile.Notes;
+            mergedProduct.Notes = MergeNotes(existingProduct.Notes, productFromImportFile.Notes);
 
             return mergedProduct;
         }
@@ -464,10 +464,22 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             merged.ContentProvider = existing.ContentProvider;
             merged.DistributionType = existing.DistributionType;
             merged.ListType = gameFromImportFile.ListType;
-            merged.Notes = existing.Notes + gameFromImportFile.Notes;
+            merged.Notes = MergeNotes(existing.Notes, gameFromImportFile.Notes);
             merged.System = existing.System;
 
             return merged;
+        }
+        
+        private static string MergeNotes(string existingNotes, string actualNotes)
+        {
+            if (string.Equals(existingNotes, actualNotes, StringComparison.Ordinal))
+            {
+                return existingNotes;
+            }
+            else
+            {
+                return existingNotes + actualNotes;
+            }
         }
 
         /// <summary>
