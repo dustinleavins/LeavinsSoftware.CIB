@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2013 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
+using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Persistence.Migrations;
 using LeavinsSoftware.Collection.Program.Resources;
@@ -30,12 +31,20 @@ namespace LeavinsSoftware.Collection.Program
             Profile defaultProfile = new Profile("default");
             MigrationRunner.Run(ProgramDir, defaultProfile);
 
-            Container.RegisterSingle<IComicBookPersistence>(new ComicBookPersistence(ProgramDir, defaultProfile));
-            Container.RegisterSingle<IVideoGamePersistence>(new VideoGamePersistence(ProgramDir, defaultProfile));
-            Container.RegisterSingle<IProductPersistence>(new ProductPersistence(ProgramDir, defaultProfile));
+            var comicBookPersistence = new ComicBookPersistence(ProgramDir, defaultProfile);
+            var videoGamePersistence = new VideoGamePersistence(ProgramDir, defaultProfile);
+            var productPersistence = new ProductPersistence(ProgramDir, defaultProfile);
+
+            Container.RegisterSingle<IComicBookPersistence>(comicBookPersistence);
+            Container.RegisterSingle<IVideoGamePersistence>(videoGamePersistence);
+            Container.RegisterSingle<IProductPersistence>(productPersistence);
             Container.RegisterSingle<ICategoryPersistence>(new ItemCategoryPersistence(ProgramDir, defaultProfile));
             Container.RegisterSingle<IProgramOptionsPersistence>(new ProgramOptionsPersistence(
                 new FileInfo(Path.Combine(ProgramDir.FullName, "options.xml"))));
+
+            Container.RegisterSingle<ISearchablePersistence<ComicBookSummary>>(comicBookPersistence);
+            Container.RegisterSingle<ISearchablePersistence<VideoGame>>(videoGamePersistence);
+            Container.RegisterSingle<ISearchablePersistence<Product>>(productPersistence);
 
             UpdateNotifier = new UpdateNotifier(GetInstance<IProgramOptionsPersistence>().Retrieve(),
                 Assembly.GetExecutingAssembly().GetName().Version,
