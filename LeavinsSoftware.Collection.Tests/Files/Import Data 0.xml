@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <ExportData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ComicBooks>
     <ComicBookSeries>
@@ -64,36 +64,36 @@
         <ComicBookSeriesEntry>
           <Id>4</Id>
           <ComicBookId>2</ComicBookId>
-          <IssueNumber>761513014</IssueNumber>
+          <Number>761513014</Number>
           <Cover />
           <Name />
           <DistributionType>Physical</DistributionType>
           <Condition />
-          <IssueType>Issue</IssueType>
+          <EntryType>Issue</EntryType>
           <Notes />
           <ListType>Have</ListType>
         </ComicBookSeriesEntry>
         <ComicBookSeriesEntry>
           <Id>5</Id>
           <ComicBookId>2</ComicBookId>
-          <IssueNumber>2037243568</IssueNumber>
+          <Number>2037243568</Number>
           <Cover />
           <Name />
           <DistributionType>Physical</DistributionType>
           <Condition />
-          <IssueType>Issue</IssueType>
+          <EntryType>Issue</EntryType>
           <Notes />
           <ListType>Have</ListType>
         </ComicBookSeriesEntry>
         <ComicBookSeriesEntry>
           <Id>6</Id>
           <ComicBookId>2</ComicBookId>
-          <IssueNumber>1528357293</IssueNumber>
+          <Number>1528357293</Number>
           <Cover />
           <Name />
           <DistributionType>Physical</DistributionType>
           <Condition />
-          <IssueType>Issue</IssueType>
+          <EntryType>Issue</EntryType>
           <Notes />
           <ListType>Want</ListType>
         </ComicBookSeriesEntry>

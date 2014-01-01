@@ -12,11 +12,13 @@ using System.IO;
 using LeavinsSoftware.Collection.Persistence.Migrations;
 using LeavinsSoftware.Collection.Models;
 using System.Globalization;
+using LeavinsSoftware.Collection.Tests.Helpers;
 namespace LeavinsSoftware.Collection.Tests.Persistence.Export
 {
     [TestFixture]
     public sealed class PersistenceImporterTests
     {
+        private const string MainImportFileName = "Files\\Import Data 0.xml";
         private PersistenceImporter target;
         private IComicBookPersistence comicBookPersistence;
         private IProductPersistence productPersistence;
@@ -34,7 +36,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
             Profile defaultProfile = new Profile("default");
             MigrationRunner.Run(currentDir, defaultProfile);
-            
+
             comicBookPersistence = new ComicBookPersistence(currentDir, defaultProfile);
             productPersistence = new ProductPersistence(currentDir, defaultProfile);
             categoryPersistence = new ItemCategoryPersistence(currentDir, defaultProfile);
@@ -49,11 +51,11 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
                 .Build();
         }
 
-        [Test]
-        public void ImportTest()
+        [TestCase(true)]
+        [TestCase(false)]
+        public void ImportTest(bool merge)
         {
-            const string fileName = "Files\\Import Data 0.xml";
-            target.Import(fileName, new ImportOptions(merge: false));
+            target.Import(MainImportFileName, new ImportOptions(merge: merge));
 
             ModelSearchOptions searchOptions = new ModelSearchOptionsBuilder()
             {
@@ -83,23 +85,23 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             List<VideoGame> gameResults = videoGamePersistence.Page(searchOptions, 0);
             Assert.IsNotNull(gameResults);
             Assert.AreEqual(4, gameResults.Count);
-            
+
             #region Individual ComicBookSeries Checks
-            
+
             ComicBookSeries[] actualBooks = new ComicBookSeries[]
             {
-            	comicBookPersistence.Retrieve(1),
-            	comicBookPersistence.Retrieve(2)
+                comicBookPersistence.Retrieve(1),
+                comicBookPersistence.Retrieve(2)
             };
-            
+
             Assert.IsNotNull(actualBooks[0]);
             Assert.AreEqual("Test Book #1938005744", actualBooks[0].Name);
             Assert.AreEqual("Notes", actualBooks[0].Notes);
             Assert.AreEqual("ComicPublisher0", actualBooks[0].Publisher.Name);
-            
+
             ComicBookSeriesEntry tempActualEntry = actualBooks[0].Entries
-            	.SingleOrDefault(c => c.Number == "2080427802");
-            
+                .SingleOrDefault(c => c.Number == "2080427802");
+
             Assert.IsNotNull(tempActualEntry, "Cannot find issue 2080427802");
             Assert.AreEqual("Cover", tempActualEntry.Cover);
             Assert.AreEqual("Entry Name", tempActualEntry.Name);
@@ -108,49 +110,49 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             Assert.AreEqual(DistributionType.Physical, tempActualEntry.DistributionType);
             Assert.AreEqual(ItemListType.Have, tempActualEntry.ListType);
             Assert.AreEqual(VolumeType.Issue, tempActualEntry.EntryType);
-            
+
             tempActualEntry = actualBooks[0].Entries
-            	.SingleOrDefault(c => c.Number == "1431988776");
-            
+                .SingleOrDefault(c => c.Number == "1431988776");
+
             Assert.IsNotNull(tempActualEntry, "Cannot find issue 1431988776");
             Assert.AreEqual(ItemListType.Want, tempActualEntry.ListType);
             Assert.AreEqual(VolumeType.TPB, tempActualEntry.EntryType);
             Assert.AreEqual(DistributionType.Digital, tempActualEntry.DistributionType);
-            
+
             tempActualEntry = actualBooks[0].Entries
-            	.SingleOrDefault(c => c.Number == "341851734");
+                .SingleOrDefault(c => c.Number == "341851734");
             Assert.IsNotNull(tempActualEntry, "Cannot find issue 341851734");
-            
+
             #endregion
-            
+
             #region Individual Product Checks
-            
+
             Product[] actualProducts = new Product[]
             {
-            	productPersistence.Retrieve(1),
-            	productPersistence.Retrieve(2)
+                productPersistence.Retrieve(1),
+                productPersistence.Retrieve(2)
             };
-            
+
             Assert.IsNotNull(actualProducts[0]);
             Assert.AreEqual("Item #749943798", actualProducts[0].Name);
             Assert.AreEqual("Notes", actualProducts[0].Notes);
             Assert.AreEqual("ProductCategory0", actualProducts[0].Category.Name);
             Assert.AreEqual(5, actualProducts[0].Quantity);
             Assert.AreEqual(ItemListType.Have, actualProducts[0].ListType);
-            
+
             Assert.IsNotNull(actualProducts[1]);
             Assert.AreEqual(ItemListType.Want, actualProducts[1].ListType);
-            
+
             #endregion
-            
+
             #region Individual VideoGame Checks
-            
+
             VideoGame[] actualGames = new VideoGame[]
             {
-            	videoGamePersistence.Retrieve(1),
-            	videoGamePersistence.Retrieve(2)
+                videoGamePersistence.Retrieve(1),
+                videoGamePersistence.Retrieve(2)
             };
-            
+
             Assert.IsNotNull(actualGames[0]);
             Assert.AreEqual("Game #811244070", actualGames[0].Name);
             Assert.AreEqual("Notes", actualGames[0].Notes);
@@ -159,23 +161,22 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             Assert.AreEqual("Good", actualGames[0].Condition);
             Assert.IsTrue(string.IsNullOrEmpty(actualGames[0].ContentProvider));
             Assert.AreEqual(ItemListType.Have, actualGames[0].ListType);
-            
+
             Assert.IsNotNull(actualGames[1]);
             Assert.AreEqual("Game #1063087737", actualGames[1].Name);
             Assert.AreEqual("Online Service", actualGames[1].ContentProvider);
             Assert.IsTrue(string.IsNullOrEmpty(actualGames[1].Condition));
             Assert.AreEqual(ItemListType.Want, actualGames[1].ListType);
-            
+
             #endregion
         }
-        
+
         [Test]
         public void ImportMergeAllTest()
         {
             // SETUP
-            const string fileName = "Files\\Import Data 0.xml";
-            target.Import(fileName, new ImportOptions(merge: true ));
-            
+            target.Import(MainImportFileName, new ImportOptions(merge: true));
+
             List<ItemCategory> preImportCategories = new List<ItemCategory>();
             preImportCategories.AddRange(categoryPersistence.RetrieveAll(ItemCategoryType.ComicBook));
             preImportCategories.AddRange(categoryPersistence.RetrieveAll(ItemCategoryType.Product));
@@ -206,7 +207,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             }
 
             // TESTS - Try to import the same file again
-            target.Import(fileName, new ImportOptions(merge: true));
+            target.Import(MainImportFileName, new ImportOptions(merge: true));
 
             // Category checks
             foreach (ItemCategory postImportCategory in categoryPersistence.RetrieveAll(ItemCategoryType.ComicBook))
@@ -235,8 +236,6 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
                 Assert.IsNotNull(preImportMatch);
                 Assert.AreEqual(preImportMatch, postImportCategory);
             }
-            
-            // TODO: Check Item Equality
 
             // ComicBook checks
             foreach (var page in comicBookPersistence.AllPages())
@@ -247,7 +246,9 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
                     ComicBookSeries preImportMatch = preImportComics
                         .SingleOrDefault(c => c.Id == book.Id);
 
-                    Assert.IsNotNull(preImportMatch, "ID: {0}", book.Id);
+                    string msg = string.Format("book ID: {0}", book.Id);
+                    Assert.IsNotNull(preImportMatch, msg);
+                    AssertEquality.For(preImportMatch, book);
                 }
             }
 
@@ -260,6 +261,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
                         .SingleOrDefault(c => c.Id == product.Id);
 
                     Assert.IsNotNull(preImportMatch, "ID: {0}", product.Id);
+                    AssertEquality.For(preImportMatch, product);
                 }
             }
 
@@ -272,10 +274,9 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
                         .SingleOrDefault(c => c.Id == game.Id);
 
                     Assert.IsNotNull(preImportMatch, "ID: {0}", game.Id);
+                    AssertEquality.For(preImportMatch, game);
                 }
             }
         }
-        
-        // TODO: Check what happens when import w/ new data is merged
     }
 }

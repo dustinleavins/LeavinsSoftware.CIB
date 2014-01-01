@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EqualsTester.cs" />
+    <Compile Include="Helpers\AssertEquality.cs" />
     <Compile Include="Models\ComicBookSeriesEntryTests.cs" />
     <Compile Include="Models\ComicBookSummaryTests.cs" />
     <Compile Include="Models\ComicBookSeriesTests.cs" />
@@ -109,9 +110,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Files\Import Data 0.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -120,6 +118,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Files\Import Data 0.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
