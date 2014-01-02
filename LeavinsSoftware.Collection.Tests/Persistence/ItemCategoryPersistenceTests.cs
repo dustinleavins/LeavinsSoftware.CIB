@@ -3,6 +3,7 @@
 using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Persistence.Migrations;
+using LeavinsSoftware.Collection.Tests.Helpers;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System;
@@ -61,7 +62,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             ItemCategory retrievedCategory = categoryPersistence.Retrieve(newCategory.Id);
             Assert.IsNotNull(retrievedCategory);
 
-            AssertEquality(newCategory, retrievedCategory);
+            AssertEquality.For(newCategory, retrievedCategory);
         }
 
         [Test]
@@ -88,7 +89,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             ItemCategory retrievedCategory = categoryPersistence.Retrieve(updatedCategory.Id);
             Assert.IsNotNull(retrievedCategory);
 
-            AssertEquality(updatedCategory, retrievedCategory);
+            AssertEquality.For(updatedCategory, retrievedCategory);
         }
 
         [Test]
@@ -185,13 +186,6 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Assert.AreEqual(1, allRetrievedCategories.Count(c => c.Id == newComicCategory.Id));
             Assert.AreEqual(1, allRetrievedCategories.Count(c => c.Id == newProductCategory.Id));
             Assert.AreEqual(1, allRetrievedCategories.Count(c => c.Id == newGameCategory.Id));
-        }
-
-        private static void AssertEquality(ItemCategory expected, ItemCategory actual)
-        {
-            Assert.AreEqual(expected.Name, actual.Name);
-            Assert.AreEqual(expected.CategoryType, actual.CategoryType);
-            Assert.AreEqual(expected.Code, actual.Code);
         }
     }
 }

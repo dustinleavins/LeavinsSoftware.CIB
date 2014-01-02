@@ -1,0 +1,86 @@
+﻿<?xml version="1.0"?>
+<ExportData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ComicBooks>
+    <ComicBookSeries>
+      <Id>1</Id>
+      <Name>Test Book #1938005744</Name>
+      <Notes>Update Notes</Notes>
+      <Publisher>
+        <Id>1</Id>
+        <Name>ComicPublisher0</Name>
+        <Code />
+        <CategoryType>ComicBook</CategoryType>
+      </Publisher>
+      <Entries>
+        <ComicBookSeriesEntry>
+          <Id>1</Id>
+          <ComicBookId>1</ComicBookId>
+          <Number>2080427802</Number>
+          <Cover>Cover</Cover>
+          <Name>Entry Name</Name>
+          <DistributionType>Physical</DistributionType>
+          <Condition>Good</Condition>
+          <EntryType>Issue</EntryType>
+          <Notes>Update Notes Entry</Notes>
+          <ListType>Want</ListType>
+        </ComicBookSeriesEntry>
+        <ComicBookSeriesEntry>
+          <Id>2</Id>
+          <ComicBookId>1</ComicBookId>
+          <Number>341851734</Number>
+          <Cover />
+          <Name />
+          <DistributionType>Physical</DistributionType>
+          <Condition />
+          <EntryType>Issue</EntryType>
+          <Notes />
+          <ListType>Have</ListType>
+        </ComicBookSeriesEntry>
+        <ComicBookSeriesEntry>
+          <Id>3</Id>
+          <ComicBookId>1</ComicBookId>
+          <Number>1431988776</Number>
+          <Cover />
+          <Name />
+          <DistributionType>Digital</DistributionType>
+          <Condition />
+          <EntryType>TPB</EntryType>
+          <Notes />
+          <ListType>Want</ListType>
+        </ComicBookSeriesEntry>
+      </Entries>
+    </ComicBookSeries>
+  </ComicBooks>
+  <Products>
+    <Product>
+      <Id>1</Id>
+      <Name>Item #749943798</Name>
+      <Notes>Update Notes</Notes>
+      <Category>
+        <Id>3</Id>
+        <Name>ProductCategory0</Name>
+        <Code />
+        <CategoryType>Product</CategoryType>
+      </Category>
+      <Quantity>5</Quantity>
+      <ListType>Want</ListType>
+    </Product>
+  </Products>
+  <VideoGames>
+    <VideoGame>
+      <Id>1</Id>
+      <Name>Game #811244070</Name>
+      <Notes>Update Notes</Notes>
+      <System>
+        <Id>5</Id>
+        <Name>System0</Name>
+        <Code />
+        <CategoryType>VideoGame</CategoryType>
+      </System>
+      <DistributionType>Physical</DistributionType>
+      <Condition>Good</Condition>
+      <ContentProvider />
+      <ListType>Want</ListType>
+    </VideoGame>
+  </VideoGames>
+</ExportData>

@@ -278,5 +278,35 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
                 }
             }
         }
+        
+        [Test]
+        public void ImportMergeUpdateTest()
+        {
+            // TODO: Update test file with additional changes (to be ignored by merge)
+            // SETUP
+            target.Import(MainImportFileName, new ImportOptions(merge: false));
+            ComicBookSeries expectedComicSeries = comicBookPersistence.Retrieve(1);
+            expectedComicSeries.Notes += "\nUpdate Notes";
+
+            ComicBookSeriesEntry updatedEntry = expectedComicSeries.Entries
+                .Single(e => e.Id == 1);
+            updatedEntry.Notes += "\nUpdate Notes Entry";
+            updatedEntry.ListType = ItemListType.Want;
+
+            VideoGame expectedGame = videoGamePersistence.Retrieve(1);
+            expectedGame.Notes += "\nUpdate Notes";
+            expectedGame.ListType = ItemListType.Want;
+
+            Product expectedProduct = productPersistence.Retrieve(1);
+            expectedProduct.Notes += "\nUpdate Notes";
+            expectedProduct.ListType = ItemListType.Want;
+
+            // Test
+            target.Import("Files\\Import Data Update.xml", new ImportOptions(merge: true));
+            
+            AssertEquality.For(expectedComicSeries, comicBookPersistence.Retrieve(1));
+            AssertEquality.For(expectedGame, videoGamePersistence.Retrieve(1));
+            AssertEquality.For(expectedProduct, productPersistence.Retrieve(1));
+        }
     }
 }
