@@ -46,6 +46,10 @@ namespace LeavinsSoftware.Collection.Persistence
 
         public ItemCategory Retrieve(long id)
         {
+            if (id <= 0)
+            {
+                throw new ArgumentException("ID must be positive", "id");
+            }
             ItemCategory targetCategory = null;
 
             using (var connection = new SQLiteConnection(ConnectionString))

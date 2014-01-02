@@ -5,6 +5,7 @@ using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Persistence.Migrations;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System;
 using System.IO;
 using System.Linq;
 
@@ -103,6 +104,21 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             categoryPersistence.Create(newCategory);
             categoryPersistence.Delete(newCategory);
             Assert.IsNull(categoryPersistence.Retrieve(newCategory.Id));
+        }
+        
+        [Test]
+        public void RetrieveNullTest()
+        {
+            Assert.IsNull(categoryPersistence.Retrieve(long.MaxValue));
+        }
+        
+        [TestCase(long.MinValue)]
+        [TestCase(int.MinValue)]
+        [TestCase(0)]
+        [ExpectedException(typeof(ArgumentException))]
+        public void RetrieveInvalidTest(long invalidId)
+        {
+            Assert.IsNull(categoryPersistence.Retrieve(invalidId));
         }
 
         [Test]
