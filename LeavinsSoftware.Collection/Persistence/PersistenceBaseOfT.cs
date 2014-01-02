@@ -26,6 +26,11 @@ namespace LeavinsSoftware.Collection.Persistence
 
         public T Retrieve(long id)
         {
+            if (id <= 0)
+            {
+                throw new ArgumentException("ID must be positive", "id");
+            }
+            
             return RetrieveBase(id);
         }
 

@@ -284,6 +284,21 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         }
 
         [Test]
+        public void RetrieveNullTest()
+        {
+            Assert.IsNull(comicPersistence.Retrieve(long.MaxValue));
+        }
+        
+        [TestCase(long.MinValue)]
+        [TestCase(int.MinValue)]
+        [TestCase(0)]
+        [ExpectedException(typeof(ArgumentException))]
+        public void RetrieveInvalidTest(long invalidId)
+        {
+            Assert.IsNull(comicPersistence.Retrieve(invalidId));
+        }
+        
+        [Test]
         public void PaginationTest()
         {
             #region Test Setup
