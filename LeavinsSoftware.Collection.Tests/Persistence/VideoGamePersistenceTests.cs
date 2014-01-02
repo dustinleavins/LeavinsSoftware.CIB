@@ -146,6 +146,20 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         {
             Assert.IsNull(gamePersistence.Retrieve(invalidId));
         }
+        
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CreateNullTest()
+        {
+            gamePersistence.Create(null);
+        }
+        
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void UpdateNullTest()
+        {
+            gamePersistence.Update(null);
+        }
 
         [Test]
         public void PaginationTest()

@@ -18,6 +18,11 @@ namespace LeavinsSoftware.Collection.Persistence
     {
         public T Create(T item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item", "item cannot be null");
+            }
+            
             item.Validate();
             return CreateBase(item);
         }
@@ -38,6 +43,11 @@ namespace LeavinsSoftware.Collection.Persistence
 
         public T Update(T item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item", "item cannot be null");
+            }
+            
             item.Validate();
             return UpdateBase(item);
         }

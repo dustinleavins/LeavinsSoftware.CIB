@@ -299,6 +299,20 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         }
         
         [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CreateNullTest()
+        {
+            comicPersistence.Create(null);
+        }
+        
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void UpdateNullTest()
+        {
+            comicPersistence.Update(null);
+        }
+        
+        [Test]
         public void PaginationTest()
         {
             #region Test Setup

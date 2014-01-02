@@ -121,6 +121,20 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         {
             Assert.IsNull(categoryPersistence.Retrieve(invalidId));
         }
+        
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CreateNullTest()
+        {
+            categoryPersistence.Create(null);
+        }
+        
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void UpdateNullTest()
+        {
+            categoryPersistence.Update(null);
+        }
 
         [Test]
         public void RetrieveAllTest()

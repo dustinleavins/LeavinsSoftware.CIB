@@ -25,6 +25,11 @@ namespace LeavinsSoftware.Collection.Persistence
 
         public ItemCategory Create(ItemCategory item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item", "item cannot be null");
+            }
+            
             item.Validate();
             using (var connection = new SQLiteConnection(ConnectionString))
             {
@@ -82,6 +87,11 @@ namespace LeavinsSoftware.Collection.Persistence
 
         public ItemCategory Update(ItemCategory item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item", "item cannot be null");
+            }
+            
             item.Validate();
             using (var connection = new SQLiteConnection(ConnectionString))
             {
