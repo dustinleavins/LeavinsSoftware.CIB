@@ -478,7 +478,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             }
             else
             {
-                return existingNotes + actualNotes;
+                return existingNotes + "\n" + actualNotes;
             }
         }
 
