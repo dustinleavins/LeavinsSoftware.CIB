@@ -73,6 +73,11 @@ namespace LeavinsSoftware.Collection.Program
         {
             model.Item.Entries.CollectionChanged += Issues_CollectionChanged;
             RefreshErrorLabels();
+            
+            if (model.Item.IsNew)
+            {
+            	nameTextBox.Focus();
+            }
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)

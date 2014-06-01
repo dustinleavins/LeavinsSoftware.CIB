@@ -77,6 +77,11 @@ namespace LeavinsSoftware.Collection.Program
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             CommandManager.RequerySuggested += CommandManager_RequerySuggested;
+            
+            if (model.Item.IsNew)
+            {
+            	nameTextBox.Focus();
+            }
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)

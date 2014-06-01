@@ -101,5 +101,13 @@ namespace LeavinsSoftware.Collection.Program
                     throw new NotImplementedException();
             }
         }
+        
+		void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
+		{
+			if (model.Item.IsNew)
+			{
+				nameTextBox.Focus();
+			}
+		}
     }
 }

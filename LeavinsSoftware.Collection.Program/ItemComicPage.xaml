@@ -60,6 +60,7 @@
                Content="{x:Static res:InterfaceResources.Fields_Title}" />
         <TextBox Grid.Row="0"
                  Grid.Column="1"
+                 Name="nameTextBox"
                  Margin="0,0,0,20"
                  Text="{Binding Item.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
