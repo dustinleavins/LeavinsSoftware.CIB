@@ -103,6 +103,8 @@ namespace LeavinsSoftware.Collection.Program
             {
                 backLinkRectangle.Fill = SystemColors.GrayTextBrush;
             }
+            
+            viewer.ScrollToTop();
         }
 
         private bool doNavWorkaround;
