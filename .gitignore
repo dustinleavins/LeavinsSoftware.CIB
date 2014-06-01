@@ -109,6 +109,9 @@ _TeamCity*
 *.ncrunch*
 .*crunch*.local.xml
 
+# SharpDevelop
+*.sdsettings
+
 # Installshield output folder
 [Ee]xpress/
 
