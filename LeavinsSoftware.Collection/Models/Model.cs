@@ -25,27 +25,27 @@ namespace LeavinsSoftware.Collection.Models
             }
             set
             {
-                bool isNewModel = !HasId;
+                bool wasNewModel = IsNew;
 
                 if (id != value)
                 {
                     id = value;
                     OnPropertyChanged("Id");
 
-                    if (isNewModel)
+                    if (wasNewModel)
                     {
-                        OnPropertyChanged("HasId");
+                        OnPropertyChanged("IsNew");
                     }
                 }
             }
         }
-
-        public bool HasId
+        
+        public bool IsNew
         {
-            get
-            {
-                return id != 0;
-            }
+        	get
+        	{
+        		return id == 0;
+        	}
         }
 
         /// <summary>

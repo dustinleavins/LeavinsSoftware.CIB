@@ -58,13 +58,14 @@ namespace LeavinsSoftware.Collection.Program
             model = context;
             DataContext = model;
 
-            if (model.Item.HasId)
+            if (model.Item.IsNew)
             {
-                Title = InterfaceResources.PageTitles_ItemExistingComic;
+            	Title = InterfaceResources.PageTitles_ItemNewComic;
+                
             }
             else
             {
-                Title = InterfaceResources.PageTitles_ItemNewComic;
+                Title = InterfaceResources.PageTitles_ItemExistingComic;
             }
         }
 

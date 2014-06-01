@@ -61,13 +61,13 @@ namespace LeavinsSoftware.Collection.Program
             model.Item.PropertyChanged += Item_PropertyChanged;
             SetupFields();
 
-            if (model.Item.HasId)
+            if (model.Item.IsNew)
             {
-                Title = InterfaceResources.PageTitles_ItemExistingVideoGame;
+            	Title = InterfaceResources.PageTitles_ItemNewVideoGame; 
             }
             else
             {
-                Title = InterfaceResources.PageTitles_ItemNewVideoGame;
+                Title = InterfaceResources.PageTitles_ItemExistingVideoGame;
             }
         }
 

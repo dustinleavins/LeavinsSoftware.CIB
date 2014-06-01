@@ -64,13 +64,13 @@ namespace LeavinsSoftware.Collection.Program
                     return !Validation.GetHasError(quantityBox);
                 };
 
-            if (model.Item.HasId)
+            if (model.Item.IsNew)
             {
-                Title = InterfaceResources.PageTitles_ItemExistingProduct;
+            	Title = InterfaceResources.PageTitles_ItemNewProduct;
             }
             else
             {
-                Title = InterfaceResources.PageTitles_ItemNewProduct;
+                Title = InterfaceResources.PageTitles_ItemExistingProduct;
             }
         }
 

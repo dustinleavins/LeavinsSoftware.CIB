@@ -130,13 +130,13 @@ namespace LeavinsSoftware.Collection.Persistence
 
                 foreach (ComicBookSeriesEntry issue in item.Entries)
                 {
-                    if (issue.HasId)
+                    if (issue.IsNew)
                     {
-                        UpdateIssue(issue, connection);
+                    	CreateIssue(issue, item.Id, connection);      
                     }
                     else
                     {
-                        CreateIssue(issue, item.Id, connection);
+                       UpdateIssue(issue, connection);
                     }
                 }
 

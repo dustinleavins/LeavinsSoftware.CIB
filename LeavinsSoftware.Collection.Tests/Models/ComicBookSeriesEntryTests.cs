@@ -33,7 +33,7 @@ namespace LeavinsSoftware.Collection.Tests.Models
         public void IdTest(long expectedValue)
         {
             PropertyChangedChecker.CheckOnly("Id");
-            PropertyChangedChecker.CheckOnly("HasId");
+            PropertyChangedChecker.CheckOnly("IsNew");
             target.Id = expectedValue;
             Assert.AreEqual(expectedValue, target.Id);
             Assert.IsTrue(target.IsValid());
@@ -41,7 +41,7 @@ namespace LeavinsSoftware.Collection.Tests.Models
             Assert.AreEqual(expectedValue != default(long),
                 PropertyChangedChecker.HasPropertyChanged("Id"));
             Assert.AreEqual(expectedValue != default(long),
-                PropertyChangedChecker.HasPropertyChanged("HasId"));
+                PropertyChangedChecker.HasPropertyChanged("IsNew"));
         }
         
         [TestCase(-1)]
@@ -51,7 +51,7 @@ namespace LeavinsSoftware.Collection.Tests.Models
         public void IdInvalidTest(long expectedValue)
         {
             PropertyChangedChecker.CheckOnly("Id");
-            PropertyChangedChecker.CheckOnly("HasId");
+            PropertyChangedChecker.CheckOnly("IsNew");
 
             target.Id = expectedValue;
             Assert.AreEqual(expectedValue, target.Id);
@@ -60,7 +60,7 @@ namespace LeavinsSoftware.Collection.Tests.Models
             Assert.AreEqual(1, results.Count);
 
             Assert.IsTrue(PropertyChangedChecker.HasPropertyChanged("Id"));
-            Assert.IsTrue(PropertyChangedChecker.HasPropertyChanged("HasId"));
+            Assert.IsTrue(PropertyChangedChecker.HasPropertyChanged("IsNew"));
         }
         
         [TestCase("")]
