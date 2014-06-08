@@ -102,15 +102,9 @@
     <Compile Include="Categories\DefaultCategory.cs" />
     <Compile Include="Categories\DefaultCategories.cs" />
     <Compile Include="Categories\ICategory.cs" />
-    <Compile Include="CategoryComicPage.xaml.cs">
-      <DependentUpon>CategoryComicPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CategoryGamePage.xaml.cs">
-      <DependentUpon>CategoryGamePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CategoryPage.cs" />
-    <Compile Include="CategoryProductPage.xaml.cs">
-      <DependentUpon>CategoryProductPage.xaml</DependentUpon>
+    <Compile Include="CategoryPage.xaml.cs">
+      <DependentUpon>CategoryPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="CollectionComicPage.xaml.cs">
       <DependentUpon>CollectionComicPage.xaml</DependentUpon>
@@ -187,18 +181,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CategoryComicPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CategoryGamePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CategoryProductPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Page Include="CategoryPage.xaml" />
     <Page Include="CollectionComicPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

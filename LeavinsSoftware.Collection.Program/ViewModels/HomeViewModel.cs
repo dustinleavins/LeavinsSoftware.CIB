@@ -3,6 +3,7 @@
 using KSMVVM.WPF;
 using KSMVVM.WPF.ViewModel;
 using System.Windows.Input;
+using LeavinsSoftware.Collection.Models;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
@@ -22,17 +23,17 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
             ProductCategory = new CustomCommand((unused) =>
                 {
-                    Nav.Navigate(() => new CategoryProductPage());
+                    Nav.Navigate(() => CategoryPage.PageFor(ItemCategoryType.Product));
                 });
 
             ComicCategory = new CustomCommand((x) =>
                 {
-                    Nav.Navigate(() => new CategoryComicPage());
+                    Nav.Navigate(() => CategoryPage.PageFor(ItemCategoryType.ComicBook));
                 });
 
             GameCategory = new CustomCommand((x) =>
             {
-                Nav.Navigate(() => new CategoryGamePage());
+                Nav.Navigate(() => CategoryPage.PageFor(ItemCategoryType.VideoGame));
             });
 
             Export = new CustomCommand(

@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using LeavinsSoftware.Collection.Program.Resources;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
@@ -65,6 +66,42 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         public ICommand AddCategory { get; private set; }
 
         public ObservableCollection<ItemCategory> Categories { get; private set; }
+        
+        public String Title
+        {
+            get
+            {
+                switch(primaryCategory)
+                {
+                    case ItemCategoryType.ComicBook:
+                        return InterfaceResources.Common_ComicBooks;
+                    case ItemCategoryType.Product:
+                        return InterfaceResources.Common_Products;
+                    case ItemCategoryType.VideoGame:
+                        return InterfaceResources.Common_VideoGames;
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
+        }
+        //{x:Static res:InterfaceResources.AddSubCategory_ComicBook}
+        public String AddCategoryText
+        {
+            get
+            {
+                switch(primaryCategory)
+                {
+                    case ItemCategoryType.ComicBook:
+                        return InterfaceResources.AddSubCategory_ComicBook;
+                    case ItemCategoryType.Product:
+                        return InterfaceResources.AddSubCategory_Product;
+                    case ItemCategoryType.VideoGame:
+                        return InterfaceResources.AddSubCategory_VideoGame;
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
+        }
 
         public void OnLoaded()
         {
