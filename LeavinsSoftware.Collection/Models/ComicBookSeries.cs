@@ -13,6 +13,7 @@ namespace LeavinsSoftware.Collection.Models
     /// <summary>
     /// Represents a series of comic books
     /// </summary>
+    [ItemCategoryType(ItemCategoryType.ComicBook)]
     public sealed class ComicBookSeries : Item
     {
         public ComicBookSeries()

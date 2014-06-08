@@ -16,6 +16,7 @@ namespace LeavinsSoftware.Collection.Models
     /// <remarks>
     /// This usually represents a collectible of some kind.
     /// </remarks>
+    [ItemCategoryType(ItemCategoryType.Product)]
     public sealed class Product : Item
     {
         [Required]

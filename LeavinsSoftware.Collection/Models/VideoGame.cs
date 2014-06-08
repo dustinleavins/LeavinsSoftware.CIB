@@ -13,6 +13,7 @@ namespace LeavinsSoftware.Collection.Models
     /// <summary>
     /// Represents a video game in a user's collection.
     /// </summary>
+    [ItemCategoryType(ItemCategoryType.VideoGame)]
     public sealed class VideoGame : Item
     {
         [Required]

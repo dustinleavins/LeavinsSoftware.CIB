@@ -2,6 +2,7 @@
 // See the file 'LICENSE.txt' for copying permission.
 using System.ComponentModel.DataAnnotations;
 using System;
+using System.Linq;
 using LeavinsSoftware.Collection.Resources;
 
 namespace LeavinsSoftware.Collection.Models
@@ -13,6 +14,15 @@ namespace LeavinsSoftware.Collection.Models
     {
         private static char[] summarySeparator =
             new char[] { '\n' };
+        
+        public static ItemCategoryType CategoryType<T>() where T: Item
+        {
+            var attr = typeof(T).GetCustomAttributes(true)
+                .Single(x => x is ItemCategoryTypeAttribute)
+                as ItemCategoryTypeAttribute;
+            
+            return attr.CategoryType;
+        }
         
         [Required]
         public string Name

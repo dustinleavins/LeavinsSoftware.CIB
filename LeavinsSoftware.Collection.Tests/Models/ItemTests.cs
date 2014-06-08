@@ -23,6 +23,19 @@ namespace LeavinsSoftware.Collection.Tests.Models
             Assert.AreEqual(expectedSummary, target.NotesSummary);
         }
         
+        [Test]
+        public void CategoryTypeTest()
+        {
+            Assert.AreEqual(ItemCategoryType.ComicBook,
+                Item.CategoryType<ComicBookSeries>());
+            
+            Assert.AreEqual(ItemCategoryType.VideoGame,
+                Item.CategoryType<VideoGame>());
+            
+            Assert.AreEqual(ItemCategoryType.Product,
+                Item.CategoryType<Product>());
+        }
+        
         private class ItemBase : Item
         {
         }
