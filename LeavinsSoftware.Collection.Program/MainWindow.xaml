@@ -17,6 +17,11 @@
         <KeyBinding Command="ApplicationCommands.New"
                       Key="N"
                       Modifiers="Control" />
+    
+        <KeyBinding Command="NavigationCommands.BrowseBack"
+                    CommandTarget="{Binding ElementName=mainFrame}"
+                    Key="Left"
+                    Modifiers="Alt" />
     </Window.InputBindings>
 
     <Grid>
