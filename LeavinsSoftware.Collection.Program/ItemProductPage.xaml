@@ -32,6 +32,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -97,11 +98,18 @@
                   ItemsSource="{Binding Source={StaticResource listType}}"
                   SelectedValue="{Binding Item.ListType}" />
 
-        <Grid Grid.Row="5"
-              Grid.ColumnSpan="2">
-            <Button HorizontalAlignment="Center"
-                    Content="{x:Static res:InterfaceResources.Common_Save}"
-                    Command="{Binding AddItem}" />
-        </Grid>
+        <Button Grid.Row="5"
+                Grid.ColumnSpan="2"
+                Margin="0,0,0,20"
+                HorizontalAlignment="Center"
+                Content="{x:Static res:InterfaceResources.Common_Save}"
+                Command="{Binding AddItem}" />
+        
+        <Button Grid.Row="6"
+                Grid.ColumnSpan="2"
+                Name="deleteBtn"
+                HorizontalAlignment="Center"
+                Content="{x:Static res:InterfaceResources.Common_Delete}"
+                Command="{Binding PromptDeleteItem}" />
     </Grid>
 </Page>

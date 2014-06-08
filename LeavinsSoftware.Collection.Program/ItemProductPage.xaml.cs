@@ -66,7 +66,8 @@ namespace LeavinsSoftware.Collection.Program
 
             if (model.Item.IsNew)
             {
-            	Title = InterfaceResources.PageTitles_ItemNewProduct;
+                Title = InterfaceResources.PageTitles_ItemNewProduct;
+                deleteBtn.Visibility = Visibility.Collapsed;
             }
             else
             {

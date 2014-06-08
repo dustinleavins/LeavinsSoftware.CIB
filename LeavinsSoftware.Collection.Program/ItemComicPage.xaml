@@ -1,4 +1,4 @@
-﻿<!-- Copyright (c) 2013 Dustin Leavins
+<!-- Copyright (c) 2013 Dustin Leavins
      See the file 'LICENSE.txt' for copying permission.
 -->
 <Page x:Class="LeavinsSoftware.Collection.Program.ItemComicPage"
@@ -41,6 +41,7 @@
 
     <Grid Style="{StaticResource mainPageGrid}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -92,6 +93,7 @@
         <Label Grid.Row="3"
                Grid.Column="0"
                Grid.ColumnSpan="2"
+               Margin="0,0,0,20"
                x:Name="issuesRequiredLabel"
                Visibility="Collapsed"
                Content="{x:Static res:InterfaceResources.ItemComicPage_NoEntriesError}" />
@@ -125,11 +127,18 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Grid Grid.Row="5"
-              Grid.ColumnSpan="2">
-            <Button HorizontalAlignment="Center"
-                    Content="{x:Static res:InterfaceResources.Common_Save}"
-                    Command="{Binding AddItem}" />
-        </Grid>
+        <Button Grid.Row="5"
+                Grid.ColumnSpan="2"
+                Margin="0,0,0,20"
+                HorizontalAlignment="Center"
+                Content="{x:Static res:InterfaceResources.Common_Save}"
+                Command="{Binding AddItem}" />
+
+        <Button Grid.Row="6"
+                Grid.ColumnSpan="2"
+                Name="deleteBtn"
+                HorizontalAlignment="Center"
+                Content="{x:Static res:InterfaceResources.Delete_ComicBooks}"
+                Command="{Binding PromptDeleteItem}" />
     </Grid>
 </Page>

@@ -59,6 +59,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         public ComicBookSeries Item { get; private set; }
 
         public CustomCommand AddItem { get; private set; }
+        
+        public CustomCommand PromptDeleteItem { get; private set; }
 
         public IEnumerable Publishers { get; private set; }
 
@@ -98,6 +100,9 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     return Item.IsValid() && PageValidator.Invoke();
                 }
             );
+            
+            PromptDeleteItem = new CustomCommand(
+                (x) => Nav.Navigate(() => DeleteItemPage.Page(Item)));
 
             Item.PropertyChanged += Item_PropertyChanged;
             Item.Entries.CollectionChanged += Issues_CollectionChanged;

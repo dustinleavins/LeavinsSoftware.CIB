@@ -64,6 +64,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         public Func<bool> PageValidator { get; set; }
 
         public CustomCommand AddItem { get; private set; }
+        
+        public CustomCommand PromptDeleteItem { get; private set; }
 
         public IEnumerable Categories { get; private set; }
 
@@ -97,6 +99,9 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     return Item.IsValid() && PageValidator.Invoke();
                 }
             );
+            
+            PromptDeleteItem = new CustomCommand(
+                (x) => Nav.Navigate(() => DeleteItemPage.Page(Item)));
 
             Item.PropertyChanged += Item_PropertyChanged;
 

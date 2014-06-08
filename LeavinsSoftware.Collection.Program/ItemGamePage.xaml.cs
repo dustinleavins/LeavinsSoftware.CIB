@@ -63,7 +63,8 @@ namespace LeavinsSoftware.Collection.Program
 
             if (model.Item.IsNew)
             {
-            	Title = InterfaceResources.PageTitles_ItemNewVideoGame; 
+                Title = InterfaceResources.PageTitles_ItemNewVideoGame; 
+                deleteBtn.Visibility = Visibility.Collapsed;
             }
             else
             {

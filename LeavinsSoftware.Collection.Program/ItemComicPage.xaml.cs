@@ -76,7 +76,8 @@ namespace LeavinsSoftware.Collection.Program
             
             if (model.Item.IsNew)
             {
-            	nameTextBox.Focus();
+                nameTextBox.Focus();
+                deleteBtn.Visibility = Visibility.Collapsed;
             }
         }
 

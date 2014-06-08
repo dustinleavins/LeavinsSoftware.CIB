@@ -122,6 +122,10 @@
     <Compile Include="CollectionProductPage.xaml.cs">
       <DependentUpon>CollectionProductPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DeleteItemPage.xaml.cs">
+      <DependentUpon>DeleteItemPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ExportPage.xaml.cs">
       <DependentUpon>ExportPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -165,6 +169,7 @@
     <Compile Include="ViewModels\CollectionGameViewModel.cs" />
     <Compile Include="ViewModels\CollectionProductViewModel.cs" />
     <Compile Include="ViewModels\CollectionViewModelBaseOfT.cs" />
+    <Compile Include="ViewModels\DeleteItemViewModel.cs" />
     <Compile Include="ViewModels\ExportViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ImportViewModel.cs" />
@@ -205,6 +210,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DeleteItemPage.xaml" />
     <Page Include="ExportPage.xaml" />
     <Page Include="HomePage.xaml">
       <SubType>Designer</SubType>

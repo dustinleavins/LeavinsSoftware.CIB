@@ -60,6 +60,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         public IEnumerable Systems { get; private set; }
 
         public CustomCommand AddItem { get; private set; }
+        
+        public CustomCommand PromptDeleteItem { get; private set; }
 
         /// <summary>
         /// Method that is invoked to determine if page contents are valid.
@@ -97,6 +99,9 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 }
             );
 
+            PromptDeleteItem = new CustomCommand(
+                (x) => Nav.Navigate(() => DeleteItemPage.Page(Item)));
+            
             Item.PropertyChanged += Item_PropertyChanged;
 
             Systems = Persistence.GetInstance<ICategoryPersistence>()
