@@ -103,6 +103,7 @@
                   Grid.ColumnSpan="2"
                   Margin="0,0,0,20"
                   ItemsSource="{Binding Item.Entries}"
+                  SelectionMode="Single"
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridComboBoxColumn Header="{x:Static res:InterfaceResources.Fields_ListType}"
