@@ -25,24 +25,10 @@ namespace LeavinsSoftware.Collection.Program
             InitializeComponent();
         }
         
-        public static DeleteItemPage Page(ComicBookSeries book)
+        public static DeleteItemPage Page<T>(T item) where T : Item
         {
             var page = new DeleteItemPage();
-            page.DataContext = DeleteItemViewModel.New(book, new PageNavigationService(page));
-            return page;
-        }
-        
-        public static DeleteItemPage Page(VideoGame game)
-        {
-            var page = new DeleteItemPage();
-            page.DataContext = DeleteItemViewModel.New(game, new PageNavigationService(page));
-            return page;
-        }
-        
-        public static DeleteItemPage Page(Product product)
-        {
-            var page = new DeleteItemPage();
-            page.DataContext = DeleteItemViewModel.New(product, new PageNavigationService(page));
+            page.DataContext = DeleteItemViewModel.New(item, new PageNavigationService(page));
             return page;
         }
     }

@@ -24,9 +24,9 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 (x) => Nav.GoBack());
         }
         
-        public static DeleteItemViewModel New(ComicBookSeries book, IAppNavigationService nav)
+        public static DeleteItemViewModel New<T>(T book, IAppNavigationService nav) where T : Item
         {
-            if (book == null)
+            if (Object.Equals(book, null))
             {
                 throw new ArgumentNullException("book");
             }
@@ -36,48 +36,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             viewModel.Delete = new CustomCommand(
                 (x) =>
                 {
-                    Persistence.GetInstance<IComicBookPersistence>().Delete(book);
-                    // TODO: Refactor & use messaging
-                    nav.GoBack();
-                    nav.GoBack();
-                });
-            
-            return viewModel;
-        }
-        
-        public static DeleteItemViewModel New(VideoGame game, IAppNavigationService nav)
-        {
-            if (game == null)
-            {
-                throw new ArgumentNullException("game");
-            }
-            
-            var viewModel = new DeleteItemViewModel(nav);
-            
-            viewModel.Delete = new CustomCommand(
-                (x) =>
-                {
-                    Persistence.GetInstance<IVideoGamePersistence>().Delete(game);
-                    nav.GoBack();
-                    nav.GoBack();
-                });
-            
-            return viewModel;
-        }
-        
-        public static DeleteItemViewModel New(Product product, IAppNavigationService nav)
-        {
-            if (product == null)
-            {
-                throw new ArgumentNullException("product");
-            }
-            
-            var viewModel = new DeleteItemViewModel(nav);
-            
-            viewModel.Delete = new CustomCommand(
-                (x) =>
-                {
-                    Persistence.GetInstance<IProductPersistence>().Delete(product);
+                    Persistence.GetInstance<IPersistence<T>>().Delete(book);
+                    // TODO: Use messaging
                     nav.GoBack();
                     nav.GoBack();
                 });

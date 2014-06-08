@@ -45,6 +45,11 @@ namespace LeavinsSoftware.Collection.Program
             Container.RegisterSingle<ISearchablePersistence<ComicBookSummary>>(comicBookPersistence);
             Container.RegisterSingle<ISearchablePersistence<VideoGame>>(videoGamePersistence);
             Container.RegisterSingle<ISearchablePersistence<Product>>(productPersistence);
+            
+            Container.RegisterSingle<IPersistence<ComicBookSeries>>(comicBookPersistence);
+            Container.RegisterSingle<IPersistence<VideoGame>>(videoGamePersistence);
+            Container.RegisterSingle<IPersistence<Product>>(productPersistence);
+            
 
             UpdateNotifier = new UpdateNotifier(GetInstance<IProgramOptionsPersistence>().Retrieve(),
                 Assembly.GetExecutingAssembly().GetName().Version,
