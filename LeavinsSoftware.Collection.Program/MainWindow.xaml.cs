@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2013, 2014 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
+using KSMVVM.WPF.Messaging;
 using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Program.Attributes;
 using System;
@@ -107,6 +108,11 @@ namespace LeavinsSoftware.Collection.Program
             viewer.ScrollToTop();
         }
 
+        private void New_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            BasicMessenger.Default.Send(MessageIds.App_New);
+        }
+        
         private bool doNavWorkaround;
     }
 }

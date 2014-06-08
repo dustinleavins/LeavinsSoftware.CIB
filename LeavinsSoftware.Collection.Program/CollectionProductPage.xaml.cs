@@ -3,6 +3,7 @@
 using System.Globalization;
 using System.Windows.Controls;
 using KSMVVM.WPF;
+using KSMVVM.WPF.Messaging;
 using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Program.Attributes;
 using LeavinsSoftware.Collection.Program.Resources;
@@ -21,13 +22,8 @@ namespace LeavinsSoftware.Collection.Program
         public CollectionProductPage(ItemCategory category)
         {
             InitializeComponent();
-            var model = new CollectionProductViewModel(new PageNavigationService(this), category);
+            model = new CollectionProductViewModel(new PageNavigationService(this), category);
             DataContext = model;
-
-            Loaded += (x, y) =>
-                {
-                    model.OnLoaded();
-                };
 
             if (model.SubCategory != null)
             {
@@ -38,5 +34,17 @@ namespace LeavinsSoftware.Collection.Program
                     model.SubCategory.Name);
             }
         }
+        
+        private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            model.OnLoaded();
+            BasicMessenger.Default.Register(MessageIds.App_New, () => model.AddItem.Execute(null));
+        }
+        
+        private void Page_Unloaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+        }
+        
+        private CollectionProductViewModel model;
     }
 }

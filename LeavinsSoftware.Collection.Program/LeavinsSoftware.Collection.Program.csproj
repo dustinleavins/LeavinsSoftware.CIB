@@ -146,6 +146,7 @@
     <Compile Include="ItemProductPage.xaml.cs">
       <DependentUpon>ItemProductPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MessageIds.cs" />
     <Compile Include="OptionsCategoryNamesPage.xaml.cs">
       <DependentUpon>OptionsCategoryNamesPage.xaml</DependentUpon>
     </Compile>
