@@ -85,6 +85,12 @@
                 <DataGridTextColumn Binding="{Binding NotesSummary}"
                                     Header="{x:Static res:InterfaceResources.Fields_Notes}" />
             </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{x:Static res:InterfaceResources.Common_EditSelected}"
+                              Command="{Binding EditSelectedItem}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
 
         <Grid Grid.Row="3"
