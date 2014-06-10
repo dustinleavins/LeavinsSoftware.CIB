@@ -39,12 +39,23 @@ namespace LeavinsSoftware.Collection.Program
                 default:
                     throw new NotImplementedException();
             }
+            
             DataContext = model;
+
+            // Set title; if it just used binding, it appears as blank
+            // when the user first navigates to a CategoryPage
+            this.Title = model.Title;
         }
 
+        [Obsolete("Use generic version of this method")]
         public static CategoryPage PageFor(ItemCategoryType type)
         {
             return new CategoryPage(type);
+        }
+        
+        public static CategoryPage PageFor<TItem>() where TItem : Item
+        {
+            return new CategoryPage(Item.CategoryType<TItem>());
         }
         
         private void Page_Loaded(object sender, RoutedEventArgs e)
