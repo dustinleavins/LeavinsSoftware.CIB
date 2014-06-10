@@ -23,17 +23,17 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
             ProductCategory = new CustomCommand((unused) =>
                 {
-                    Nav.Navigate(() => CategoryPage.PageFor(ItemCategoryType.Product));
+                    Nav.Navigate(() => CategoryPage.PageFor<Product>());
                 });
 
             ComicCategory = new CustomCommand((x) =>
                 {
-                    Nav.Navigate(() => CategoryPage.PageFor(ItemCategoryType.ComicBook));
+                    Nav.Navigate(() => CategoryPage.PageFor<ComicBookSeries>());
                 });
 
             GameCategory = new CustomCommand((x) =>
             {
-                Nav.Navigate(() => CategoryPage.PageFor(ItemCategoryType.VideoGame));
+                Nav.Navigate(() => CategoryPage.PageFor<VideoGame>());
             });
 
             Export = new CustomCommand(
