@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="BuildBootstrapper">
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="BuildBootstrapper">
   <ItemGroup>
-    <BootstrapperFile Include=".NETFramework,Version=v4.0" >
-       <ProductName>.NET Framework 4.0</ProductName>
+    <BootstrapperFile Include=".NETFramework,Version=v4.5.1" >
+       <ProductName>Microsoft .NET Framework 4.5.1 (x86 and x64)</ProductName>
     </BootstrapperFile>
-    <BootstrapperFile Include="Microsoft.Windows.Installer.3.1" >
-       <ProductName>Windows Installer 3.1</ProductName>
+    <BootstrapperFile Include="Microsoft.Windows.Installer.4.5" >
+       <ProductName>Windows Installer 4.5</ProductName>
     </BootstrapperFile>
   </ItemGroup>
 
@@ -14,6 +14,7 @@
       ApplicationFile="main.exe"
       ApplicationName="CIB Collection Manager"
       BootstrapperItems="@(BootstrapperFile)"
+      Path="C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\Bootstrapper"
       OutputPath="."/>
   </Target>
 </Project>
