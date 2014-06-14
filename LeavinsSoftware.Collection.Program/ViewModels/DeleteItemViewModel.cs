@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2013, 2014 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
+using System.Globalization;
 using KSMVVM.WPF;
 using KSMVVM.WPF.Messaging;
 using KSMVVM.WPF.ViewModel;
@@ -8,6 +9,7 @@ using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Persistence.Export;
 using System;
 using System.Windows.Input;
+using LeavinsSoftware.Collection.Program.Resources;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
 {
@@ -24,11 +26,11 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 (x) => Nav.GoBack());
         }
         
-        public static DeleteItemViewModel New<T>(T book, IAppNavigationService nav) where T : Item
+        public static DeleteItemViewModel New<T>(T item, IAppNavigationService nav) where T : Item
         {
-            if (Object.Equals(book, null))
+            if (Object.Equals(item, null))
             {
-                throw new ArgumentNullException("book");
+                throw new ArgumentNullException("item");
             }
 
             var viewModel = new DeleteItemViewModel(nav);
@@ -36,11 +38,14 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             viewModel.Delete = new CustomCommand(
                 (x) =>
                 {
-                    Persistence.GetInstance<IPersistence<T>>().Delete(book);
-                    // TODO: Use messaging
-                    nav.GoBack();
-                    nav.GoBack();
+                    Persistence.GetInstance<IPersistence<T>>().Delete(item);
+                    BasicMessenger.Default.Send(MessageIds.App_ItemDeleted);
                 });
+            
+            viewModel.DeleteConfirmMessage = string.Format(
+                CultureInfo.InvariantCulture,
+                InterfaceResources.DeleteItem_ConfirmMessageFormat,
+                item.Name);
             
             return viewModel;
         }
@@ -50,5 +55,11 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         public ICommand Delete { get; private set; }
         
         public ICommand Cancel { get; private set; }
+        
+        public string DeleteConfirmMessage
+        {
+            get;
+            private set;
+        }
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using KSMVVM.WPF;
+using KSMVVM.WPF.Messaging;
 using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Program.ViewModels;
 
@@ -30,6 +31,22 @@ namespace LeavinsSoftware.Collection.Program
             var page = new DeleteItemPage();
             page.DataContext = DeleteItemViewModel.New(item, new PageNavigationService(page));
             return page;
+        }
+        
+        void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            BasicMessenger.Default.Register(MessageIds.App_ItemDeleted, OnItemDeleted);
+        }
+        
+        void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            BasicMessenger.Default.Unregister(MessageIds.App_ItemDeleted);
+        }
+        
+        void OnItemDeleted()
+        {
+            NavigationService.GoBack();
+            NavigationService.GoBack();
         }
     }
 }

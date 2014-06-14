@@ -327,4 +327,11 @@
   <data name="Common_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="PageTitles_DeleteItemPage" xml:space="preserve">
+    <value>Delete?</value>
+  </data>
+  <data name="DeleteItem_ConfirmMessageFormat" xml:space="preserve">
+    <value>Are you sure that you want to remove {0} from your collection?
+Deleting this item is permanent.</value>
+  </data>
 </root>

@@ -7,5 +7,7 @@ namespace LeavinsSoftware.Collection.Program
     public static class MessageIds
     {
         public const String App_New = "App_New";
+        
+        public const String App_ItemDeleted = "App_ItemDeleted";
     }
 }

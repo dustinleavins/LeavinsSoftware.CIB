@@ -259,6 +259,16 @@ namespace LeavinsSoftware.Collection.Program.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure that you want to remove {0} from your collection?
+        ///Deleting this item is permanent..
+        /// </summary>
+        public static string DeleteItem_ConfirmMessageFormat {
+            get {
+                return ResourceManager.GetString("DeleteItem_ConfirmMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export was successful..
         /// </summary>
         public static string Export_SuccessMessage {
@@ -561,6 +571,15 @@ namespace LeavinsSoftware.Collection.Program.Resources {
         public static string PageTitles_CollectionVideoGame {
             get {
                 return ResourceManager.GetString("PageTitles_CollectionVideoGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete?.
+        /// </summary>
+        public static string PageTitles_DeleteItemPage {
+            get {
+                return ResourceManager.GetString("PageTitles_DeleteItemPage", resourceCulture);
             }
         }
         
