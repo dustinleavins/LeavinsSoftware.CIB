@@ -44,11 +44,11 @@ namespace LeavinsSoftware.Collection.Program
         {
             model.OnLoaded();
             // Get unused categories
-            IEnumerable<ICategory> categories = model.UnusedDefaultCategories;
+            IEnumerable<IDefaultCategory> categories = model.UnusedDefaultCategories;
 
             bool atLeastOneCategory = false;
 
-            foreach (ICategory categoryBase in categories)
+            foreach (IDefaultCategory categoryBase in categories)
             {
                 atLeastOneCategory = true;
 
@@ -90,7 +90,7 @@ namespace LeavinsSoftware.Collection.Program
             model.OnUnloaded();
         }
 
-        private Expander CreateCategoryGroup(ICategory categoryBase)
+        private Expander CreateCategoryGroup(IDefaultCategory categoryBase)
         {
             StackPanel categoriesWithHeaderPanel = new StackPanel();
 
@@ -126,7 +126,7 @@ namespace LeavinsSoftware.Collection.Program
 //            return categoryLabel;
 //        }
         
-        private Label CreateCategoryLabel(ICategory category)
+        private Label CreateCategoryLabel(IDefaultCategory category)
         {
             Hyperlink categoryLink = new Hyperlink(new Run(category.Name));
             categoryLink.Command = model.CreateDefaultCategory;

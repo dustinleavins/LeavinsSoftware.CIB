@@ -8,7 +8,7 @@ using System.Text;
 
 namespace LeavinsSoftware.Collection.Program.Categories
 {
-    public sealed class CompositeCategory : ICategory
+    public sealed class CompositeCategory : IDefaultCategory
     {
         public CompositeCategory(IEnumerable<DefaultCategory> categories)
         {

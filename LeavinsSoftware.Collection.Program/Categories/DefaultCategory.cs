@@ -8,7 +8,7 @@ using System.Text;
 
 namespace LeavinsSoftware.Collection.Program.Categories
 {
-    public sealed class DefaultCategory : ICategory
+    public sealed class DefaultCategory : IDefaultCategory
     {
         public string Name
         {

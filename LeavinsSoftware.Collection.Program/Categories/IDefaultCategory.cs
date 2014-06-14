@@ -12,11 +12,11 @@ namespace LeavinsSoftware.Collection.Program.Categories
     /// Interface for a default category or a category group.
     /// </summary>
     /// <remarks>
-    /// Why does <see cref="ICategory"/> represent a single category and
+    /// Why does <see cref="IDefaultCategory"/> represent a single category and
     /// a group? It allows back-end code to build a menu of categories
     /// where categories do not have to belong to a group.
     /// </remarks>
-    public interface ICategory
+    public interface IDefaultCategory
     {
         string Name { get; set; }
 
@@ -40,17 +40,5 @@ namespace LeavinsSoftware.Collection.Program.Categories
         /// Thrown if this instance does not support composition.
         /// </exception>
         IEnumerable<DefaultCategory> Categories { get; }
-
-        /// <summary>
-        /// Returns a new instance of <see cref="ItemCategory"/> that contains
-        /// the same data as this instance.
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NotSupportedException">
-        /// Thrown if this instance does not support conversion to
-        /// <see cref="ItemCategory"/>.
-        /// </exception>
-        [ObsoleteAttribute]
-        ItemCategory ToItemCategory();
     }
 }

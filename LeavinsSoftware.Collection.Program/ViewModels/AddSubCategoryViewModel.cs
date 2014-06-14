@@ -31,8 +31,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 .Select(c => c.Code);
 
             // Initialize UnusedDefaultCategories
-            List<ICategory> unusedCategories = new List<ICategory>();
-            foreach (ICategory category in DefaultCategories.CategoriesFor(mainCategory))
+            List<IDefaultCategory> unusedCategories = new List<IDefaultCategory>();
+            foreach (IDefaultCategory category in DefaultCategories.CategoriesFor(mainCategory))
             {
                 if (category.IsComposite)
                 {
@@ -93,7 +93,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 {
                     PropertyChanged -= PropertyChangedHandler;
 
-                    var defaultCategory = categoryObject as ICategory;
+                    var defaultCategory = categoryObject as IDefaultCategory;
                     var newCategory = new ItemCategory
                     {
                         Name = defaultCategory.Name,
@@ -119,7 +119,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
         public ICommand CreateDefaultCategory { get; private set; }
 
-        public IEnumerable<ICategory> UnusedDefaultCategories { get; private set; }
+        public IEnumerable<IDefaultCategory> UnusedDefaultCategories { get; private set; }
 
         public string SubCategoryName
         {

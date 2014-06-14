@@ -101,7 +101,7 @@
     <Compile Include="Categories\CompositeCategory.cs" />
     <Compile Include="Categories\DefaultCategory.cs" />
     <Compile Include="Categories\DefaultCategories.cs" />
-    <Compile Include="Categories\ICategory.cs" />
+    <Compile Include="Categories\IDefaultCategory.cs" />
     <Compile Include="CategoryPage.xaml.cs">
       <DependentUpon>CategoryPage.xaml</DependentUpon>
       <SubType>Code</SubType>
