@@ -46,11 +46,6 @@ namespace LeavinsSoftware.Collection.Program.Categories
             }
         }
 
-        public ItemCategory ToItemCategory()
-        {
-            throw new NotSupportedException();
-        }
-
-        private IEnumerable<DefaultCategory> innerCategories;
+        private readonly IEnumerable<DefaultCategory> innerCategories;
     }
 }
