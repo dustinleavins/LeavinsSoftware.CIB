@@ -21,6 +21,8 @@ namespace LeavinsSoftware.Collection.Program.Categories
         string Name { get; set; }
 
         ItemCategoryType CategoryType { get; set; }
+        
+        string Code { get; set; }
 
         /// <summary>
         /// Does this instance contain multiple categories?
@@ -48,6 +50,7 @@ namespace LeavinsSoftware.Collection.Program.Categories
         /// Thrown if this instance does not support conversion to
         /// <see cref="ItemCategory"/>.
         /// </exception>
+        [ObsoleteAttribute]
         ItemCategory ToItemCategory();
     }
 }

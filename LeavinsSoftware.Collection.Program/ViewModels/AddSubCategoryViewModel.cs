@@ -57,7 +57,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                         unusedCategories.Add(copiedCategory);
                     }
                 }
-                else if (!persistedCodes.Contains(category.ToItemCategory().Code))
+                else if (!persistedCodes.Contains(category.Code))
                 {
                     unusedCategories.Add(category);
                 }
@@ -93,7 +93,13 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 {
                     PropertyChanged -= PropertyChangedHandler;
 
-                    ItemCategory newCategory = categoryObject as ItemCategory;
+                    var defaultCategory = categoryObject as ICategory;
+                    var newCategory = new ItemCategory
+                    {
+                        Name = defaultCategory.Name,
+                        Code = defaultCategory.Code,
+                        CategoryType = defaultCategory.CategoryType
+                    };
 
                     Persistence.GetInstance<ICategoryPersistence>().Create(newCategory);
                     Nav.Navigate(() => CollectionPage.PageFor(newCategory));

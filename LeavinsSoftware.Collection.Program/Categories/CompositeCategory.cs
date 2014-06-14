@@ -26,6 +26,12 @@ namespace LeavinsSoftware.Collection.Program.Categories
             get;
             set;
         }
+        
+        public string Code
+        {
+            get;
+            set;
+        }
 
         public bool IsComposite
         {

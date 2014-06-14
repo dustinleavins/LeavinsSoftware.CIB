@@ -59,7 +59,7 @@ namespace LeavinsSoftware.Collection.Program
                 }
                 else
                 {
-                    Label categoryLabel = CreateCategoryLabel(categoryBase.ToItemCategory());
+                    Label categoryLabel = CreateCategoryLabel(categoryBase);
                     defaultCategoriesPanel.Children.Add(categoryLabel);
                 }
             }
@@ -96,7 +96,7 @@ namespace LeavinsSoftware.Collection.Program
 
             foreach (DefaultCategory innerCategory in categoryBase.Categories)
             {
-                Label categoryLabel = CreateCategoryLabel(innerCategory.ToItemCategory());
+                Label categoryLabel = CreateCategoryLabel(innerCategory);
                 categoriesWithHeaderPanel.Children.Add(categoryLabel);
             }
 
@@ -115,7 +115,18 @@ namespace LeavinsSoftware.Collection.Program
             return categoryExpander;
         }
 
-        private Label CreateCategoryLabel(ItemCategory category)
+//        private Label CreateCategoryLabel(ItemCategory category)
+//        {
+//            Hyperlink categoryLink = new Hyperlink(new Run(category.Name));
+//            categoryLink.Command = model.CreateDefaultCategory;
+//            categoryLink.CommandParameter = category;
+//            Label categoryLabel = new Label();
+//            categoryLabel.Content = categoryLink;
+//            categoryLabel.Style = (Style)Application.Current.FindResource("categoryLabelStyle");
+//            return categoryLabel;
+//        }
+        
+        private Label CreateCategoryLabel(ICategory category)
         {
             Hyperlink categoryLink = new Hyperlink(new Run(category.Name));
             categoryLink.Command = model.CreateDefaultCategory;

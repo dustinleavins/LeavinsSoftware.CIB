@@ -18,19 +18,9 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
     /// </summary>
     public sealed class CategoryViewModel
     {
-        public static CategoryViewModel Product(IAppNavigationService nav)
+        public static CategoryViewModel Create<TItem>(IAppNavigationService nav) where TItem : Item
         {
-            return new CategoryViewModel(nav, ItemCategoryType.Product);
-        }
-
-        public static CategoryViewModel ComicBook(IAppNavigationService nav)
-        {
-            return new CategoryViewModel(nav, ItemCategoryType.ComicBook);
-        }
-
-        public static CategoryViewModel VideoGame(IAppNavigationService nav)
-        {
-            return new CategoryViewModel(nav, ItemCategoryType.VideoGame);
+            return new CategoryViewModel(nav, Item.CategoryType<TItem>());
         }
 
         private CategoryViewModel(IAppNavigationService nav, ItemCategoryType category)
@@ -46,15 +36,11 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     Nav.Navigate(() => CollectionPage.PageFor(paramAsCategory));
                 });
 
-            GoToAll = new CustomCommand((x) =>
-            {
-                Nav.Navigate(() => CollectionPage.PageFor(primaryCategory));
-            });
+            GoToAll = new CustomCommand(
+                (x) => Nav.Navigate(() => CollectionPage.PageFor(primaryCategory)));
 
-            AddCategory = new CustomCommand((unused) =>
-            {
-                Nav.Navigate(() => new AddSubCategoryPage(primaryCategory));
-            });
+            AddCategory = new CustomCommand(
+                (unused) => Nav.Navigate(() => new AddSubCategoryPage(primaryCategory)));
         }
 
         public IAppNavigationService Nav { get; private set; }
@@ -84,7 +70,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 }
             }
         }
-        //{x:Static res:InterfaceResources.AddSubCategory_ComicBook}
+
         public String AddCategoryText
         {
             get

@@ -21,41 +21,51 @@ namespace LeavinsSoftware.Collection.Program
     public partial class CategoryPage : Page
     {
         private CategoryViewModel model;
-        public CategoryPage(ItemCategoryType primaryType)
+
+        private CategoryPage()
         {
             InitializeComponent();
-            model = CategoryViewModel.ComicBook(new PageNavigationService(this));
-            switch(primaryType)
-            {
-                case ItemCategoryType.ComicBook:
-                    model = CategoryViewModel.ComicBook(new PageNavigationService(this));
-                    break;
-                case ItemCategoryType.Product:
-                    model = CategoryViewModel.Product(new PageNavigationService(this));
-                    break;
-                case ItemCategoryType.VideoGame:
-                    model = CategoryViewModel.VideoGame(new PageNavigationService(this));
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
-            
-            DataContext = model;
-
-            // Set title; if it just used binding, it appears as blank
-            // when the user first navigates to a CategoryPage
-            this.Title = model.Title;
         }
 
         [Obsolete("Use generic version of this method")]
         public static CategoryPage PageFor(ItemCategoryType type)
         {
-            return new CategoryPage(type);
+            var page = new CategoryPage();
+            switch(type)
+            {
+                case ItemCategoryType.ComicBook:
+                    page.model = CategoryViewModel.Create<ComicBookSeries>(new PageNavigationService(page));
+                    break;
+                case ItemCategoryType.Product:
+                    page.model = CategoryViewModel.Create<Product>(new PageNavigationService(page));
+                    break;
+                case ItemCategoryType.VideoGame:
+                    page.model = CategoryViewModel.Create<VideoGame>(new PageNavigationService(page));
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+            
+            page.DataContext = page.model;
+
+            // Set title; if it just used binding, it appears as blank
+            // when the user first navigates to a CategoryPage
+            page.Title = page.model.Title;
+            
+            return page;
         }
         
         public static CategoryPage PageFor<TItem>() where TItem : Item
         {
-            return new CategoryPage(Item.CategoryType<TItem>());
+            var page = new CategoryPage();
+            page.model = CategoryViewModel.Create<TItem>(new PageNavigationService(page));
+            page.DataContext = page.model;
+            
+            // Set title; if it just used binding, it appears as blank
+            // when the user first navigates to a CategoryPage
+            page.Title = page.model.Title;
+            
+            return page;
         }
         
         private void Page_Loaded(object sender, RoutedEventArgs e)

@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace LeavinsSoftware.Collection.Program.Categories
 {
-    public sealed class DefaultCategories
+    public static class DefaultCategories
     {
         public static IEnumerable<ICategory> ProductCategories
         {
