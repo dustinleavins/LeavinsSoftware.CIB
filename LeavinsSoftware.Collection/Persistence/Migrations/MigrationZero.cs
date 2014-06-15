@@ -66,6 +66,11 @@ namespace LeavinsSoftware.Collection.Persistence.Migrations
                 .Column("listtype", "integer")
                 .ForeignKey("FOREIGN KEY(comicid) REFERENCES ComicBooks(comicid)")
                 .ExecuteWith(connection);
+            
+            SQL.CreateTable("KeyValues")
+                .Column("k", "Integer", "Primary Key")
+                .Column("v", "Text")
+                .ExecuteWith(connection);
         }
 
         public override long SchemaVersion
