@@ -39,14 +39,14 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             
             target.Save(key, value);
             Assert.IsTrue(target.HasKey(key));
-            Assert.AreEqual(value, target.Value<string>(key));
+            Assert.AreEqual(value, target.GetValue<string>(key));
         }
         
         [Test]
         [ExpectedException(typeof(KeyNotFoundException))]
         public void ValueKeyNotFoundExceptionTest()
         {
-            target.Value<string>(-1);
+            target.GetValue<string>(-1);
         }
     }
 }

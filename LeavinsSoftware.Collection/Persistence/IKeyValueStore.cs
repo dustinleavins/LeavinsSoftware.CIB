@@ -15,7 +15,7 @@ namespace LeavinsSoftware.Collection.Persistence
         /// <param name="key"></param>
         /// <exception
         /// <returns></returns>
-        T Value<T>(int key);
+        T GetValue<T>(int key);
         
         /// <summary>
         /// Saves a key-value pair.

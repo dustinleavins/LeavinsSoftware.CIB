@@ -28,7 +28,7 @@ namespace LeavinsSoftware.Collection.Persistence
                 fullPath);
         }
         
-        public T Value<T>(int key)
+        public T GetValue<T>(int key)
         {
             bool setValue = false;
             T value = default(T);
