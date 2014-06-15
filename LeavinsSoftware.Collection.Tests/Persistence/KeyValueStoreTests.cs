@@ -33,7 +33,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         [Test]
         public void PersistenceTest()
         {
-            const int key = 0;
+            const string key = "Key";
             const string value = "value";
             Assert.IsFalse(target.HasKey(key));
             
@@ -46,15 +46,15 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         [ExpectedException(typeof(KeyNotFoundException))]
         public void ValueKeyNotFoundExceptionTest()
         {
-            target.GetValue<string>(-1);
+            target.GetValue<string>("Not Found");
         }
         
         [Test]
         public void GetValueOrDefaultTest()
         {
-            Assert.AreEqual(-1, target.GetValueOrDefault(2, -1));
-            target.Save(2, 5);
-            Assert.AreEqual(5, target.GetValueOrDefault(2, -1));
+            Assert.AreEqual(-1, target.GetValueOrDefault("2", -1));
+            target.Save("2", 5);
+            Assert.AreEqual(5, target.GetValueOrDefault("2", -1));
         }
     }
 }

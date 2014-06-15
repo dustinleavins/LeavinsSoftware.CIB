@@ -17,7 +17,7 @@ namespace LeavinsSoftware.Collection.Persistence
         /// Thrown if the key is not found.
         /// </exception>
         /// <returns></returns>
-        T GetValue<T>(int key);
+        T GetValue<T>(string key);
         
         /// <summary>
         /// Retrieves a value from storage or a default value.
@@ -25,7 +25,7 @@ namespace LeavinsSoftware.Collection.Persistence
         /// <param name="key"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        T GetValueOrDefault<T>(int key, T defaultValue);
+        T GetValueOrDefault<T>(string key, T defaultValue);
         
         /// <summary>
         /// Saves a key-value pair.
@@ -36,13 +36,13 @@ namespace LeavinsSoftware.Collection.Persistence
         /// </remarks>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        void Save<T>(int key, T value);
+        void Save<T>(string key, T value);
         
         /// <summary>
         /// Is the key present in persistence?
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        bool HasKey(int key);
+        bool HasKey(string key);
     }
 }

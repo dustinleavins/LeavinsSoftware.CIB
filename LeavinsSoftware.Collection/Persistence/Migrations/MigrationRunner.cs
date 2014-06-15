@@ -35,7 +35,8 @@ namespace LeavinsSoftware.Collection.Persistence.Migrations
                         new InitialSetup(),
                         new AddListTypeColumn(),
                         new RequireIssue(),
-                        new KeyValueStoreSetup()
+                        new KeyValueStoreSetup(),
+                        new AlterKeyValueStore()
                     };
         }
 

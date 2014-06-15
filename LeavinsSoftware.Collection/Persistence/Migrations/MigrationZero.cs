@@ -68,7 +68,7 @@ namespace LeavinsSoftware.Collection.Persistence.Migrations
                 .ExecuteWith(connection);
             
             SQL.CreateTable("KeyValues")
-                .Column("k", "Integer", "Primary Key")
+                .Column("k", "Text", "Primary Key")
                 .Column("v", "Text")
                 .ExecuteWith(connection);
         }

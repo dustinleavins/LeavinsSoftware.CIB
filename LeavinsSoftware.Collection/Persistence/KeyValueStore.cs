@@ -28,7 +28,7 @@ namespace LeavinsSoftware.Collection.Persistence
                 fullPath);
         }
         
-        public T GetValue<T>(int key)
+        public T GetValue<T>(string key)
         {
             bool setValue = false;
             T value = default(T);
@@ -68,7 +68,7 @@ namespace LeavinsSoftware.Collection.Persistence
             }
         }
         
-        public T GetValueOrDefault<T>(int key, T defaultValue)
+        public T GetValueOrDefault<T>(string key, T defaultValue)
         {
             T value = defaultValue;
             
@@ -100,7 +100,7 @@ namespace LeavinsSoftware.Collection.Persistence
             return value;
         }
 
-        public void Save<T>(int key, T value)
+        public void Save<T>(string key, T value)
         {
             using (var connection = new SQLiteConnection(ConnectionString))
             {
@@ -125,7 +125,7 @@ namespace LeavinsSoftware.Collection.Persistence
             }
         }
 
-        public bool HasKey(int key)
+        public bool HasKey(string key)
         {
             bool hasKey = false;
             using (var connection = new SQLiteConnection(ConnectionString))

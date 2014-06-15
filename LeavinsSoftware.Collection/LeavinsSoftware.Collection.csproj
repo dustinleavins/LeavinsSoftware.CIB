@@ -116,6 +116,7 @@
     <Compile Include="Persistence\Migrations\02AddListTypeColumn.cs" />
     <Compile Include="Persistence\Migrations\03RequireIssue.cs" />
     <Compile Include="Persistence\Migrations\04KeyValueStoreSetup.cs" />
+    <Compile Include="Persistence\Migrations\05AlterKeyValueStore.cs" />
     <Compile Include="Persistence\Migrations\Migration.cs" />
     <Compile Include="Persistence\Migrations\MigrationRunner.cs" />
     <Compile Include="Persistence\Migrations\MigrationZero.cs" />
