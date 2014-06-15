@@ -20,6 +20,14 @@ namespace LeavinsSoftware.Collection.Persistence
         T GetValue<T>(int key);
         
         /// <summary>
+        /// Retrieves a value from storage or a default value.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        T GetValueOrDefault<T>(int key, T defaultValue);
+        
+        /// <summary>
         /// Saves a key-value pair.
         /// </summary>
         /// <remarks>

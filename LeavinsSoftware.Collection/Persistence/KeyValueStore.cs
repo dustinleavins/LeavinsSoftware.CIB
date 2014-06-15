@@ -67,6 +67,38 @@ namespace LeavinsSoftware.Collection.Persistence
                 return value;
             }
         }
+        
+        public T GetValueOrDefault<T>(int key, T defaultValue)
+        {
+            T value = defaultValue;
+            
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT v " +
+                        "FROM KeyValues " +
+                        "WHERE k = @key;";
+                    
+                    cmd.Parameters.Add(new SQLiteParameter("key", key));
+                    
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            object v = reader["v"];
+                            value = FromDb<T>(v.ToString());
+                        }
+                    }
+                }
+                
+                connection.Close();
+            }
+            
+            return value;
+        }
 
         public void Save<T>(int key, T value)
         {

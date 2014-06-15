@@ -48,5 +48,13 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         {
             target.GetValue<string>(-1);
         }
+        
+        [Test]
+        public void GetValueOrDefaultTest()
+        {
+            Assert.AreEqual(-1, target.GetValueOrDefault(2, -1));
+            target.Save(2, 5);
+            Assert.AreEqual(5, target.GetValueOrDefault(2, -1));
+        }
     }
 }
