@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2013, 2014 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF;
+using KSMVVM.WPF.Messaging;
 using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Program.Resources;
@@ -79,11 +80,14 @@ namespace LeavinsSoftware.Collection.Program
                 nameTextBox.Focus();
                 deleteBtn.Visibility = Visibility.Collapsed;
             }
+            
+            BasicMessenger.Default.Register(MessageIds.App_Finish, OnFinish);
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             model.Item.Entries.CollectionChanged -= Issues_CollectionChanged;
+            BasicMessenger.Default.Unregister(MessageIds.App_Finish);
         }
 
         private void Issues_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -100,6 +104,14 @@ namespace LeavinsSoftware.Collection.Program
             else
             {
                 issuesRequiredLabel.Visibility = Visibility.Visible;
+            }
+        }
+        
+        private void OnFinish()
+        {
+            if (model.AddItem.CanExecute(null))
+            {
+                model.AddItem.Execute(null);
             }
         }
     }

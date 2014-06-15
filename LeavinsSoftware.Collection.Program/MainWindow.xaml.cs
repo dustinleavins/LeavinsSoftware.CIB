@@ -113,6 +113,11 @@ namespace LeavinsSoftware.Collection.Program
             BasicMessenger.Default.Send(MessageIds.App_New);
         }
         
+        void Finish_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            BasicMessenger.Default.Send(MessageIds.App_Finish);
+        }
+        
         private bool doNavWorkaround;
     }
 }

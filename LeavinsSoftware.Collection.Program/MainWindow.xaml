@@ -5,12 +5,15 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:res="clr-namespace:LeavinsSoftware.Collection.Program.Resources"
+        xmlns:local="clr-namespace:LeavinsSoftware.Collection.Program"
         Title="{x:Static res:InterfaceResources.ProgramName}"
         Height="350"
         Width="525">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New"
                         Executed="New_Executed" />
+        <CommandBinding Command="{x:Static local:AppCommands.Finish}"
+                        Executed="Finish_Executed" />
     </Window.CommandBindings>
 
     <Window.InputBindings>
@@ -21,6 +24,10 @@
         <KeyBinding Command="NavigationCommands.BrowseBack"
                     CommandTarget="{Binding ElementName=mainFrame}"
                     Key="Left"
+                    Modifiers="Alt" />
+    
+        <KeyBinding Command="{x:Static local:AppCommands.Finish}"
+                    Key="S"
                     Modifiers="Alt" />
     </Window.InputBindings>
 

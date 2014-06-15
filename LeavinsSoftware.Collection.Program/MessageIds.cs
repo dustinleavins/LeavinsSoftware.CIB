@@ -6,8 +6,19 @@ namespace LeavinsSoftware.Collection.Program
 {
     public static class MessageIds
     {
+        /// <summary>
+        /// New Item
+        /// </summary>
         public const String App_New = "App_New";
         
+        /// <summary>
+        /// Save and Close
+        /// </summary>
+        public const String App_Finish = "App_Finish";
+        
+        /// <summary>
+        /// Item Deleted
+        /// </summary>
         public const String App_ItemDeleted = "App_ItemDeleted";
     }
 }

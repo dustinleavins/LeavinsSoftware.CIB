@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2013, 2014 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF;
+using KSMVVM.WPF.Messaging;
 using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Program.Resources;
@@ -73,26 +74,26 @@ namespace LeavinsSoftware.Collection.Program
             }
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            CommandManager.RequerySuggested += CommandManager_RequerySuggested;
-            
             if (model.Item.IsNew)
             {
-            	nameTextBox.Focus();
+                nameTextBox.Focus();
             }
+            
+            BasicMessenger.Default.Register(MessageIds.App_Finish, OnFinish);
         }
-
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        
+        void Page_Unloaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            CommandManager.RequerySuggested -= CommandManager_RequerySuggested;
+            BasicMessenger.Default.Unregister(MessageIds.App_Finish);
         }
-
-        void CommandManager_RequerySuggested(object sender, EventArgs e)
+        
+        private void OnFinish()
         {
-            if (model != null)
+            if (model.AddItem.CanExecute(null))
             {
-                model.AddItem.TriggerCanExecuteChanged();
+                model.AddItem.Execute(null);
             }
         }
     }

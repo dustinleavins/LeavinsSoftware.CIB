@@ -26,6 +26,11 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             {
                 System = defaultCategory
             };
+            
+            var store = Persistence.GetInstance<IKeyValueStore>();
+            Item.DistributionType = store.GetValueOrDefault(
+                AppKeys.VideoGame_LastDistributionType(defaultCategory),
+                Item.DistributionType);
 
             Setup(nav);
         }
@@ -83,6 +88,12 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     if (Item.Id == 0)
                     {
                         Persistence.GetInstance<IVideoGamePersistence>().Create(Item);
+                        
+                        // Save DistributionType as last used
+                        var store = Persistence.GetInstance<IKeyValueStore>();
+                    
+                        store.Save(AppKeys.VideoGame_LastDistributionType(Item.System),
+                            Item.DistributionType);
                     }
                     else
                     {

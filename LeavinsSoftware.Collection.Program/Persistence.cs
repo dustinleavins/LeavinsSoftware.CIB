@@ -50,6 +50,7 @@ namespace LeavinsSoftware.Collection.Program
             Container.RegisterSingle<IPersistence<VideoGame>>(videoGamePersistence);
             Container.RegisterSingle<IPersistence<Product>>(productPersistence);
             
+            Container.RegisterSingle<IKeyValueStore>(new KeyValueStore(ProgramDir, defaultProfile));
 
             UpdateNotifier = new UpdateNotifier(GetInstance<IProgramOptionsPersistence>().Retrieve(),
                 Assembly.GetExecutingAssembly().GetName().Version,

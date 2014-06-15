@@ -100,6 +100,8 @@
     <Compile Include="AddSubCategoryPage.xaml.cs">
       <DependentUpon>AddSubCategoryPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppCommands.cs" />
+    <Compile Include="AppKeys.cs" />
     <Compile Include="Attributes\CollectionPageAttribute.cs" />
     <Compile Include="Categories\CompositeCategory.cs" />
     <Compile Include="Categories\DefaultCategory.cs" />
