@@ -11,7 +11,7 @@ namespace LeavinsSoftware.Collection.Persistence
     {
         public ProgramOptionsPersistence(FileInfo file)
         {
-            FileName = file.Name;
+            FileName = file.FullName;
         }
 
         public string FileName { get; private set; }

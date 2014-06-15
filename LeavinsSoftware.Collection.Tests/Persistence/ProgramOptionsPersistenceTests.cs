@@ -15,22 +15,41 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
     [TestFixture]
     public sealed class ProgramOptionsPersistenceTests
     {
+        private const string TestDirectory = "options_test";
+
+        /// <summary>
+        /// Name of options file.
+        /// </summary>
+        /// <remarks>
+        /// Added after discovering a bug where the program uses its own
+        /// directory (as opposed to the user's directory) to store the
+        /// options file.
+        /// </remarks>
+        private static readonly string FileName = Path.Combine(TestDirectory, "options.xml");
+        
         private IProgramOptionsPersistence target;
 
         [SetUp]
         public void SetUp()
         {
-            if (File.Exists("options.xml"))
+            if (File.Exists(FileName))
             {
-                File.Delete("options.xml");
+                File.Delete(FileName);
+            }
+            else if (!Directory.Exists(TestDirectory))
+            {
+                Directory.CreateDirectory(TestDirectory);
             }
             
-            target = new ProgramOptionsPersistence(new FileInfo("options.xml"));
+            target = new ProgramOptionsPersistence(new FileInfo(FileName));
         }
 
         [Test]
         public void PersistenceTest()
         {
+            Assert.IsFalse(File.Exists(FileName),
+                "options file should not exist before persistence test");
+            
             // Initially, options should be equal to defaults
             Assert.AreEqual((new ProgramOptions()), target.Retrieve());
 
@@ -46,6 +65,9 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
 
             target.Update(newOptions);
             Assert.AreEqual(newOptions, target.Retrieve());
+            
+            Assert.IsTrue(File.Exists(FileName),
+                "options file did not save to the right location");
         }
     }
 }
