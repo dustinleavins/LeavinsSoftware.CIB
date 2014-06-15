@@ -21,18 +21,30 @@ namespace LeavinsSoftware.Collection.Program
     /// </summary>
     public partial class DeleteItemPage : Page
     {
-        private DeleteItemPage()
+        public class DeleteItemPageConfig
+        {
+            /// <summary>
+            /// Number of pages to go back after successful deletion.
+            /// </summary>
+            /// <remarks>
+            /// Default - 2
+            /// </remarks>
+            public int PagesToGoBack { get; set; }
+        }
+
+        private DeleteItemPage(DeleteItemPageConfig config = null)
         {
             InitializeComponent();
+            Configuration = config;
         }
         
-        public static DeleteItemPage Page<T>(T item) where T : Item
+        public static DeleteItemPage Page<T>(T item, DeleteItemPageConfig config = null) where T : Item
         {
-            var page = new DeleteItemPage();
+            var page = new DeleteItemPage(config);
             page.DataContext = DeleteItemViewModel.New(item, new PageNavigationService(page));
             return page;
         }
-        
+
         void Page_Loaded(object sender, RoutedEventArgs e)
         {
             BasicMessenger.Default.Register(MessageIds.App_ItemDeleted, OnItemDeleted);
@@ -45,8 +57,25 @@ namespace LeavinsSoftware.Collection.Program
         
         void OnItemDeleted()
         {
-            NavigationService.GoBack();
-            NavigationService.GoBack();
+            var configInstance = Configuration ?? DefaultConfig;
+            
+            for(int x = 0; x < configInstance.PagesToGoBack; ++x)
+            {
+               NavigationService.GoBack();
+            }
         }
+        
+        private static DeleteItemPageConfig DefaultConfig
+        {
+            get
+            {
+                return new DeleteItemPageConfig()
+                {
+                    PagesToGoBack = 2
+                };
+            }
+        }
+        
+        private readonly DeleteItemPageConfig Configuration;
     }
 }
