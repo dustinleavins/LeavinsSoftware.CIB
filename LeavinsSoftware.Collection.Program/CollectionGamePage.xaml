@@ -94,6 +94,8 @@
                 <ContextMenu>
                     <MenuItem Header="{x:Static res:InterfaceResources.Common_EditSelected}"
                               Command="{Binding EditSelectedItem}"/>
+                    <MenuItem Header="{x:Static res:InterfaceResources.Common_Delete}"
+                              Command="{Binding DeleteSelectedItem}"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>

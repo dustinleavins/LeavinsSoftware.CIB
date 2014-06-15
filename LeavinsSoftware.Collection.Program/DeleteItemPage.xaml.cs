@@ -12,6 +12,7 @@ using System.Windows.Media;
 using KSMVVM.WPF;
 using KSMVVM.WPF.Messaging;
 using LeavinsSoftware.Collection.Models;
+using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Program.ViewModels;
 
 namespace LeavinsSoftware.Collection.Program
@@ -43,6 +44,14 @@ namespace LeavinsSoftware.Collection.Program
             var page = new DeleteItemPage(config);
             page.DataContext = DeleteItemViewModel.New(item, new PageNavigationService(page));
             return page;
+        }
+        
+        public static DeleteItemPage PageForItemId<TItem>(long itemId, DeleteItemPageConfig config = null)
+            where TItem : Item
+        {
+            var persistence = Persistence.GetInstance<IPersistence<TItem>>();
+            
+            return Page(persistence.Retrieve(itemId), config);
         }
 
         void Page_Loaded(object sender, RoutedEventArgs e)

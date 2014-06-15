@@ -27,7 +27,7 @@ namespace LeavinsSoftware.Collection.Program
             CollectionPageAttribute collectAttribute = mainFrame.Content
                 .GetType()
                 .GetCustomAttributes(true)
-                .SingleOrDefault(o => o.GetType() == typeof(CollectionPageAttribute))
+                .SingleOrDefault(o => o is CollectionPageAttribute)
                 as CollectionPageAttribute;
 
             if (collectAttribute == null)

@@ -22,19 +22,13 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             Nav = nav;
 
             NewProductCategory = new CustomCommand((unused) =>
-                {
-                    Nav.Navigate(() => new AddSubCategoryPage(ItemCategoryType.Product));
-                });
+                Nav.Navigate(() => new AddSubCategoryPage(ItemCategoryType.Product)));
 
             NewComicCategory = new CustomCommand((unused) =>
-                {
-                    Nav.Navigate(() => new AddSubCategoryPage(ItemCategoryType.ComicBook));
-                });
+                Nav.Navigate(() => new AddSubCategoryPage(ItemCategoryType.ComicBook)));
 
             NewGameCategory = new CustomCommand((x) =>
-                {
-                    Nav.Navigate(() => new AddSubCategoryPage(ItemCategoryType.VideoGame));
-                });
+                Nav.Navigate(() => new AddSubCategoryPage(ItemCategoryType.VideoGame)));
         }
 
         public ICommand NewProductCategory { get; private set; }

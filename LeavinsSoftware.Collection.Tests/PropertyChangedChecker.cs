@@ -13,7 +13,7 @@ namespace LeavinsSoftware.Collection.Tests
     {
         private static PropertyChangedEventHandler _handler;
         private static INotifyPropertyChanged _target;
-        private static IDictionary<string, bool> _propertyChangedDictionary;
+        private static readonly IDictionary<string, bool> _propertyChangedDictionary;
         private static ICollection<string> _restrictions;
 
         static PropertyChangedChecker()

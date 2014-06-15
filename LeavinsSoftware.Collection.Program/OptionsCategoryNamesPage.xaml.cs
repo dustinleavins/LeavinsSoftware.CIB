@@ -11,7 +11,7 @@ namespace LeavinsSoftware.Collection.Program
     /// </summary>
     public partial class OptionsCategoryNamesPage : Page
     {
-        private OptionsCategoryNamesViewModel model;
+        private readonly OptionsCategoryNamesViewModel model;
         public OptionsCategoryNamesPage()
         {
             InitializeComponent();

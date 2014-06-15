@@ -60,9 +60,7 @@ namespace LeavinsSoftware.Collection.Program
             DataContext = model;
 
             model.PageValidator = () =>
-                {
-                    return !Validation.GetHasError(quantityBox);
-                };
+                !Validation.GetHasError(quantityBox);
 
             if (model.Item.IsNew)
             {

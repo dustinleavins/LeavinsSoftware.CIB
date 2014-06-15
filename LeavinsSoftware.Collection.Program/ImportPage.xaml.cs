@@ -14,7 +14,7 @@ namespace LeavinsSoftware.Collection.Program
     /// </summary>
     public partial class ImportPage : Page
     {
-        private ImportViewModel viewModel;
+        private readonly ImportViewModel viewModel;
         public ImportPage()
         {
             InitializeComponent();
@@ -35,10 +35,7 @@ namespace LeavinsSoftware.Collection.Program
                 });
 
             viewModel.Messenger.Register(ImportViewModel.FinishedImportMessage,
-                () =>
-                {
-                    MessageBox.Show(InterfaceResources.Import_SuccessMessage);
-                });
+                () => MessageBox.Show(InterfaceResources.Import_SuccessMessage));
         }
 
         private void Page_Unloaded(object sender, System.Windows.RoutedEventArgs e)

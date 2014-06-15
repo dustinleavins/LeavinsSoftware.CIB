@@ -32,10 +32,7 @@ namespace LeavinsSoftware.Collection.Program
                 });
 
             viewModel.Messenger.Register(ExportViewModel.FinishedExportMessage,
-                () =>
-                {
-                    MessageBox.Show(InterfaceResources.Export_SuccessMessage);
-                });
+                () => MessageBox.Show(InterfaceResources.Export_SuccessMessage));
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)

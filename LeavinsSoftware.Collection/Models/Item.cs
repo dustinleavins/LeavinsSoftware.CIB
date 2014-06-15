@@ -12,14 +12,13 @@ namespace LeavinsSoftware.Collection.Models
     /// </summary>
     public abstract class Item :  Model
     {
-        private static char[] summarySeparator =
+        private static readonly char[] summarySeparator =
             new char[] { '\n' };
         
         public static ItemCategoryType CategoryType<T>() where T: Item
         {
-            var attr = typeof(T).GetCustomAttributes(true)
-                .Single(x => x is ItemCategoryTypeAttribute)
-                as ItemCategoryTypeAttribute;
+            var attr = (ItemCategoryTypeAttribute)typeof(T).GetCustomAttributes(true)
+                .Single(x => x is ItemCategoryTypeAttribute);
             
             return attr.CategoryType;
         }

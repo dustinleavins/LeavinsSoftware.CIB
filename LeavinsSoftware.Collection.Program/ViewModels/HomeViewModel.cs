@@ -17,42 +17,25 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             Nav = nav;
 
             AddCategory = new CustomCommand((unused) =>
-                {
-                    Nav.Navigate(() => new AddMainCategoryPage());
-                });
+                Nav.Navigate(() => new AddMainCategoryPage()));
 
             ProductCategory = new CustomCommand((unused) =>
-                {
-                    Nav.Navigate(() => CategoryPage.PageFor<Product>());
-                });
+                Nav.Navigate(() => CategoryPage.PageFor<Product>()));
 
             ComicCategory = new CustomCommand((x) =>
-                {
-                    Nav.Navigate(() => CategoryPage.PageFor<ComicBookSeries>());
-                });
+                Nav.Navigate(() => CategoryPage.PageFor<ComicBookSeries>()));
 
             GameCategory = new CustomCommand((x) =>
-            {
-                Nav.Navigate(() => CategoryPage.PageFor<VideoGame>());
-            });
+            Nav.Navigate(() => CategoryPage.PageFor<VideoGame>()));
 
-            Export = new CustomCommand(
-                (x) =>
-                {
-                    Nav.Navigate(() => new ExportPage());
-                });
+            Export = new CustomCommand((x) =>
+                Nav.Navigate(() => new ExportPage()));
 
-            Import = new CustomCommand(
-                (x) =>
-                {
-                    Nav.Navigate(() => new ImportPage());
-                });
+            Import = new CustomCommand((x) =>
+                Nav.Navigate(() => new ImportPage()));
 
-            Options = new CustomCommand(
-                (x) =>
-                {
-                    Nav.Navigate(() => new OptionsPage());
-                });
+            Options = new CustomCommand((x) =>
+                Nav.Navigate(() => new OptionsPage()));
         }
 
         public ICommand ProductCategory { get; private set; }

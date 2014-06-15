@@ -13,7 +13,7 @@ namespace LeavinsSoftware.Collection.Models
     /// Provides validation methods.
     /// </summary>
     /// <remarks>
-    /// Uses <see cref="System.ComponentModel.DataAnnotations"/> for validation.
+    /// Uses DataAnnotations for validation.
     /// </remarks>
     public abstract class ValidatableBase : IDataErrorInfo
     {

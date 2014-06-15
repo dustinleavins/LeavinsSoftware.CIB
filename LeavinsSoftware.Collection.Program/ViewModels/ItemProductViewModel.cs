@@ -94,10 +94,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 },
 
                 // CanExecute
-                (x) =>
-                {
-                    return Item.IsValid() && PageValidator.Invoke();
-                }
+                (x) => Item.IsValid() && PageValidator.Invoke()
             );
             
             PromptDeleteItem = new CustomCommand(

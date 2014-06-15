@@ -103,12 +103,12 @@ namespace LeavinsSoftware.Collection.Program
             }
         }
         
-		void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
-		{
-			if (model.Item.IsNew)
-			{
-				nameTextBox.Focus();
-			}
-		}
+        void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (model.Item.IsNew)
+            {
+                nameTextBox.Focus();
+            }
+        }
     }
 }

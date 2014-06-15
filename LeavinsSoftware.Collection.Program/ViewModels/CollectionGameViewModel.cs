@@ -28,21 +28,28 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
             EditSelectedItem = new CustomCommand(
                 // Execute
-                (x) =>
-                {
-                    Nav.Navigate(() => ItemGamePage.ExistingGamePage(SelectedItem.Id));
-                },
+                (x) => Nav.Navigate(() => ItemGamePage.ExistingGamePage(SelectedItem.Id)),
 
                 // CanExecute
+                (x) => SelectedItem != null
+            );
+            
+            DeleteSelectedItem = new CustomCommand(
                 (x) =>
                 {
-                    return SelectedItem != null;
-                }
-            );
+                    var config = new DeleteItemPage.DeleteItemPageConfig()
+                    {
+                        PagesToGoBack = 1
+                    };
+                    
+                    Nav.Navigate(() => DeleteItemPage.PageForItemId<VideoGame>(SelectedItem.Id, config));
+                });
         }
 
         public override ICommand AddItem { get; protected set; }
 
         public override CustomCommand EditSelectedItem { get; protected set; }
+        
+        public override CustomCommand DeleteSelectedItem { get; protected set; }
     }
 }

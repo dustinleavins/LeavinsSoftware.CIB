@@ -14,15 +14,13 @@ namespace LeavinsSoftware.Collection.Program
     /// </summary>
     public partial class OptionsPage : Page
     {
-        private OptionsViewModel model;
+        private readonly OptionsViewModel model;
 
         public OptionsPage()
         {
             InitializeComponent();
             model = new OptionsViewModel(new PageNavigationService(this), () =>
-            {
-                return !Validation.GetHasError(proxyServerPortBox);
-            });
+                !Validation.GetHasError(proxyServerPortBox));
 
             DataContext = model;
         }

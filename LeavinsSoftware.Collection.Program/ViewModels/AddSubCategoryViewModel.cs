@@ -82,10 +82,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 },
 
                 // CanExecute
-                (unused) =>
-                {
-                    return !string.IsNullOrWhiteSpace(SubCategoryName);
-                }
+                (unused) => !string.IsNullOrWhiteSpace(SubCategoryName)
             );
 
             CreateDefaultCategory = new CustomCommand(

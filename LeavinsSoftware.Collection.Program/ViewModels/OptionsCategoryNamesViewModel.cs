@@ -43,10 +43,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     Nav.GoBack();
                 },
 
-                (x) =>
-                {
-                    return !(Categories.Any(c => !c.IsValid()));
-                });
+                (x) => Categories.All(c => c.IsValid()));
 
             Categories = Persistence.GetInstance<ICategoryPersistence>().RetrieveAll();
 

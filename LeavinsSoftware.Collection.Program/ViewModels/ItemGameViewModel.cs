@@ -45,7 +45,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         /// Existing Game constructor
         /// </summary>
         /// <param name="nav"></param>
-        /// <param name="GameId"></param>
+        /// <param name="gameId"></param>
         public ItemGameViewModel(IAppNavigationService nav, long gameId)
         {
             Item = Persistence.GetInstance<IVideoGamePersistence>().Retrieve(gameId);
@@ -93,10 +93,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 },
 
                 // CanExecute
-                (x) =>
-                {
-                    return Item.IsValid() && PageValidator.Invoke();
-                }
+                (x) => Item.IsValid() && PageValidator.Invoke()
             );
 
             PromptDeleteItem = new CustomCommand(

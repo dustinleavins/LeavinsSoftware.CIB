@@ -110,7 +110,7 @@ namespace LeavinsSoftware.Collection.Program.Update
             }
         }
 
-        private object serverVersionLock = new object();
+        private readonly object serverVersionLock = new object();
         private Version cachedServerVersion;
     }
 }

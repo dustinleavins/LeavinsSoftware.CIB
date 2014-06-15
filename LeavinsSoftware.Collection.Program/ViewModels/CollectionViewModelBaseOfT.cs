@@ -32,10 +32,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             };
 
             PreviousPage.CanExecuteHandler = (x) =>
-            {
-                return currentSearch != null &&
-                    currentSearch.HasPreviousPage;
-            };
+                currentSearch != null && currentSearch.HasPreviousPage;
 
             NextPage.ExecuteHandler = (x) =>
             {
@@ -44,16 +41,10 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             };
 
             NextPage.CanExecuteHandler = (x) =>
-            {
-                return currentSearch != null &&
-                    currentSearch.HasNextPage;
-            };
+                currentSearch != null && currentSearch.HasNextPage;
 
-            Search = new CustomCommand(
-                (x) =>
-                {
-                    NewSearch();
-                });
+            Search = new CustomCommand((x) =>
+                NewSearch());
         }
 
         public IAppNavigationService Nav { get; private set; }
@@ -65,6 +56,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         public ICommand Search { get; private set; }
 
         public abstract CustomCommand EditSelectedItem { get; protected set; }
+        
+        public abstract CustomCommand DeleteSelectedItem { get; protected set; }
 
         public CustomCommand PreviousPage { get; private set; }
 
@@ -89,6 +82,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     selectedItem = value;
                     OnPropertyChanged("SelectedItem");
                     EditSelectedItem.TriggerCanExecuteChanged();
+                    DeleteSelectedItem.TriggerCanExecuteChanged();
                 }
             }
         }

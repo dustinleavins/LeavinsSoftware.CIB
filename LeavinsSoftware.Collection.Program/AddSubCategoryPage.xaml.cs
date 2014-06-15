@@ -114,17 +114,6 @@ namespace LeavinsSoftware.Collection.Program
 
             return categoryExpander;
         }
-
-//        private Label CreateCategoryLabel(ItemCategory category)
-//        {
-//            Hyperlink categoryLink = new Hyperlink(new Run(category.Name));
-//            categoryLink.Command = model.CreateDefaultCategory;
-//            categoryLink.CommandParameter = category;
-//            Label categoryLabel = new Label();
-//            categoryLabel.Content = categoryLink;
-//            categoryLabel.Style = (Style)Application.Current.FindResource("categoryLabelStyle");
-//            return categoryLabel;
-//        }
         
         private Label CreateCategoryLabel(IDefaultCategory category)
         {

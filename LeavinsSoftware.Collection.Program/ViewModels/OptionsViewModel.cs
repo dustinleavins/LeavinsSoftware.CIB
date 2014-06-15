@@ -31,11 +31,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
             Options = Persistence.GetInstance<IProgramOptionsPersistence>().Retrieve();
 
-            CategoryEdit = new BasicCommand(
-                () =>
-                {
-                    Nav.Navigate(() => new OptionsCategoryNamesPage());
-                });
+            CategoryEdit = new BasicCommand(() =>
+                Nav.Navigate(() => new OptionsCategoryNamesPage()));
 
             Finish = new BasicCommand(
                 // Execute
@@ -49,10 +46,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 },
 
                 // CanExecute
-                () =>
-                {
-                    return Options.IsValid() && formValidator.Invoke();
-                });
+                () => Options.IsValid() && formValidator.Invoke());
         }
 
         public IAppNavigationService Nav { get; private set; }
