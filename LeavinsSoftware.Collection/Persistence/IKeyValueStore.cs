@@ -13,7 +13,9 @@ namespace LeavinsSoftware.Collection.Persistence
         /// Retrieves a value from storage
         /// </summary>
         /// <param name="key"></param>
-        /// <exception
+        /// <exception cref="System.Collections.Generic.KeyNotFoundException">
+        /// Thrown if the key is not found.
+        /// </exception>
         /// <returns></returns>
         T GetValue<T>(int key);
         
