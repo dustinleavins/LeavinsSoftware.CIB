@@ -41,9 +41,10 @@ namespace LeavinsSoftware.Collection.Persistence.Migrations
         }
 
         /// <summary>
-        /// Runs all migrations, in order.
+        /// Runs all migrations in order.
         /// </summary>
-        /// <param name="databaseFileName"></param>
+        /// <param name="dataDir"></param>
+        /// <param name="profile"></param>
         public static void Run(DirectoryInfo dataDir, Profile profile)
         {
             string collectionDatabasePath = Path.Combine(dataDir.FullName,

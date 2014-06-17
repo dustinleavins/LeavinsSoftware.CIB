@@ -213,7 +213,7 @@ namespace LeavinsSoftware.Collection.Persistence
                     {
                         if (reader.Read())
                         {
-                            long? countNullable = reader[0] as long?;
+                            long? countNullable = (long?)reader[0];
 
                             count = countNullable.GetValueOrDefault();
                         }

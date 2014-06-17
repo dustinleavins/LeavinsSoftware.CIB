@@ -262,7 +262,7 @@ namespace LeavinsSoftware.Collection.Persistence
                     {
                         if (reader.Read())
                         {
-                            var countNullable = reader[0] as long?;
+                            var countNullable = (long?)reader[0];
                             total = countNullable.Value;
                         }
                     }
