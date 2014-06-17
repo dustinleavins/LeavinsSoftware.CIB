@@ -27,7 +27,6 @@ namespace LeavinsSoftware.Collection.Program
             InitializeComponent();
         }
 
-        [Obsolete("Use generic version of this method")]
         public static CategoryPage PageFor(ItemCategoryType type)
         {
             var page = new CategoryPage();

@@ -94,7 +94,12 @@ namespace LeavinsSoftware.Collection.Program
                 doNavWorkaround = false;
             }
 
-            headerLabel.Content = (e.Content as Page).Title;
+            var pageContent = e.Content as Page;
+            
+            if (pageContent != null)
+            {
+                headerLabel.Content = pageContent.Title;
+            }
 
             if (mainFrame.CanGoBack)
             {
