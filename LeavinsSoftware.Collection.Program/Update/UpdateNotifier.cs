@@ -31,14 +31,10 @@ namespace LeavinsSoftware.Collection.Program.Update
         public Version ClientVersion { get; private set; }
 
         public Uri ServerVersionUri { get; private set; }
-
-        public void GetServerVersionAsync(Action<Version> callbackDelegate)
+        
+        public async Task<Version> GetServerVersionAsync()
         {
-            Task.Factory.StartNew(() =>
-            {
-                var version = GetServerVersion();
-                callbackDelegate(version);
-            });
+            return await Task.Run(() => GetServerVersion());
         }
 
         private Version GetServerVersion()

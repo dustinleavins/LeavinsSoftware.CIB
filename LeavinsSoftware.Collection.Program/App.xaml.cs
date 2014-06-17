@@ -28,7 +28,6 @@ namespace LeavinsSoftware.Collection.Program
             else
             {
                 Persistence.Setup();
-                AsyncProgramSetup();
             }
         }
 
@@ -42,46 +41,36 @@ namespace LeavinsSoftware.Collection.Program
             }
         }
 
-        private static void AsyncProgramSetup()
+        async void Application_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-            Task.Factory.StartNew(
-                () =>
+            var options = Persistence.GetInstance<IProgramOptionsPersistence>().Retrieve();
+
+            if (options.IsFirstRun)
+            {
+                var result = MessageBox.Show(
+                    InterfaceResources.Startup_CheckUpdatesPrompt,
+                    InterfaceResources.ProgramName,
+                    MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.Yes)
                 {
-                    var options = Persistence.GetInstance<IProgramOptionsPersistence>()
-                        .Retrieve();
+                    options.CheckForProgramUpdates = true;
+                }
 
-                    if (options.IsFirstRun)
-                    {
-                        var result = MessageBox.Show(
-                            InterfaceResources.Startup_CheckUpdatesPrompt,
-                            InterfaceResources.ProgramName,
-                            MessageBoxButton.YesNo);
-
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            options.CheckForProgramUpdates = true;
-                        }
-
-                        options.IsFirstRun = false;
-                        Persistence.GetInstance<IProgramOptionsPersistence>().Update(options);
-                    }
-                    else if (options.CheckForProgramUpdates)
-                    {
-                        Action<Version> versionDelegate = (v) =>
-                        {
-                            if (v != null &&
-                                v.CompareTo(Persistence.UpdateNotifier.ClientVersion) > 0)
-                            {
-                                MessageBox.Show(
-                                    InterfaceResources.Startup_UpdateAvailable,
-                                    InterfaceResources.ProgramName);
-                            }
-                        };
-
-                        Persistence.UpdateNotifier
-                            .GetServerVersionAsync(versionDelegate);
-                    }
-                });
+                options.IsFirstRun = false;
+                Persistence.GetInstance<IProgramOptionsPersistence>().Update(options);
+            }
+            else if (options.CheckForProgramUpdates)
+            {
+                Version v = await Persistence.UpdateNotifier.GetServerVersionAsync();
+                if (v != null &&
+                    v.CompareTo(Persistence.UpdateNotifier.ClientVersion) > 0)
+                {
+                    MessageBox.Show(
+                        InterfaceResources.Startup_UpdateAvailable,
+                        InterfaceResources.ProgramName);
+                }
+            }
         }
     }
 }
