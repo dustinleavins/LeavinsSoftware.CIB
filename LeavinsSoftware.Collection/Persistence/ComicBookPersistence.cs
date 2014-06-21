@@ -189,6 +189,22 @@ namespace LeavinsSoftware.Collection.Persistence
 
             Dictionary<long, long> categoryIdDict =
                 new Dictionary<long, long>();
+            
+            String issueCountQuery;
+            if (options.ListType.HasValue)
+            {
+                issueCountQuery = "SELECT comicId, count(issueId) as count " +
+                    "FROM ComicBookIssues " +
+                    "WHERE listtype = @listtype " +
+                    "GROUP BY comicId ";
+                    
+            }
+            else
+            {
+                issueCountQuery = "SELECT comicId, count(issueId) as count " +
+                    "FROM ComicBookIssues " +
+                    "GROUP BY comicId ";
+            }
 
             using (var connection = new SQLiteConnection(ConnectionString))
             {
@@ -197,11 +213,15 @@ namespace LeavinsSoftware.Collection.Persistence
                 using (var cmd = connection.CreateCommand())
                 {
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "SELECT DISTINCT cb.comicid, cb.name, cb.notes, cb.categoryid " +
-                        "FROM ComicBooks cb, ComicBookIssues i, Categories cat " +
-                        "WHERE cb.comicid = i.comicid " +
-                        "AND cb.categoryid = cat.rowid " +
-                        "AND cb.name LIKE @name ";
+                    cmd.CommandText = "SELECT cb.comicid, cb.name, " +
+                        "cb.notes, cb.categoryid, iCount.count " +
+                        "FROM ComicBooks cb " +
+                        "INNER JOIN Categories cat ON cb.categoryId = cat.categoryId " +
+                        "INNER JOIN " +
+                        "( " +
+                        issueCountQuery +
+                        ") iCount ON iCount.comicId = cb.comicId " +
+                        "WHERE cb.name LIKE @name ";
 
                     string searchParamValue = "%";
 
@@ -215,7 +235,6 @@ namespace LeavinsSoftware.Collection.Persistence
 
                     if (options.ListType.HasValue)
                     {
-                        cmd.CommandText += "AND i.listtype = @listtype ";
                         cmd.Parameters.Add(new SQLiteParameter("listtype", options.ListType));
                     }
 
@@ -226,7 +245,7 @@ namespace LeavinsSoftware.Collection.Persistence
                             options.ItemCategory.Id));
                     }
 
-                    cmd.CommandText += "ORDER BY cat.name, cb.name LIMIT @limit OFFSET @offset;";;
+                    cmd.CommandText += "ORDER BY cat.name, cb.name LIMIT @limit OFFSET @offset;";
 
                     cmd.Parameters.Add(new SQLiteParameter("@limit", options.ItemsPerPage));
                     cmd.Parameters.Add(new SQLiteParameter("@offset", options.ItemsPerPage * pageNumber));
@@ -245,40 +264,6 @@ namespace LeavinsSoftware.Collection.Persistence
                         }
                     }
                 }
-
-                // Get issue counts
-                foreach (ComicBookSummary summary in page)
-                {
-                    using (var cmd = connection.CreateCommand())
-                    {
-                        cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "SELECT COUNT(*) " +
-                            "FROM ComicBookIssues " +
-                            "WHERE comicid = @comicid ";
-
-                        cmd.Parameters.Add(new SQLiteParameter("comicid", summary.Id));
-
-                        if (options.ListType.HasValue)
-                        {
-                            cmd.CommandText += "AND listtype = @listtype;";
-                            cmd.Parameters.Add(new SQLiteParameter("listtype", options.ListType));
-                        }
-                        else
-                        {
-                            cmd.CommandText += ";";
-                        }
-
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                summary.EntriesCount = long.Parse(reader[0].ToString(),
-                                CultureInfo.InvariantCulture);
-                            }
-                        }
-                    }
-                }
-
 
                 if (options.ItemCategory != null)
                 {
@@ -413,6 +398,9 @@ namespace LeavinsSoftware.Collection.Persistence
                 CultureInfo.InvariantCulture);
             targetBook.Name = reader["name"].ToString();
             targetBook.Notes = reader["notes"].ToString();
+            
+            targetBook.EntriesCount = long.Parse(reader["count"].ToString(),
+                CultureInfo.InvariantCulture);
 
             return targetBook;
         }
