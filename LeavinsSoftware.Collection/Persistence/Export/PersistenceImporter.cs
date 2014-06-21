@@ -1,14 +1,12 @@
 ﻿// Copyright (c) 2013, 2014 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using SimpleInjector;
 using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Persistence.Export.Extensions;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
-using System;
-using SimpleInjector;
 
 namespace LeavinsSoftware.Collection.Persistence.Export
 {
@@ -17,13 +15,36 @@ namespace LeavinsSoftware.Collection.Persistence.Export
     /// </summary>
     public sealed class PersistenceImporter
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="container"></param>
+        /// <exception cref="T:System.ArgumentException">
+        /// Thrown when container does not specify a necessary instance.
+        /// </exception>
+        /// <exception cref="T:System.ArgumentNullException">
+        /// Thrown when container is null.
+        /// </exception>
         public PersistenceImporter(Container container)
         {
-            // TODO: Refactor to use Container instead of properties
-            ComicBookPersistence = container.GetInstance<ISearchablePersistence<ComicBookSeries>>();
-            ProductPersistence = container.GetInstance<ISearchablePersistence<Product>>();
-            VideoGamePersistence = container.GetInstance<ISearchablePersistence<VideoGame>>();
-            CategoryPersistence = container.GetInstance<ICategoryPersistence>();
+            if (container == null)
+            {
+                throw new ArgumentNullException("container");
+            }
+            
+            try
+            {
+                ComicBookPersistence = container.GetInstance<ISearchablePersistence<ComicBookSeries>>();
+                ProductPersistence = container.GetInstance<ISearchablePersistence<Product>>();
+                VideoGamePersistence = container.GetInstance<ISearchablePersistence<VideoGame>>();
+                CategoryPersistence = container.GetInstance<ICategoryPersistence>();
+            }
+            catch (ActivationException e)
+            {
+                throw new ArgumentException("container does not specify necessary instances",
+                    "container",
+                    e);
+            }
         }
 
         public ISearchablePersistence<ComicBookSeries> ComicBookPersistence { get; private set; }
