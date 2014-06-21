@@ -11,6 +11,7 @@ using System.IO;
 using LeavinsSoftware.Collection.Persistence.Migrations;
 using LeavinsSoftware.Collection.Models;
 using System.Globalization;
+using SimpleInjector;
 
 namespace LeavinsSoftware.Collection.Tests.Persistence.Export
 {
@@ -40,12 +41,13 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             categoryPersistence = new ItemCategoryPersistence(currentDir, defaultProfile);
             videoGamePersistence = new VideoGamePersistence(currentDir, defaultProfile);
 
-            target = PersistenceExporter
-                .New()
-                .ComicBookPersistence(comicBookPersistence)
-                .ProductPersistence(productPersistence)
-                .VideoGamePersistence(videoGamePersistence)
-                .Build();
+            var container = new Container();
+            container.RegisterSingle<ISearchablePersistence<ComicBookSeries>>(comicBookPersistence);
+            container.RegisterSingle<ISearchablePersistence<Product>>(productPersistence);
+            container.RegisterSingle<ISearchablePersistence<VideoGame>>(videoGamePersistence);
+            container.RegisterSingle<ICategoryPersistence>(categoryPersistence);
+            
+            target = new PersistenceExporter(container);
 
             Random rnd = new Random(100);
 

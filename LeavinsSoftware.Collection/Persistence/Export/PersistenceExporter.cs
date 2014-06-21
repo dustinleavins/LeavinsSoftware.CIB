@@ -2,6 +2,7 @@
 // See the file 'LICENSE.txt' for copying permission.
 using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Persistence.Export.Extensions;
+using SimpleInjector;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,8 +20,12 @@ namespace LeavinsSoftware.Collection.Persistence.Export
     /// </summary>
     public sealed class PersistenceExporter
     {
-        private PersistenceExporter()
+        public PersistenceExporter(Container container)
         {
+            // TODO: Refactor to use Container instead of properties
+            ComicBookPersistence = container.GetInstance<ISearchablePersistence<ComicBookSeries>>();
+            ProductPersistence = container.GetInstance<ISearchablePersistence<Product>>();
+            VideoGamePersistence = container.GetInstance<ISearchablePersistence<VideoGame>>();
         }
 
         public ISearchablePersistence<ComicBookSeries> ComicBookPersistence { get; private set; }
@@ -45,12 +50,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
 
             dataFormat.Export(destinationFileName, exportData);
         }
-
-        public static ExporterBuilder New()
-        {
-            return new ExporterBuilder();
-        }
-
+        
         private List<ComicBookSeries> ComicBooks()
         {
             ModelSearchOptions options = new ModelSearchOptionsBuilder()
@@ -104,50 +104,6 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             }
 
             return games;
-        }
-
-        /// <summary>
-        /// Builds an object to perform data export.
-        /// </summary>
-        public class ExporterBuilder
-        {
-            public ExporterBuilder()
-            {
-            }
-
-            public ExporterBuilder ComicBookPersistence(ISearchablePersistence<ComicBookSeries> instance)
-            {
-                comicBookPersistence = instance;
-                return this;
-            }
-
-            public ExporterBuilder ProductPersistence(ISearchablePersistence<Product> instance)
-            {
-                productPersistence = instance;
-                return this;
-            }
-
-            public ExporterBuilder VideoGamePersistence(ISearchablePersistence<VideoGame> instance)
-            {
-                videoGamePersistence = instance;
-                return this;
-            }
-
-            public PersistenceExporter Build()
-            {
-                return new PersistenceExporter()
-                {
-                    ComicBookPersistence = comicBookPersistence,
-                    ProductPersistence = productPersistence,
-                    VideoGamePersistence = videoGamePersistence
-                };
-            }
-
-            private ISearchablePersistence<ComicBookSeries> comicBookPersistence;
-
-            private ISearchablePersistence<Product> productPersistence;
-
-            private ISearchablePersistence<VideoGame> videoGamePersistence;
         }
     }
 }

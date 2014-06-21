@@ -22,7 +22,7 @@ namespace LeavinsSoftware.Collection.Program
             InterfaceResources.CompanyName,
             InterfaceResources.ProgramName));
 
-        private static readonly Container Container = new Container();
+        public static readonly Container Container = new Container();
 
         public static UpdateNotifier UpdateNotifier { get; private set; }
 

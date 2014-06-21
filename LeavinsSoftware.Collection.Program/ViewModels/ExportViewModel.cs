@@ -41,11 +41,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     }
 
                     // Create exporter instance & export
-                    PersistenceExporter.New()
-                        .ComicBookPersistence(Persistence.GetInstance<ISearchablePersistence<ComicBookSeries>>())
-                        .ProductPersistence(Persistence.GetInstance<ISearchablePersistence<Product>>())
-                        .VideoGamePersistence(Persistence.GetInstance<ISearchablePersistence<VideoGame>>())
-                        .Build()
+                    (new PersistenceExporter(Persistence.Container))
                         .Export(ExportFileName);
 
                     // TODO: Catch possible exceptions

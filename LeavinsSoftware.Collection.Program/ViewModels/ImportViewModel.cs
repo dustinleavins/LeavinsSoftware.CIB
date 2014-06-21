@@ -42,14 +42,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     {
                         return;
                     }
-
-                    // Create exporter instance & export
-                    PersistenceImporter.New()
-                        .ComicBookPersistence(Persistence.GetInstance<ISearchablePersistence<ComicBookSeries>>())
-                        .ProductPersistence(Persistence.GetInstance<ISearchablePersistence<Product>>())
-                        .VideoGamePersistence(Persistence.GetInstance<ISearchablePersistence<VideoGame>>())
-                        .CategoryPersistence(Persistence.GetInstance<ICategoryPersistence>())
-                        .Build()
+                    
+                    (new PersistenceImporter(Persistence.Container))
                         .Import(ImportFileName, new ImportOptions(merge: MergeImportData));
 
                     // TODO: Catch possible exceptions

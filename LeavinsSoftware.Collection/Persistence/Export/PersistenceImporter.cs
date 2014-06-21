@@ -8,6 +8,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using System;
+using SimpleInjector;
 
 namespace LeavinsSoftware.Collection.Persistence.Export
 {
@@ -16,8 +17,13 @@ namespace LeavinsSoftware.Collection.Persistence.Export
     /// </summary>
     public sealed class PersistenceImporter
     {
-        private PersistenceImporter()
+        public PersistenceImporter(Container container)
         {
+            // TODO: Refactor to use Container instead of properties
+            ComicBookPersistence = container.GetInstance<ISearchablePersistence<ComicBookSeries>>();
+            ProductPersistence = container.GetInstance<ISearchablePersistence<Product>>();
+            VideoGamePersistence = container.GetInstance<ISearchablePersistence<VideoGame>>();
+            CategoryPersistence = container.GetInstance<ICategoryPersistence>();
         }
 
         public ISearchablePersistence<ComicBookSeries> ComicBookPersistence { get; private set; }
@@ -27,12 +33,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
         public ISearchablePersistence<VideoGame> VideoGamePersistence { get; private set; }
 
         public ICategoryPersistence CategoryPersistence { get; private set; }
-
-        public static ImporterBuilder New()
-        {
-            return new ImporterBuilder();
-        }
-
+        
         public void Import(string fileName, ImportOptions importOptions)
         {
             IDataImportFormat dataFormat = null;
@@ -475,59 +476,6 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             {
                 return existingNotes + "\n" + actualNotes;
             }
-        }
-
-        /// <summary>
-        /// Builds an object to perform data import.
-        /// </summary>
-        public class ImporterBuilder
-        {
-            public ImporterBuilder()
-            {
-            }
-
-            public ImporterBuilder ComicBookPersistence(ISearchablePersistence<ComicBookSeries> instance)
-            {
-                comicBookPersistence = instance;
-                return this;
-            }
-
-            public ImporterBuilder ProductPersistence(ISearchablePersistence<Product> instance)
-            {
-                productPersistence = instance;
-                return this;
-            }
-
-            public ImporterBuilder VideoGamePersistence(ISearchablePersistence<VideoGame> instance)
-            {
-                videoGamePersistence = instance;
-                return this;
-            }
-
-            public ImporterBuilder CategoryPersistence(ICategoryPersistence instance)
-            {
-                categoryPersistence = instance;
-                return this;
-            }
-
-            public PersistenceImporter Build()
-            {
-                return new PersistenceImporter()
-                {
-                    ComicBookPersistence = comicBookPersistence,
-                    ProductPersistence = productPersistence,
-                    VideoGamePersistence = videoGamePersistence,
-                    CategoryPersistence = categoryPersistence
-                };
-            }
-
-            private ISearchablePersistence<ComicBookSeries> comicBookPersistence;
-
-            private ISearchablePersistence<Product> productPersistence;
-
-            private ISearchablePersistence<VideoGame> videoGamePersistence;
-
-            private ICategoryPersistence categoryPersistence;
         }
     }
 }
