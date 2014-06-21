@@ -34,10 +34,7 @@ namespace LeavinsSoftware.Collection.Program
             var comicBookPersistence = new ComicBookPersistence(ProgramDir, defaultProfile);
             var videoGamePersistence = new VideoGamePersistence(ProgramDir, defaultProfile);
             var productPersistence = new ProductPersistence(ProgramDir, defaultProfile);
-
-            Container.RegisterSingle<IComicBookPersistence>(comicBookPersistence);
-            Container.RegisterSingle<IVideoGamePersistence>(videoGamePersistence);
-            Container.RegisterSingle<IProductPersistence>(productPersistence);
+            
             Container.RegisterSingle<ICategoryPersistence>(new ItemCategoryPersistence(ProgramDir, defaultProfile));
             Container.RegisterSingle<IProgramOptionsPersistence>(new ProgramOptionsPersistence(
                 new FileInfo(Path.Combine(ProgramDir.FullName, "options.xml"))));

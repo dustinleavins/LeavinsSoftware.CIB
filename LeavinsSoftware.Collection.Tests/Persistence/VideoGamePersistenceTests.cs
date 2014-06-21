@@ -16,7 +16,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
     [TestFixture]
     public sealed class VideoGamePersistenceTests
     {
-        private IVideoGamePersistence gamePersistence;
+        private ISearchablePersistence<VideoGame> gamePersistence;
         private ItemCategory primarySystem;
         private ItemCategory secondarySystem;
 
@@ -175,7 +175,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             MigrationRunner.Run(currentDir, paginationProfile);
             
 
-            IVideoGamePersistence target =
+            ISearchablePersistence<VideoGame> target =
                 new VideoGamePersistence(currentDir, paginationProfile);
 
             IPersistence<ItemCategory> categoryPersistence =
@@ -330,7 +330,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Profile listProfile = new Profile("listtype");
             MigrationRunner.Run(currentDir, listProfile);
 
-            IVideoGamePersistence target =
+            ISearchablePersistence<VideoGame> target =
                 new VideoGamePersistence(currentDir, listProfile);
 
             IPersistence<ItemCategory> categoryPersistence =

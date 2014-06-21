@@ -20,10 +20,10 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
     {
         private const string MainImportFileName = "Files\\Import Data 0.xml";
         private PersistenceImporter target;
-        private IComicBookPersistence comicBookPersistence;
-        private IProductPersistence productPersistence;
+        private ISearchablePersistence<ComicBookSeries> comicBookPersistence;
+        private ISearchablePersistence<Product> productPersistence;
         private ICategoryPersistence categoryPersistence;
-        private IVideoGamePersistence videoGamePersistence;
+        private ISearchablePersistence<VideoGame> videoGamePersistence;
 
         [SetUp]
         public void SetUp()

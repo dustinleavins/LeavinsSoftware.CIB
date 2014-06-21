@@ -20,11 +20,11 @@ namespace LeavinsSoftware.Collection.Persistence.Export
         {
         }
 
-        public IComicBookPersistence ComicBookPersistence { get; private set; }
+        public ISearchablePersistence<ComicBookSeries> ComicBookPersistence { get; private set; }
 
-        public IProductPersistence ProductPersistence { get; private set; }
+        public ISearchablePersistence<Product> ProductPersistence { get; private set; }
 
-        public IVideoGamePersistence VideoGamePersistence { get; private set; }
+        public ISearchablePersistence<VideoGame> VideoGamePersistence { get; private set; }
 
         public ICategoryPersistence CategoryPersistence { get; private set; }
 
@@ -486,19 +486,19 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             {
             }
 
-            public ImporterBuilder ComicBookPersistence(IComicBookPersistence instance)
+            public ImporterBuilder ComicBookPersistence(ISearchablePersistence<ComicBookSeries> instance)
             {
                 comicBookPersistence = instance;
                 return this;
             }
 
-            public ImporterBuilder ProductPersistence(IProductPersistence instance)
+            public ImporterBuilder ProductPersistence(ISearchablePersistence<Product> instance)
             {
                 productPersistence = instance;
                 return this;
             }
 
-            public ImporterBuilder VideoGamePersistence(IVideoGamePersistence instance)
+            public ImporterBuilder VideoGamePersistence(ISearchablePersistence<VideoGame> instance)
             {
                 videoGamePersistence = instance;
                 return this;
@@ -521,11 +521,11 @@ namespace LeavinsSoftware.Collection.Persistence.Export
                 };
             }
 
-            private IComicBookPersistence comicBookPersistence;
+            private ISearchablePersistence<ComicBookSeries> comicBookPersistence;
 
-            private IProductPersistence productPersistence;
+            private ISearchablePersistence<Product> productPersistence;
 
-            private IVideoGamePersistence videoGamePersistence;
+            private ISearchablePersistence<VideoGame> videoGamePersistence;
 
             private ICategoryPersistence categoryPersistence;
         }

@@ -15,7 +15,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
     [TestFixture]
     public sealed class ProductPersistenceTests
     {
-        private IProductPersistence productPersistence;
+        private ISearchablePersistence<Product> productPersistence;
         private ItemCategory primaryCategory;
         private ItemCategory secondaryCategory;
 
@@ -162,7 +162,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Profile paginationProfile = new Profile("pagination");
             MigrationRunner.Run(currentDir, paginationProfile);
 
-            IProductPersistence target =
+            ISearchablePersistence<Product> target =
                 new ProductPersistence(currentDir, paginationProfile);
 
             IPersistence<ItemCategory> categoryPersistence =
@@ -309,7 +309,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Profile listProfile = new Profile("listtype");
             MigrationRunner.Run(currentDir, listProfile);
 
-            IProductPersistence target =
+            ISearchablePersistence<Product> target =
                 new ProductPersistence(currentDir, listProfile);
 
             IPersistence<ItemCategory> categoryPersistence =

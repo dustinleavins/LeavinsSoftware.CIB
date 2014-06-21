@@ -14,7 +14,8 @@ using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
-    public sealed class ProductPersistence :  PersistenceBase<Product>, IProductPersistence
+    public sealed class ProductPersistence :
+        PersistenceBase<Product>, ISearchablePersistence<Product>
     {
         public ProductPersistence(DirectoryInfo dataDir, Profile initialProfile)
         {

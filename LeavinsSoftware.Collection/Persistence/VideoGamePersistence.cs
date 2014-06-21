@@ -14,7 +14,8 @@ using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
-    public sealed class VideoGamePersistence : PersistenceBase<VideoGame>, IVideoGamePersistence
+    public sealed class VideoGamePersistence :
+        PersistenceBase<VideoGame>, ISearchablePersistence<VideoGame>
     {
         public VideoGamePersistence(DirectoryInfo dataDir, Profile initialProfile)
         {

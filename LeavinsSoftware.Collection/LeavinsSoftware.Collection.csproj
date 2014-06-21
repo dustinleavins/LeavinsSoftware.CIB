@@ -101,15 +101,12 @@
     <Compile Include="Persistence\Export\PersistenceExporter.cs" />
     <Compile Include="Persistence\Export\PersistenceImporter.cs" />
     <Compile Include="Persistence\ICategoryPersistence.cs" />
-    <Compile Include="Persistence\IComicBookPersistence.cs" />
     <Compile Include="Persistence\IKeyValueStore.cs" />
     <Compile Include="Persistence\IProgramOptionsPersistence.cs" />
-    <Compile Include="Persistence\IProductPersistence.cs" />
     <Compile Include="Persistence\ISearchablePersistenceOfT.cs" />
     <Compile Include="Persistence\ItemCategoryPersistence.cs" />
     <Compile Include="Persistence\ComicBookPersistence.cs" />
     <Compile Include="Persistence\IPersistenceOfT.cs" />
-    <Compile Include="Persistence\IVideoGamePersistence.cs" />
     <Compile Include="Persistence\KeyValueStore.cs" />
     <Compile Include="Persistence\Migrations\01InitialSetup.cs" />
     <Compile Include="Persistence\Migrations\02AddListTypeColumn.cs" />

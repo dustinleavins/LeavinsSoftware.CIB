@@ -12,7 +12,8 @@ using System.Globalization;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
-    public sealed class ComicBookPersistence : PersistenceBase<ComicBookSeries>, IComicBookPersistence
+    public sealed class ComicBookPersistence :
+        PersistenceBase<ComicBookSeries>, ISearchablePersistence<ComicBookSeries>
     {
         public ComicBookPersistence(DirectoryInfo dataDir, Profile initialProfile)
         {

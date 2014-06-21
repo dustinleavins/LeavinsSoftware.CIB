@@ -15,7 +15,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
     [TestFixture]
     public sealed class ComicBookPersistenceTests
     {
-        private IComicBookPersistence comicPersistence;
+        private ISearchablePersistence<ComicBookSeries> comicPersistence;
         private ItemCategory primaryPublisher;
         private ItemCategory secondaryPublisher;
 
@@ -325,7 +325,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Profile paginationProfile = new Profile("pagination");
             MigrationRunner.Run(currentDir, paginationProfile);
 
-            IComicBookPersistence target =
+            ISearchablePersistence<ComicBookSeries> target =
                 new ComicBookPersistence(currentDir, paginationProfile);
 
             IPersistence<ItemCategory> categoryPersistence =
@@ -491,7 +491,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Profile listProfile = new Profile("listtype");
             MigrationRunner.Run(currentDir, listProfile);
 
-            IComicBookPersistence target =
+            ISearchablePersistence<ComicBookSeries> target =
                 new ComicBookPersistence(currentDir, listProfile);
 
             IPersistence<ItemCategory> categoryPersistence =

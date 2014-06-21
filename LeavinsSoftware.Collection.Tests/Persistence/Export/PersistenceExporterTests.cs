@@ -18,10 +18,10 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
     public sealed class PersistenceExporterTests
     {
         private PersistenceExporter target;
-        private IComicBookPersistence comicBookPersistence;
-        private IProductPersistence productPersistence;
+        private ISearchablePersistence<ComicBookSeries> comicBookPersistence;
+        private ISearchablePersistence<Product> productPersistence;
         private ICategoryPersistence categoryPersistence;
-        private IVideoGamePersistence videoGamePersistence;
+        private ISearchablePersistence<VideoGame> videoGamePersistence;
 
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
