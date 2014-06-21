@@ -78,8 +78,6 @@ namespace LeavinsSoftware.Collection.Models
                 }
             }
         }
-        
-        public virtual bool IsSummary { get { return false; } }
 
         private string name;
         private string notes;

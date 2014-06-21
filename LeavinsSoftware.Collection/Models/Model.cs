@@ -47,6 +47,8 @@ namespace LeavinsSoftware.Collection.Models
         		return id == 0;
         	}
         }
+        
+        public virtual bool IsSummary { get { return false; } }
 
         /// <summary>
         /// Triggers PropertyChanged event for the specified property.

@@ -22,6 +22,11 @@ namespace LeavinsSoftware.Collection.Persistence
             {
                 throw new ArgumentNullException("item", "item cannot be null");
             }
+
+            if (item.IsSummary)
+            {
+                throw new ArgumentException("cannot persist 'summary' item", "item");
+            }
             
             item.Validate();
             return CreateBase(item);
@@ -36,7 +41,15 @@ namespace LeavinsSoftware.Collection.Persistence
                 throw new ArgumentException("ID must be positive", "id");
             }
             
-            return RetrieveBase(id);
+            T item =  RetrieveBase(id);
+            
+            if (item != null && item.IsSummary)
+            {
+                throw new InvalidOperationException(
+                    "RetrieveBase tried to return a 'summary' item");
+            }
+            
+            return item;
         }
 
         protected abstract T RetrieveBase(long id);
@@ -46,6 +59,11 @@ namespace LeavinsSoftware.Collection.Persistence
             if (item == null)
             {
                 throw new ArgumentNullException("item", "item cannot be null");
+            }
+            
+            if (item.IsSummary)
+            {
+                throw new ArgumentException("cannot persist 'summary' item", "item");
             }
             
             item.Validate();
