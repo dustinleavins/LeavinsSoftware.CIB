@@ -151,7 +151,6 @@ namespace LeavinsSoftware.Collection.Tests.Models
             };
             
             Assert.IsFalse(comicBookWithoutIssues.IsValid());
-            Assert.IsFalse(comicBookWithoutIssues.IsValid("Entries"));
         }
         
         [Test]
@@ -170,7 +169,20 @@ namespace LeavinsSoftware.Collection.Tests.Models
             comicBookWithInvalidIssue.Entries.Add(new ComicBookSeriesEntry() { Id = -1 });
             
             Assert.IsFalse(comicBookWithInvalidIssue.IsValid());
-            Assert.IsFalse(comicBookWithInvalidIssue.IsValid("Entries"));
+        }
+        
+        [Test]
+        public void SummaryValidationTest()
+        {
+            ComicBookSeries summary = ComicBookSeries.NewSummary();
+            summary.Name = "Test Comic Book";
+            summary.Publisher = new ItemCategory()
+            {
+                Name = "Category",
+                CategoryType = ItemCategoryType.ComicBook
+            };
+            
+            Assert.IsTrue(target.IsValid());
         }
     }
 }

@@ -14,6 +14,7 @@ namespace LeavinsSoftware.Collection.Models
     /// Represents a series of comic books
     /// </summary>
     [ItemCategoryType(ItemCategoryType.ComicBook)]
+    [CustomValidation(typeof(ComicBookSeries), "ValidateItems")]
     public sealed class ComicBookSeries : Item
     {
         public ComicBookSeries()
@@ -38,7 +39,6 @@ namespace LeavinsSoftware.Collection.Models
             }
         }
 
-        [CustomValidation(typeof(ComicBookSeries), "ValidateItems")]
         public ObservableCollection<ComicBookSeriesEntry> Entries
         {
             get
@@ -46,25 +46,49 @@ namespace LeavinsSoftware.Collection.Models
                 return entries;
             }
         }
+        
+        public static ComicBookSeries NewSummary()
+        {
+            ComicBookSeries series = new ComicBookSeries();
+            series.isSummary = true;
+            return series;
+        }
 
-        public static ValidationResult ValidateItems(ObservableCollection<ComicBookSeriesEntry> items,
+        public static ValidationResult ValidateItems(ComicBookSeries series,
             ValidationContext context)
         {
+            if (series.IsSummary)
+            {
+                return ValidationResult.Success;
+            }
+            
+            var items = series.Entries;
             if (items.Count == 0)
             {
-                return new ValidationResult("This book should have at least one issue");
+                return new ValidationResult("This book should have at least one issue",
+                    new string[] { "Entries" });
             }
             else if (items.Any(i => !i.IsValid()))
             {
-                return new ValidationResult("Invalid item");
+                return new ValidationResult("Invalid item",
+                    new string[] { "Entries" });
             }
             else
             {
                 return ValidationResult.Success;
             }
         }
+        
+        public override bool IsSummary
+        {
+            get
+            {
+                return isSummary;
+            }
+        }
 
         private ItemCategory publisher;
         private ObservableCollection<ComicBookSeriesEntry> entries;
+        private bool isSummary;
     }
 }
