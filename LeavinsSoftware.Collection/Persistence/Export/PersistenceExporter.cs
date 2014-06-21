@@ -62,7 +62,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
 
             foreach (var pageOfSummaries in ComicBookPersistence.AllPages(options))
             {
-                foreach (ComicBookSummary summary in pageOfSummaries)
+                foreach (ComicBookSeries summary in pageOfSummaries)
                 {
                     ComicBookSeries book = ComicBookPersistence.Retrieve(summary.Id);
                     books.Add(book);

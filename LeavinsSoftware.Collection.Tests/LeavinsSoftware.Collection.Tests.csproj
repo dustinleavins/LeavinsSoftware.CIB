@@ -79,7 +79,6 @@
     <Compile Include="EqualsTester.cs" />
     <Compile Include="Helpers\AssertEquality.cs" />
     <Compile Include="Models\ComicBookSeriesEntryTests.cs" />
-    <Compile Include="Models\ComicBookSummaryTests.cs" />
     <Compile Include="Models\ComicBookSeriesTests.cs" />
     <Compile Include="Models\ItemCategoryTests.cs" />
     <Compile Include="Models\ItemTests.cs" />

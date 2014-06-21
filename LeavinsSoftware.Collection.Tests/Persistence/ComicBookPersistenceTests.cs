@@ -408,7 +408,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
 
             #endregion
 
-            List<ComicBookSummary> tempResults = new List<ComicBookSummary>();
+            List<ComicBookSeries> tempResults = new List<ComicBookSeries>();
 
             // Null Category
             ModelSearchOptions allInclusiveOptions = new ModelSearchOptionsBuilder()
@@ -420,7 +420,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
 
             for (long pageNumber = 0; pageNumber < 4; ++pageNumber)
             {
-                List<ComicBookSummary> currentPage = target.Page(allInclusiveOptions, pageNumber);
+                List<ComicBookSeries> currentPage = target.Page(allInclusiveOptions, pageNumber);
                 Assert.AreEqual(1, currentPage.Count);
                 tempResults.AddRange(currentPage);
             }
@@ -444,7 +444,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
 
             for (long pageNumber = 0; pageNumber < 3; ++pageNumber)
             {
-                List<ComicBookSummary> currentPage = target.Page(categoryOneOptions, pageNumber);
+                List<ComicBookSeries> currentPage = target.Page(categoryOneOptions, pageNumber);
                 Assert.AreEqual(1, currentPage.Count);
                 tempResults.AddRange(currentPage);
             }
@@ -543,7 +543,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 Assert.AreEqual(1, target.TotalResults(searchOptions), errorMsg);
                 Assert.AreEqual(1, target.Page(searchOptions, 0).Count, errorMsg);
 
-                ComicBookSummary retrievedSummary = target.Page(searchOptions, 0).First();
+                ComicBookSeries retrievedSummary = target.Page(searchOptions, 0).First();
 
                 if (listType == ItemListType.Have)
                 {
@@ -564,7 +564,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Assert.AreEqual(1, target.TotalResults(allInclusiveOptions));
             Assert.AreEqual(1, target.Page(allInclusiveOptions, 0).Count);
             
-            ComicBookSummary issueSummary = target.Page(allInclusiveOptions, 0).First();
+            ComicBookSeries issueSummary = target.Page(allInclusiveOptions, 0).First();
             Assert.AreEqual(6, issueSummary.EntriesCount);
             
             // Name search search

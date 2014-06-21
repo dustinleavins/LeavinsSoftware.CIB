@@ -172,9 +172,9 @@ namespace LeavinsSoftware.Collection.Tests.Models
         }
         
         [Test]
-        public void SummaryValidationTest()
+        public void NewSummaryTest()
         {
-            ComicBookSeries summary = ComicBookSeries.NewSummary();
+            ComicBookSeries summary = ComicBookSeries.NewSummary(5);
             summary.Name = "Test Comic Book";
             summary.Publisher = new ItemCategory()
             {
@@ -183,6 +183,7 @@ namespace LeavinsSoftware.Collection.Tests.Models
             };
             
             Assert.IsTrue(target.IsValid());
+            Assert.AreEqual(5, summary.EntriesCount);
         }
     }
 }

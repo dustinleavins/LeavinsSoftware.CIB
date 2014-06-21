@@ -279,7 +279,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export
 
         private ComicBookSeries FindMatch(ComicBookSeries bookFromImportFile)
         {
-            ComicBookSummary matchingSummary = null;
+            ComicBookSeries matchingSummary = null;
             ComicBookSeries match = null;
 
             foreach (var page in ComicBookPersistence.AllPages())

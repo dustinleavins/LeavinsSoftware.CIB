@@ -42,7 +42,7 @@ namespace LeavinsSoftware.Collection.Program
             Container.RegisterSingle<IProgramOptionsPersistence>(new ProgramOptionsPersistence(
                 new FileInfo(Path.Combine(ProgramDir.FullName, "options.xml"))));
 
-            Container.RegisterSingle<ISearchablePersistence<ComicBookSummary>>(comicBookPersistence);
+            Container.RegisterSingle<ISearchablePersistence<ComicBookSeries>>(comicBookPersistence);
             Container.RegisterSingle<ISearchablePersistence<VideoGame>>(videoGamePersistence);
             Container.RegisterSingle<ISearchablePersistence<Product>>(productPersistence);
             

@@ -183,9 +183,9 @@ namespace LeavinsSoftware.Collection.Persistence
             // TODO: Trigger changed event
         }
 
-        public List<ComicBookSummary> Page(ModelSearchOptions options, long pageNumber)
+        public List<ComicBookSeries> Page(ModelSearchOptions options, long pageNumber)
         {
-            List<ComicBookSummary> page = new List<ComicBookSummary>();
+            List<ComicBookSeries> page = new List<ComicBookSeries>();
 
             Dictionary<long, long> categoryIdDict =
                 new Dictionary<long, long>();
@@ -254,7 +254,7 @@ namespace LeavinsSoftware.Collection.Persistence
                     {
                         while (reader.Read())
                         {
-                            ComicBookSummary book = ReaderToComicBookSummary(reader);
+                            ComicBookSeries book = ReaderToComicBookSummary(reader);
 
                             categoryIdDict[book.Id] =
                                 long.Parse(reader["categoryid"].ToString(),
@@ -267,14 +267,14 @@ namespace LeavinsSoftware.Collection.Persistence
 
                 if (options.ItemCategory != null)
                 {
-                    foreach (ComicBookSummary item in page)
+                    foreach (ComicBookSeries item in page)
                     {
                         item.Publisher = options.ItemCategory;
                     }
                 }
                 else
                 {
-                    foreach (ComicBookSummary item in page)
+                    foreach (ComicBookSeries item in page)
                     {
                         long categoryId = categoryIdDict[item.Id];
                         item.Publisher = GetCategory(categoryId, connection);
@@ -390,17 +390,17 @@ namespace LeavinsSoftware.Collection.Persistence
             return targetBook;
         }
 
-        private static ComicBookSummary ReaderToComicBookSummary(SQLiteDataReader reader)
+        private static ComicBookSeries ReaderToComicBookSummary(SQLiteDataReader reader)
         {
-            ComicBookSummary targetBook = new ComicBookSummary();
+            long entriesCount = long.Parse(reader["count"].ToString(),
+                CultureInfo.InvariantCulture);
+            
+            ComicBookSeries targetBook = ComicBookSeries.NewSummary(entriesCount);
 
             targetBook.Id = long.Parse(reader["comicid"].ToString(),
                 CultureInfo.InvariantCulture);
             targetBook.Name = reader["name"].ToString();
             targetBook.Notes = reader["notes"].ToString();
-            
-            targetBook.EntriesCount = long.Parse(reader["count"].ToString(),
-                CultureInfo.InvariantCulture);
 
             return targetBook;
         }

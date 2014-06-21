@@ -63,13 +63,13 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             }.Build();
 
             // ComicBook checks
-            List<ComicBookSummary> comicResults = comicBookPersistence.Page(searchOptions, 0);
+            List<ComicBookSeries> comicResults = comicBookPersistence.Page(searchOptions, 0);
             Assert.IsNotNull(comicResults);
             Assert.AreEqual(2, comicResults.Count);
             Assert.AreEqual(3, comicResults.First().EntriesCount);
             Assert.AreEqual(3, comicResults.Skip(1).First().EntriesCount);
 
-            foreach (ComicBookSummary summary in comicResults)
+            foreach (ComicBookSeries summary in comicResults)
             {
                 ComicBookSeries actualBook = comicBookPersistence.Retrieve(summary.Id);
                 Assert.IsNotNull(actualBook);
@@ -186,7 +186,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
 
             foreach (var page in comicBookPersistence.AllPages())
             {
-                foreach (ComicBookSummary summary in page)
+                foreach (ComicBookSeries summary in page)
                 {
                     preImportComics.Add(comicBookPersistence.Retrieve(summary.Id));
                 }
@@ -240,7 +240,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             // ComicBook checks
             foreach (var page in comicBookPersistence.AllPages())
             {
-                foreach (ComicBookSummary summary in page)
+                foreach (ComicBookSeries summary in page)
                 {
                     ComicBookSeries book = comicBookPersistence.Retrieve(summary.Id);
                     ComicBookSeries preImportMatch = preImportComics

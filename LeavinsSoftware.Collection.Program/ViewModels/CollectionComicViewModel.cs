@@ -9,7 +9,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
     /// <summary>
     /// ViewModel for <see cref="CollectionComicPage"/>.
     /// </summary>
-    public sealed class CollectionComicViewModel : CollectionViewModelBase<ComicBookSummary>
+    public sealed class CollectionComicViewModel : CollectionViewModelBase<ComicBookSeries>
     {
         public CollectionComicViewModel(IAppNavigationService nav, ItemCategory subCategory) :
             base(nav, subCategory)

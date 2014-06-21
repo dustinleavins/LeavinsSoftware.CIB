@@ -23,7 +23,7 @@ namespace LeavinsSoftware.Collection.Persistence
     /// classes don't need to grab every individual issue for every search.
     /// </remarks>
     public interface IComicBookPersistence :
-        IPersistence<ComicBookSeries>, ISearchablePersistence<ComicBookSummary>
+        IPersistence<ComicBookSeries>, ISearchablePersistence<ComicBookSeries>
     {
     }
 }

@@ -77,7 +77,6 @@
     </Compile>
     <Compile Include="Models\ComicBookSeries.cs" />
     <Compile Include="Models\ComicBookSeriesEntry.cs" />
-    <Compile Include="Models\ComicBookSummary.cs" />
     <Compile Include="Models\ItemCategoryTypeAttribute.cs" />
     <Compile Include="Models\VolumeType.cs" />
     <Compile Include="Models\DistributionType.cs" />

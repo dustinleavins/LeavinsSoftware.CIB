@@ -47,10 +47,11 @@ namespace LeavinsSoftware.Collection.Models
             }
         }
         
-        public static ComicBookSeries NewSummary()
+        public static ComicBookSeries NewSummary(long entriesCount)
         {
             ComicBookSeries series = new ComicBookSeries();
             series.isSummary = true;
+            series.entriesCount = entriesCount;
             return series;
         }
 
@@ -86,9 +87,18 @@ namespace LeavinsSoftware.Collection.Models
                 return isSummary;
             }
         }
+        
+        public long EntriesCount
+        {
+            get
+            {
+                return isSummary ? entriesCount : entries.Count;
+            }
+        }
 
         private ItemCategory publisher;
         private ObservableCollection<ComicBookSeriesEntry> entries;
         private bool isSummary;
+        private long entriesCount;
     }
 }
