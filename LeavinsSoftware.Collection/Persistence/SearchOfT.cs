@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LeavinsSoftware.Collection.Models;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
@@ -12,7 +13,7 @@ namespace LeavinsSoftware.Collection.Persistence
     /// Represents an ongoing search.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public sealed class Search<T>
+    public sealed class Search<T> where T : Model
     {
         public Search(ISearchablePersistence<T> persistence, ModelSearchOptions options)
         {

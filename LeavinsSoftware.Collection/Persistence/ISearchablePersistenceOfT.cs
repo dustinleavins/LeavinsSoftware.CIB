@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LeavinsSoftware.Collection.Models;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
@@ -12,7 +13,7 @@ namespace LeavinsSoftware.Collection.Persistence
     /// Interface for classes that enable searches for instances of type T.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface ISearchablePersistence<T>
+    public interface ISearchablePersistence<T> : IPersistence<T> where T : Model
     {
         /// <summary>
         /// Retrieves a page of search results.

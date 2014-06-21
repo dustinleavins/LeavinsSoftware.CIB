@@ -21,7 +21,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export.Extensions
         /// <param name="persistence"></param>
         /// <returns></returns>
         public static IEnumerable<List<T>> AllPages<T>(
-            this ISearchablePersistence<T> persistence)
+            this ISearchablePersistence<T> persistence) where T : Model
         {
             ModelSearchOptions options = new ModelSearchOptionsBuilder()
             {
@@ -40,7 +40,7 @@ namespace LeavinsSoftware.Collection.Persistence.Export.Extensions
         /// <returns></returns>
         public static IEnumerable<List<T>> AllPages<T>(
             this ISearchablePersistence<T> persistence,
-            ModelSearchOptions options)
+            ModelSearchOptions options) where T : Model
         {
             long numberOfPages = persistence.TotalResults(options);
 
