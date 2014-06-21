@@ -49,7 +49,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         /// <param name="comicId"></param>
         public ItemComicViewModel(IAppNavigationService nav, long comicId)
         {
-            Item = Persistence.GetInstance<IComicBookPersistence>().Retrieve(comicId);
+            Item = Persistence.GetInstance<IPersistence<ComicBookSeries>>().Retrieve(comicId);
 
             Setup(nav);
         }
@@ -84,11 +84,11 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
                     if (Item.Id == 0)
                     {
-                        Persistence.GetInstance<IComicBookPersistence>().Create(Item);
+                        Persistence.GetInstance<IPersistence<ComicBookSeries>>().Create(Item);
                     }
                     else
                     {
-                        Persistence.GetInstance<IComicBookPersistence>().Update(Item);
+                        Persistence.GetInstance<IPersistence<ComicBookSeries>>().Update(Item);
                     }
 
                     Nav.GoBack();

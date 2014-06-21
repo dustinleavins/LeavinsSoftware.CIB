@@ -53,7 +53,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         /// <param name="gameId"></param>
         public ItemGameViewModel(IAppNavigationService nav, long gameId)
         {
-            Item = Persistence.GetInstance<IVideoGamePersistence>().Retrieve(gameId);
+            Item = Persistence.GetInstance<IPersistence<VideoGame>>().Retrieve(gameId);
 
             Setup(nav);
         }
@@ -87,7 +87,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
                     if (Item.Id == 0)
                     {
-                        Persistence.GetInstance<IVideoGamePersistence>().Create(Item);
+                        Persistence.GetInstance<IPersistence<VideoGame>>().Create(Item);
                         
                         // Save DistributionType as last used
                         var store = Persistence.GetInstance<IKeyValueStore>();
@@ -97,7 +97,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                     }
                     else
                     {
-                        Persistence.GetInstance<IVideoGamePersistence>().Update(Item);
+                        Persistence.GetInstance<IPersistence<VideoGame>>().Update(Item);
                     }
 
                     Nav.GoBack();

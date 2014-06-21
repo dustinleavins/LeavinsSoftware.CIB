@@ -286,13 +286,8 @@ namespace LeavinsSoftware.Collection.Persistence.Export
             {
                 // Search for match in page
                 matchingSummary = page.FirstOrDefault(existing =>
-                    {
-                        return string.Equals(bookFromImportFile.Name,
-                            existing.Name,
-                            StringComparison.OrdinalIgnoreCase) &&
-
-                            IsCategoryMatch(bookFromImportFile.Publisher, existing.Publisher);
-                    });
+                    string.Equals(bookFromImportFile.Name, existing.Name, StringComparison.OrdinalIgnoreCase) &&
+                    IsCategoryMatch(bookFromImportFile.Publisher, existing.Publisher));
 
                 if (matchingSummary != null)
                 {

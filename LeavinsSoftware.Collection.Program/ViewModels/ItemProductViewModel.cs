@@ -49,7 +49,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         /// <param name="productId"></param>
         public ItemProductViewModel(IAppNavigationService nav, long productId)
         {
-            Item = Persistence.GetInstance<IProductPersistence>().Retrieve(productId);
+            Item = Persistence.GetInstance<IPersistence<Product>>().Retrieve(productId);
 
             Setup(nav);
         }
@@ -83,11 +83,11 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
                     if (Item.Id == 0)
                     {
-                        Persistence.GetInstance<IProductPersistence>().Create(Item);
+                        Persistence.GetInstance<IPersistence<Product>>().Create(Item);
                     }
                     else
                     {
-                        Persistence.GetInstance<IProductPersistence>().Update(Item);
+                        Persistence.GetInstance<IPersistence<Product>>().Update(Item);
                     }
 
                     Nav.GoBack();
