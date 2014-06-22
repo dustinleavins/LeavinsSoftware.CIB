@@ -12,6 +12,7 @@ using System.Windows.Media;
 using KSMVVM.WPF;
 using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Program.ViewModels;
+using LeavinsSoftware.Collection.Program.Resources;
 
 namespace LeavinsSoftware.Collection.Program
 {
@@ -46,11 +47,8 @@ namespace LeavinsSoftware.Collection.Program
             }
             
             page.DataContext = page.model;
+            page.Title = ItemResources.Get(type).Name;
 
-            // Set title; if it just used binding, it appears as blank
-            // when the user first navigates to a CategoryPage
-            page.Title = page.model.Title;
-            
             return page;
         }
         
@@ -59,11 +57,8 @@ namespace LeavinsSoftware.Collection.Program
             var page = new CategoryPage();
             page.model = CategoryViewModel.Create<TItem>(new PageNavigationService(page));
             page.DataContext = page.model;
-            
-            // Set title; if it just used binding, it appears as blank
-            // when the user first navigates to a CategoryPage
-            page.Title = page.model.Title;
-            
+            page.Title = ItemResources.Get<TItem>().Name;
+
             return page;
         }
         

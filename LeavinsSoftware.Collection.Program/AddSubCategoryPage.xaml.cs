@@ -24,20 +24,9 @@ namespace LeavinsSoftware.Collection.Program
             model = new AddSubCategoryViewModel(new PageNavigationService(this), categoryType);
             DataContext = model;
 
-            switch (model.MainCategory)
-            {
-                case ItemCategoryType.Product:
-                    Title = InterfaceResources.AddSubCategory_Product;
-                    break;
-                case ItemCategoryType.ComicBook:
-                    Title = InterfaceResources.AddSubCategory_ComicBook;
-                    break;
-                case ItemCategoryType.VideoGame:
-                    Title = InterfaceResources.AddSubCategory_VideoGame;
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
+            Title = ItemResources
+                .Get(model.MainCategory)
+                .AddSubCategory;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -64,20 +53,9 @@ namespace LeavinsSoftware.Collection.Program
                 }
             }
 
-            switch (model.MainCategory)
-            {
-                case ItemCategoryType.Product:
-                    addSubCategoryButton.Content = InterfaceResources.AddSubCategory_Product;
-                    break;
-                case ItemCategoryType.ComicBook:
-                    addSubCategoryButton.Content = InterfaceResources.AddSubCategory_ComicBook;
-                    break;
-                case ItemCategoryType.VideoGame:
-                    addSubCategoryButton.Content = InterfaceResources.AddSubCategory_VideoGame;
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
+            addSubCategoryButton.Content = ItemResources
+                .Get(model.MainCategory)
+                .AddSubCategory;
 
             if (!atLeastOneCategory)
             {

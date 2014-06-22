@@ -156,11 +156,17 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Resources\IItemSpecificResources.cs" />
+    <Compile Include="Resources\IItemSpecificResourcesOfTItem.cs" />
     <Compile Include="Resources\InterfaceResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InterfaceResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\ItemResources.cs" />
+    <Compile Include="Resources\ItemSpecific\ComicBookResources.cs" />
+    <Compile Include="Resources\ItemSpecific\ProductResources.cs" />
+    <Compile Include="Resources\ItemSpecific\VideoGameResources.cs" />
     <Compile Include="Update\UpdateNotifier.cs" />
     <Compile Include="ViewModels\AddMainCategoryViewModel.cs" />
     <Compile Include="ViewModels\AddSubCategoryViewModel.cs" />
