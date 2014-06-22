@@ -15,7 +15,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
     /// <typeparam name="TSearchable"></typeparam>
     public abstract class CollectionViewModelBase<TSearchable> : ViewModelBase where TSearchable : Item
     {
-        public CollectionViewModelBase(IAppNavigationService nav, ItemCategory subCategory)
+        protected CollectionViewModelBase(IAppNavigationService nav, ItemCategory subCategory)
         {
             Nav = nav;
             SubCategory = subCategory;
@@ -45,6 +45,17 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
             Search = new CustomCommand((x) =>
                 NewSearch());
+            
+            DeleteSelectedItem = new CustomCommand(
+                (x) =>
+                {
+                    var config = new DeleteItemPage.DeleteItemPageConfig()
+                    {
+                        PagesToGoBack = 1
+                    };
+                    
+                    Nav.Navigate(() => DeleteItemPage.PageForItemId<Product>(SelectedItem.Id, config));
+                });
         }
 
         public IAppNavigationService Nav { get; private set; }
@@ -57,7 +68,7 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
         public abstract CustomCommand EditSelectedItem { get; protected set; }
         
-        public abstract CustomCommand DeleteSelectedItem { get; protected set; }
+        public CustomCommand DeleteSelectedItem { get; protected set; }
 
         public CustomCommand PreviousPage { get; private set; }
 

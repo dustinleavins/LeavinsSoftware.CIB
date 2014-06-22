@@ -33,23 +33,10 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
                 // CanExecute
                 (x) => SelectedItem != null
             );
-            
-            DeleteSelectedItem = new CustomCommand(
-                (x) =>
-                {
-                    var config = new DeleteItemPage.DeleteItemPageConfig()
-                    {
-                        PagesToGoBack = 1
-                    };
-                    
-                    Nav.Navigate(() => DeleteItemPage.PageForItemId<ComicBookSeries>(SelectedItem.Id, config));
-                });
         }
 
         public override ICommand AddItem { get; protected set; }
 
         public override CustomCommand EditSelectedItem { get; protected set; }
-        
-        public override CustomCommand DeleteSelectedItem { get; protected set; }
     }
 }
