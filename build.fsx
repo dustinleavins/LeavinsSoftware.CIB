@@ -6,6 +6,8 @@ open System.Text.RegularExpressions
 open Microsoft.Win32
 open System.Diagnostics
 
+RestorePackages()
+
 exception NsisError of string
 
 let nsis = (fun args ->
