@@ -5,6 +5,7 @@ using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Persistence.Migrations;
 using LeavinsSoftware.Collection.Tests.Helpers;
 using NUnit.Framework;
+using Ploeh.AutoFixture;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,6 +19,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         private ISearchablePersistence<ComicBookSeries> comicPersistence;
         private ItemCategory primaryPublisher;
         private ItemCategory secondaryPublisher;
+        private Fixture fixture;
 
         [TestFixtureSetUp]
         public void FixtureSetUp()
@@ -35,46 +37,35 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
 
             IPersistence<ItemCategory> categoryPersistence =
                 new ItemCategoryPersistence(currentDir, new Profile("default"));
-
-            primaryPublisher = new ItemCategory()
-            {
-                Name = "Publisher 1",
-                CategoryType = ItemCategoryType.ComicBook
-            };
-
-            categoryPersistence.Create(primaryPublisher);
             
-            secondaryPublisher = new ItemCategory()
-            {
-                Name = "Publisher 2",
-                CategoryType = ItemCategoryType.ComicBook
-            };
+            fixture = new Fixture();
             
-            categoryPersistence.Create(secondaryPublisher);
+            fixture.Freeze<ItemCategoryType>(ItemCategoryType.ComicBook);
+            fixture.Freeze<DistributionType>(DistributionType.Digital);
+            fixture.Freeze<VolumeType>(VolumeType.Issue);
+            fixture.Customize<ItemCategory>(obj => obj
+                .With(c => c.Code, String.Empty));
+            
+            fixture.Customize<Model>(obj => obj
+                .With(s => s.Id, 0));
+            
+            fixture.Customize<ComicBookSeriesEntry>(obj => obj
+                .With(e => e.SeriesId, 0));
+
+            primaryPublisher = categoryPersistence.Create(fixture.Create<ItemCategory>());
+            secondaryPublisher = categoryPersistence.Create(fixture.Create<ItemCategory>());
         }
 
         [Test]
         public void CreateTest()
         {
-            ComicBookSeries newComic = new ComicBookSeries()
-            {
-                Name = "Test Book",
-                Notes = "Test Notes",
-                Publisher = primaryPublisher
-            };
-
-            newComic.Entries.Add(new ComicBookSeriesEntry()
-            {
-                Condition = "Test Condition",
-                Cover = "Test Cover",
-                DistributionType = DistributionType.Digital,
-                Number = "Test Issue",
-                EntryType = VolumeType.Issue,
-                Name = "Title",
-                Notes = "Test Notes"
-            });
-
+            ComicBookSeries newComic = fixture.Build<ComicBookSeries>()
+                .With(s => s.Publisher, primaryPublisher)
+                .Create();
+            
+            newComic.Entries.Add(fixture.Create<ComicBookSeriesEntry>());
             comicPersistence.Create(newComic);
+            
             // Create should set Ids
             Assert.IsTrue(newComic.Id > 0);
             Assert.IsTrue(newComic.Entries[0].Id > 0);
@@ -87,23 +78,11 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         [Test]
         public void UpdateTest()
         {
-            ComicBookSeries newComic = new ComicBookSeries()
-            {
-                Name = "Test Book",
-                Notes = "Test Notes",
-                Publisher = primaryPublisher
-            };
+            ComicBookSeries newComic = fixture.Build<ComicBookSeries>()
+                .With(s => s.Publisher, primaryPublisher)
+                .Create();
 
-            newComic.Entries.Add(new ComicBookSeriesEntry()
-            {
-                Condition = "Test Condition",
-                Cover = "Test Cover",
-                DistributionType = DistributionType.Digital,
-                Number = "Test Issue",
-                EntryType = VolumeType.Issue,
-                Name = "Title",
-                Notes = "Test Notes"
-            });
+            newComic.Entries.Add(fixture.Create<ComicBookSeriesEntry>());
 
             comicPersistence.Create(newComic);
 
@@ -111,27 +90,18 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             long comicId = newComic.Id;
             long comicIssueId = newComic.Entries[0].Id;
 
-            ComicBookSeries updatedComic = new ComicBookSeries()
-            {
-                Id = comicId,
-                Name = "Test Book 2",
-                Notes = "Test Notes 2",
-                Publisher = secondaryPublisher
-            };
-
-            updatedComic.Entries.Add(new ComicBookSeriesEntry()
-            {
-                Id = comicIssueId,
-                SeriesId = comicId,
-                Condition = "Test Condition 2",
-                Cover = "Test Cover 2",
-                DistributionType = DistributionType.Physical,
-                Number = "Test Issue 2",
-                EntryType = VolumeType.TPB,
-                Name = "Title 2",
-                Notes = "Test Notes 2"
-            });
-
+            ComicBookSeries updatedComic = fixture.Build<ComicBookSeries>()
+                .With(s => s.Id, comicId)
+                .With(s => s.Publisher, secondaryPublisher)
+                .Create();
+            
+            updatedComic.Entries.Add(fixture.Build<ComicBookSeriesEntry>()
+                .With(e => e.Id, comicIssueId)
+                .With(e => e.SeriesId, comicId)
+                .With(e => e.DistributionType, DistributionType.Physical)
+                .With(e => e.EntryType, VolumeType.TPB)
+                .Create());
+            
             comicPersistence.Update(updatedComic);
 
             // IDs should not change
@@ -146,51 +116,24 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         [Test]
         public void UpdateCreatesIssueTest()
         {
-            ComicBookSeries comic = new ComicBookSeries()
-            {
-                Name = "Test Book",
-                Notes = "Test Notes",
-                Publisher = primaryPublisher
-            };
+            ComicBookSeries comic = fixture.Build<ComicBookSeries>()
+                .With(s => s.Publisher, primaryPublisher)
+                .Create();
 
-            comic.Entries.Add(new ComicBookSeriesEntry()
-            {
-                Condition = "Test Condition",
-                Cover = "Test Cover",
-                DistributionType = DistributionType.Digital,
-                Number = "Test Issue",
-                EntryType = VolumeType.Issue,
-                Name = "Title",
-                Notes = "Test Notes"
-            });
+            comic.Entries.Add(fixture.Create<ComicBookSeriesEntry>());
 
             comicPersistence.Create(comic);
             long comicId = comic.Id;
             long initialIssueId = comic.Entries[0].Id;
 
-            ComicBookSeriesEntry updatedIssue = new ComicBookSeriesEntry()
-            {
-                Id = initialIssueId,
-                SeriesId = comicId,
-                Condition = "Test Condition 2",
-                Cover = "Test Cover 2",
-                DistributionType = DistributionType.Physical,
-                Number = "Test Issue 2",
-                EntryType = VolumeType.TPB,
-                Name = "Title 2",
-                Notes = "Test Notes 2"
-            };
-
-            ComicBookSeriesEntry issueNewToUpdate = new ComicBookSeriesEntry()
-            {
-                Condition = "Test Condition 3",
-                Cover = "Test Cover 3",
-                DistributionType = DistributionType.Digital,
-                Number = "Test Issue 3",
-                EntryType = VolumeType.Issue,
-                Name = "Title 3",
-                Notes = "Test Notes 3"
-            };
+            ComicBookSeriesEntry updatedIssue = fixture.Build<ComicBookSeriesEntry>()
+                .With(e => e.Id, initialIssueId)
+                .With(e => e.SeriesId, comicId)
+                .With(e => e.DistributionType, DistributionType.Physical)
+                .With(e => e.EntryType, VolumeType.TPB)
+                .Create();
+            
+            ComicBookSeriesEntry issueNewToUpdate = fixture.Create<ComicBookSeriesEntry>();
 
             comic.Entries.Clear();
             comic.Entries.Add(updatedIssue);
@@ -219,34 +162,13 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         [Test]
         public void UpdateDeletesIssueTest()
         {
-            ComicBookSeries comic = new ComicBookSeries()
-            {
-                Name = "Test Book",
-                Notes = "Test Notes",
-                Publisher = primaryPublisher
-            };
+            ComicBookSeries comic = fixture.Build<ComicBookSeries>()
+                .With(s => s.Publisher, primaryPublisher)
+                .Create();
 
-            ComicBookSeriesEntry firstIssue = new ComicBookSeriesEntry()
-            {
-                Condition = "Test Condition",
-                Cover = "Test Cover",
-                DistributionType = DistributionType.Digital,
-                Number = "Test Issue",
-                EntryType = VolumeType.Issue,
-                Name = "Title",
-                Notes = "Test Notes"
-            };
+            ComicBookSeriesEntry firstIssue = fixture.Create<ComicBookSeriesEntry>();
 
-            ComicBookSeriesEntry issueToDelete = new ComicBookSeriesEntry()
-            {
-                Condition = "Test Condition",
-                Cover = "Test Cover",
-                DistributionType = DistributionType.Digital,
-                Number = "Test Issue",
-                EntryType = VolumeType.Issue,
-                Name = "Title",
-                Notes = "Test Notes"
-            };
+            ComicBookSeriesEntry issueToDelete = fixture.Create<ComicBookSeriesEntry>();
 
             comic.Entries.Add(firstIssue);
             comic.Entries.Add(issueToDelete);
@@ -268,14 +190,11 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         [Test]
         public void DeleteTest()
         {
-            ComicBookSeries newComic = new ComicBookSeries()
-            {
-                Name = "Test Book",
-                Notes = "Test Notes",
-                Publisher = primaryPublisher
-            };
+            ComicBookSeries newComic = fixture.Build<ComicBookSeries>()
+                .With(s => s.Publisher, primaryPublisher)
+                .Create();
 
-            newComic.Entries.Add(new ComicBookSeriesEntry());
+            newComic.Entries.Add(fixture.Create<ComicBookSeriesEntry>());
 
             comicPersistence.Create(newComic);
             comicPersistence.Delete(newComic);
@@ -331,22 +250,8 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             IPersistence<ItemCategory> categoryPersistence =
                 new ItemCategoryPersistence(currentDir, paginationProfile);
 
-            List<ItemCategory> categories = new List<ItemCategory>()
-            {
-                new ItemCategory()
-                {
-                    Name = "Category 1",
-                    CategoryType = ItemCategoryType.ComicBook,
-                    Code = "001"
-                },
-
-                new ItemCategory()
-                {
-                    Name = "Category 2",
-                    CategoryType = ItemCategoryType.ComicBook,
-                    Code = "002"
-                }
-            };
+            var categories = new List<ItemCategory>();
+            fixture.AddManyTo<ItemCategory>(categories, 2);
 
             foreach (ItemCategory category in categories)
             {
@@ -354,34 +259,22 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             }
 
             List<ComicBookSeries> books = new List<ComicBookSeries>();
-            books.Add(new ComicBookSeries()
-            {
-                Name = "Test Book 1",
-                Notes = "Test Notes",
-                Publisher = categories[0]
-            });
-
-            books.Add(new ComicBookSeries()
-            {
-                Name = "Test Book 2",
-                Notes = "Test Notes",
-                Publisher = categories[0]
-            });
-
-            books.Add(new ComicBookSeries()
-            {
-                Name = "Test Book 3",
-                Notes = "Test Notes",
-                Publisher = categories[0]
-            });
-
-            books.Add(new ComicBookSeries()
-            {
-                Name = "Test Book 4",
-                Notes = "Test Notes",
-                Publisher = categories[1]
-            });
-
+            books.Add(fixture.Build<ComicBookSeries>()
+                .With(s => s.Publisher, categories[0])
+                .Create());
+            
+            books.Add(fixture.Build<ComicBookSeries>()
+                .With(s => s.Publisher, categories[0])
+                .Create());
+            
+            books.Add(fixture.Build<ComicBookSeries>()
+                .With(s => s.Publisher, categories[0])
+                .Create());
+            
+            books.Add(fixture.Build<ComicBookSeries>()
+                .With(s => s.Publisher, categories[1])
+                .Create());
+            
             foreach (ComicBookSeries book in books)
             {
                 // Add issues to each book before adding the book
@@ -497,18 +390,12 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             IPersistence<ItemCategory> categoryPersistence =
                 new ItemCategoryPersistence(currentDir, listProfile);
 
-            ItemCategory category = categoryPersistence.Create(new ItemCategory()
-            {
-                Name = "Category 1",
-                CategoryType = ItemCategoryType.ComicBook,
-                Code = "001"
-            });
-
-            ComicBookSeries addedBook = new ComicBookSeries()
-            {
-                Name = "Test Book",
-                Publisher = category
-            };
+            ItemCategory category = categoryPersistence.Create(fixture.Create<ItemCategory>());
+            
+            ComicBookSeries addedBook = fixture.Build<ComicBookSeries>()
+                .With(s => s.Name, "Test Book")
+                .With(s => s.Publisher, category)
+                .Create();
 
             foreach (ItemListType listType in Enum.GetValues(typeof(ItemListType)).Cast<ItemListType>())
             {
