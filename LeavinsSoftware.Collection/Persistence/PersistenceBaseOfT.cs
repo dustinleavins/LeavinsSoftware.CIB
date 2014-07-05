@@ -28,6 +28,11 @@ namespace LeavinsSoftware.Collection.Persistence
                 throw new ArgumentException("cannot persist 'summary' item", "item");
             }
             
+            if (!item.IsNew)
+            {
+                throw new ArgumentException("cannot 'create' existing item", "item");
+            }
+            
             item.Validate();
             return CreateBase(item);
         }
@@ -64,6 +69,11 @@ namespace LeavinsSoftware.Collection.Persistence
             if (item.IsSummary)
             {
                 throw new ArgumentException("cannot persist 'summary' item", "item");
+            }
+            
+            if (item.IsNew)
+            {
+                throw new ArgumentException("cannot update a new item", "item");
             }
             
             item.Validate();
