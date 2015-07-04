@@ -123,6 +123,12 @@
     <Compile Include="CollectionProductPage.xaml.cs">
       <DependentUpon>CollectionProductPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Banner.cs" />
+    <Compile Include="Controls\FirstRunBanner.xaml.cs">
+      <DependentUpon>FirstRunBanner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ViewInterfaces\IBannerView.cs" />
+    <Compile Include="Controls\ViewModels\FirstRunBannerViewModel.cs" />
     <Compile Include="DeleteItemPage.xaml.cs">
       <DependentUpon>DeleteItemPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -204,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CollectionProductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FirstRunBanner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

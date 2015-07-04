@@ -1,4 +1,4 @@
-﻿<!-- Copyright (c) 2013, 2014 Dustin Leavins
+﻿<!-- Copyright (c) 2013-2015 Dustin Leavins
      See the file 'LICENSE.txt' for copying permission.
 -->
 <Window x:Class="LeavinsSoftware.Collection.Program.MainWindow"
@@ -6,6 +6,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:res="clr-namespace:LeavinsSoftware.Collection.Program.Resources"
         xmlns:local="clr-namespace:LeavinsSoftware.Collection.Program"
+        Loaded="Window_Loaded"
         Title="{x:Static res:InterfaceResources.ProgramName}"
         Height="350"
         Width="525">
@@ -34,10 +35,14 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
-        <Grid Grid.Row="0">
+
+        <StackPanel Grid.Row="0"
+                    x:Name="notificationsPanel"/>
+
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -64,7 +69,7 @@
                    Name="headerLabel" />
         </Grid>
 
-        <ScrollViewer Grid.Row="1"
+        <ScrollViewer Grid.Row="2"
                       Name="viewer"
                       VerticalAlignment="Stretch"
                       VerticalScrollBarVisibility="Auto"

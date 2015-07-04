@@ -334,4 +334,10 @@
     <value>Are you sure that you want to remove {0} from your collection?
 Deleting this item is permanent.</value>
   </data>
+  <data name="Common_Accept" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Common_Reject" xml:space="preserve">
+    <value>No</value>
+  </data>
 </root>

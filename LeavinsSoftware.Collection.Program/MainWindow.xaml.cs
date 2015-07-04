@@ -1,8 +1,10 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013-2015 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF.Messaging;
 using LeavinsSoftware.Collection.Models;
+using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Program.Attributes;
+using LeavinsSoftware.Collection.Program.Controls;
 using System;
 using System.Linq;
 using System.Windows;
@@ -124,5 +126,15 @@ namespace LeavinsSoftware.Collection.Program
         }
         
         private bool doNavWorkaround;
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var options = Persistence.GetInstance<IProgramOptionsPersistence>().Retrieve();
+
+            if (options.IsFirstRun)
+            {
+                notificationsPanel.Children.Add(new FirstRunBanner());
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013-2015 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Program.Resources;
@@ -45,22 +45,7 @@ namespace LeavinsSoftware.Collection.Program
         {
             var options = Persistence.GetInstance<IProgramOptionsPersistence>().Retrieve();
 
-            if (options.IsFirstRun)
-            {
-                var result = MessageBox.Show(
-                    InterfaceResources.Startup_CheckUpdatesPrompt,
-                    InterfaceResources.ProgramName,
-                    MessageBoxButton.YesNo);
-
-                if (result == MessageBoxResult.Yes)
-                {
-                    options.CheckForProgramUpdates = true;
-                }
-
-                options.IsFirstRun = false;
-                Persistence.GetInstance<IProgramOptionsPersistence>().Update(options);
-            }
-            else if (options.CheckForProgramUpdates)
+            if (!options.IsFirstRun && options.CheckForProgramUpdates)
             {
                 Version v = await Persistence.UpdateNotifier.GetServerVersionAsync();
                 if (v != null &&
