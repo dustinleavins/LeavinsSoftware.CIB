@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013-2015 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF;
 using LeavinsSoftware.Collection.Program.ViewModels;
@@ -17,16 +17,6 @@ namespace LeavinsSoftware.Collection.Program
             InitializeComponent();
             model = new OptionsCategoryNamesViewModel(new PageNavigationService(this));
             DataContext = model;
-        }
-
-        private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-            model.OnLoaded();
-        }
-
-        private void Page_Unloaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-            model.OnUnloaded();
         }
     }
 }

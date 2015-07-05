@@ -1,4 +1,4 @@
-﻿<!-- Copyright (c) 2013, 2014 Dustin Leavins
+﻿<!-- Copyright (c) 2013-2015 Dustin Leavins
      See the file 'LICENSE.txt' for copying permission.
 -->
 <Page x:Class="LeavinsSoftware.Collection.Program.OptionsCategoryNamesPage"
@@ -9,9 +9,7 @@
       xmlns:res="clr-namespace:LeavinsSoftware.Collection.Program.Resources"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="{x:Static res:InterfaceResources.PageTitles_OptionsCategoryNames}"
-      Loaded="Page_Loaded"
-      Unloaded="Page_Unloaded">
+      Title="{x:Static res:InterfaceResources.PageTitles_OptionsCategoryNames}">
     <Grid Style="{StaticResource mainPageGrid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -21,13 +19,15 @@
         <DataGrid Grid.Row="0"
                   Margin="0,0,0,20"
                   AutoGenerateColumns="False"
-                  ItemsSource="{Binding Categories}">
+                  ItemsSource="{Binding Categories}"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{x:Static res:InterfaceResources.Fields_CategoryType}"
                                     Binding="{Binding CategoryType}"
                                     IsReadOnly="True"/>
                 <DataGridTextColumn Header="{x:Static res:InterfaceResources.Fields_Name}"
-                                    Binding="{Binding Name}" />
+                                    Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
         </DataGrid>
 

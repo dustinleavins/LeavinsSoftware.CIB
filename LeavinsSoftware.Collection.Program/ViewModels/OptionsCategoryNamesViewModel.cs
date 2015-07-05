@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013-2015 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF;
 using KSMVVM.WPF.ViewModel;
@@ -7,6 +7,7 @@ using LeavinsSoftware.Collection.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 
 namespace LeavinsSoftware.Collection.Program.ViewModels
@@ -45,7 +46,13 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
                 (x) => Categories.All(c => c.IsValid()));
 
-            Categories = Persistence.GetInstance<ICategoryPersistence>().RetrieveAll();
+            Categories = new BindingList<ItemCategory>();
+            foreach (var category in Persistence.GetInstance<ICategoryPersistence>().RetrieveAll())
+            {
+                Categories.Add(category);
+            }
+
+            Categories.ListChanged += Categories_ListChanged;
 
             originalCategoryNames = Categories.ToDictionary(
                 (cat) => cat.Id,
@@ -56,25 +63,9 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
         public IAppNavigationService Nav { get; private set; }
 
-        public IEnumerable<ItemCategory> Categories { get; private set; }
+        public BindingList<ItemCategory> Categories { get; private set; }
 
-        public void OnLoaded()
-        {
-            foreach (ItemCategory category in Categories)
-            {
-                category.PropertyChanged += CategoryChanged;
-            }
-        }
-
-        public void OnUnloaded()
-        {
-            foreach (ItemCategory category in Categories)
-            {
-                category.PropertyChanged -= CategoryChanged;
-            }
-        }
-
-        void CategoryChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void Categories_ListChanged(object sender, ListChangedEventArgs e)
         {
             SaveNames.TriggerCanExecuteChanged();
         }
