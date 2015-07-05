@@ -40,22 +40,5 @@ namespace LeavinsSoftware.Collection.Program
                 appMutex = null;
             }
         }
-
-        async void Application_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
-        {
-            var options = Persistence.GetInstance<IProgramOptionsPersistence>().Retrieve();
-
-            if (!options.IsFirstRun && options.CheckForProgramUpdates)
-            {
-                Version v = await Persistence.UpdateNotifier.GetServerVersionAsync();
-                if (v != null &&
-                    v.CompareTo(Persistence.UpdateNotifier.ClientVersion) > 0)
-                {
-                    MessageBox.Show(
-                        InterfaceResources.Startup_UpdateAvailable,
-                        InterfaceResources.ProgramName);
-                }
-            }
-        }
     }
 }

@@ -127,13 +127,22 @@ namespace LeavinsSoftware.Collection.Program
         
         private bool doNavWorkaround;
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        async private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var options = Persistence.GetInstance<IProgramOptionsPersistence>().Retrieve();
 
             if (options.IsFirstRun)
             {
                 notificationsPanel.Children.Add(new FirstRunBanner());
+            }
+            else if (options.CheckForProgramUpdates)
+            {
+                Version v = await Persistence.UpdateNotifier.GetServerVersionAsync();
+                if (v != null &&
+                    v.CompareTo(Persistence.UpdateNotifier.ClientVersion) > 0)
+                {
+                    notificationsPanel.Children.Add(new ProgramUpdateBanner());
+                }
             }
         }
     }
