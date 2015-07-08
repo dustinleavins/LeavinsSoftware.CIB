@@ -5,6 +5,7 @@ using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Program.Attributes;
 using LeavinsSoftware.Collection.Program.Controls;
+using LeavinsSoftware.Collection.Program.Resources;
 using System;
 using System.Linq;
 using System.Windows;
@@ -129,6 +130,12 @@ namespace LeavinsSoftware.Collection.Program
 
         async private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            BasicMessenger.Default.Register(MessageIds.App_ImportSuccess,
+                () => MessageBox.Show(InterfaceResources.Import_SuccessMessage));
+
+            BasicMessenger.Default.Register(MessageIds.App_ExportSuccess,
+                () => MessageBox.Show(InterfaceResources.Export_SuccessMessage));
+
             var options = Persistence.GetInstance<IProgramOptionsPersistence>().Retrieve();
 
             if (options.IsFirstRun)

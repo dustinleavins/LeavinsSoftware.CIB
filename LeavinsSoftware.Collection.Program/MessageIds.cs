@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013-2015 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using System;
 
@@ -20,5 +20,15 @@ namespace LeavinsSoftware.Collection.Program
         /// Item Deleted
         /// </summary>
         public const String App_ItemDeleted = "App_ItemDeleted";
+
+        /// <summary>
+        /// Import Successful
+        /// </summary>
+        public const String App_ImportSuccess = "App_ImportSuccess";
+
+        /// <summary>
+        /// Export Successful
+        /// </summary>
+        public const String App_ExportSuccess = "App_ExportSuccess";
     }
 }

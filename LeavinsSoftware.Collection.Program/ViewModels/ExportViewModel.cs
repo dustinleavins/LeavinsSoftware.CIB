@@ -1,10 +1,8 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013-2015 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF;
 using KSMVVM.WPF.Messaging;
 using KSMVVM.WPF.ViewModel;
-using LeavinsSoftware.Collection.Models;
-using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Persistence.Export;
 using System;
 using System.Windows.Input;
@@ -16,37 +14,27 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
     /// </summary>
     public sealed class ExportViewModel : ViewModelBase
     {
-        /// <summary>
-        /// ID associated with the 'ExportFileName' message.
-        /// </summary>
-        public const string ExportFileNameMessage = "ExportFileName";
-
-        /// <summary>
-        /// ID associated with the 'FinishedExport' message.
-        /// </summary>
-        public const string FinishedExportMessage = "FinishedExport";
-
-        public ExportViewModel(IAppNavigationService nav)
+        public ExportViewModel(IAppNavigationService nav, IFilePicker filePicker)
         {
-            Messenger = new BasicMessenger();
             Nav = nav;
+            FilePicker = filePicker;
 
             Export = new CustomCommand(
                 (x) =>
                 {
-                    Messenger.Send(ExportFileNameMessage);
-                    if (string.IsNullOrEmpty(ExportFileName))
+                    string exportFileName = FilePicker.SaveFile(new string[] { "xml" });
+                    if (string.IsNullOrEmpty(exportFileName))
                     {
                         return;
                     }
 
                     // Create exporter instance & export
                     (new PersistenceExporter(Persistence.Container))
-                        .Export(ExportFileName);
+                        .Export(exportFileName);
 
                     // TODO: Catch possible exceptions
 
-                    Messenger.Send(FinishedExportMessage);
+                    BasicMessenger.Default.Send(MessageIds.App_ExportSuccess);
                     Nav.GoBack();
                 });
         }
@@ -55,24 +43,6 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
 
         public IAppNavigationService Nav { get; private set; }
 
-        public BasicMessenger Messenger { get; private set; }
-
-        public string ExportFileName
-        {
-            get
-            {
-                return exportFileName;
-            }
-            set
-            {
-                if (!string.Equals(exportFileName, value, StringComparison.Ordinal))
-                {
-                    exportFileName = value;
-                    OnPropertyChanged("ExportFileName");
-                }
-            }
-        }
-
-        private string exportFileName;
+        public IFilePicker FilePicker { get; private set; }
     }
 }

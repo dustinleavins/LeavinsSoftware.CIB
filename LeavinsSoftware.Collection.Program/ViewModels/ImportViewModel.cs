@@ -1,10 +1,8 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013-2015 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF;
 using KSMVVM.WPF.Messaging;
 using KSMVVM.WPF.ViewModel;
-using LeavinsSoftware.Collection.Models;
-using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Persistence.Export;
 using System;
 using System.Windows.Input;
@@ -16,39 +14,29 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
     /// </summary>
     public sealed class ImportViewModel : ViewModelBase
     {
-        /// <summary>
-        /// ID associated with the 'ImportFileName' message.
-        /// </summary>
-        public const string ImportFileNameMessage = "ImportFileName";
-
-        /// <summary>
-        /// ID associated with the 'ImportFileName' message.
-        /// </summary>
-        public const string FinishedImportMessage = "FinishedImport";
-
-        public ImportViewModel(IAppNavigationService nav)
+        public ImportViewModel(IAppNavigationService nav, IFilePicker filePicker)
         {
-            Messenger = new BasicMessenger();
             mergeImportData = true;
 
             Nav = nav;
+            FilePicker = filePicker;
 
             Import = new CustomCommand(
                 (x) =>
                 {
-                    Messenger.Send(ImportFileNameMessage);
+                    string importFileName = FilePicker.OpenFile(new string[] { "xml" });
 
-                    if (string.IsNullOrEmpty(ImportFileName))
+                    if (string.IsNullOrEmpty(importFileName))
                     {
                         return;
                     }
                     
                     (new PersistenceImporter(Persistence.Container))
-                        .Import(ImportFileName, new ImportOptions(merge: MergeImportData));
+                        .Import(importFileName, new ImportOptions(merge: MergeImportData));
 
                     // TODO: Catch possible exceptions
 
-                    Messenger.Send(FinishedImportMessage);
+                    BasicMessenger.Default.Send(MessageIds.App_ImportSuccess);
                     Nav.GoBack();
                 });
         }
@@ -56,6 +44,8 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         public ICommand Import { get; private set; }
 
         public IAppNavigationService Nav { get; private set; }
+
+        public IFilePicker FilePicker { get; private set; }
 
         public bool MergeImportData
         {
@@ -73,25 +63,6 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             }
         }
 
-        public BasicMessenger Messenger { get; private set; }
-
-        public string ImportFileName
-        {
-            get
-            {
-                return importFileName;
-            }
-            set
-            {
-                if (!string.Equals(importFileName, value, StringComparison.Ordinal))
-                {
-                    importFileName = value;
-                    OnPropertyChanged("ImportFileName");
-                }
-            }
-        }
-
         private bool mergeImportData;
-        private string importFileName;
     }
 }
