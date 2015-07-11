@@ -20,12 +20,6 @@ namespace LeavinsSoftware.Collection.Program.Controls
             Init();
         }
 
-        public SimpleBanner(String text)
-        {
-            Init();
-            SetValue(TextProperty, text);
-        }
-
         private void Init()
         {
             InitializeComponent();

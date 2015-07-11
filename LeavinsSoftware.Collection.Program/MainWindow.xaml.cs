@@ -131,10 +131,27 @@ namespace LeavinsSoftware.Collection.Program
         async private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             BasicMessenger.Default.Register(MessageIds.App_ImportSuccess,
-                () => notificationsPanel.Children.Add(new SimpleBanner(InterfaceResources.Import_SuccessMessage)));
+                () =>
+                {
+                    var banner = new SimpleBanner()
+                    {
+                        Text = InterfaceResources.Import_SuccessMessage,
+                        AutoHide = true
+                    };
+
+                    notificationsPanel.Children.Add(banner);
+                });
 
             BasicMessenger.Default.Register(MessageIds.App_ExportSuccess,
-                () => notificationsPanel.Children.Add(new SimpleBanner(InterfaceResources.Export_SuccessMessage)));
+                () =>
+                {
+                    var banner = new SimpleBanner()
+                    {
+                        Text = InterfaceResources.Export_SuccessMessage,
+                        AutoHide = true
+                    };
+                    notificationsPanel.Children.Add(banner);
+                });
 
             var options = Persistence.GetInstance<IProgramOptionsPersistence>().Retrieve();
 
