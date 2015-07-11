@@ -30,6 +30,16 @@
             </Style>
         </Style.Resources>
     </Style>
+
+    <Style TargetType="{x:Type controls:SimpleBanner}">
+        <Setter Property="Background" Value="LightYellow" />
+        <Setter Property="Padding" Value="0,5,0,5" />
+        <Style.Resources>
+            <Style TargetType="Label">
+                <Setter Property="FontWeight" Value="Bold" />
+            </Style>
+        </Style.Resources>
+    </Style>
     <!-- Key Styles -->
     <Style x:Key="categoryLabelStyle"
            TargetType="Label">

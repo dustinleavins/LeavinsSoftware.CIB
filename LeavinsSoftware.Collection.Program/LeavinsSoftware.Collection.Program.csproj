@@ -130,6 +130,9 @@
     <Compile Include="Controls\ProgramUpdateBanner.xaml.cs">
       <DependentUpon>ProgramUpdateBanner.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SimpleBanner.xaml.cs">
+      <DependentUpon>SimpleBanner.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ViewInterfaces\IBannerView.cs" />
     <Compile Include="Controls\ViewModels\FirstRunBannerViewModel.cs" />
     <Compile Include="Controls\ViewModels\ProgramUpdateBannerViewModel.cs" />
@@ -224,6 +227,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ProgramUpdateBanner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SimpleBanner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
