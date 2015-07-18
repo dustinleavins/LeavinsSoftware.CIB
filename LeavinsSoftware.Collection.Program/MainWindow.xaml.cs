@@ -130,34 +130,35 @@ namespace LeavinsSoftware.Collection.Program
 
         async private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            AddBanner(new SimpleNotification() { Text = "TODO: message" });
             BasicMessenger.Default.Register(MessageIds.App_ImportSuccess,
                 () =>
                 {
-                    var banner = new SimpleBanner()
+                    var banner = new SimpleNotification()
                     {
                         Text = InterfaceResources.Import_SuccessMessage,
                         AutoHide = true
                     };
 
-                    AddNotification(banner);
+                    AddToast(banner);
                 });
 
             BasicMessenger.Default.Register(MessageIds.App_ExportSuccess,
                 () =>
                 {
-                    var banner = new SimpleBanner()
+                    var banner = new SimpleNotification()
                     {
                         Text = InterfaceResources.Export_SuccessMessage,
                         AutoHide = true
                     };
-                    AddNotification(banner);
+                    AddToast(banner);
                 });
 
             var options = Persistence.GetInstance<IProgramOptionsPersistence>().Retrieve();
 
             if (options.IsFirstRun)
             {
-                AddNotification(new FirstRunBanner());
+                AddBanner(new FirstRunNotification());
             }
             else if (options.CheckForProgramUpdates)
             {
@@ -165,12 +166,17 @@ namespace LeavinsSoftware.Collection.Program
                 if (v != null &&
                     v.CompareTo(Persistence.UpdateNotifier.ClientVersion) > 0)
                 {
-                    AddNotification(new ProgramUpdateBanner());
+                    AddBanner(new ProgramUpdateNotification());
                 }
             }
         }
 
-        private void AddNotification(Banner banner)
+        private void AddToast(Notification banner)
+        {
+            toastPanel.Children.Add(banner);
+        }
+
+        private void AddBanner(Notification banner)
         {
             notificationsPanel.Children.Add(banner);
         }

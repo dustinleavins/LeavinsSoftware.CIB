@@ -19,11 +19,11 @@ using System.Windows.Shapes;
 namespace LeavinsSoftware.Collection.Program.Controls
 {
     /// <summary>
-    /// Interaction logic for FirstRunBanner.xaml
+    /// Interaction logic for FirstRunNotification.xaml
     /// </summary>
-    public partial class FirstRunBanner : Banner
+    public partial class FirstRunNotification : Notification
     {
-        public FirstRunBanner()
+        public FirstRunNotification()
         {
             InitializeComponent();
             DataContext = new FirstRunBannerViewModel(this);

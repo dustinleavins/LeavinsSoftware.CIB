@@ -1,29 +1,25 @@
 ﻿<!-- Copyright (c) 2015 Dustin Leavins
      See the file 'LICENSE.txt' for copying permission.
 -->
-<local:Banner x:Class="LeavinsSoftware.Collection.Program.Controls.ProgramUpdateBanner"
+<local:Notification x:Class="LeavinsSoftware.Collection.Program.Controls.SimpleNotification"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LeavinsSoftware.Collection.Program.Controls"
-             xmlns:res="clr-namespace:LeavinsSoftware.Collection.Program.Resources"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0"
                    TextWrapping="Wrap"
-                   Text="{x:Static res:InterfaceResources.Startup_UpdateAvailable}" />
-
+                   Text="{Binding Text}" />
         <Button Grid.Column="1"
                 Style="{StaticResource closeButton}"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
                 Content="X"
-                Command="{Binding Close}"/>
+                Command="{Binding CloseCommand}"/>
     </Grid>
-</local:Banner>
+</local:Notification>

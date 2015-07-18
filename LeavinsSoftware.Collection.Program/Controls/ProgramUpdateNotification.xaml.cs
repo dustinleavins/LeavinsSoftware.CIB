@@ -7,9 +7,9 @@ namespace LeavinsSoftware.Collection.Program.Controls
     /// <summary>
     /// Interaction logic for ProgramUpdateBanner.xaml
     /// </summary>
-    public partial class ProgramUpdateBanner : Banner
+    public partial class ProgramUpdateNotification : Notification
     {
-        public ProgramUpdateBanner()
+        public ProgramUpdateNotification()
         {
             InitializeComponent();
             DataContext = new ProgramUpdateBannerViewModel(this);

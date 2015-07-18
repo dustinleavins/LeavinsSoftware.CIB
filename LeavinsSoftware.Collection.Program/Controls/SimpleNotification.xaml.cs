@@ -8,14 +8,14 @@ using System.Windows.Input;
 namespace LeavinsSoftware.Collection.Program.Controls
 {
     /// <summary>
-    /// Interaction logic for SimpleBanner.xaml
+    /// Interaction logic for SimpleNotification.xaml
     /// </summary>
-    public partial class SimpleBanner : Banner
+    public partial class SimpleNotification : Notification
     {
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(SimpleBanner));
+            DependencyProperty.Register("Text", typeof(string), typeof(SimpleNotification));
 
-        public SimpleBanner()
+        public SimpleNotification()
         {
             Init();
         }

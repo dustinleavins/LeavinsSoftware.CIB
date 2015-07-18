@@ -8,17 +8,17 @@ using System.Windows.Threading;
 
 namespace LeavinsSoftware.Collection.Program.Controls
 {
-    public class Banner : UserControl, IBannerView
+    public class Notification : UserControl, IBannerView
     {
         public static readonly DependencyProperty AutoHideProperty =
-            DependencyProperty.Register("AutoHide", typeof(bool), typeof(Banner));
+            DependencyProperty.Register("AutoHide", typeof(bool), typeof(Notification));
 
         private DispatcherTimer autoHideTimer = new DispatcherTimer()
         {
             Interval = TimeSpan.FromSeconds(30)
         };
 
-        public Banner()
+        public Notification()
         {
             Loaded += Banner_Loaded;
         }

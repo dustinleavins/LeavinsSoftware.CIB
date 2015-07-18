@@ -4,7 +4,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:LeavinsSoftware.Collection.Program.Controls">
-    <Style TargetType="{x:Type controls:Banner}">
+    <Style TargetType="{x:Type controls:Notification}">
         <Setter Property="Opacity" Value="0.75" />
         <Setter Property="Background" Value="Black" />
         <Setter Property="Padding" Value="5" />
@@ -20,9 +20,9 @@
         </Style.Resources>
     </Style>
 
-    <Style TargetType="{x:Type controls:FirstRunBanner}" BasedOn="{StaticResource {x:Type controls:Banner}}" />
-    <Style TargetType="{x:Type controls:ProgramUpdateBanner}" BasedOn="{StaticResource {x:Type controls:Banner}}" />
-    <Style TargetType="{x:Type controls:SimpleBanner}" BasedOn="{StaticResource {x:Type controls:Banner}}" />
+    <Style TargetType="{x:Type controls:FirstRunNotification}" BasedOn="{StaticResource {x:Type controls:Notification}}" />
+    <Style TargetType="{x:Type controls:ProgramUpdateNotification}" BasedOn="{StaticResource {x:Type controls:Notification}}" />
+    <Style TargetType="{x:Type controls:SimpleNotification}" BasedOn="{StaticResource {x:Type controls:Notification}}" />
 
     <!-- Key Styles -->
     <Style x:Key="categoryLabelStyle"

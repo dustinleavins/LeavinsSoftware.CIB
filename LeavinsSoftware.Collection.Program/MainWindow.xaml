@@ -36,6 +36,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -86,6 +87,10 @@
                     Grid.RowSpan="2"
                     Height="Auto"
                     HorizontalAlignment="Right"
-                    x:Name="notificationsPanel"/>
+                    x:Name="toastPanel"/>
+
+        <StackPanel Grid.Row="2"
+                    Height="Auto"
+                    x:Name="notificationsPanel" />
     </Grid>
 </Window>

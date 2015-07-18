@@ -123,15 +123,15 @@
     <Compile Include="CollectionProductPage.xaml.cs">
       <DependentUpon>CollectionProductPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Banner.cs" />
-    <Compile Include="Controls\FirstRunBanner.xaml.cs">
-      <DependentUpon>FirstRunBanner.xaml</DependentUpon>
+    <Compile Include="Controls\Notification.cs" />
+    <Compile Include="Controls\FirstRunNotification.xaml.cs">
+      <DependentUpon>FirstRunNotification.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ProgramUpdateBanner.xaml.cs">
-      <DependentUpon>ProgramUpdateBanner.xaml</DependentUpon>
+    <Compile Include="Controls\ProgramUpdateNotification.xaml.cs">
+      <DependentUpon>ProgramUpdateNotification.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SimpleBanner.xaml.cs">
-      <DependentUpon>SimpleBanner.xaml</DependentUpon>
+    <Compile Include="Controls\SimpleNotification.xaml.cs">
+      <DependentUpon>SimpleNotification.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ViewInterfaces\IBannerView.cs" />
     <Compile Include="Controls\ViewModels\FirstRunBannerViewModel.cs" />
@@ -222,15 +222,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\FirstRunBanner.xaml">
+    <Page Include="Controls\FirstRunNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ProgramUpdateBanner.xaml">
+    <Page Include="Controls\ProgramUpdateNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SimpleBanner.xaml">
+    <Page Include="Controls\SimpleNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

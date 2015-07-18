@@ -1,7 +1,7 @@
 ﻿<!-- Copyright (c) 2015 Dustin Leavins
      See the file 'LICENSE.txt' for copying permission.
 -->
-<local:Banner x:Class="LeavinsSoftware.Collection.Program.Controls.FirstRunBanner"
+<local:Notification x:Class="LeavinsSoftware.Collection.Program.Controls.FirstRunNotification"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -30,4 +30,4 @@
                     Command="{Binding Reject}" />
         </StackPanel>
     </Grid>
-</local:Banner>
+</local:Notification>
