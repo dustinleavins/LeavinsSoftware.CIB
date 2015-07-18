@@ -8,7 +8,7 @@ using System.Windows.Threading;
 
 namespace LeavinsSoftware.Collection.Program.Controls
 {
-    public abstract class Banner : UserControl, IBannerView
+    public class Banner : UserControl, IBannerView
     {
         public static readonly DependencyProperty AutoHideProperty =
             DependencyProperty.Register("AutoHide", typeof(bool), typeof(Banner));

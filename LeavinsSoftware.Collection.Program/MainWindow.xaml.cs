@@ -139,7 +139,7 @@ namespace LeavinsSoftware.Collection.Program
                         AutoHide = true
                     };
 
-                    notificationsPanel.Children.Add(banner);
+                    AddNotification(banner);
                 });
 
             BasicMessenger.Default.Register(MessageIds.App_ExportSuccess,
@@ -150,14 +150,14 @@ namespace LeavinsSoftware.Collection.Program
                         Text = InterfaceResources.Export_SuccessMessage,
                         AutoHide = true
                     };
-                    notificationsPanel.Children.Add(banner);
+                    AddNotification(banner);
                 });
 
             var options = Persistence.GetInstance<IProgramOptionsPersistence>().Retrieve();
 
             if (options.IsFirstRun)
             {
-                notificationsPanel.Children.Add(new FirstRunBanner());
+                AddNotification(new FirstRunBanner());
             }
             else if (options.CheckForProgramUpdates)
             {
@@ -165,9 +165,14 @@ namespace LeavinsSoftware.Collection.Program
                 if (v != null &&
                     v.CompareTo(Persistence.UpdateNotifier.ClientVersion) > 0)
                 {
-                    notificationsPanel.Children.Add(new ProgramUpdateBanner());
+                    AddNotification(new ProgramUpdateBanner());
                 }
             }
+        }
+
+        private void AddNotification(Banner banner)
+        {
+            notificationsPanel.Children.Add(banner);
         }
     }
 }

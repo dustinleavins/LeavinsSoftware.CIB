@@ -16,8 +16,9 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="0"
-               Content="{x:Static res:InterfaceResources.Startup_CheckUpdatesPrompt}" />
+        <TextBlock Grid.Column="0"
+                   TextWrapping="Wrap"
+                   Text="{x:Static res:InterfaceResources.Startup_CheckUpdatesPrompt}" />
 
         <StackPanel Grid.Column="1"
                     Orientation="Horizontal"

@@ -35,14 +35,10 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0"
-                    x:Name="notificationsPanel"/>
-
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -69,7 +65,7 @@
                    Name="headerLabel" />
         </Grid>
 
-        <ScrollViewer Grid.Row="2"
+        <ScrollViewer Grid.Row="1"
                       Name="viewer"
                       VerticalAlignment="Stretch"
                       VerticalScrollBarVisibility="Auto"
@@ -85,5 +81,11 @@
                 </Frame.CommandBindings>
             </Frame>
         </ScrollViewer>
+
+        <StackPanel Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Height="Auto"
+                    HorizontalAlignment="Right"
+                    x:Name="notificationsPanel"/>
     </Grid>
 </Window>

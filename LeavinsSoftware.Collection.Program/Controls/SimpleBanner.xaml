@@ -14,9 +14,11 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0"
-               Content="{Binding Text}" />
+        <TextBlock Grid.Column="0"
+                   TextWrapping="Wrap"
+                   Text="{Binding Text}" />
         <Button Grid.Column="1"
+                Style="{StaticResource closeButton}"
                 Content="X"
                 Command="{Binding CloseCommand}"/>
     </Grid>
