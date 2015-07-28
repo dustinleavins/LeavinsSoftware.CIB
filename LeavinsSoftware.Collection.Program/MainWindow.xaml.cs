@@ -130,7 +130,6 @@ namespace LeavinsSoftware.Collection.Program
 
         async private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            AddBanner(new SimpleNotification() { Text = "TODO: message" });
             BasicMessenger.Default.Register(MessageIds.App_ImportSuccess,
                 () =>
                 {
