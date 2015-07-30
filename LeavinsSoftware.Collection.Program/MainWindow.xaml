@@ -6,6 +6,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:res="clr-namespace:LeavinsSoftware.Collection.Program.Resources"
         xmlns:local="clr-namespace:LeavinsSoftware.Collection.Program"
+        xmlns:controls="clr-namespace:LeavinsSoftware.Collection.Program.Controls"
         Loaded="Window_Loaded"
         Title="{x:Static res:InterfaceResources.ProgramName}"
         Height="350"
@@ -21,75 +22,101 @@
         <KeyBinding Command="ApplicationCommands.New"
                       Key="N"
                       Modifiers="Control" />
-    
+
         <KeyBinding Command="NavigationCommands.BrowseBack"
                     CommandTarget="{Binding ElementName=mainFrame}"
                     Key="Left"
                     Modifiers="Alt" />
-    
+
         <KeyBinding Command="{x:Static local:AppCommands.Finish}"
                     Key="S"
                     Modifiers="Alt" />
     </Window.InputBindings>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <controls:Sidebar Grid.Column="0"
+                          Grid.Row="0"
+                          Width="150"
+                          Frame="{Binding ElementName=mainFrame}"/>
 
-            <Label Grid.Column="0"
+        <GridSplitter Grid.Column="1"
+                      Grid.Row="0"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch"
+                      Width="2" />
+        <Grid Grid.Column="2"
+              Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0"
                    VerticalAlignment="Center">
-                <Hyperlink Name="backLink"
+                    <Hyperlink Name="backLink"
                            Command="NavigationCommands.BrowseBack"
                            CommandTarget="{Binding ElementName=mainFrame}"
                            TextDecorations="None">
-                    <Rectangle Height="32"
+                        <Rectangle Height="32"
                                Width="32"
                                Name="backLinkRectangle">
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="Resources\Images\back32.png" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </Hyperlink>
-            </Label>
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="Resources\Images\back32.png" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Hyperlink>
+                </Label>
 
-            <Label Grid.Column="1"
+                <Label Grid.Column="1"
                    Style="{StaticResource headerLabelStyle}"
                    Name="headerLabel" />
-        </Grid>
+            </Grid>
 
-        <ScrollViewer Grid.Row="1"
+            <ScrollViewer Grid.Row="1"
                       Name="viewer"
                       VerticalAlignment="Stretch"
                       VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Auto">
-            <Frame Name="mainFrame"
+                <Frame Name="mainFrame"
                    Source="HomePage.xaml"
                    Navigated="mainFrame_Navigated"
                    NavigationUIVisibility="Hidden">
-                <Frame.CommandBindings>
-                    <CommandBinding Command="NavigationCommands.BrowseBack"
+                    <Frame.CommandBindings>
+                        <CommandBinding Command="NavigationCommands.BrowseBack"
                                     Executed="BrowseBack_Executed"
                                     CanExecute="BrowseBack_CanExecute"/>
-                </Frame.CommandBindings>
-            </Frame>
-        </ScrollViewer>
+                    </Frame.CommandBindings>
+                </Frame>
+            </ScrollViewer>
 
-        <StackPanel Grid.Row="0"
+            <StackPanel Grid.Row="0"
                     Grid.RowSpan="2"
                     Height="Auto"
                     HorizontalAlignment="Right"
                     x:Name="toastPanel"/>
 
-        <StackPanel Grid.Row="2"
+
+        </Grid>
+        <StackPanel Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="1"
                     Height="Auto"
                     x:Name="notificationsPanel" />
     </Grid>

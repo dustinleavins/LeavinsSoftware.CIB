@@ -130,12 +130,16 @@
     <Compile Include="Controls\ProgramUpdateNotification.xaml.cs">
       <DependentUpon>ProgramUpdateNotification.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Sidebar.xaml.cs">
+      <DependentUpon>Sidebar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SimpleNotification.xaml.cs">
       <DependentUpon>SimpleNotification.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ViewInterfaces\IBannerView.cs" />
     <Compile Include="Controls\ViewModels\FirstRunBannerViewModel.cs" />
     <Compile Include="Controls\ViewModels\ProgramUpdateBannerViewModel.cs" />
+    <Compile Include="Controls\ViewModels\SidebarViewModel.cs" />
     <Compile Include="DeleteItemPage.xaml.cs">
       <DependentUpon>DeleteItemPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -227,6 +231,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ProgramUpdateNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Sidebar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
