@@ -33,8 +33,7 @@ namespace LeavinsSoftware.Collection.Program.Controls
         public Sidebar()
         {
             InitializeComponent();
-            var mainWindow = App.Current.MainWindow as MainWindow;
-            DataContext = new SidebarViewModel(new AppNavImpl(this));
+
         }
 
         public Frame Frame
@@ -46,43 +45,6 @@ namespace LeavinsSoftware.Collection.Program.Controls
             set
             {
                 SetValue(FrameProperty, value);
-            }
-        }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (DesignerProperties.GetIsInDesignMode(this))
-            {
-                return;
-            }
-
-            if (Persistence.GetInstance<ICategoryPersistence>().Any(ItemCategoryType.Product))
-            {
-                productLabel.Visibility = System.Windows.Visibility.Visible;
-            }
-            else
-            {
-                productLabel.Visibility = System.Windows.Visibility.Collapsed;
-            }
-
-            // Comic Book
-            if (Persistence.GetInstance<ICategoryPersistence>().Any(ItemCategoryType.ComicBook))
-            {
-                comicLabel.Visibility = System.Windows.Visibility.Visible;
-            }
-            else
-            {
-                comicLabel.Visibility = System.Windows.Visibility.Collapsed;
-            }
-
-            // Video Game
-            if (Persistence.GetInstance<ICategoryPersistence>().Any(ItemCategoryType.VideoGame))
-            {
-                gameLabel.Visibility = System.Windows.Visibility.Visible;
-            }
-            else
-            {
-                gameLabel.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 
@@ -117,7 +79,30 @@ namespace LeavinsSoftware.Collection.Program.Controls
 
             public void Navigate<TPage>(Func<TPage> page) where TPage : Page
             {
-                Instance.Frame.Navigate(page());
+                var pageInstance = page();
+                bool removePreviousEntry = Instance.Frame.Content is CollectionPage && pageInstance is CollectionPage;
+
+                if (removePreviousEntry)
+                {
+                    Instance.Frame.Navigated += Frame_Navigated;
+                }
+
+                Instance.Frame.Navigate(pageInstance);
+            }
+
+            private void Frame_Navigated(object sender, NavigationEventArgs e)
+            {
+                Instance.Frame.Navigated -= Frame_Navigated;
+                Instance.Frame.RemoveBackEntry();
+            }
+        }
+
+        private async void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!DesignerProperties.GetIsInDesignMode(this))
+            {
+                var mainWindow = App.Current.MainWindow as MainWindow;
+                DataContext = await SidebarViewModel.Create(new AppNavImpl(this));
             }
         }
     }

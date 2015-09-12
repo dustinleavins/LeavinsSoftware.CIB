@@ -35,9 +35,9 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -46,7 +46,6 @@
 
         <controls:Sidebar Grid.Column="0"
                           Grid.Row="0"
-                          Width="150"
                           Frame="{Binding ElementName=mainFrame}"/>
 
         <GridSplitter Grid.Column="1"
