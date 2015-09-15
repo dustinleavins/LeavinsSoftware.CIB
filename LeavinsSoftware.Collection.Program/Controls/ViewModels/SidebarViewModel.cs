@@ -18,7 +18,7 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
 {
     public sealed class SidebarViewModel : ViewModelBase
     {
-        private ObservableCollection<MainCategoryItem> mainCategories;
+        private List<MainCategoryItem> mainCategories;
         private MainCategoryItem selectedCategory;
         private ObservableCollection<SubCategoryItem> subCategoryItems;
 
@@ -27,14 +27,11 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
             Nav = nav;
             subCategoryItems = new ObservableCollection<SubCategoryItem>();
 
-            mainCategories = new ObservableCollection<MainCategoryItem>();
+            mainCategories = new List<MainCategoryItem>();
 
             foreach (ItemCategoryType categoryType in Enum.GetValues(typeof(ItemCategoryType)))
             {
-                if (Persistence.GetInstance<ICategoryPersistence>().Any(categoryType))
-                {
-                    mainCategories.Add(new MainCategoryItem(categoryType, ItemResources.Get(categoryType).Name));
-                }
+                mainCategories.Add(new MainCategoryItem(categoryType, ItemResources.Get(categoryType).Name));
             }
 
             selectedCategory = mainCategories.FirstOrDefault();
