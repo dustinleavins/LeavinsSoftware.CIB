@@ -18,7 +18,7 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
 {
     public sealed class SidebarViewModel : ViewModelBase
     {
-        private List<MainCategoryItem> mainCategories;
+        private ObservableCollection<MainCategoryItem> mainCategories;
         private MainCategoryItem selectedCategory;
         private ObservableCollection<SubCategoryItem> subCategoryItems;
 
@@ -27,7 +27,7 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
             Nav = nav;
             subCategoryItems = new ObservableCollection<SubCategoryItem>();
 
-            mainCategories = new List<MainCategoryItem>();
+            mainCategories = new ObservableCollection<MainCategoryItem>();
 
             foreach (ItemCategoryType categoryType in Enum.GetValues(typeof(ItemCategoryType)))
             {
@@ -41,8 +41,6 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
 
             this.PropertyChanged += SidebarViewModel_PropertyChanged;
         }
-
-
 
         public IAppNavigationService Nav
         {

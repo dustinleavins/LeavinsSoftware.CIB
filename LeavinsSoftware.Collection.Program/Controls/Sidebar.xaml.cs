@@ -30,6 +30,8 @@ namespace LeavinsSoftware.Collection.Program.Controls
         public static readonly DependencyProperty FrameProperty =
             DependencyProperty.Register("Frame", typeof(Frame), typeof(Sidebar));
 
+        private SidebarViewModel model;
+
         public Sidebar()
         {
             InitializeComponent();
@@ -102,7 +104,27 @@ namespace LeavinsSoftware.Collection.Program.Controls
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
                 var mainWindow = App.Current.MainWindow as MainWindow;
-                DataContext = await SidebarViewModel.Create(new AppNavImpl(this));
+                model = await SidebarViewModel.Create(new AppNavImpl(this));
+                DataContext = model;
+                Persistence.GetInstance<ICategoryPersistence>().ItemAdded += Sidebar_ItemAdded;
+            }
+        }
+
+        private async void Sidebar_ItemAdded(object sender, ModelAddedEventArgs<ItemCategory> e)
+        {
+            if (Dispatcher.CheckAccess())
+            {
+                await model.UpdateSubCategories();
+            }
+            else
+            {
+                Action<Sidebar> d = async (instance) =>
+                {
+                    await instance.model.UpdateSubCategories();
+                };
+                await Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal,
+                    d,
+                    this);
             }
         }
     }
