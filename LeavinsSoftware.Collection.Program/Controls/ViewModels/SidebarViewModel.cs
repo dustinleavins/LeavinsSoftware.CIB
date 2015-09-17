@@ -36,6 +36,17 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
 
             selectedCategory = mainCategories.FirstOrDefault();
 
+            AddSubCategoryCommand = new CustomCommand(
+                (_) =>
+                {
+                    if (selectedCategory == null)
+                    {
+                        return;
+                    }
+
+                    Nav.Navigate(() => new AddSubCategoryPage(selectedCategory.Type));
+                });
+
             this.PropertyChanged += SidebarViewModel_PropertyChanged;
         }
 
@@ -75,6 +86,12 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
             {
                 return subCategoryItems;
             }
+        }
+
+        public ICommand AddSubCategoryCommand
+        {
+            get;
+            private set;
         }
 
         public async static Task<SidebarViewModel> Create(IAppNavigationService nav)

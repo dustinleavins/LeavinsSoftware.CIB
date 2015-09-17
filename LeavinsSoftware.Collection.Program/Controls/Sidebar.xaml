@@ -17,16 +17,28 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
         <ComboBox Grid.Row="0"
+                  Grid.Column="0"
                   ItemsSource="{Binding MainCategories}"
                   DisplayMemberPath="DisplayName"
                   SelectedItem="{Binding SelectedCategory}" />
+        <Button Grid.Row="0"
+                Grid.Column="1"
+                Command="{Binding AddSubCategoryCommand}"
+                Content="+" />
         <ItemsControl Grid.Row="1"
+                      Grid.Column="0"
+                      Grid.ColumnSpan="2"
                       ItemsSource="{Binding SubCategories}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
-                        <Hyperlink Command="{Binding LinkCommand}" CommandParameter="{Binding Name}">
+                        <Hyperlink Command="{Binding LinkCommand}"
+                                   CommandParameter="{Binding Name}">
                             <TextBlock Text="{Binding Name}" />
                         </Hyperlink>
                     </TextBlock>

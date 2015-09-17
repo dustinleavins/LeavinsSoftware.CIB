@@ -82,7 +82,8 @@ namespace LeavinsSoftware.Collection.Program.Controls
             public void Navigate<TPage>(Func<TPage> page) where TPage : Page
             {
                 var pageInstance = page();
-                bool removePreviousEntry = Instance.Frame.Content is CollectionPage && pageInstance is CollectionPage;
+                bool removePreviousEntry = (Instance.Frame.Content is CollectionPage && pageInstance is CollectionPage) ||
+                    (Instance.Frame.Content is AddSubCategoryPage && pageInstance is AddSubCategoryPage);
 
                 if (removePreviousEntry)
                 {
