@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013-2015 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using LeavinsSoftware.Collection.SQLite;
 using LeavinsSoftware.Collection.Models;
@@ -8,6 +8,7 @@ using System.IO;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Threading;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
@@ -22,6 +23,8 @@ namespace LeavinsSoftware.Collection.Persistence
         }
 
         public string ConnectionString { get; private set; }
+
+        public event EventHandler<ModelAddedEventArgs<ItemCategory>> ItemAdded;
 
         public ItemCategory Create(ItemCategory item)
         {
@@ -45,7 +48,7 @@ namespace LeavinsSoftware.Collection.Persistence
                 connection.Close();
             }
 
-            // TODO: Trigger changed event
+            OnItemAdded(item);
             return item;
         }
 
@@ -229,6 +232,16 @@ namespace LeavinsSoftware.Collection.Persistence
         public bool Any(ItemCategoryType type)
         {
             return Count(type) > 0;
+        }
+
+        private void OnItemAdded(ItemCategory item)
+        {
+            var handler = Volatile.Read(ref ItemAdded);
+
+            if (handler != null)
+            {
+                handler(this, new ModelAddedEventArgs<ItemCategory>(item));
+            }
         }
 
         private static ItemCategory ReaderToCategory(SQLiteDataReader reader)

@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013-2015 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using LeavinsSoftware.Collection.Models;
 using System;
@@ -40,5 +40,7 @@ namespace LeavinsSoftware.Collection.Persistence
         /// <param name="type"></param>
         /// <returns></returns>
         bool Any(ItemCategoryType type);
+
+        event EventHandler<ModelAddedEventArgs<ItemCategory>> ItemAdded;
     }
 }

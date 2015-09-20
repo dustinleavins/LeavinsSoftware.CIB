@@ -111,6 +111,7 @@
     <Compile Include="Persistence\IKeyValueStore.cs" />
     <Compile Include="Persistence\IProgramOptionsPersistence.cs" />
     <Compile Include="Persistence\ISearchablePersistenceOfT.cs" />
+    <Compile Include="Persistence\ModelAddedEventArgsOfT.cs" />
     <Compile Include="Persistence\ItemCategoryPersistence.cs" />
     <Compile Include="Persistence\ComicBookPersistence.cs" />
     <Compile Include="Persistence\IPersistenceOfT.cs" />
