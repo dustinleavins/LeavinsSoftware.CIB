@@ -21,6 +21,7 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
         private List<MainCategoryItem> mainCategories;
         private MainCategoryItem selectedCategory;
         private ObservableCollection<SubCategoryItem> subCategoryItems;
+        private SubCategoryItem selectedSubCategory;
 
         private SidebarViewModel(IAppNavigationService nav)
         {
@@ -76,6 +77,27 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
                 {
                     selectedCategory = value;
                     OnPropertyChanged("SelectedCategory");
+                }
+            }
+        }
+
+        public SubCategoryItem SelectedSubCategory
+        {
+            get
+            {
+                return selectedSubCategory;
+            }
+            set
+            {
+                if (selectedSubCategory != value)
+                {
+                    selectedSubCategory = value;
+                    OnPropertyChanged("SelectedSubCategory");
+
+                    if (value != null)
+                    {
+                        Nav.Navigate(() => CollectionPage.PageFor(value.Category));
+                    }
                 }
             }
         }
@@ -186,11 +208,6 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
             {
                 Category = category;
                 Nav = nav;
-                LinkCommand = new CustomCommand(
-                    (_) =>
-                    {
-                        Nav.Navigate(() => CollectionPage.PageFor(Category));
-                    });
             }
 
             public IAppNavigationService Nav
@@ -208,12 +225,6 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
             }
 
             public ItemCategory Category
-            {
-                get;
-                private set;
-            }
-
-            public ICommand LinkCommand
             {
                 get;
                 private set;

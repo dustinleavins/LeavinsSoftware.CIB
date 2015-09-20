@@ -30,20 +30,15 @@
                 Grid.Column="1"
                 Command="{Binding AddSubCategoryCommand}"
                 Content="+" />
-        <ItemsControl Grid.Row="1"
+        <ListBox Grid.Row="1"
                       Grid.Column="0"
                       Grid.ColumnSpan="2"
-                      ItemsSource="{Binding SubCategories}">
-            <ItemsControl.ItemTemplate>
+                      ItemsSource="{Binding SubCategories}" SelectedItem="{Binding SelectedSubCategory}">
+            <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock>
-                        <Hyperlink Command="{Binding LinkCommand}"
-                                   CommandParameter="{Binding Name}">
-                            <TextBlock Text="{Binding Name}" />
-                        </Hyperlink>
-                    </TextBlock>
+                    <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>
