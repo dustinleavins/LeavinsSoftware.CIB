@@ -57,12 +57,25 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 CategoryType = ItemCategoryType.ComicBook
             };
 
+            bool handledEvent = false;
+            Action<object, ModelAddedEventArgs<ItemCategory>> handlerAction = (sender, args) =>
+            {
+                handledEvent = true;
+            };
+
+            var handler = new EventHandler<ModelAddedEventArgs<ItemCategory>>(handlerAction);
+
+            categoryPersistence.ItemAdded += handler;
+
             categoryPersistence.Create(newCategory);
+
+            categoryPersistence.ItemAdded -= handler;
 
             ItemCategory retrievedCategory = categoryPersistence.Retrieve(newCategory.Id);
             Assert.IsNotNull(retrievedCategory);
 
             AssertEquality.For(newCategory, retrievedCategory);
+            Assert.IsTrue(handledEvent, "Did not handle update event");
         }
 
         [Test]
