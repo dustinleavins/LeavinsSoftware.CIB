@@ -33,7 +33,7 @@
         <ListBox Grid.Row="1"
                       Grid.Column="0"
                       Grid.ColumnSpan="2"
-                      ItemsSource="{Binding SubCategories}" SelectedItem="{Binding SelectedSubCategory}">
+                      ItemsSource="{Binding SidebarItems}" SelectedItem="{Binding SelectedSidebarItem}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />

@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
@@ -20,13 +21,13 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
     {
         private List<MainCategoryItem> mainCategories;
         private MainCategoryItem selectedCategory;
-        private ObservableCollection<SubCategoryItem> subCategoryItems;
-        private SubCategoryItem selectedSubCategory;
+        private ObservableCollection<ISidebarItem> sidebarItems;
+        private ISidebarItem selectedSidebarItem;
 
         private SidebarViewModel(IAppNavigationService nav)
         {
             Nav = nav;
-            subCategoryItems = new ObservableCollection<SubCategoryItem>();
+            sidebarItems = new ObservableCollection<ISidebarItem>();
 
             mainCategories = new List<MainCategoryItem>();
 
@@ -81,32 +82,32 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
             }
         }
 
-        public SubCategoryItem SelectedSubCategory
+        public ISidebarItem SelectedSidebarItem
         {
             get
             {
-                return selectedSubCategory;
+                return selectedSidebarItem;
             }
             set
             {
-                if (selectedSubCategory != value)
+                if (selectedSidebarItem != value)
                 {
-                    selectedSubCategory = value;
+                    selectedSidebarItem = value;
                     OnPropertyChanged("SelectedSubCategory");
 
                     if (value != null)
                     {
-                        Nav.Navigate(() => CollectionPage.PageFor(value.Category));
+                        Nav.Navigate(value.CreatePage);
                     }
                 }
             }
         }
 
-        public ObservableCollection<SubCategoryItem> SubCategories
+        public ObservableCollection<ISidebarItem> SidebarItems
         {
             get
             {
-                return subCategoryItems;
+                return sidebarItems;
             }
         }
 
@@ -125,7 +126,7 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
 
         public async Task UpdateSubCategories()
         {
-            subCategoryItems.Clear();
+            sidebarItems.Clear();
             if (selectedCategory == null)
             {
                 return;
@@ -134,7 +135,8 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
             var items = await Task.Run(
                 () =>
                 {
-                    var categoryItems = new List<SubCategoryItem>();
+                    var categoryItems = new List<ISidebarItem>();
+                    categoryItems.Add(new AllSubCategoriesItem(selectedCategory.Type));
 
                     foreach (var category in Persistence.GetInstance<ICategoryPersistence>().RetrieveAll(selectedCategory.Type))
                     {
@@ -146,7 +148,7 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
 
             foreach (var item in items)
             {
-                subCategoryItems.Add(item);
+                sidebarItems.Add(item);
             }
         }
 
@@ -202,7 +204,40 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
             }
         }
 
-        public sealed class SubCategoryItem
+        public interface ISidebarItem
+        {
+            string Name { get; }
+            Page CreatePage();
+        }
+
+        public sealed class AllSubCategoriesItem : ISidebarItem
+        {
+            public AllSubCategoriesItem(ItemCategoryType categoryType)
+            {
+                CategoryType = categoryType;
+            }
+
+            public ItemCategoryType CategoryType
+            {
+                get;
+                private set;
+            }
+
+            public string Name
+            {
+                get
+                {
+                    return InterfaceResources.Common_ViewAll;
+                }
+            }
+
+            public Page CreatePage()
+            {
+                return CollectionPage.PageFor(CategoryType);
+            }
+        }
+
+        public sealed class SubCategoryItem : ISidebarItem
         {
             public SubCategoryItem(ItemCategory category, IAppNavigationService nav)
             {
@@ -228,6 +263,11 @@ namespace LeavinsSoftware.Collection.Program.Controls.ViewModels
             {
                 get;
                 private set;
+            }
+
+            public Page CreatePage()
+            {
+                return CollectionPage.PageFor(Category);
             }
         }
     }
