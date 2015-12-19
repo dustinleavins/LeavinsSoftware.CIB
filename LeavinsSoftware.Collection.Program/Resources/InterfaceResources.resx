@@ -340,4 +340,10 @@ Deleting this item is permanent.</value>
   <data name="Common_Reject" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="Startup_GetStarted" xml:space="preserve">
+    <value>Get Started!</value>
+  </data>
+  <data name="Startup_Welcome" xml:space="preserve">
+    <value>Welcome to CIB Collection Manager.</value>
+  </data>
 </root>

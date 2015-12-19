@@ -1,4 +1,4 @@
-﻿<!-- Copyright (c) 2013, 2014 Dustin Leavins
+﻿<!-- Copyright (c) 2013-2015 Dustin Leavins
      See the file 'LICENSE.txt' for copying permission.
 -->
 <Page x:Class="LeavinsSoftware.Collection.Program.HomePage"
@@ -32,48 +32,12 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Grid.Row="0"
-               Name="largeAddCategoryLabel"
-               Style="{StaticResource largeAddCategoryLabelStyle}">
-            <Hyperlink Command="{Binding AddCategory}">
-                <TextBlock Text="{x:Static res:InterfaceResources.Common_AddCategory}" />
-            </Hyperlink>
-        </Label>
-        <Label Grid.Row="1"
-               Name="productLabel"
-               Style="{StaticResource categoryLabelStyle}">
-            <Hyperlink Command="{Binding ProductCategory}">
-                <TextBlock Text="{x:Static res:InterfaceResources.Common_Products}" />
-            </Hyperlink>
-        </Label>
-        <Label Grid.Row="2"
-               Name="comicLabel"
-               Style="{StaticResource categoryLabelStyle}">
-            <Hyperlink Command="{Binding ComicCategory}">
-                <TextBlock Text="{x:Static res:InterfaceResources.Common_ComicBooks}"  />
-            </Hyperlink>
-        </Label>
-        <Label Grid.Row="3"
-               Name="gameLabel"
-               Style="{StaticResource categoryLabelStyle}">
-            <Hyperlink Command="{Binding GameCategory}">
-                <TextBlock Text="{x:Static res:InterfaceResources.Common_VideoGames}"  />
-            </Hyperlink>
-        </Label>
-        <Label Grid.Row="4"
-               Name="addCategoryLabel"
-               Style="{StaticResource categoryLabelStyle}">
-            <Hyperlink Command="{Binding AddCategory}">
-                <TextBlock Text="{x:Static res:InterfaceResources.Common_AddCategory}"  />
-            </Hyperlink>
-        </Label>
+        <Grid Grid.Row="0" Name="welcomeMessageGrid">
+            <TextBlock Name="welcomeMessageBlock" />
+        </Grid>
 
-        <Grid Grid.Row="5"
+        <Grid Grid.Row="1"
               Name="importExportGrid"
               Margin="0,40,0,20">
             <Grid.ColumnDefinitions>
@@ -98,7 +62,7 @@
             </Label>
         </Grid>
 
-        <Label Grid.Row="6"
+        <Label Grid.Row="2"
                HorizontalAlignment="Center"
                VerticalAlignment="Bottom">
             <Hyperlink Command="{Binding Options}">

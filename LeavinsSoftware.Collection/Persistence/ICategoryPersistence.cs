@@ -41,6 +41,12 @@ namespace LeavinsSoftware.Collection.Persistence
         /// <returns></returns>
         bool Any(ItemCategoryType type);
 
+        /// <summary>
+        /// Are there any categories?
+        /// </summary>
+        /// <returns></returns>
+        bool Any();
+
         event EventHandler<ModelAddedEventArgs<ItemCategory>> ItemAdded;
     }
 }

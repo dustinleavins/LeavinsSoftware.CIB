@@ -127,6 +127,9 @@
     <Compile Include="Controls\FirstRunNotification.xaml.cs">
       <DependentUpon>FirstRunNotification.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\WelcomeNotification.xaml.cs">
+      <DependentUpon>WelcomeNotification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ProgramUpdateNotification.xaml.cs">
       <DependentUpon>ProgramUpdateNotification.xaml</DependentUpon>
     </Compile>
@@ -227,6 +230,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\FirstRunNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WelcomeNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -30,5 +30,15 @@ namespace LeavinsSoftware.Collection.Program
         /// Export Successful
         /// </summary>
         public const String App_ExportSuccess = "App_ExportSuccess";
+
+        /// <summary>
+        /// Welcome
+        /// </summary>
+        public const String App_Welcome = "App_Welcome";
+
+        /// <summary>
+        /// Getting Started
+        /// </summary>
+        public const String App_GettingStarted = "App_FirstRun";
     }
 }

@@ -23,6 +23,7 @@
     <Style TargetType="{x:Type controls:FirstRunNotification}" BasedOn="{StaticResource {x:Type controls:Notification}}" />
     <Style TargetType="{x:Type controls:ProgramUpdateNotification}" BasedOn="{StaticResource {x:Type controls:Notification}}" />
     <Style TargetType="{x:Type controls:SimpleNotification}" BasedOn="{StaticResource {x:Type controls:Notification}}" />
+    <Style TargetType="{x:Type controls:WelcomeNotification}" BasedOn="{StaticResource {x:Type controls:Notification}}" />
 
     <!-- Key Styles -->
     <Style x:Key="categoryLabelStyle"

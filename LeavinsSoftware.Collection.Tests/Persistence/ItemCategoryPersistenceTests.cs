@@ -213,6 +213,8 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Assert.AreEqual(1, allRetrievedCategories.Count(c => c.Id == newComicCategory.Id));
             Assert.AreEqual(1, allRetrievedCategories.Count(c => c.Id == newProductCategory.Id));
             Assert.AreEqual(1, allRetrievedCategories.Count(c => c.Id == newGameCategory.Id));
+
+            Assert.IsTrue(categoryPersistence.Any());
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013-2015 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF;
 using KSMVVM.WPF.ViewModel;
@@ -16,18 +16,6 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
         {
             Nav = nav;
 
-            AddCategory = new CustomCommand((unused) =>
-                Nav.Navigate(() => new AddMainCategoryPage()));
-
-            ProductCategory = new CustomCommand((unused) =>
-                Nav.Navigate(() => CategoryPage.PageFor<Product>()));
-
-            ComicCategory = new CustomCommand((x) =>
-                Nav.Navigate(() => CategoryPage.PageFor<ComicBookSeries>()));
-
-            GameCategory = new CustomCommand((x) =>
-            Nav.Navigate(() => CategoryPage.PageFor<VideoGame>()));
-
             Export = new CustomCommand((x) =>
                 Nav.Navigate(() => new ExportPage()));
 
@@ -37,14 +25,6 @@ namespace LeavinsSoftware.Collection.Program.ViewModels
             Options = new CustomCommand((x) =>
                 Nav.Navigate(() => new OptionsPage()));
         }
-
-        public ICommand ProductCategory { get; private set; }
-
-        public ICommand AddCategory { get; private set; }
-
-        public ICommand ComicCategory { get; private set; }
-
-        public ICommand GameCategory { get; private set; }
 
         public ICommand Export { get; private set; }
 

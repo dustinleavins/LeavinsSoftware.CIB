@@ -234,6 +234,37 @@ namespace LeavinsSoftware.Collection.Persistence
             return Count(type) > 0;
         }
 
+        public bool Any()
+        {
+            long count = 0;
+
+            using (var connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT COUNT(*) " +
+                        "FROM Categories";
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            long? countNullable = (long?)reader[0];
+
+                            count = countNullable.GetValueOrDefault();
+                        }
+                    }
+                }
+
+                connection.Close();
+            }
+
+            return count > 0;
+        }
+
         private void OnItemAdded(ItemCategory item)
         {
             var handler = Volatile.Read(ref ItemAdded);
