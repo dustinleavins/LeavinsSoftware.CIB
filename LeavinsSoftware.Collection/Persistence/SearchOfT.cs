@@ -1,22 +1,28 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013-2015 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
+using LeavinsSoftware.Collection.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LeavinsSoftware.Collection.Models;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
     /// <summary>
     /// Represents an ongoing search.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public sealed class Search<T> where T : Model
+    /// <typeparam name="TModel">Type of data to search for.</typeparam>
+    public sealed class Search<TModel> where TModel : Model
     {
-        public Search(ISearchablePersistence<T> persistence, ModelSearchOptions options)
+        public Search(ISearchablePersistence<TModel> persistence, ModelSearchOptions options)
         {
+            if (persistence == null)
+            {
+                throw new ArgumentNullException(nameof(persistence), "persistence cannot be null.");
+            }
+            else if (options.ItemsPerPage <= 0)
+            {
+                throw new ArgumentException(nameof(options), "options must specify at least 1 item per page.");
+            }
+
             Persistence = persistence;
             Options = options;
             
@@ -24,7 +30,7 @@ namespace LeavinsSoftware.Collection.Persistence
             
             if (totalResults == 0)
             {
-                CurrentPage = new List<T>();
+                CurrentPage = new List<TModel>();
             }
             else
             {
@@ -45,7 +51,7 @@ namespace LeavinsSoftware.Collection.Persistence
         /// <remarks>
         /// This should be the page of results currently being shown to an end-user.
         /// </remarks>
-        public List<T> CurrentPage { get; private set; }
+        public List<TModel> CurrentPage { get; private set; }
 
         /// <summary>
         /// Number of the current page.
@@ -134,7 +140,7 @@ namespace LeavinsSoftware.Collection.Persistence
         /// <summary>
         /// Backing persistence class to use for actually performing searches
         /// </summary>
-        public ISearchablePersistence<T> Persistence { get; private set; }
+        public ISearchablePersistence<TModel> Persistence { get; private set; }
 
         /// <summary>
         /// Search options

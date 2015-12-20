@@ -110,7 +110,6 @@ namespace LeavinsSoftware.Collection.Persistence
                 connection.Close();
             }
 
-            // TODO: Trigger changed event
             return item;
         }
 
@@ -127,7 +126,6 @@ namespace LeavinsSoftware.Collection.Persistence
                 connection.Close();
             }
 
-            // TODO: Trigger changed event
         }
 
         public ICollection<ItemCategory> RetrieveAll(ItemCategoryType type)
@@ -193,7 +191,7 @@ namespace LeavinsSoftware.Collection.Persistence
             return categories;
         }
 
-        public long Count(ItemCategoryType type)
+        private long Count(ItemCategoryType type)
         {
             long count = 0;
 

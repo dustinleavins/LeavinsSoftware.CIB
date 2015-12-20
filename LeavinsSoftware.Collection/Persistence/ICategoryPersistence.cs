@@ -28,13 +28,6 @@ namespace LeavinsSoftware.Collection.Persistence
         ICollection<ItemCategory> RetrieveAll();
 
         /// <summary>
-        /// Retrieves the number of categories with the specified type.
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        long Count(ItemCategoryType type);
-
-        /// <summary>
         /// Are there any categories with the specified type?
         /// </summary>
         /// <param name="type"></param>
@@ -47,6 +40,9 @@ namespace LeavinsSoftware.Collection.Persistence
         /// <returns></returns>
         bool Any();
 
+        /// <summary>
+        /// Occurs when a category is added.
+        /// </summary>
         event EventHandler<ModelAddedEventArgs<ItemCategory>> ItemAdded;
     }
 }

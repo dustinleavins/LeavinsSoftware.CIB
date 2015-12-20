@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013-2015 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using LeavinsSoftware.Collection.SQLite;
 using LeavinsSoftware.Collection.Models;
@@ -133,7 +133,7 @@ namespace LeavinsSoftware.Collection.Persistence
                 {
                     if (issue.IsNew)
                     {
-                    	CreateIssue(issue, item.Id, connection);      
+                        CreateIssue(issue, item.Id, connection);
                     }
                     else
                     {
@@ -180,8 +180,6 @@ namespace LeavinsSoftware.Collection.Persistence
 
                 connection.Close();
             }
-
-            // TODO: Trigger changed event
         }
 
         public List<ComicBookSeries> Page(ModelSearchOptions options, long pageNumber)

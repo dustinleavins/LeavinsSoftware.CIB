@@ -1,4 +1,6 @@
-﻿using LeavinsSoftware.Collection.Persistence;
+﻿// Copyright (c) 2013-2015 Dustin Leavins
+// See the file 'LICENSE.txt' for copying permission.
+using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Models;
 using NUnit.Framework;
 using System;
@@ -163,6 +165,20 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
             Search<Product> target = new Search<Product>(persistenceMock.Object, defaultOptions);
             
             target.GoToPage(pageNumber);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorNullPersistenceExceptionTest()
+        {
+            new Search<Product>(null, new ModelSearchOptions());
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorInvalidOperationsExceptionTest()
+        {
+            new Search<Product>(persistenceMock.Object, new ModelSearchOptions(0, null, null, null));
         }
 
         private static List<Product> GeneratePage(ModelSearchOptions options, long length)

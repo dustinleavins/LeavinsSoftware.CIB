@@ -1,34 +1,27 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013-2015 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using LeavinsSoftware.Collection.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Persistence
 {
-    // TODO: Add change event notification
     /// <summary>
-    /// Base class for <see cref="IPersistence&lt;T&gt;"/> instances.
+    /// Base class for <see cref="IPersistence&lt;TModel&gt;"/> instances.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract class PersistenceBase<T> : IPersistence<T> where T : Model
+    /// <typeparam name="TModel">The type of data to persist.</typeparam>
+    public abstract class PersistenceBase<TModel> : IPersistence<TModel> where TModel : Model
     {
-        public T Create(T item)
+        public TModel Create(TModel item)
         {
             if (item == null)
             {
                 throw new ArgumentNullException("item", "item cannot be null");
             }
-
-            if (item.IsSummary)
+            else if (item.IsSummary)
             {
                 throw new ArgumentException("cannot persist 'summary' item", "item");
             }
-            
-            if (!item.IsNew)
+            else if (!item.IsNew)
             {
                 throw new ArgumentException("cannot 'create' existing item", "item");
             }
@@ -37,16 +30,16 @@ namespace LeavinsSoftware.Collection.Persistence
             return CreateBase(item);
         }
 
-        protected abstract T CreateBase(T item);
+        protected abstract TModel CreateBase(TModel item);
 
-        public T Retrieve(long id)
+        public TModel Retrieve(long id)
         {
             if (id <= 0)
             {
                 throw new ArgumentException("ID must be positive", "id");
             }
             
-            T item =  RetrieveBase(id);
+            TModel item =  RetrieveBase(id);
             
             if (item != null && item.IsSummary)
             {
@@ -57,21 +50,19 @@ namespace LeavinsSoftware.Collection.Persistence
             return item;
         }
 
-        protected abstract T RetrieveBase(long id);
+        protected abstract TModel RetrieveBase(long id);
 
-        public T Update(T item)
+        public TModel Update(TModel item)
         {
             if (item == null)
             {
                 throw new ArgumentNullException("item", "item cannot be null");
             }
-            
-            if (item.IsSummary)
+            else if (item.IsSummary)
             {
                 throw new ArgumentException("cannot persist 'summary' item", "item");
             }
-            
-            if (item.IsNew)
+            else if (item.IsNew)
             {
                 throw new ArgumentException("cannot update a new item", "item");
             }
@@ -80,13 +71,13 @@ namespace LeavinsSoftware.Collection.Persistence
             return UpdateBase(item);
         }
 
-        protected abstract T UpdateBase(T item);
+        protected abstract TModel UpdateBase(TModel item);
 
-        public void Delete(T item)
+        public void Delete(TModel item)
         {
             DeleteBase(item);
         }
 
-        protected abstract void DeleteBase(T item);
+        protected abstract void DeleteBase(TModel item);
     }
 }
