@@ -145,4 +145,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <Image x:Key="plusImage"
+           Source="Images/plus.png" />
 </ResourceDictionary>
