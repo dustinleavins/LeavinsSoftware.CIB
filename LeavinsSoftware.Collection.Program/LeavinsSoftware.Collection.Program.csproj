@@ -206,6 +206,7 @@
     <Compile Include="ViewModels\ItemComicViewModel.cs" />
     <Compile Include="ViewModels\ItemGameViewModel.cs" />
     <Compile Include="ViewModels\ItemProductViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowMenuViewModel.cs" />
     <Compile Include="ViewModels\OptionsCategoryNamesViewModel.cs" />
     <Compile Include="ViewModels\OptionsViewModel.cs" />
     <Page Include="AddMainCategoryPage.xaml">

@@ -1,11 +1,13 @@
 ﻿// Copyright (c) 2013-2015 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
+using KSMVVM.WPF;
 using KSMVVM.WPF.Messaging;
 using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Program.Attributes;
 using LeavinsSoftware.Collection.Program.Controls;
 using LeavinsSoftware.Collection.Program.Resources;
+using LeavinsSoftware.Collection.Program.ViewModels;
 using System;
 using System.Linq;
 using System.Windows;
@@ -23,6 +25,7 @@ namespace LeavinsSoftware.Collection.Program
         public MainWindow()
         {
             InitializeComponent();
+            settingsMenu.DataContext = new MainWindowMenuViewModel(new MainWindowAppNav(this));
         }
 
         private void BrowseBack_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -197,20 +200,36 @@ namespace LeavinsSoftware.Collection.Program
             notificationsPanel.Children.Add(banner);
         }
 
-        // hopefully temp code here
-        private void Options_Click(object sender, RoutedEventArgs e)
+        private class MainWindowAppNav : IAppNavigationService
         {
-            mainFrame.Navigate(new OptionsPage());
-        }
+            public MainWindowAppNav(MainWindow instance)
+            {
+                Instance = instance;
+            }
 
-        private void Import_Click(object sender, RoutedEventArgs e)
-        {
-            mainFrame.Navigate(new ImportPage());
-        }
+            public MainWindow Instance
+            {
+                get;
+                private set;
+            }
 
-        private void Export_Click(object sender, RoutedEventArgs e)
-        {
-            mainFrame.Navigate(new ExportPage());
+            public Page CurrentPage
+            {
+                get
+                {
+                    return Instance.mainFrame.Content as Page;
+                }
+            }
+
+            public void GoBack()
+            {
+                Instance.mainFrame.GoBack();
+            }
+
+            public void Navigate<TPage>(Func<TPage> page) where TPage : Page
+            {
+                Instance.mainFrame.Navigate(page.Invoke());
+            }
         }
     }
 }

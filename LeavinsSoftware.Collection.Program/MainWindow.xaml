@@ -87,8 +87,9 @@
                 <Label Grid.Column="1"
                        Style="{StaticResource headerLabelStyle}"
                        Name="headerLabel" />
-                <!-- TODO - more options-->
-                <Menu Grid.Column="2">
+
+                <Menu Grid.Column="2"
+                      x:Name="settingsMenu">
                     <Menu.ItemsPanel>
                         <ItemsPanelTemplate>
                             <Grid>
@@ -103,14 +104,14 @@
                         <MenuItem.Items>
                             <MenuItem Header="Import..."
                                       FontWeight="Normal"
-                                      Click="Import_Click" />
+                                      Command="{Binding ImportCommand}" />
                             <MenuItem Header="Export..."
                                       FontWeight="Normal"
-                                      Click="Export_Click" />
+                                      Command="{Binding ExportCommand}" />
                             <Separator />
                             <MenuItem Header="Options..."
                                       FontWeight="Normal"
-                                      Click="Options_Click" />
+                                      Command="{Binding OptionsCommand}" />
                         </MenuItem.Items>
                     </MenuItem>
                 </Menu>
