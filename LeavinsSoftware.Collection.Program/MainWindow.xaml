@@ -10,7 +10,7 @@
         Loaded="Window_Loaded"
         Title="{x:Static res:InterfaceResources.ProgramName}"
         Height="350"
-        Width="525">
+        Width="640">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New"
                         Executed="New_Executed" />
