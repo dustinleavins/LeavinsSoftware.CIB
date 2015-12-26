@@ -11,63 +11,6 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="{x:Static res:InterfaceResources.PageTitles_Home}"
       Loaded="Page_Loaded">
-    <Page.Resources>
-        <Style x:Key="largeAddCategoryLabelStyle"
-               TargetType="Label">
-            <Setter Property="LayoutTransform">
-                <Setter.Value>
-                    <ScaleTransform ScaleX="4"
-                                    ScaleY="4" />
-                </Setter.Value>
-            </Setter>
-            <Setter Property="HorizontalAlignment"
-                    Value="Center" />
-            <Setter Property="VerticalAlignment"
-                    Value="Center" />
-        </Style>
-    </Page.Resources>
-
     <Grid Style="{StaticResource mainPageGrid}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Name="welcomeMessageGrid">
-            <TextBlock Name="welcomeMessageBlock" />
-        </Grid>
-
-        <Grid Grid.Row="1"
-              Name="importExportGrid"
-              Margin="0,40,0,20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <Label Grid.Column="0"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Bottom">
-                <Hyperlink Command="{Binding Export}">
-                    <TextBlock Text="{x:Static res:InterfaceResources.Common_ExportData}" />
-                </Hyperlink>
-            </Label>
-
-            <Label Grid.Column="1"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Bottom">
-                <Hyperlink Command="{Binding Import}">
-                    <TextBlock Text="{x:Static res:InterfaceResources.Common_ImportData}" />
-                </Hyperlink>
-            </Label>
-        </Grid>
-
-        <Label Grid.Row="2"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Bottom">
-            <Hyperlink Command="{Binding Options}">
-                <TextBlock Text="{x:Static res:InterfaceResources.Home_ProgramOptions}" />
-            </Hyperlink>
-        </Label>
     </Grid>
 </Page>

@@ -2,11 +2,9 @@
 // See the file 'LICENSE.txt' for copying permission.
 using KSMVVM.WPF;
 using KSMVVM.WPF.Messaging;
-using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Program.ViewModels;
 using System.Windows.Controls;
-using System.Windows.Documents;
 
 namespace LeavinsSoftware.Collection.Program
 {
@@ -23,17 +21,8 @@ namespace LeavinsSoftware.Collection.Program
 
         private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            // 'Add Category'
-            if (Persistence.GetInstance<ICategoryPersistence>().Any())
+            if (!Persistence.GetInstance<ICategoryPersistence>().Any())
             {
-                welcomeMessageGrid.Visibility = System.Windows.Visibility.Collapsed;
-                importExportGrid.Visibility = System.Windows.Visibility.Visible;
-            }
-            else
-            {
-                welcomeMessageGrid.Visibility = System.Windows.Visibility.Visible;
-                importExportGrid.Visibility = System.Windows.Visibility.Collapsed;
-
                 BasicMessenger.Default.Send(MessageIds.App_Welcome);
             }
         }

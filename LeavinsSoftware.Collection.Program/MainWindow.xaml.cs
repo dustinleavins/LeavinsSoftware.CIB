@@ -196,5 +196,21 @@ namespace LeavinsSoftware.Collection.Program
         {
             notificationsPanel.Children.Add(banner);
         }
+
+        // hopefully temp code here
+        private void Options_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new OptionsPage());
+        }
+
+        private void Import_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new ImportPage());
+        }
+
+        private void Export_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new ExportPage());
+        }
     }
 }
