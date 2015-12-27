@@ -4,13 +4,25 @@
 <Page x:Class="LeavinsSoftware.Collection.Program.HomePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:res="clr-namespace:LeavinsSoftware.Collection.Program.Resources"
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      mc:Ignorable="d"
+      d:DesignHeight="300"
+      d:DesignWidth="480"
       Title="{x:Static res:InterfaceResources.PageTitles_Home}"
       Loaded="Page_Loaded">
     <Grid Style="{StaticResource mainPageGrid}">
+        <TextBlock Text="{x:Static res:InterfaceResources.HomePage_InitialWelcome}"
+                   Style="{StaticResource homeWelcome}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   x:Name="initialWelcome" />
+        <TextBlock Text="{x:Static res:InterfaceResources.HomePage_WelcomeBack}"
+                   Style="{StaticResource homeWelcome}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Visibility="Collapsed"
+                   x:Name="welcomeBack" />
     </Grid>
 </Page>

@@ -277,7 +277,7 @@
     <value>Export Data</value>
   </data>
   <data name="PageTitles_Home" xml:space="preserve">
-    <value>Welcome!</value>
+    <value>Home</value>
   </data>
   <data name="PageTitles_Import" xml:space="preserve">
     <value>Import Data</value>
@@ -345,5 +345,11 @@ Deleting this item is permanent.</value>
   </data>
   <data name="Startup_Welcome" xml:space="preserve">
     <value>Welcome to CIB Collection Manager.</value>
+  </data>
+  <data name="HomePage_InitialWelcome" xml:space="preserve">
+    <value>Welcome to CIB Collection Manager!</value>
+  </data>
+  <data name="HomePage_WelcomeBack" xml:space="preserve">
+    <value>Welcome back!</value>
   </data>
 </root>

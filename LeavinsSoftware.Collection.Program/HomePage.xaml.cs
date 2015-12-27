@@ -4,6 +4,7 @@ using KSMVVM.WPF;
 using KSMVVM.WPF.Messaging;
 using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Program.ViewModels;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace LeavinsSoftware.Collection.Program
@@ -19,10 +20,17 @@ namespace LeavinsSoftware.Collection.Program
             DataContext = new HomeViewModel(new PageNavigationService(this));
         }
 
-        private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!Persistence.GetInstance<ICategoryPersistence>().Any())
+            if (Persistence.GetInstance<ICategoryPersistence>().Any())
             {
+                initialWelcome.Visibility = Visibility.Collapsed;
+                welcomeBack.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                initialWelcome.Visibility = Visibility.Visible;
+                welcomeBack.Visibility = Visibility.Collapsed;
                 BasicMessenger.Default.Send(MessageIds.App_Welcome);
             }
         }

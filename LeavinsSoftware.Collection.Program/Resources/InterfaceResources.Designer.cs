@@ -494,6 +494,24 @@ namespace LeavinsSoftware.Collection.Program.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Welcome to CIB Collection Manager!.
+        /// </summary>
+        public static string HomePage_InitialWelcome {
+            get {
+                return ResourceManager.GetString("HomePage_InitialWelcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome back!.
+        /// </summary>
+        public static string HomePage_WelcomeBack {
+            get {
+                return ResourceManager.GetString("HomePage_WelcomeBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Merge data from import file.
         /// </summary>
         public static string Import_MergeData {
@@ -611,7 +629,7 @@ namespace LeavinsSoftware.Collection.Program.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome!.
+        ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string PageTitles_Home {
             get {
