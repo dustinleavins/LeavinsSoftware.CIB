@@ -5,25 +5,34 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:LeavinsSoftware.Collection.Program.Controls">
     <Style TargetType="{x:Type controls:Notification}">
-        <Setter Property="Opacity" Value="0.75" />
-        <Setter Property="Background" Value="Black" />
-        <Setter Property="Padding" Value="5" />
+        <Setter Property="Opacity"
+                Value="0.75" />
+        <Setter Property="Background"
+                Value="Black" />
+        <Setter Property="Padding"
+                Value="5" />
         <Style.Resources>
             <Style TargetType="TextBlock">
-                <Setter Property="FontWeight" Value="Bold" />
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="Padding" Value="0,0,10,0" />
+                <Setter Property="FontWeight"
+                        Value="Bold" />
+                <Setter Property="Foreground"
+                        Value="White" />
+                <Setter Property="Padding"
+                        Value="0,0,10,0" />
             </Style>
             <Style TargetType="Separator">
-                <Setter Property="Margin" Value="0,0,10,0" />
+                <Setter Property="Margin"
+                        Value="0,0,10,0" />
             </Style>
         </Style.Resources>
     </Style>
 
-    <Style TargetType="{x:Type controls:FirstRunNotification}" BasedOn="{StaticResource {x:Type controls:Notification}}" />
-    <Style TargetType="{x:Type controls:ProgramUpdateNotification}" BasedOn="{StaticResource {x:Type controls:Notification}}" />
-    <Style TargetType="{x:Type controls:SimpleNotification}" BasedOn="{StaticResource {x:Type controls:Notification}}" />
-    <Style TargetType="{x:Type controls:WelcomeNotification}" BasedOn="{StaticResource {x:Type controls:Notification}}" />
+    <Style TargetType="{x:Type controls:FirstRunNotification}"
+           BasedOn="{StaticResource {x:Type controls:Notification}}" />
+    <Style TargetType="{x:Type controls:ProgramUpdateNotification}"
+           BasedOn="{StaticResource {x:Type controls:Notification}}" />
+    <Style TargetType="{x:Type controls:SimpleNotification}"
+           BasedOn="{StaticResource {x:Type controls:Notification}}" />
 
     <!-- Key Styles -->
     <Style x:Key="categoryLabelStyle"
@@ -57,10 +66,12 @@
                 <SolidColorBrush Color="Red" />
             </Setter.Value>
         </Setter>
-        
-        <Setter Property="BorderThickness" Value="1" />
-        
-        <Setter Property="CornerRadius" Value="3" />
+
+        <Setter Property="BorderThickness"
+                Value="1" />
+
+        <Setter Property="CornerRadius"
+                Value="3" />
     </Style>
 
     <Style x:Key="headerLabelStyle"
@@ -95,19 +106,32 @@
                 Value="Center" />
     </Style>
 
+    <Style x:Key="homeButton"
+           TargetType="Button">
+        <Setter Property="LayoutTransform">
+            <Setter.Value>
+                <ScaleTransform ScaleX="1.5"
+                                ScaleY="1.5" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="mainPageGrid"
            TargetType="Grid">
         <Setter Property="Margin"
                 Value="20" />
     </Style>
-    
+
     <Style x:Key="itemFieldLabel"
            TargetType="Label">
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Padding" Value="0,0,20,0" />
-        <Setter Property="Margin" Value="0" />
+        <Setter Property="FontWeight"
+                Value="Bold" />
+        <Setter Property="Padding"
+                Value="0,0,20,0" />
+        <Setter Property="Margin"
+                Value="0" />
     </Style>
-    
+
     <Style x:Key="listTypeCollectionBox"
            TargetType="ComboBox">
         <Setter Property="LayoutTransform">
@@ -123,7 +147,7 @@
         <Setter Property="HorizontalContentAlignment"
                 Value="Center" />
     </Style>
-    
+
     <Style x:Key="listTypeCollectionLabel"
            TargetType="Label">
         <Setter Property="LayoutTransform">
@@ -134,15 +158,22 @@
         </Setter>
         <Setter Property="FontWeight"
                 Value="Bold" />
-        <Setter Property="Padding" Value="0, 0, 20,0" />
-        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Padding"
+                Value="0, 0, 20,0" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
     </Style>
 
-    <Style TargetType="Button" x:Key="closeButton">
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="Padding" Value="2" />
+    <Style TargetType="Button"
+           x:Key="closeButton">
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="Foreground"
+                Value="White" />
+        <Setter Property="Padding"
+                Value="2" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -155,9 +186,12 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="Button.IsMouseOver" Value="True">
-                <Setter Property="Background" Value="White" />
-                <Setter Property="Foreground" Value="Black" />
+            <Trigger Property="Button.IsMouseOver"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="White" />
+                <Setter Property="Foreground"
+                        Value="Black" />
             </Trigger>
         </Style.Triggers>
     </Style>

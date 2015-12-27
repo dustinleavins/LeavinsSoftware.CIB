@@ -156,23 +156,6 @@ namespace LeavinsSoftware.Collection.Program
                     AddToast(banner);
                 });
 
-            BasicMessenger.Default.Register(MessageIds.App_Welcome,
-                () =>
-                {
-                    var notification = new WelcomeNotification()
-                    {
-                        AutoHide = false
-                    };
-
-                    AddBanner(notification);
-                });
-
-            BasicMessenger.Default.Register(MessageIds.App_GettingStarted,
-                () =>
-                {
-                    mainFrame.Navigate(new AddMainCategoryPage());
-                });
-
             var options = Persistence.GetInstance<IProgramOptionsPersistence>().Retrieve();
 
             if (options.IsFirstRun)

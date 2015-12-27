@@ -31,7 +31,6 @@ namespace LeavinsSoftware.Collection.Program
             {
                 initialWelcome.Visibility = Visibility.Visible;
                 welcomeBack.Visibility = Visibility.Collapsed;
-                BasicMessenger.Default.Send(MessageIds.App_Welcome);
             }
         }
     }

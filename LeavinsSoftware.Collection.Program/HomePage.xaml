@@ -13,11 +13,21 @@
       Title="{x:Static res:InterfaceResources.PageTitles_Home}"
       Loaded="Page_Loaded">
     <Grid Style="{StaticResource mainPageGrid}">
-        <TextBlock Text="{x:Static res:InterfaceResources.HomePage_InitialWelcome}"
-                   Style="{StaticResource homeWelcome}"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   x:Name="initialWelcome" />
+        <StackPanel  x:Name="initialWelcome"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center">
+            <TextBlock Text="{x:Static res:InterfaceResources.HomePage_InitialWelcome}"
+                       Style="{StaticResource homeWelcome}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+
+            <Button Content="{x:Static res:InterfaceResources.Startup_GetStarted}"
+                    Style="{StaticResource homeButton}"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Command="{Binding GetStartedCommand}" />
+        </StackPanel>
         <TextBlock Text="{x:Static res:InterfaceResources.HomePage_WelcomeBack}"
                    Style="{StaticResource homeWelcome}"
                    HorizontalAlignment="Center"
