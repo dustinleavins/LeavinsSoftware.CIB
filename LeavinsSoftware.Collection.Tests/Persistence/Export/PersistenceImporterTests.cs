@@ -1,17 +1,14 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013, 2014, 2021 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using LeavinsSoftware.Collection.Persistence.Export;
 using LeavinsSoftware.Collection.Persistence.Export.Extensions;
 using LeavinsSoftware.Collection.Persistence;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.IO;
 using LeavinsSoftware.Collection.Persistence.Migrations;
 using LeavinsSoftware.Collection.Models;
-using System.Globalization;
 using LeavinsSoftware.Collection.Tests.Helpers;
 using SimpleInjector;
 namespace LeavinsSoftware.Collection.Tests.Persistence.Export
@@ -19,7 +16,9 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
     [TestFixture]
     public sealed class PersistenceImporterTests
     {
-        private const string MainImportFileName = "Files\\Import Data 0.xml";
+        private string rootDirectory;
+        private string mainImportFileName;
+        private string importDataUpdateFileName;
         private PersistenceImporter target;
         private ISearchablePersistence<ComicBookSeries> comicBookPersistence;
         private ISearchablePersistence<Product> productPersistence;
@@ -29,12 +28,14 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
         [SetUp]
         public void SetUp()
         {
-            if (File.Exists(Path.Combine("default", "collection.db")))
+            rootDirectory = TestContext.CurrentContext.TestDirectory;
+
+            if (File.Exists(Path.Combine(rootDirectory, "default", "collection.db")))
             {
-                File.Delete(Path.Combine("default", "collection.db"));
+                File.Delete(Path.Combine(rootDirectory, "default", "collection.db"));
             }
 
-            DirectoryInfo currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+            DirectoryInfo currentDir = new DirectoryInfo(rootDirectory);
             Profile defaultProfile = new Profile("default");
             MigrationRunner.Run(currentDir, defaultProfile);
 
@@ -44,19 +45,22 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             videoGamePersistence = new VideoGamePersistence(currentDir, defaultProfile);
 
             var container = new Container();
-            container.RegisterSingle<ISearchablePersistence<ComicBookSeries>>(comicBookPersistence);
-            container.RegisterSingle<ISearchablePersistence<Product>>(productPersistence);
-            container.RegisterSingle<ISearchablePersistence<VideoGame>>(videoGamePersistence);
-            container.RegisterSingle<ICategoryPersistence>(categoryPersistence);
+            container.RegisterInstance(comicBookPersistence);
+            container.RegisterInstance(productPersistence);
+            container.RegisterInstance(videoGamePersistence);
+            container.RegisterInstance(categoryPersistence);
 
             target = new PersistenceImporter(container);
+
+            mainImportFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, "Files", "Import Data 0.xml");
+            importDataUpdateFileName = Path.Combine(TestContext.CurrentContext.TestDirectory, "Files", "Import Data Update.xml");
         }
 
         [TestCase(true)]
         [TestCase(false)]
         public void ImportTest(bool merge)
         {
-            target.Import(MainImportFileName, new ImportOptions(merge: merge));
+            target.Import(mainImportFileName, new ImportOptions(merge: merge));
 
             ModelSearchOptions searchOptions = new ModelSearchOptionsBuilder()
             {
@@ -176,7 +180,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
         public void ImportMergeAllTest()
         {
             // SETUP
-            target.Import(MainImportFileName, new ImportOptions(merge: true));
+            target.Import(mainImportFileName, new ImportOptions(merge: true));
 
             List<ItemCategory> preImportCategories = new List<ItemCategory>();
             preImportCategories.AddRange(categoryPersistence.RetrieveAll(ItemCategoryType.ComicBook));
@@ -208,7 +212,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             }
 
             // TESTS - Try to import the same file again
-            target.Import(MainImportFileName, new ImportOptions(merge: true));
+            target.Import(mainImportFileName, new ImportOptions(merge: true));
 
             // Category checks
             foreach (ItemCategory postImportCategory in categoryPersistence.RetrieveAll(ItemCategoryType.ComicBook))
@@ -285,7 +289,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
         {
             // TODO: Update test file with additional changes (to be ignored by merge)
             // SETUP
-            target.Import(MainImportFileName, new ImportOptions(merge: false));
+            target.Import(mainImportFileName, new ImportOptions(merge: false));
             ComicBookSeries expectedComicSeries = comicBookPersistence.Retrieve(1);
             expectedComicSeries.Notes += "\nUpdate Notes";
 
@@ -303,7 +307,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             expectedProduct.ListType = ItemListType.Want;
 
             // Test
-            target.Import("Files\\Import Data Update.xml", new ImportOptions(merge: true));
+            target.Import(importDataUpdateFileName, new ImportOptions(merge: true));
             
             AssertEquality.For(expectedComicSeries, comicBookPersistence.Retrieve(1));
             AssertEquality.For(expectedGame, videoGamePersistence.Retrieve(1));

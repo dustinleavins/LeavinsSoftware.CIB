@@ -1,12 +1,10 @@
-﻿// Copyright (c) 2013-2015 Dustin Leavins
+﻿// Copyright (c) 2013-2015, 2021 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using LeavinsSoftware.Collection.Persistence;
 using LeavinsSoftware.Collection.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Moq;
 
 namespace LeavinsSoftware.Collection.Tests.Persistence
@@ -17,7 +15,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         private Mock<ISearchablePersistence<Product>> persistenceMock;
         private ModelSearchOptions defaultOptions;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             defaultOptions = new ModelSearchOptionsBuilder()
@@ -121,7 +119,6 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         }
         
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void NextPageExceptionTest()
         {
             persistenceMock.Setup(p => p.Page(defaultOptions, 0))
@@ -132,11 +129,10 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
 
             Search<Product> target = new Search<Product>(persistenceMock.Object, defaultOptions);
             
-            target.NextPage();
+            Assert.Catch(typeof(InvalidOperationException), () => target.NextPage());
         }
         
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void PreviousPageExceptionTest()
         {
             persistenceMock.Setup(p => p.Page(defaultOptions, 0))
@@ -146,14 +142,13 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 .Returns(20);
 
             Search<Product> target = new Search<Product>(persistenceMock.Object, defaultOptions);
-            
-            target.PreviousPage();
+
+            Assert.Catch(typeof(InvalidOperationException), () => target.PreviousPage());
         }
-        
+
         [TestCase(1)]
         [TestCase(2)]
         [TestCase(-1)]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void GoToPageExceptionTest(long pageNumber)
         {
             persistenceMock.Setup(p => p.Page(defaultOptions, 0))
@@ -163,22 +158,20 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
                 .Returns(20);
 
             Search<Product> target = new Search<Product>(persistenceMock.Object, defaultOptions);
-            
-            target.GoToPage(pageNumber);
+
+            Assert.Catch(typeof(InvalidOperationException), () => target.GoToPage(pageNumber));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorNullPersistenceExceptionTest()
         {
-            new Search<Product>(null, new ModelSearchOptions());
+            Assert.Catch(typeof(ArgumentNullException), () => new Search<Product>(null, new ModelSearchOptions()));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorInvalidOperationsExceptionTest()
         {
-            new Search<Product>(persistenceMock.Object, new ModelSearchOptions(0, null, null, null));
+            Assert.Catch(typeof(ArgumentException), () => new Search<Product>(persistenceMock.Object, new ModelSearchOptions(0, null, null, null)));
         }
 
         private static List<Product> GeneratePage(ModelSearchOptions options, long length)

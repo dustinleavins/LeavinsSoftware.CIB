@@ -1,11 +1,8 @@
-﻿using LeavinsSoftware.Collection.Models;
-using ItemSpecific = LeavinsSoftware.Collection.Program.Resources.ItemSpecific;
+﻿// Copyright (c) 2014, 2021 Dustin Leavins
+// See the file 'LICENSE.txt' for copying permission.
+using LeavinsSoftware.Collection.Models;
 using SimpleInjector;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LeavinsSoftware.Collection.Program.Resources
 {
@@ -35,9 +32,9 @@ namespace LeavinsSoftware.Collection.Program.Resources
             () =>
             {
                 var c = new Container();
-                c.RegisterSingle<IItemSpecificResources<ComicBookSeries>>(new ItemSpecific.ComicBookResources());
-                c.RegisterSingle<IItemSpecificResources<Product>>(new ItemSpecific.ProductResources());
-                c.RegisterSingle<IItemSpecificResources<VideoGame>>(new ItemSpecific.VideoGameResources());
+                c.RegisterInstance<IItemSpecificResources<ComicBookSeries>>(new ItemSpecific.ComicBookResources());
+                c.RegisterInstance<IItemSpecificResources<Product>>(new ItemSpecific.ProductResources());
+                c.RegisterInstance<IItemSpecificResources<VideoGame>>(new ItemSpecific.VideoGameResources());
                 return c;
             });
     }

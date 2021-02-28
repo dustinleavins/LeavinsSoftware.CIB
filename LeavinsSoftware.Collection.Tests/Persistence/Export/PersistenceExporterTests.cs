@@ -1,12 +1,9 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013, 2014, 2021 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using LeavinsSoftware.Collection.Persistence.Export;
 using LeavinsSoftware.Collection.Persistence;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using LeavinsSoftware.Collection.Persistence.Migrations;
 using LeavinsSoftware.Collection.Models;
@@ -24,7 +21,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
         private ICategoryPersistence categoryPersistence;
         private ISearchablePersistence<VideoGame> videoGamePersistence;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             if (File.Exists(Path.Combine("default", "collection.db")))
@@ -42,10 +39,10 @@ namespace LeavinsSoftware.Collection.Tests.Persistence.Export
             videoGamePersistence = new VideoGamePersistence(currentDir, defaultProfile);
 
             var container = new Container();
-            container.RegisterSingle<ISearchablePersistence<ComicBookSeries>>(comicBookPersistence);
-            container.RegisterSingle<ISearchablePersistence<Product>>(productPersistence);
-            container.RegisterSingle<ISearchablePersistence<VideoGame>>(videoGamePersistence);
-            container.RegisterSingle<ICategoryPersistence>(categoryPersistence);
+            container.RegisterInstance<ISearchablePersistence<ComicBookSeries>>(comicBookPersistence);
+            container.RegisterInstance<ISearchablePersistence<Product>>(productPersistence);
+            container.RegisterInstance<ISearchablePersistence<VideoGame>>(videoGamePersistence);
+            container.RegisterInstance<ICategoryPersistence>(categoryPersistence);
             
             target = new PersistenceExporter(container);
 

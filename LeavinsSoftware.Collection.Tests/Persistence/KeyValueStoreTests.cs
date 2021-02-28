@@ -1,6 +1,5 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013, 2014, 2021 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
-using System;
 using System.Collections.Generic;
 using System.IO;
 using LeavinsSoftware.Collection.Persistence;
@@ -15,7 +14,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
     {
         private IKeyValueStore target;
         
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void FixtureSetUp()
         {
             if (File.Exists(Path.Combine("kv", "collection.db")))
@@ -43,10 +42,9 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         }
         
         [Test]
-        [ExpectedException(typeof(KeyNotFoundException))]
         public void ValueKeyNotFoundExceptionTest()
         {
-            target.GetValue<string>("Not Found");
+            Assert.Catch(typeof(KeyNotFoundException), () => target.GetValue<string>("Not Found"));
         }
         
         [Test]

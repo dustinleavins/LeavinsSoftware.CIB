@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013, 2014, 2021 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         private ItemCategory primarySystem;
         private ItemCategory secondarySystem;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void FixtureSetUp()
         {
             if (File.Exists(Path.Combine("default", "collection.db")))
@@ -141,24 +141,21 @@ namespace LeavinsSoftware.Collection.Tests.Persistence
         [TestCase(long.MinValue)]
         [TestCase(int.MinValue)]
         [TestCase(0)]
-        [ExpectedException(typeof(ArgumentException))]
         public void RetrieveInvalidTest(long invalidId)
         {
-            Assert.IsNull(gamePersistence.Retrieve(invalidId));
+            Assert.Catch(typeof(ArgumentException), () => gamePersistence.Retrieve(invalidId));
         }
         
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CreateNullTest()
         {
-            gamePersistence.Create(null);
+            Assert.Catch(typeof(ArgumentNullException), () => gamePersistence.Create(null));
         }
         
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void UpdateNullTest()
         {
-            gamePersistence.Update(null);
+            Assert.Catch(typeof(ArgumentNullException), () => gamePersistence.Update(null));
         }
 
         [Test]

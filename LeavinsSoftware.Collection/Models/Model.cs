@@ -1,11 +1,7 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013, 2014, 2021 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection;
 
 namespace LeavinsSoftware.Collection.Models
 {
@@ -16,7 +12,7 @@ namespace LeavinsSoftware.Collection.Models
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [Range(0, long.MaxValue)]
+        [Range(typeof(long), "0", "9223372036854775807")]
         public long Id
         {
             get

@@ -1,12 +1,20 @@
-#r @"packages/FAKE/tools/FakeLib.dll"
-open Fake
+#r "paket:
+nuget Fake.IO.FileSystem
+nuget Fake.DotNet.MSBuild
+nuget Fake.Core.Target //"
+#load "./.fake/build.fsx/intellisense.fsx"
+
+// TODO - https://fake.build/fake-gettingstarted.html
 open System.IO
 open System
 open System.Text.RegularExpressions
 open Microsoft.Win32
 open System.Diagnostics
-
-RestorePackages()
+open Fake.Core
+open Fake.IO
+open Fake.IO.Globbing.Operators
+open Fake.DotNet
+open Fake.Core.TargetOperators
 
 exception NsisError of string
 
@@ -24,7 +32,7 @@ let nsis = (fun args ->
   pInfo.RedirectStandardOutput <- true
         
   let proc = Process.Start (pInfo)
-  trace (proc.StandardOutput.ReadToEnd())
+  Trace.log(proc.StandardOutput.ReadToEnd())
     
   if proc.ExitCode <> 0 then raise (NsisError("Did not build installer"))
 )
@@ -41,31 +49,32 @@ let hasVersionInfo (line:string) =
     
 let matches = Seq.filter hasVersionInfo (readLines ("SolutionInfo.cs"))
 let matchCast (captures) : seq<Capture> = Seq.cast captures
-let versionNumber = (Seq.nth 1 (matchCast (pattern.Match (Seq.nth 0 matches)).Groups)).Value
+let versionNumber = (Seq.item 1 (matchCast (pattern.Match (Seq.item 0 matches)).Groups)).Value
 let buildDir = "./Files/" + versionNumber
 
-Target "Clean" (fun _ ->
-    CleanDir buildDir
+
+Target.create "Clean" (fun _ ->
+    Shell.cleanDir buildDir
     File.Delete ("main.exe")
     File.Delete ("setup.exe")
 )
 
-Target "BuildProduction" (fun _ ->
+Target.create "BuildProduction" (fun _ ->
     !! "LeavinsSoftware.Collection.Program/*.csproj"
-      |> MSBuildRelease buildDir "Build"
-      |> Log "Build: "
+      |> MSBuild.runRelease id buildDir "Build"
+      |> Trace.logItems "Build: "
 )
 
-Target "Default" (fun _ ->
+Target.create "Default" (fun _ ->
     nsis ("/DProgramVersion=" + versionNumber + " Installer.nsi")
     
     !! "Bootstrapper.proj"
-      |> MSBuildRelease "." "BuildBootstrapper"
-      |> Log "Build: "
+      |> MSBuild.runRelease id "." "BuildBootstrapper"
+      |> Trace.logItems "Build: "
       
     nsis ("/DProgramVersion=" + versionNumber + " \"Wrapper Installer.nsi\"")
     
-    CleanDir buildDir
+    Shell.cleanDir buildDir
     File.Delete ("main.exe")
     File.Delete ("setup.exe")
 )
@@ -75,4 +84,4 @@ Target "Default" (fun _ ->
   ==> "Default"
 
 // start build
-RunTargetOrDefault "Default"
+Target.runOrDefault "Default"

@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013, 2014, 2021 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using LeavinsSoftware.Collection.Models;
 using LeavinsSoftware.Collection.Persistence;
@@ -35,19 +35,19 @@ namespace LeavinsSoftware.Collection.Program
             var videoGamePersistence = new VideoGamePersistence(ProgramDir, defaultProfile);
             var productPersistence = new ProductPersistence(ProgramDir, defaultProfile);
             
-            Container.RegisterSingle<ICategoryPersistence>(new ItemCategoryPersistence(ProgramDir, defaultProfile));
-            Container.RegisterSingle<IProgramOptionsPersistence>(new ProgramOptionsPersistence(
+            Container.RegisterInstance<ICategoryPersistence>(new ItemCategoryPersistence(ProgramDir, defaultProfile));
+            Container.RegisterInstance<IProgramOptionsPersistence>(new ProgramOptionsPersistence(
                 new FileInfo(Path.Combine(ProgramDir.FullName, "options.xml"))));
 
-            Container.RegisterSingle<ISearchablePersistence<ComicBookSeries>>(comicBookPersistence);
-            Container.RegisterSingle<ISearchablePersistence<VideoGame>>(videoGamePersistence);
-            Container.RegisterSingle<ISearchablePersistence<Product>>(productPersistence);
+            Container.RegisterInstance<ISearchablePersistence<ComicBookSeries>>(comicBookPersistence);
+            Container.RegisterInstance<ISearchablePersistence<VideoGame>>(videoGamePersistence);
+            Container.RegisterInstance<ISearchablePersistence<Product>>(productPersistence);
             
-            Container.RegisterSingle<IPersistence<ComicBookSeries>>(comicBookPersistence);
-            Container.RegisterSingle<IPersistence<VideoGame>>(videoGamePersistence);
-            Container.RegisterSingle<IPersistence<Product>>(productPersistence);
+            Container.RegisterInstance<IPersistence<ComicBookSeries>>(comicBookPersistence);
+            Container.RegisterInstance<IPersistence<VideoGame>>(videoGamePersistence);
+            Container.RegisterInstance<IPersistence<Product>>(productPersistence);
             
-            Container.RegisterSingle<IKeyValueStore>(new KeyValueStore(ProgramDir, defaultProfile));
+            Container.RegisterInstance<IKeyValueStore>(new KeyValueStore(ProgramDir, defaultProfile));
 
             UpdateNotifier = new UpdateNotifier(GetInstance<IProgramOptionsPersistence>().Retrieve(),
                 Assembly.GetExecutingAssembly().GetName().Version,

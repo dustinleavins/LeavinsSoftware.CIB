@@ -1,10 +1,6 @@
-﻿// Copyright (c) 2013, 2014 Dustin Leavins
+﻿// Copyright (c) 2013, 2014, 2021 Dustin Leavins
 // See the file 'LICENSE.txt' for copying permission.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 namespace LeavinsSoftware.Collection.Models
@@ -15,7 +11,7 @@ namespace LeavinsSoftware.Collection.Models
     /// </summary>
     public sealed class ComicBookSeriesEntry : Model
     {
-        [Range(0, long.MaxValue)]
+        [Range(typeof(long), "0", "9223372036854775807")]
         public long SeriesId
         {
             get
